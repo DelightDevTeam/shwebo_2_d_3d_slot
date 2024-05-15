@@ -2,18 +2,13 @@
 
 namespace App\Models\TwoD;
 
-use App\Models\Admin\LotteryMatch;
-use App\Models\Admin\PrizeSentTwoDigit;
-use App\Models\TwoD\TwoDigit;
 use App\Models\User;
-use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Lottery extends Model
 {
     use HasFactory;
-
     protected $fillable = [
         'pay_amount',
         'total_amount',

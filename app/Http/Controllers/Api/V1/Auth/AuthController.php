@@ -23,7 +23,7 @@ class AuthController extends Controller
     {
         $credentials = $request->only('phone', 'password');
 
-        $user = User::where('phone', $request->user_name)->first();
+        $user = User::where('phone', $request->phone)->first();
 
         if (! $user || ! Hash::check($request->password, $user->password)) {
             return $this->error('', 'Credentail does not match!', 401);
@@ -37,7 +37,7 @@ class AuthController extends Controller
             return $this->error('', 'Credentials do not match!', 401);
         }
 
-        $user = User::where('phone', $request->user_name)->first();
+        $user = User::where('phone', $request->phone)->first();
         if (! $user->hasRole('Player')) {
             return $this->error('', 'You are not a player!', 401);
         }

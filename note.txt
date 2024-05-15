@@ -1,3 +1,7 @@
 // to remove laravel log
 php -r "file_put_contents('/var/www/html/shwe_dragon_slot_a/storage/logs/laravel.log', '');"
 // created dev branch for kzt
+
+SET FOREIGN_KEY_CHECKS = 0;
+TRUNCATE TABLE twod_settings;
+SET FOREIGN_KEY_CHECKS = 1;

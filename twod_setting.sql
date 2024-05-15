@@ -1,5 +1,5 @@
 
-INSERT INTO `twod_game_results` (`id`, `result_date`, `result_time`, `result_number`, `session`, `status`, `admin_log`, `user_log`, `created_at`, `updated_at`) VALUES
+INSERT INTO `twod_settings` (`id`, `result_date`, `result_time`, `result_number`, `session`, `status`, `admin_log`, `user_log`, `created_at`, `updated_at`) VALUES
 (1, '2024-04-29', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:31', '2024-04-29 03:57:08'),
 (2, '2024-04-29', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:31', '2024-04-29 09:09:45'),
 (3, '2024-04-30', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:31', '2024-04-28 04:24:31'),
@@ -402,7 +402,7 @@ INSERT INTO `twod_game_results` (`id`, `result_date`, `result_time`, `result_num
 (400, '2024-12-02', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:31', '2024-04-28 04:24:31'),
 (401, '2024-12-03', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:31', '2024-04-28 04:24:31'),
 (402, '2024-12-03', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:31', '2024-04-28 04:24:31');
-INSERT INTO `twod_game_results` (`id`, `result_date`, `result_time`, `result_number`, `session`, `status`, `admin_log`, `user_log`, `created_at`, `updated_at`) VALUES
+INSERT INTO `twod_settings` (`id`, `result_date`, `result_time`, `result_number`, `session`, `status`, `admin_log`, `user_log`, `created_at`, `updated_at`) VALUES
 (403, '2024-12-04', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:31', '2024-04-28 04:24:31'),
 (404, '2024-12-04', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:31', '2024-04-28 04:24:31'),
 (405, '2024-12-05', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:31', '2024-04-28 04:24:31'),
@@ -804,7 +804,7 @@ INSERT INTO `twod_game_results` (`id`, `result_date`, `result_time`, `result_num
 (801, '2025-07-07', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:32', '2024-04-28 04:24:32'),
 (802, '2025-07-07', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:32', '2024-04-28 04:24:32'),
 (803, '2025-07-08', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:32', '2024-04-28 04:24:32');
-INSERT INTO `twod_game_results` (`id`, `result_date`, `result_time`, `result_number`, `session`, `status`, `admin_log`, `user_log`, `created_at`, `updated_at`) VALUES
+INSERT INTO `twod_settings` (`id`, `result_date`, `result_time`, `result_number`, `session`, `status`, `admin_log`, `user_log`, `created_at`, `updated_at`) VALUES
 (804, '2025-07-08', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:32', '2024-04-28 04:24:32'),
 (805, '2025-07-09', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:32', '2024-04-28 04:24:32'),
 (806, '2025-07-09', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:32', '2024-04-28 04:24:32'),
@@ -1205,7 +1205,7 @@ INSERT INTO `twod_game_results` (`id`, `result_date`, `result_time`, `result_num
 (1201, '2026-02-10', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:33', '2024-04-28 04:24:33'),
 (1202, '2026-02-10', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:33', '2024-04-28 04:24:33'),
 (1203, '2026-02-11', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:33', '2024-04-28 04:24:33');
-INSERT INTO `twod_game_results` (`id`, `result_date`, `result_time`, `result_number`, `session`, `status`, `admin_log`, `user_log`, `created_at`, `updated_at`) VALUES
+INSERT INTO `twod_settings` (`id`, `result_date`, `result_time`, `result_number`, `session`, `status`, `admin_log`, `user_log`, `created_at`, `updated_at`) VALUES
 (1204, '2026-02-11', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:33', '2024-04-28 04:24:33'),
 (1205, '2026-02-12', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:33', '2024-04-28 04:24:33'),
 (1206, '2026-02-12', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:33', '2024-04-28 04:24:33'),
@@ -1604,7 +1604,7 @@ INSERT INTO `twod_game_results` (`id`, `result_date`, `result_time`, `result_num
 (1599, '2026-09-13', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:33', '2024-04-28 04:24:33'),
 (1600, '2026-09-13', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:33', '2024-04-28 04:24:33'),
 (1601, '2026-09-14', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:33', '2024-04-28 04:24:33');
-INSERT INTO `twod_game_results` (`id`, `result_date`, `result_time`, `result_number`, `session`, `status`, `admin_log`, `user_log`, `created_at`, `updated_at`) VALUES
+INSERT INTO `twod_settings` (`id`, `result_date`, `result_time`, `result_number`, `session`, `status`, `admin_log`, `user_log`, `created_at`, `updated_at`) VALUES
 (1602, '2026-09-14', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:33', '2024-04-28 04:24:33'),
 (1603, '2026-09-15', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:33', '2024-04-28 04:24:33'),
 (1604, '2026-09-15', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:33', '2024-04-28 04:24:33'),
@@ -2003,7 +2003,7 @@ INSERT INTO `twod_game_results` (`id`, `result_date`, `result_time`, `result_num
 (1997, '2027-04-16', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:34', '2024-04-28 04:24:34'),
 (1998, '2027-04-16', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:34', '2024-04-28 04:24:34'),
 (1999, '2027-04-17', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:34', '2024-04-28 04:24:34');
-INSERT INTO `twod_game_results` (`id`, `result_date`, `result_time`, `result_number`, `session`, `status`, `admin_log`, `user_log`, `created_at`, `updated_at`) VALUES
+INSERT INTO `twod_settings` (`id`, `result_date`, `result_time`, `result_number`, `session`, `status`, `admin_log`, `user_log`, `created_at`, `updated_at`) VALUES
 (2000, '2027-04-17', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:34', '2024-04-28 04:24:34'),
 (2001, '2027-04-18', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:34', '2024-04-28 04:24:34'),
 (2002, '2027-04-18', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:34', '2024-04-28 04:24:34'),
@@ -2402,7 +2402,7 @@ INSERT INTO `twod_game_results` (`id`, `result_date`, `result_time`, `result_num
 (2395, '2027-11-19', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:35', '2024-04-28 04:24:35'),
 (2396, '2027-11-19', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:35', '2024-04-28 04:24:35'),
 (2397, '2027-11-20', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:35', '2024-04-28 04:24:35');
-INSERT INTO `twod_game_results` (`id`, `result_date`, `result_time`, `result_number`, `session`, `status`, `admin_log`, `user_log`, `created_at`, `updated_at`) VALUES
+INSERT INTO `twod_settings` (`id`, `result_date`, `result_time`, `result_number`, `session`, `status`, `admin_log`, `user_log`, `created_at`, `updated_at`) VALUES
 (2398, '2027-11-20', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:35', '2024-04-28 04:24:35'),
 (2399, '2027-11-21', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:35', '2024-04-28 04:24:35'),
 (2400, '2027-11-21', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:35', '2024-04-28 04:24:35'),
@@ -2801,7 +2801,7 @@ INSERT INTO `twod_game_results` (`id`, `result_date`, `result_time`, `result_num
 (2793, '2028-06-22', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:35', '2024-04-28 04:24:35'),
 (2794, '2028-06-22', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:35', '2024-04-28 04:24:35'),
 (2795, '2028-06-23', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:35', '2024-04-28 04:24:35');
-INSERT INTO `twod_game_results` (`id`, `result_date`, `result_time`, `result_number`, `session`, `status`, `admin_log`, `user_log`, `created_at`, `updated_at`) VALUES
+INSERT INTO `twod_settings` (`id`, `result_date`, `result_time`, `result_number`, `session`, `status`, `admin_log`, `user_log`, `created_at`, `updated_at`) VALUES
 (2796, '2028-06-23', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:35', '2024-04-28 04:24:35'),
 (2797, '2028-06-24', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:35', '2024-04-28 04:24:35'),
 (2798, '2028-06-24', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:35', '2024-04-28 04:24:35'),
@@ -3200,7 +3200,7 @@ INSERT INTO `twod_game_results` (`id`, `result_date`, `result_time`, `result_num
 (3191, '2029-01-25', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:36', '2024-04-28 04:24:36'),
 (3192, '2029-01-25', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:36', '2024-04-28 04:24:36'),
 (3193, '2029-01-29', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:36', '2024-04-28 04:24:36');
-INSERT INTO `twod_game_results` (`id`, `result_date`, `result_time`, `result_number`, `session`, `status`, `admin_log`, `user_log`, `created_at`, `updated_at`) VALUES
+INSERT INTO `twod_settings` (`id`, `result_date`, `result_time`, `result_number`, `session`, `status`, `admin_log`, `user_log`, `created_at`, `updated_at`) VALUES
 (3194, '2029-01-29', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:36', '2024-04-28 04:24:36'),
 (3195, '2029-01-30', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:36', '2024-04-28 04:24:36'),
 (3196, '2029-01-30', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:36', '2024-04-28 04:24:36'),
@@ -3599,7 +3599,7 @@ INSERT INTO `twod_game_results` (`id`, `result_date`, `result_time`, `result_num
 (3589, '2029-08-31', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:37', '2024-04-28 04:24:37'),
 (3590, '2029-08-31', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:37', '2024-04-28 04:24:37'),
 (3591, '2029-09-01', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:37', '2024-04-28 04:24:37');
-INSERT INTO `twod_game_results` (`id`, `result_date`, `result_time`, `result_number`, `session`, `status`, `admin_log`, `user_log`, `created_at`, `updated_at`) VALUES
+INSERT INTO `twod_settings` (`id`, `result_date`, `result_time`, `result_number`, `session`, `status`, `admin_log`, `user_log`, `created_at`, `updated_at`) VALUES
 (3592, '2029-09-01', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:37', '2024-04-28 04:24:37'),
 (3593, '2029-09-02', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:37', '2024-04-28 04:24:37'),
 (3594, '2029-09-02', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:37', '2024-04-28 04:24:37'),
@@ -3998,7 +3998,7 @@ INSERT INTO `twod_game_results` (`id`, `result_date`, `result_time`, `result_num
 (3987, '2030-04-03', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:37', '2024-04-28 04:24:37'),
 (3988, '2030-04-03', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:37', '2024-04-28 04:24:37'),
 (3989, '2030-04-04', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:37', '2024-04-28 04:24:37');
-INSERT INTO `twod_game_results` (`id`, `result_date`, `result_time`, `result_number`, `session`, `status`, `admin_log`, `user_log`, `created_at`, `updated_at`) VALUES
+INSERT INTO `twod_settings` (`id`, `result_date`, `result_time`, `result_number`, `session`, `status`, `admin_log`, `user_log`, `created_at`, `updated_at`) VALUES
 (3990, '2030-04-04', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:37', '2024-04-28 04:24:37'),
 (3991, '2030-04-05', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:37', '2024-04-28 04:24:37'),
 (3992, '2030-04-05', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:37', '2024-04-28 04:24:37'),
@@ -4397,7 +4397,7 @@ INSERT INTO `twod_game_results` (`id`, `result_date`, `result_time`, `result_num
 (4385, '2030-11-06', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:38', '2024-04-28 04:24:38'),
 (4386, '2030-11-06', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:38', '2024-04-28 04:24:38'),
 (4387, '2030-11-07', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:38', '2024-04-28 04:24:38');
-INSERT INTO `twod_game_results` (`id`, `result_date`, `result_time`, `result_number`, `session`, `status`, `admin_log`, `user_log`, `created_at`, `updated_at`) VALUES
+INSERT INTO `twod_settings` (`id`, `result_date`, `result_time`, `result_number`, `session`, `status`, `admin_log`, `user_log`, `created_at`, `updated_at`) VALUES
 (4388, '2030-11-07', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:38', '2024-04-28 04:24:38'),
 (4389, '2030-11-08', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:38', '2024-04-28 04:24:38'),
 (4390, '2030-11-08', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:38', '2024-04-28 04:24:38'),
@@ -4796,7 +4796,7 @@ INSERT INTO `twod_game_results` (`id`, `result_date`, `result_time`, `result_num
 (4783, '2031-06-09', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:39', '2024-04-28 04:24:39'),
 (4784, '2031-06-09', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:39', '2024-04-28 04:24:39'),
 (4785, '2031-06-10', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:39', '2024-04-28 04:24:39');
-INSERT INTO `twod_game_results` (`id`, `result_date`, `result_time`, `result_number`, `session`, `status`, `admin_log`, `user_log`, `created_at`, `updated_at`) VALUES
+INSERT INTO `twod_settings` (`id`, `result_date`, `result_time`, `result_number`, `session`, `status`, `admin_log`, `user_log`, `created_at`, `updated_at`) VALUES
 (4786, '2031-06-10', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:39', '2024-04-28 04:24:39'),
 (4787, '2031-06-11', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:39', '2024-04-28 04:24:39'),
 (4788, '2031-06-11', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:39', '2024-04-28 04:24:39'),
@@ -5195,7 +5195,7 @@ INSERT INTO `twod_game_results` (`id`, `result_date`, `result_time`, `result_num
 (5181, '2032-01-12', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:39', '2024-04-28 04:24:39'),
 (5182, '2032-01-12', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:39', '2024-04-28 04:24:39'),
 (5183, '2032-01-13', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:39', '2024-04-28 04:24:39');
-INSERT INTO `twod_game_results` (`id`, `result_date`, `result_time`, `result_number`, `session`, `status`, `admin_log`, `user_log`, `created_at`, `updated_at`) VALUES
+INSERT INTO `twod_settings` (`id`, `result_date`, `result_time`, `result_number`, `session`, `status`, `admin_log`, `user_log`, `created_at`, `updated_at`) VALUES
 (5184, '2032-01-13', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:39', '2024-04-28 04:24:39'),
 (5185, '2032-01-14', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:39', '2024-04-28 04:24:39'),
 (5186, '2032-01-14', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:39', '2024-04-28 04:24:39'),
@@ -5594,7 +5594,7 @@ INSERT INTO `twod_game_results` (`id`, `result_date`, `result_time`, `result_num
 (5579, '2032-08-15', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:40', '2024-04-28 04:24:40'),
 (5580, '2032-08-15', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:40', '2024-04-28 04:24:40'),
 (5581, '2032-08-16', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:40', '2024-04-28 04:24:40');
-INSERT INTO `twod_game_results` (`id`, `result_date`, `result_time`, `result_number`, `session`, `status`, `admin_log`, `user_log`, `created_at`, `updated_at`) VALUES
+INSERT INTO `twod_settings` (`id`, `result_date`, `result_time`, `result_number`, `session`, `status`, `admin_log`, `user_log`, `created_at`, `updated_at`) VALUES
 (5582, '2032-08-16', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:40', '2024-04-28 04:24:40'),
 (5583, '2032-08-17', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:40', '2024-04-28 04:24:40'),
 (5584, '2032-08-17', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:40', '2024-04-28 04:24:40'),
@@ -5993,7 +5993,7 @@ INSERT INTO `twod_game_results` (`id`, `result_date`, `result_time`, `result_num
 (5977, '2033-03-21', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:41', '2024-04-28 04:24:41'),
 (5978, '2033-03-21', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:41', '2024-04-28 04:24:41'),
 (5979, '2033-03-22', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:41', '2024-04-28 04:24:41');
-INSERT INTO `twod_game_results` (`id`, `result_date`, `result_time`, `result_number`, `session`, `status`, `admin_log`, `user_log`, `created_at`, `updated_at`) VALUES
+INSERT INTO `twod_settings` (`id`, `result_date`, `result_time`, `result_number`, `session`, `status`, `admin_log`, `user_log`, `created_at`, `updated_at`) VALUES
 (5980, '2033-03-22', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:41', '2024-04-28 04:24:41'),
 (5981, '2033-03-23', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:41', '2024-04-28 04:24:41'),
 (5982, '2033-03-23', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:41', '2024-04-28 04:24:41'),
@@ -6392,7 +6392,7 @@ INSERT INTO `twod_game_results` (`id`, `result_date`, `result_time`, `result_num
 (6375, '2033-10-22', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:41', '2024-04-28 04:24:41'),
 (6376, '2033-10-22', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:41', '2024-04-28 04:24:41'),
 (6377, '2033-10-23', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:41', '2024-04-28 04:24:41');
-INSERT INTO `twod_game_results` (`id`, `result_date`, `result_time`, `result_number`, `session`, `status`, `admin_log`, `user_log`, `created_at`, `updated_at`) VALUES
+INSERT INTO `twod_settings` (`id`, `result_date`, `result_time`, `result_number`, `session`, `status`, `admin_log`, `user_log`, `created_at`, `updated_at`) VALUES
 (6378, '2033-10-23', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:41', '2024-04-28 04:24:41'),
 (6379, '2033-10-24', '12:01:00', NULL, 'morning', 'closed', 'closed', 'closed', '2024-04-28 04:24:41', '2024-04-28 04:24:41'),
 (6380, '2033-10-24', '16:30:00', NULL, 'evening', 'closed', 'closed', 'closed', '2024-04-28 04:24:41', '2024-04-28 04:24:41'),
