@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\TwoD;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class LoginRequest extends FormRequest
+class TwoDPlayRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +22,10 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'phone' => ['required'],
-            'password' => 'required|min:6',
+            'totalAmount' => 'required|numeric|min:1',
+            'amounts' => 'required|array',
+            'amounts.*.num' => 'required|string',
+            'amounts.*.amount' => 'required|integer|min:1',
         ];
     }
 }

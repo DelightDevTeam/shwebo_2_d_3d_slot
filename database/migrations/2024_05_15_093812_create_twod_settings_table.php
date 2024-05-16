@@ -12,14 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('twod_settings', function (Blueprint $table) {
-            $table->id(); // Primary key
+            $table->id();
             $table->date('result_date'); // Date of the game result
             $table->time('result_time'); // Time of the game result
             $table->string('result_number', 2)->nullable(); // Nullable result number (two digits)
             $table->enum('session', ['morning', 'evening']); // Game session (morning or evening)
             $table->enum('status', ['open', 'closed'])->default('closed'); // New status column
             $table->enum('admin_log', ['open', 'closed'])->default('closed'); // New status column
-            $table->enum('user_log', ['open', 'closed'])->default('closed'); // New status column
+            $table->enum('user_log', ['open', 'closed'])->default('closed');
             $table->timestamps();
         });
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AdminLoginRequest;
 use App\Http\Requests\LoginRequest;
 use App\Models\Admin\UserLog;
 use App\Models\User;
@@ -19,7 +20,7 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
-    public function login(LoginRequest $request)
+    public function login(AdminLoginRequest $request)
     {
         $user = User::where('user_name', $request->user_name)->first();
 

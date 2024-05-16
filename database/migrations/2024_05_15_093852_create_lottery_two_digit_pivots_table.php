@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('lottery_two_digit_copy', function (Blueprint $table) {
+        Schema::create('lottery_two_digit_pivots', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('lottery_id');
             $table->unsignedBigInteger('twod_setting_id')->nullable();
@@ -34,7 +34,6 @@ return new class extends Migration
             $table->foreign('lottery_id')->references('id')->on('lotteries')->onDelete('cascade');
             $table->foreign('two_digit_id')->references('id')->on('two_digits')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            //$table->foreign('two_digit_id')->references('id')->on('two_digits')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -44,6 +43,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('lottery_two_digit_copy');
+        Schema::dropIfExists('lottery_two_digit_pivots');
     }
 };

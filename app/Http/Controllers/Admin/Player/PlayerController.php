@@ -94,11 +94,11 @@ class PlayerController extends Controller
             $player = User::create($userPrepare);
             $player->roles()->sync(self::PLAYER_ROLE);
 
-            $player->main_balance +=$inputs['main_balance'];
+            $player->main_balance += $inputs['main_balance'];
             $player->save();
 
             (new WalletService)->withdraw($agent, $inputs['main_balance'], TransactionName::CapitalDeposit);
-            
+
             return redirect()->back()
                 ->with('success', 'Player created successfully')
                 ->with('url', env('APP_URL'))
@@ -214,7 +214,7 @@ class PlayerController extends Controller
 
         try {
             $inputs = $request->validate([
-                'main_balance' => 'required'
+                'main_balance' => 'required',
             ]);
             $inputs['refrence_id'] = $this->getRefrenceId();
 
@@ -226,10 +226,10 @@ class PlayerController extends Controller
                 return redirect()->back()->with('error', 'You do not have enough balance to transfer!');
             }
 
-            $player->main_balance +=$cashIn;
+            $player->main_balance += $cashIn;
             $player->save();
 
-            $agent->main_balance -=$cashIn;
+            $agent->main_balance -= $cashIn;
             $agent->save();
 
             return redirect()->back()
@@ -260,8 +260,8 @@ class PlayerController extends Controller
         );
 
         try {
-           $inputs = $request->validate([
-                'main_balance' => 'required'
+            $inputs = $request->validate([
+                'main_balance' => 'required',
             ]);
             $inputs['refrence_id'] = $this->getRefrenceId();
 
@@ -273,12 +273,12 @@ class PlayerController extends Controller
                 return redirect()->back()->with('error', 'You do not have enough balance to transfer!');
             }
 
-            $player->main_balance -=$cashOut;
+            $player->main_balance -= $cashOut;
             $player->save();
 
-            $agent->main_balance +=$cashOut;
+            $agent->main_balance += $cashOut;
             $agent->save();
-            
+
             return redirect()->back()
                 ->with('success', 'CashOut submitted successfully!');
         } catch (Exception $e) {

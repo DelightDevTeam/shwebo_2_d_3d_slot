@@ -28,8 +28,7 @@ class DatabaseSeeder extends Seeder
             BannerTextSeeder::class,
             TwoDigitsTableSeeder::class,
             TwoDLimitTableSeeder::class,
-            TwoDGameResultTableSeeder::class,
-            TwoDBreakSeeder::class,
+            TwodSettingTableSeeder::class,
         ]);
     }
 }

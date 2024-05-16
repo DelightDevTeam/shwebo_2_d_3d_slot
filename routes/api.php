@@ -1,30 +1,33 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TestController;
+use App\Http\Controllers\Api\V1\BannerController;
 use App\Http\Controllers\Admin\BannerTextController;
 use App\Http\Controllers\Api\V1\Auth\AuthController;
 use App\Http\Controllers\Api\V1\Bank\BankController;
-use App\Http\Controllers\Api\V1\BannerController;
 use App\Http\Controllers\Api\V1\Game\GameController;
-use App\Http\Controllers\Api\V1\Game\LaunchGameController;
-use App\Http\Controllers\Api\V1\Player\PlayerTransactionLogController;
-use App\Http\Controllers\Api\V1\Player\TransactionController;
-use App\Http\Controllers\Api\V1\Player\WagerController;
-use App\Http\Controllers\Api\V1\Player\WithDrawController;
 use App\Http\Controllers\Api\V1\PromotionController;
+use App\Http\Controllers\Api\V1\Player\WagerController;
 use App\Http\Controllers\Api\V1\TwoD\TwoDPlayController;
 use App\Http\Controllers\Api\V1\Webhook\BonusController;
 use App\Http\Controllers\Api\V1\Webhook\BuyInController;
 use App\Http\Controllers\Api\V1\Webhook\BuyOutController;
+use App\Http\Controllers\Api\V1\Game\LaunchGameController;
+use App\Http\Controllers\Api\V1\Player\WithDrawController;
+use App\Http\Controllers\Api\V1\Webhook\JackPotController;
+use App\Http\Controllers\Api\V1\Webhook\PushBetController;
+use App\Http\Controllers\Api\V1\TwoD\TwoDLotteryController;
+use App\Http\Controllers\Api\V1\Webhook\PlaceBetController;
+use App\Http\Controllers\Api\V1\Webhook\RollbackController;
 use App\Http\Controllers\Api\V1\Webhook\CancelBetController;
+use App\Http\Controllers\Api\V1\Player\TransactionController;
 use App\Http\Controllers\Api\V1\Webhook\GameResultController;
 use App\Http\Controllers\Api\V1\Webhook\GetBalanceController;
-use App\Http\Controllers\Api\V1\Webhook\JackPotController;
 use App\Http\Controllers\Api\V1\Webhook\MobileLoginController;
-use App\Http\Controllers\Api\V1\Webhook\PlaceBetController;
-use App\Http\Controllers\Api\V1\Webhook\PushBetController;
-use App\Http\Controllers\Api\V1\Webhook\RollbackController;
-use App\Http\Controllers\TestController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\V1\TwoD\UserEveningHistoryController;
+use App\Http\Controllers\Api\V1\TwoD\UserMorningHistoryController;
+use App\Http\Controllers\Api\V1\Player\PlayerTransactionLogController;
 
 //login route post
 Route::post('/login', [AuthController::class, 'login']);
@@ -67,7 +70,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('transactions', [TransactionController::class, 'index']);
     Route::post('exchange-balance', [TransactionController::class, 'exchangeBalance']);
 
-
     //logout
     Route::get('user', [AuthController::class, 'getUser']);
     Route::post('logout', [AuthController::class, 'logout']);
@@ -88,5 +90,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('Seamless/LaunchGame', [LaunchGameController::class, 'launchGame']);
         // Route::post('Seamless/PullReport', [LaunchGameController::class, 'pullReport']);
         // Route::get('gamelist/{provider_id}/{game_type_id}', [GameController::class, 'gameList']);
+    });
+    Route::group(['prefix' => '2d'], function () {
+        Route::get('user/all-2-digit', [TwoDLotteryController::class, 'get_towdigit']);
+        Route::post('two-d-play', [TwoDLotteryController::class, 'store']);
+        //morning history
+        Route::get('user/morning-history', [UserMorningHistoryController::class, 'index']);
+        Route::get('user/evening-history', [UserEveningHistoryController::class, 'index']);
     });
 });

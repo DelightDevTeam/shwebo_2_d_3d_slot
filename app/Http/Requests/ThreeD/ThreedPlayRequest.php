@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\ThreeD;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class LoginRequest extends FormRequest
+class ThreedPlayRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -19,11 +19,13 @@ class LoginRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+    public function rules()
     {
         return [
-            'phone' => ['required'],
-            'password' => 'required|min:6',
+            'totalAmount' => 'required|numeric|min:1',
+            'amounts' => 'required|array',
+            'amounts.*.num' => 'required|integer',
+            'amounts.*.amount' => 'required|integer|min:1',
         ];
     }
 }

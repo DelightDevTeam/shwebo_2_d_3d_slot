@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('lottery_two_digit_pivot', function (Blueprint $table) {
+        Schema::create('lottery_two_digit_copies', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('lottery_id');
             $table->unsignedBigInteger('twod_setting_id')->nullable();
@@ -43,6 +43,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('lottery_two_digit_pivot');
+        Schema::dropIfExists('lottery_two_digit_copies');
     }
 };

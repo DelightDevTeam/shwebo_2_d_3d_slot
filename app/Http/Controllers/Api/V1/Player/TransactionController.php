@@ -39,20 +39,18 @@ class TransactionController extends Controller
     {
         $player = Auth::user();
         $inputs = $request->validate([
-            'amount' => 'required'
+            'amount' => 'required',
         ]);
 
-        if($inputs['amount'] > $player->main_balance)
-        {
-            return $this->error('','You do not have enough balance to transfer',201);
+        if ($inputs['amount'] > $player->main_balance) {
+            return $this->error('', 'You do not have enough balance to transfer', 201);
         }
-        
-        (new WalletService)->deposit($player,$inputs['amount'], TransactionName::CapitalDeposit);
+
+        (new WalletService)->deposit($player, $inputs['amount'], TransactionName::CapitalDeposit);
         $player->main_balance -= $inputs['amount'];
         $player->save();
 
-        return $this->success('','successfully exchange balance',201);
+        return $this->success('', 'successfully exchange balance', 201);
 
     }
-
 }

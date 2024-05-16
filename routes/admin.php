@@ -1,24 +1,25 @@
 <?php
 
-use App\Http\Controllers\Admin\Agent\AgentController;
-use App\Http\Controllers\Admin\BannerController;
-use App\Http\Controllers\Admin\BannerTextController;
-use App\Http\Controllers\Admin\GameTypeProductController;
-use App\Http\Controllers\Admin\GetBetDetailController;
-use App\Http\Controllers\Admin\LoginController;
-use App\Http\Controllers\Admin\Master\MasterController;
-use App\Http\Controllers\Admin\PaymentController;
-use App\Http\Controllers\Admin\PermissionController;
-use App\Http\Controllers\Admin\Player\PlayerController;
-use App\Http\Controllers\Admin\ProfileController;
-use App\Http\Controllers\Admin\PromotionController;
-use App\Http\Controllers\Admin\RolesController;
-use App\Http\Controllers\Admin\TransferLog\TransferLogController;
-use App\Http\Controllers\Admin\TwoD\TwoDSettingController;
-use App\Http\Controllers\Admin\WithDraw\WithDrawRequestController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReportController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Admin\RolesController;
+use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\PaymentController;
+use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\PromotionController;
+use App\Http\Controllers\Admin\BannerTextController;
+use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\Agent\AgentController;
+use App\Http\Controllers\Admin\GetBetDetailController;
+use App\Http\Controllers\Admin\TwoD\HistoryController;
+use App\Http\Controllers\Admin\Master\MasterController;
+use App\Http\Controllers\Admin\Player\PlayerController;
+use App\Http\Controllers\Admin\GameTypeProductController;
+use App\Http\Controllers\Admin\TwoD\TwoDSettingController;
+use App\Http\Controllers\Admin\TransferLog\TransferLogController;
+use App\Http\Controllers\Admin\WithDraw\WithDrawRequestController;
 
 Route::group([
     'prefix' => 'admin', 'as' => 'admin.',
@@ -124,5 +125,9 @@ Route::group([
     Route::get('/close-head-2d-digit', [TwoDSettingController::class, 'HeadDigitindex'])->name('two-digit-close-head');
     Route::post('/close-head-2-digit', [TwoDSettingController::class, 'HeadDigitstore'])->name('HeadClosestore');
     Route::delete('/two-digit-close-head/{id}', [TwoDSettingController::class, 'HeadDigitdestroy'])->name('digit-2-close-head.destroy');
+    // morning history
+    Route::get('2d-morning-history', [HistoryController::class, 'showMorningHistory']);
+    Route::get('2d-evening-history', [HistoryController::class, 'showEveningHistory']);
+
     // two - d route end
 });

@@ -2,13 +2,10 @@
 
 namespace App\Models\TwoD;
 
-use App\Models\Admin\LotteryMatch;
-use App\Models\Admin\PrizeSentTwoDigit;
-use App\Models\TwoD\TwoDigit;
 use App\Models\User;
-use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\TwoD\LotteryTwoDigitPivot;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Lottery extends Model
 {
@@ -31,5 +28,12 @@ class Lottery extends Model
     public function twoDigits()
     {
         return $this->belongsToMany(TwoDigit::class, 'lottery_two_digit_pivot')->withPivot('sub_amount', 'prize_sent')->withTimestamps();
+    }
+
+    
+
+    public function lotteryTwoDigitPivots()
+    {
+        return $this->hasMany(LotteryTwoDigitPivot::class);
     }
 }
