@@ -133,7 +133,7 @@ class AgentController extends Controller
     public function edit(string $id)
     {
         abort_if(
-            Gate::denies('agent_edit') || !$this->ifChildOfParent(request()->user()->id, $id),
+            Gate::denies('agent_edit') || ! $this->ifChildOfParent(request()->user()->id, $id),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden |You cannot  Access this page because you do not have permission'
         );
@@ -149,15 +149,15 @@ class AgentController extends Controller
     public function update(Request $request, string $id)
     {
         abort_if(
-            Gate::denies('agent_update') || !$this->ifChildOfParent(request()->user()->id, $id),
+            Gate::denies('agent_update') || ! $this->ifChildOfParent(request()->user()->id, $id),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden |You cannot  Access this page because you do not have permission'
         );
 
         $input = $request->validate([
-            'name' => 'required|min:3|unique:users,name,' . $id,
+            'name' => 'required|min:3|unique:users,name,'.$id,
             'player_name' => 'required|string',
-            'phone' => ['nullable', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'unique:users,phone,' . $id],
+            'phone' => ['nullable', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'unique:users,phone,'.$id],
             'limit' => ['required'],
             'limit3' => ['required'],
             'cor' => ['required'],
@@ -205,14 +205,14 @@ class AgentController extends Controller
     {
 
         abort_if(
-            Gate::denies('make_transfer') || !$this->ifChildOfParent(request()->user()->id, $id),
+            Gate::denies('make_transfer') || ! $this->ifChildOfParent(request()->user()->id, $id),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden |You cannot  Access this page because you do not have permission'
         );
 
         try {
             $inputs = $request->validate([
-                'main_balance' => 'required'
+                'main_balance' => 'required',
             ]);
             $agent = User::findOrFail($id);
             $admin = Auth::user();
@@ -241,14 +241,14 @@ class AgentController extends Controller
     {
 
         abort_if(
-            Gate::denies('make_transfer') || !$this->ifChildOfParent(request()->user()->id, $id),
+            Gate::denies('make_transfer') || ! $this->ifChildOfParent(request()->user()->id, $id),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden |You cannot  Access this page because you do not have permission'
         );
 
         try {
             $inputs = $request->validate([
-                'main_balance' => 'required'
+                'main_balance' => 'required',
             ]);
             $agent = User::findOrFail($id);
             $admin = Auth::user();
@@ -258,7 +258,7 @@ class AgentController extends Controller
 
                 return redirect()->back()->with('error', 'You do not have enough balance to transfer!');
             }
-            $agent->main_balance -=$cashOut;
+            $agent->main_balance -= $cashOut;
             $agent->save();
 
             return redirect()->back()->with('success', 'Money fill request submitted successfully!');
@@ -276,7 +276,7 @@ class AgentController extends Controller
     public function getTransferDetail($id)
     {
         abort_if(
-            Gate::denies('make_transfer') || !$this->ifChildOfParent(request()->user()->id, $id),
+            Gate::denies('make_transfer') || ! $this->ifChildOfParent(request()->user()->id, $id),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden |You cannot  Access this page because you do not have permission'
         );
@@ -291,13 +291,13 @@ class AgentController extends Controller
     {
         $randomNumber = mt_rand(10000000, 99999999);
 
-        return 'SBA' . $randomNumber;
+        return 'SBA'.$randomNumber;
     }
 
     public function banAgent($id)
     {
         abort_if(
-            !$this->ifChildOfParent(request()->user()->id, $id),
+            ! $this->ifChildOfParent(request()->user()->id, $id),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden |You cannot  Access this page because you do not have permission'
         );
@@ -310,14 +310,14 @@ class AgentController extends Controller
 
         return redirect()->back()->with(
             'success',
-            'User ' . ($user->status == 1 ? 'activated' : 'banned') . ' successfully'
+            'User '.($user->status == 1 ? 'activated' : 'banned').' successfully'
         );
     }
 
     public function getChangePassword($id)
     {
         abort_if(
-            Gate::denies('agent_change_password_access') || !$this->ifChildOfParent(request()->user()->id, $id),
+            Gate::denies('agent_change_password_access') || ! $this->ifChildOfParent(request()->user()->id, $id),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden |You cannot  Access this page because you do not have permission'
         );
@@ -330,7 +330,7 @@ class AgentController extends Controller
     public function makeChangePassword($id, Request $request)
     {
         abort_if(
-            Gate::denies('agent_change_password_access') || !$this->ifChildOfParent(request()->user()->id, $id),
+            Gate::denies('agent_change_password_access') || ! $this->ifChildOfParent(request()->user()->id, $id),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden |You cannot  Access this page because you do not have permission'
         );

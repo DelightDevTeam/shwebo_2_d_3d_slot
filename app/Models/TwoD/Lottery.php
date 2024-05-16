@@ -4,11 +4,13 @@ namespace App\Models\TwoD;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\TwoD\LotteryTwoDigitPivot;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Lottery extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'pay_amount',
         'total_amount',
@@ -26,5 +28,12 @@ class Lottery extends Model
     public function twoDigits()
     {
         return $this->belongsToMany(TwoDigit::class, 'lottery_two_digit_pivot')->withPivot('sub_amount', 'prize_sent')->withTimestamps();
+    }
+
+    
+
+    public function lotteryTwoDigitPivots()
+    {
+        return $this->hasMany(LotteryTwoDigitPivot::class);
     }
 }

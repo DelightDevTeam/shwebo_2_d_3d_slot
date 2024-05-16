@@ -25,6 +25,8 @@ use App\Http\Controllers\Api\V1\Player\TransactionController;
 use App\Http\Controllers\Api\V1\Webhook\GameResultController;
 use App\Http\Controllers\Api\V1\Webhook\GetBalanceController;
 use App\Http\Controllers\Api\V1\Webhook\MobileLoginController;
+use App\Http\Controllers\Api\V1\TwoD\UserEveningHistoryController;
+use App\Http\Controllers\Api\V1\TwoD\UserMorningHistoryController;
 use App\Http\Controllers\Api\V1\Player\PlayerTransactionLogController;
 
 //login route post
@@ -68,7 +70,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('transactions', [TransactionController::class, 'index']);
     Route::post('exchange-balance', [TransactionController::class, 'exchangeBalance']);
 
-
     //logout
     Route::get('user', [AuthController::class, 'getUser']);
     Route::post('logout', [AuthController::class, 'logout']);
@@ -92,5 +93,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     });
     Route::group(['prefix' => '2d'], function () {
         Route::post('two-d-play', [TwoDLotteryController::class, 'store']);
+        //morning history
+        Route::get('user/morning-history', [UserMorningHistoryController::class, 'index']);
+        Route::get('user/evening-history', [UserEveningHistoryController::class, 'index']);
     });
 });
