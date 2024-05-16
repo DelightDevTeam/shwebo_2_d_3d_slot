@@ -92,6 +92,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         // Route::get('gamelist/{provider_id}/{game_type_id}', [GameController::class, 'gameList']);
     });
     Route::group(['prefix' => '2d'], function () {
+        Route::get('user/all-2-digit', [TwoDLotteryController::class, 'get_towdigit']);
         Route::post('two-d-play', [TwoDLotteryController::class, 'store']);
         //morning history
         Route::get('user/morning-history', [UserMorningHistoryController::class, 'index']);
