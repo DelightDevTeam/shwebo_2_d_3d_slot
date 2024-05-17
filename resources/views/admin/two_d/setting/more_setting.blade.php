@@ -47,7 +47,7 @@
         @php 
         $status = '';
         @endphp
-        @if(isset(results))
+        @if(isset($results))
         @foreach ($results as $result)
             <tr>
                 <td>{{ $result->result_date }}</td>
@@ -97,6 +97,8 @@
             $status = $result->id;
             @endphp
         @endforeach
+        @else
+        <p>no data found</p>
         @endif
     </tbody>
 </table>
