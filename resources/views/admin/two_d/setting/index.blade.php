@@ -63,7 +63,7 @@
         </tr>
     </thead>
     <tbody>
-        @if ($morningSession)
+        @if (isset($morningSession))
         <tr>
             <td class="text-sm font-weight-normal">1</td>
             <td class="text-sm font-weight-normal">{{ $morningSession->result_date }}</td>
@@ -152,7 +152,7 @@
         </tr>
     </thead>
     <tbody>
-        @if ($eveningSession)
+        @if (isset($eveningSession))
         <tr>
             <td class="text-sm font-weight-normal">1</td>
             <td class="text-sm font-weight-normal">{{ $eveningSession->result_date }}</td>
