@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Api\V1\TwoD;
 
-use App\Models\TwoD\TwoDigit;
-use App\Traits\HttpResponses;
-use App\Models\TwoD\HeadDigit;
-use App\Models\TwoD\TwodSetting;
-use App\Services\TwoDPlayService;
-use App\Models\TwoD\CloseTwoDigit;
-use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TwoD\TwoDPlayRequest;
+use App\Models\TwoD\CloseTwoDigit;
+use App\Models\TwoD\HeadDigit;
+use App\Models\TwoD\TwoDigit;
+use App\Models\TwoD\TwodSetting;
+use App\Services\TwoDPlayService;
+use App\Traits\HttpResponses;
+use Illuminate\Support\Facades\Log;
 
 class TwoDLotteryController extends Controller
 {
@@ -21,9 +21,9 @@ class TwoDLotteryController extends Controller
     public function get_towdigit()
     {
         $digits = TwoDigit::all();
-        
+
         return $this->success([
-            
+
             'two_digits' => $digits,
         ]);
     }

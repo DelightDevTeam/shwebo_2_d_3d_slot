@@ -6,6 +6,7 @@ use App\Helpers\SessionHelper;
 use App\Models\TwoD\Lottery;
 use App\Models\TwoD\LotteryTwoDigitPivot;
 use App\Models\TwoD\TwoDigit;
+use App\Models\TwoD\TwoDLimit;
 use App\Models\TwoD\TwodSetting;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -52,7 +53,7 @@ class TwoDPlayService
             $currentTime = Carbon::now()->format('H:i:s');
             $customString = 'shwebo-2d';
             $randomNumber = rand(1000, 9999); // Generate a random 4-digit number
-            $slipNo = $randomNumber . '-' . $customString . '-' .  $currentDate . '-' . $currentTime ; // Combine date, string, and random number
+            $slipNo = $randomNumber.'-'.$customString.'-'.$currentDate.'-'.$currentTime; // Combine date, string, and random number
 
             $lottery = Lottery::create([
                 'pay_amount' => $totalAmount,
@@ -71,8 +72,9 @@ class TwoDPlayService
             if (! empty($over)) {
                 return $over;
             }
-
+            /** @var \App\Models\User $user */
             $user->main_balance -= $totalAmount;
+
             $user->save();
 
             DB::commit();
@@ -97,9 +99,12 @@ class TwoDPlayService
     {
         $twoDigit = str_pad($amount['num'], 2, '0', STR_PAD_LEFT); // Ensure two-digit format
         $break = Auth::user()->limit ?? 0; // Set default value if `cor` is not set
-
+        $user = Auth::user();
+        $defaultBreak = TwoDLimit::lasted()->first();
+        $user_default_break = $defaultBreak->two_d_limit;
         Log::info("User's commission limit (limit): {$break}");
         Log::info("Checking bet_digit: {$twoDigit}");
+        Log::info("User's default break (default break): {$user_default_break}");
 
         $current_session = SessionHelper::getCurrentSession();
         $current_day = Carbon::now()->format('Y-m-d');
@@ -114,35 +119,72 @@ class TwoDPlayService
 
         $subAmount = $amount['amount'];
 
-        if ($totalBetAmountForTwoDigit + $subAmount > $break) {
-            Log::warning("Bet on {$twoDigit} exceeds limit.");
-
-            return [$amount['num']]; // Indicates over-limit
+        if (isset($user->limit) && $totalBetAmountForTwoDigit + $subAmount > $user->limit) {
+            // User limit is set and exceeded, check default limit
+            if ($totalBetAmountForTwoDigit + $subAmount > $user_default_break) {
+                // Both limits exceeded, return error
+                return [$amount['num']];
+            } else {
+                Log::info('the user they are exceeding their personal limit but can play with the default limit.');
+            }
+        } else {
+            // Either no user limit is set or the bet doesn't exceed the user limit
+            if ($totalBetAmountForTwoDigit + $subAmount > $user_default_break) {
+                // Default limit exceeded, return error
+                return [$amount['num']];
+            } else {
+                Log::info('Within both limits, allow the bet');
+            }
         }
 
-         // Indicates no over-limit
+        // if ($totalBetAmountForTwoDigit + $subAmount > $break) {
+        //     Log::warning("Bet on {$twoDigit} exceeds limit.");
+
+        //     return [$amount['num']]; // Indicates over-limit
+        // }
+
+        // Indicates no over-limit
     }
 
-    protected function processAmount($amount, $lotteryId)
-    {
+   protected function processAmount($amount, $lotteryId)
+{
+    $twoDigits = TwoDigit::where('two_digit', sprintf('%02d', $amount['num']))->firstOrFail();
+    $twoDigit = str_pad($amount['num'], 2, '0', STR_PAD_LEFT); // Ensure two-digit format
 
-        $twoDigits = TwoDigit::where('two_digit', sprintf('%02d', $amount['num']))->firstOrFail();
-        $twoDigit = str_pad($amount['num'], 2, '0', STR_PAD_LEFT); // Ensure three-digit format
+    $user = Auth::user();
+    $break = $user->limit;
+    $defaultBreak = TwoDLimit::lasted()->first();
+    $user_default_break = $defaultBreak->two_d_limit;
 
-        $break = Auth::user()->limit;
+    $current_session = SessionHelper::getCurrentSession();
+    $current_day = Carbon::now()->format('Y-m-d');
 
-        $current_session = SessionHelper::getCurrentSession();
-        $current_day = Carbon::now()->format('Y-m-d');
+    $totalBetAmountForTwoDigit = DB::table('lottery_two_digit_pivots')
+        ->where('res_date', $current_day)
+        ->where('session', $current_session)
+        ->where('bet_digit', $twoDigit)
+        ->sum('sub_amount');
 
-        $totalBetAmountForTwoDigit = DB::table('lottery_two_digit_pivots')
-            ->where('res_date', $current_day)
-            ->where('session', $current_session)
-            ->where('bet_digit', $twoDigit)
-            ->sum('sub_amount');
-        $subAmount = $amount['amount'];
-        $betDigit = $amount['num'];
+    $subAmount = $amount['amount'];
 
-        if ($totalBetAmountForTwoDigit + $subAmount <= $break) {
+    if (isset($user->limit) && $totalBetAmountForTwoDigit + $subAmount > $user->limit) {
+        // User limit is set and exceeded, check default limit
+        if ($totalBetAmountForTwoDigit + $subAmount > $user_default_break) {
+            // Both limits exceeded, return error
+            return [$amount['num']];
+        } else {
+            // User limit exceeded but within default limit, allow with warning
+            Log::info('Bet exceeds user limit but falls within default limit.');
+            // ... add logic to inform user and allow bet with default limit (optional) ...
+        }
+    } else {
+        // Either no user limit is set or the bet doesn't exceed the user limit
+        if ($totalBetAmountForTwoDigit + $subAmount > $user_default_break) {
+            // Default limit exceeded, return error
+            return [$amount['num']];
+        } else {
+            // Within both limits, allow the bet
+            // ... existing code to check results, create lottery record, etc. ...
             $today = Carbon::now()->format('Y-m-d');
             // Retrieve results for today where status is 'open'
             $results = TwodSetting::where('result_date', $today) // Match today's date
@@ -156,7 +198,7 @@ class TwoDPlayService
                 'twod_setting_id' => $results->id,
                 'two_digit_id' => $twoDigits->id,
                 'user_id' => $player_id->id,
-                'bet_digit' => $betDigit,
+                'bet_digit' => $amount['num'],
                 'sub_amount' => $subAmount,
                 'prize_sent' => false,
                 'match_status' => $results->status,
@@ -167,11 +209,60 @@ class TwoDPlayService
                 'user_log' => $results->user_log,
                 'play_date' => $play_date,
                 'play_time' => $play_time,
-
             ]);
-        } else {
-            // Handle the case where the bet exceeds the limit
-            return [$amount['num']];
         }
     }
+}
+
+    // protected function processAmount($amount, $lotteryId)
+    // {
+
+    //     $twoDigits = TwoDigit::where('two_digit', sprintf('%02d', $amount['num']))->firstOrFail();
+    //     $twoDigit = str_pad($amount['num'], 2, '0', STR_PAD_LEFT); // Ensure three-digit format
+
+    //     $break = Auth::user()->limit;
+
+    //     $current_session = SessionHelper::getCurrentSession();
+    //     $current_day = Carbon::now()->format('Y-m-d');
+
+    //     $totalBetAmountForTwoDigit = DB::table('lottery_two_digit_pivots')
+    //         ->where('res_date', $current_day)
+    //         ->where('session', $current_session)
+    //         ->where('bet_digit', $twoDigit)
+    //         ->sum('sub_amount');
+    //     $subAmount = $amount['amount'];
+    //     $betDigit = $amount['num'];
+
+    //     if ($totalBetAmountForTwoDigit + $subAmount <= $break) {
+    //         $today = Carbon::now()->format('Y-m-d');
+    //         // Retrieve results for today where status is 'open'
+    //         $results = TwodSetting::where('result_date', $today) // Match today's date
+    //             ->where('status', 'open')      // Check if the status is 'open'
+    //             ->first();
+    //         $play_date = Carbon::now()->format('Y-m-d');  // Correct date format
+    //         $play_time = Carbon::now()->format('H:i:s');  // Correct time format
+    //         $player_id = Auth::user();
+    //         LotteryTwoDigitPivot::create([
+    //             'lottery_id' => $lotteryId,
+    //             'twod_setting_id' => $results->id,
+    //             'two_digit_id' => $twoDigits->id,
+    //             'user_id' => $player_id->id,
+    //             'bet_digit' => $betDigit,
+    //             'sub_amount' => $subAmount,
+    //             'prize_sent' => false,
+    //             'match_status' => $results->status,
+    //             'res_date' => $results->result_date,
+    //             'res_time' => $results->result_time,
+    //             'session' => $current_session,
+    //             'admin_log' => $results->admin_log,
+    //             'user_log' => $results->user_log,
+    //             'play_date' => $play_date,
+    //             'play_time' => $play_time,
+
+    //         ]);
+    //     } else {
+    //         // Handle the case where the bet exceeds the limit
+    //         return [$amount['num']];
+    //     }
+    // }
 }

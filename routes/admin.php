@@ -1,25 +1,27 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ReportController;
-use App\Http\Controllers\Admin\LoginController;
-use App\Http\Controllers\Admin\RolesController;
+use App\Http\Controllers\Admin\Agent\AgentController;
 use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\BannerTextController;
+use App\Http\Controllers\Admin\GameTypeProductController;
+use App\Http\Controllers\Admin\GetBetDetailController;
+use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Admin\Master\MasterController;
 use App\Http\Controllers\Admin\PaymentController;
+use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\Player\PlayerController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\PromotionController;
-use App\Http\Controllers\Admin\BannerTextController;
-use App\Http\Controllers\Admin\PermissionController;
-use App\Http\Controllers\Admin\Agent\AgentController;
-use App\Http\Controllers\Admin\GetBetDetailController;
-use App\Http\Controllers\Admin\TwoD\HistoryController;
-use App\Http\Controllers\Admin\Master\MasterController;
-use App\Http\Controllers\Admin\Player\PlayerController;
-use App\Http\Controllers\Admin\GameTypeProductController;
-use App\Http\Controllers\Admin\TwoD\TwoDSettingController;
+use App\Http\Controllers\Admin\RolesController;
 use App\Http\Controllers\Admin\TransferLog\TransferLogController;
+use App\Http\Controllers\Admin\TwoD\HistoryController;
+use App\Http\Controllers\Admin\Twod\ManageTwoDUserController;
+use App\Http\Controllers\Admin\Twod\MorningLegarController;
+use App\Http\Controllers\Admin\TwoD\TwoDSettingController;
 use App\Http\Controllers\Admin\WithDraw\WithDrawRequestController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ReportController;
+use Illuminate\Support\Facades\Route;
 
 Route::group([
     'prefix' => 'admin', 'as' => 'admin.',
@@ -128,6 +130,18 @@ Route::group([
     // morning history
     Route::get('2d-morning-history', [HistoryController::class, 'showMorningHistory']);
     Route::get('2d-evening-history', [HistoryController::class, 'showEveningHistory']);
+    Route::get('2d-default-limit', [TwoDSettingController::class, 'Limitindex'])->name('default2dLimit');
+    Route::post('2d-default-limit-store', [TwoDSettingController::class, 'Limitstore'])->name('DefaultLimitStore');
+    Route::delete('2d-default-limits/{id}', [TwoDSettingController::class, 'Limitdestroy'])->name('defaultLimitDelete');
+    Route::get('/2d-users-with-agents', [ManageTwoDUserController::class, 'index'])->name('2dusers.with_agents');
 
+    Route::get('/2d-users-limit-cor', [ManageTwoDUserController::class, 'limitCorindex'])->name('2dusers.limit_cor');
+
+    Route::post('/2d-users/update-limits', [ManageTwoDUserController::class, 'updateLimits'])->name('update_limits');
+
+    Route::post('/2d-users/update-cor', [ManageTwoDUserController::class, 'updateCor'])->name('update_cor');
+    Route::get('/2d-morning-legar', [MorningLegarController::class, 'showMorningLegar'])->name('morningLegar.show');
+    // default break update
+    Route::post('/2d-default-limit-update', [MorningLegarController::class, 'update'])->name('DefaultBreakupdate');
     // two - d route end
 });

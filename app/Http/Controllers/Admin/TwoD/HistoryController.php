@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\Admin\TwoD;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\AdminEveningHistoryService;
 use App\Services\AdminMorningHistoryService;
+use Illuminate\Http\Request;
 
 class HistoryController extends Controller
 {
-     protected $adminMorningHistoryService;
-     protected $eveningHistory;
+    protected $adminMorningHistoryService;
+
+    protected $eveningHistory;
 
     public function __construct(AdminMorningHistoryService $adminMorningHistoryService, AdminEveningHistoryService $eveningHistory)
     {
@@ -28,6 +29,7 @@ class HistoryController extends Controller
         $history = $this->adminMorningHistoryService->getMorningHistory();
         $data = $history['data'];
         $totalSubAmount = $history['total_sub_amount'];
+
         return view('admin.two_d.history.morning_history', compact('data', 'totalSubAmount'));
     }
 
@@ -36,6 +38,7 @@ class HistoryController extends Controller
         $history = $this->eveningHistory->getEveningHistory();
         $data = $history['data'];
         $totalSubAmount = $history['total_sub_amount'];
+
         return view('admin.two_d.history.evening_history', compact('data', 'totalSubAmount'));
     }
 }

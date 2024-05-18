@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\TwoD;
 use App\Http\Controllers\Controller;
 use App\Models\TwoD\CloseTwoDigit;
 use App\Models\TwoD\HeadDigit;
+use App\Models\TwoD\TwoDLimit;
 use App\Models\TwoD\TwodSetting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -171,5 +172,42 @@ class TwoDSettingController extends Controller
         $limit->delete();
 
         return redirect()->route('admin.two-digit-close-head')->with('toast_success', 'HeadDigit deleted successfully.');
+    }
+
+    public function Limitindex()
+    {
+        $limits = TwoDLimit::all();
+
+        return view('admin.two_d.default_limit.index', compact('limits'));
+    }
+
+    public function Limitstore(Request $request)
+    {
+        //dd($request->all());
+        $validator = Validator::make($request->all(), [
+            'two_d_limit' => 'required',
+
+            //'body' => 'required|min:3'
+        ]);
+
+        if ($validator->fails()) {
+            return back()->with('toast_error', $validator->messages()->all()[0])->withInput();
+        }
+
+        // store
+        TwoDLimit::create([
+            'two_d_limit' => $request->two_d_limit,
+        ]);
+
+        // redirect
+        return redirect()->route('admin.default2dLimit')->with('toast_success', 'two_d_limit created successfully.');
+    }
+
+    public function Limitdestroy($id)
+    {
+        $limit = TwoDLimit::findOrFail($id);
+        $limit->delete();
+
+        return redirect()->route('admin.default2dLimit')->with('toast_success', 'Permission deleted successfully.');
     }
 }

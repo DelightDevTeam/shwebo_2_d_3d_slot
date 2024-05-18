@@ -15,12 +15,12 @@ class SeamlessTransactionResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            "from_date" => $this->from_date,
-            "to_date" => $this->to_date,
-            "product" => $this->product_name,
-            "total_count" => $this->total_count,
-            "total_bet_amount" => $this->total_bet_amount,
-            "total_transaction_amount" => number_format($this->total_transaction_amount, 2),
+            'from_date' => $this->from_date,
+            'to_date' => $this->to_date,
+            'product' => $this->product_name,
+            'total_count' => $this->total_count,
+            'total_bet_amount' => $this->total_bet_amount,
+            'total_transaction_amount' => number_format($this->total_transaction_amount, 2),
         ];
     }
 }

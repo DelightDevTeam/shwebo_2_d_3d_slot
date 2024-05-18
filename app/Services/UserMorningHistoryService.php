@@ -56,7 +56,7 @@ class UserMorningHistoryService
         } catch (\Exception $e) {
             return [
                 'success' => false,
-                'message' => 'An error occurred while fetching morning history: ' . $e->getMessage(),
+                'message' => 'An error occurred while fetching morning history: '.$e->getMessage(),
             ];
         }
     }

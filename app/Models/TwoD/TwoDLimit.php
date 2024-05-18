@@ -12,4 +12,9 @@ class TwoDLimit extends Model
     protected $fillable = [
         'two_d_limit',
     ];
+
+    public function scopeLasted($query)
+    {
+        return $query->orderBy('created_at', 'desc');
+    }
 }

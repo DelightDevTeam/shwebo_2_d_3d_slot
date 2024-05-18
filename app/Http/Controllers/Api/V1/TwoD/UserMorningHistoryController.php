@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Api\V1\TwoD;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\UserMorningHistoryService;
+use Illuminate\Http\Request;
 
 class UserMorningHistoryController extends Controller
 {

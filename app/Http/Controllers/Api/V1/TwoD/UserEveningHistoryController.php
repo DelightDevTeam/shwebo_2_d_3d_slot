@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Api\V1\TwoD;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\UserEveningHistoryService;
+use Illuminate\Http\Request;
 
 class UserEveningHistoryController extends Controller
 {
-     protected $eveningHistoryService;
+    protected $eveningHistoryService;
 
     public function __construct(UserEveningHistoryService $eveningHistoryService)
     {

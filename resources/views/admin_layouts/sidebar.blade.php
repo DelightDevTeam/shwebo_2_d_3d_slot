@@ -113,6 +113,12 @@
             <div class="collapse " id="profileExample">
               <ul class="nav nav-sm flex-column">
                 <li class="nav-item">
+                  <a class="nav-link text-white " href="{{ url('admin/2d-users-with-agents')}}">
+                    <span class="sidenav-mini-icon"> 2D </span>
+                    <span class="sidenav-normal  ms-2  ps-1"> ထိုးသားများစီမံရန် </span>
+                  </a>
+                </li>
+                <li class="nav-item">
                   <a class="nav-link text-white " href="{{ url('admin/two-d-settins') }}">
                     <span class="sidenav-mini-icon">2D</span>
                     <span class="sidenav-normal  ms-2  ps-1">Setting</span>
@@ -125,7 +131,18 @@
                     <span class="sidenav-normal  ms-2  ps-1">MoreSetting</span>
                   </a>
                 </li>
-
+                 <li class="nav-item">
+                  <a class="nav-link text-white " href="{{ url('admin/2d-default-limit')}}">
+                    <span class="sidenav-mini-icon"> 2D </span>
+                    <span class="sidenav-normal  ms-2  ps-1"> DefaultLimit-သတ်မှတ်ရန် </span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-white " href="{{ url('admin/2d-users-limit-cor')}}">
+                    <span class="sidenav-mini-icon"> 2D </span>
+                    <span class="sidenav-normal  ms-2  ps-1"> ထိုးသားဘရိတ်/ကော်-သတ်မှတ်ရန် </span>
+                  </a>
+                </li>
                 <li class="nav-item">
                   <a class="nav-link text-white " href="{{ url('admin/close-2d-digit')}}">
                     <span class="sidenav-mini-icon"> 2D </span>
@@ -145,7 +162,12 @@
                     <span class="sidenav-normal  ms-2  ps-1"> 12:1-မှတ်တမ်း </span>
                   </a>
                 </li>
-
+                <li class="nav-item">
+                  <a class="nav-link text-white " href="{{ url('admin/2d-morning-legar')}}">
+                    <span class="sidenav-mini-icon"> 2D </span>
+                    <span class="sidenav-normal  ms-2  ps-1"> 12:1-လယ်ဂျာ </span>
+                  </a>
+                </li>
                 <li class="nav-item">
                   <a class="nav-link text-white " href="{{ url('admin/2d-evening-history')}}">
                     <span class="sidenav-mini-icon"> 2D </span>

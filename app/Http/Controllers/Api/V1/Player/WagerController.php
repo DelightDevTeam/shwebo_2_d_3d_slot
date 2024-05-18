@@ -18,18 +18,18 @@ class WagerController extends Controller
 
     public function index(Request $request)
     {
-        $type = $request->get("type");
+        $type = $request->get('type');
 
         [$from, $to] = match ($type) {
-            "yesterday" => [now()->subDay()->startOfDay(), now()->subDay()->endOfDay()],
-            "this_week" => [now()->startOfWeek(), now()->endOfWeek()],
-            "last_week" => [now()->subWeek()->startOfWeek(), now()->subWeek()->endOfWeek()],
+            'yesterday' => [now()->subDay()->startOfDay(), now()->subDay()->endOfDay()],
+            'this_week' => [now()->startOfWeek(), now()->endOfWeek()],
+            'last_week' => [now()->subWeek()->startOfWeek(), now()->subWeek()->endOfWeek()],
             default => [now()->startOfDay(), now()],
         };
 
         $user = auth()->user();
 
-        $transactions = SeamlessTransaction::leftJoin("products", "products.id", "=", "seamless_transactions.product_id")
+        $transactions = SeamlessTransaction::leftJoin('products', 'products.id', '=', 'seamless_transactions.product_id')
             ->select(
                 DB::raw('MIN(seamless_transactions.created_at) as from_date'),
                 DB::raw('MAX(seamless_transactions.created_at) as to_date'),
@@ -41,10 +41,10 @@ class WagerController extends Controller
                 DB::raw('SUM(transaction_amount) as total_transaction_amount')
             )
             ->where('seamless_transactions.status', TransactionStatus::Settle->value)
-            ->whereBetween("seamless_transactions.created_at", [$from, $to])
-            ->where("user_id", $user->id)
+            ->whereBetween('seamless_transactions.created_at', [$from, $to])
+            ->where('user_id', $user->id)
             ->groupBy('user_id', 'product_id')
-            ->orderBy("products.name")
+            ->orderBy('products.name')
             ->paginate();
 
         return $this->success(SeamlessTransactionResource::collection($transactions));
