@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Twod;
+namespace App\Http\Controllers\Admin\TwoD;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
