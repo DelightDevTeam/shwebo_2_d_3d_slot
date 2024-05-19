@@ -36,5 +36,5 @@ class MorningLegarController extends Controller
         return redirect()->route('admin.morningLegar.show')->with('success', 'Default Break updated successfully.');
     }
 
-    // updated 
+    // updated
 }

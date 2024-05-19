@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\PromotionController;
 use App\Http\Controllers\Admin\RolesController;
 use App\Http\Controllers\Admin\TransferLog\TransferLogController;
+use App\Http\Controllers\Admin\TwoD\EveningLegarController;
 use App\Http\Controllers\Admin\TwoD\HistoryController;
 use App\Http\Controllers\Admin\TwoD\ManageTwoDUserController;
 use App\Http\Controllers\Admin\TwoD\MorningLegarController;
@@ -143,5 +144,9 @@ Route::group([
     Route::get('/2d-morning-legar', [MorningLegarController::class, 'showMorningLegar'])->name('morningLegar.show');
     // default break update
     Route::post('/2d-default-limit-update', [MorningLegarController::class, 'update'])->name('DefaultBreakupdate');
+
+    Route::get('/2d-evening-legar', [EveningLegarController::class, 'showMorningLegar'])->name('eveningLegar.show');
+    // default break update
+    Route::post('/2d-evening-limit-update', [EveningLegarController::class, 'Eveningupdate'])->name('eveningDefaultBreakupdate');
     // two - d route end
 });

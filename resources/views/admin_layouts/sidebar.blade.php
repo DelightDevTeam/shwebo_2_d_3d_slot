@@ -174,6 +174,12 @@
                     <span class="sidenav-normal  ms-2  ps-1"> 4:30-မှတ်တမ်း </span>
                   </a>
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link text-white " href="{{ url('admin/2d-evening-legar')}}">
+                    <span class="sidenav-mini-icon"> 2D </span>
+                    <span class="sidenav-normal  ms-2  ps-1"> 4:30-လယ်ဂျာ </span>
+                  </a>
+                </li>
 
               </ul>
             </div>

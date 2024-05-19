@@ -33,7 +33,7 @@
    <div class="card-header pb-0">
     <div class="d-lg-flex">
      <div>
-      <h5 class="mb-0">2D - 12:1 -မနက်ပိုင်း လယ်ဂျာ  Dashboards
+      <h5 class="mb-0">2D - 4:30 -ညနေပိုင်း လယ်ဂျာ  Dashboards
       </h5>
 
      </div>
@@ -52,7 +52,7 @@
             {{ session('success') }}
         </div>
     @endif
-    <form action="{{ route('admin.DefaultBreakupdate') }}" method="POST">
+    <form action="{{ route('admin.eveningDefaultBreakupdate') }}" method="POST">
         @csrf
         <div class="form-group">
             <label for="two_d_limit">Default Break Edit</label>
@@ -64,7 +64,7 @@
     </form>
 </div>
    <div class="table-responsive">
-    <table class="table table-flush table-custom table-bordered" id="roles-search">
+    <table class="table table-flush table-custom" id="roles-search">
      <thead class="thead-light">
              <tr>
                     @for ($i = 0; $i < 8; $i++)
