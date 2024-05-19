@@ -60,6 +60,7 @@ class User extends Authenticatable implements Wallet
         'lottery_wallet',
         'status',
         'type',
+        'main_balance',
         'is_changed_password',
     ];
 

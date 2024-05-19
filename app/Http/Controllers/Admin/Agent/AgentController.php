@@ -86,6 +86,7 @@ class AgentController extends Controller
         }else{
             $balance = $admin->main_balance;
         }
+
         // Check if lottery wallet transfer is possible
         if (isset($inputs['main_balance']) && $inputs['main_balance'] > $balance) {
             throw ValidationException::withMessages([
@@ -108,8 +109,13 @@ class AgentController extends Controller
         $agent = User::create($userPrepare);
         $agent->roles()->sync(self::AGENT_ROLE);
        
+        if($admin->hasRole('Admin'))
+        {
         (new WalletService)->withdraw($admin, $inputs['main_balance'], TransactionName::CapitalWithdraw);
-
+        }else{
+            $admin->main_balance -= $inputs['main_balance'];
+            $admin->save();
+        }
         // Redirect back with success message
         return redirect()->back()
             ->with('success', 'Agent created successfully')
@@ -224,15 +230,29 @@ class AgentController extends Controller
             $admin = Auth::user();
             $cashIn = $inputs['main_balance'];
 
-            if ($cashIn > $admin->balanceFloat) {
+            if($admin->hasRole('Admin'))
+            {
+                $balance = $admin->balanceFloat;
+            }else{
+                $balance = $admin->main_balance;
+            }
+
+            if ($cashIn > $balance) {
                 throw new \Exception('You do not have enough balance to transfer!');
             }
 
             $agent->main_balance += $inputs['main_balance'];
             $agent->save();
+           
+            if($admin->hasRole('Admin'))
+            {
+                (new WalletService)->withdraw($admin, $inputs['main_balance'], TransactionName::CapitalWithdraw);
+                
+            }
 
+            $admin->main_balance -=$inputs['main_balance'];
+            $admin->save();
             // Transfer money
-            (new WalletService)->withdraw($admin, $inputs['main_balance'], TransactionName::CapitalWithdraw);
 
             return redirect()->back()->with('success', 'Money fill request submitted successfully!');
         } catch (Exception $e) {
@@ -259,13 +279,20 @@ class AgentController extends Controller
             $agent = User::findOrFail($id);
             $admin = Auth::user();
             $cashOut = $inputs['main_balance'];
-
+            
             if ($cashOut > $agent->main_balance) {
 
                 return redirect()->back()->with('error', 'You do not have enough balance to transfer!');
             }
+            
             $agent->main_balance -= $cashOut;
             $agent->save();
+
+            if(!$admin->hasRole('Admin'))
+            {
+                $admin->main_balance +=$cashOut;
+                $admin->save();
+            }
 
             return redirect()->back()->with('success', 'Money fill request submitted successfully!');
         } catch (Exception $e) {
