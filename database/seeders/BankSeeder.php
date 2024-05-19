@@ -44,7 +44,7 @@ class BankSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
-            
+
         ];
 
         DB::table('banks')->insert($banks);

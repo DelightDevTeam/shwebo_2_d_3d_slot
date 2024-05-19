@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Api\V1\TwoD;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Services\ApiMorningWinService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class MorningWinPrizeController extends Controller
@@ -19,12 +19,10 @@ class MorningWinPrizeController extends Controller
 
     /**
      * Get morning prize sent data for the authenticated user.
-     *
-     * @return JsonResponse
      */
     public function getMorningPrizeSent(): JsonResponse
     {
-        if (!Auth::check()) {
+        if (! Auth::check()) {
             return response()->json(['status' => 'error', 'message' => 'Unauthorized'], 401);
         }
 

@@ -77,13 +77,12 @@ class AgentController extends Controller
 
         // Get authenticated user
         $admin = Auth::user();
-        
+
         // Validate inputs
         $inputs = $request->validated();
-        if($admin->hasRole('Admin'))
-        {
+        if ($admin->hasRole('Admin')) {
             $balance = $admin->balanceFloat;
-        }else{
+        } else {
             $balance = $admin->main_balance;
         }
         // Check if lottery wallet transfer is possible
@@ -100,14 +99,14 @@ class AgentController extends Controller
                 'password' => Hash::make($request->input('password')),
                 'agent_id' => $admin->id,
                 'type' => UserType::Agent,
-                'main_balance' => $request->main_balance
+                'main_balance' => $request->main_balance,
             ]
         );
 
         // Create agent and assign roles
         $agent = User::create($userPrepare);
         $agent->roles()->sync(self::AGENT_ROLE);
-       
+
         (new WalletService)->withdraw($admin, $inputs['main_balance'], TransactionName::CapitalWithdraw);
 
         // Redirect back with success message

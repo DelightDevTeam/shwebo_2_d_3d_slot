@@ -12,7 +12,6 @@ class DepositRequest extends Model
 
     protected $fillable = ['user_id', 'agent_id', 'bank_id', 'account_name', 'account_no', 'amount', 'refrence_no', 'status'];
 
-
     public function user()
     {
         return $this->belongsTo(User::class);

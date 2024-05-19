@@ -28,7 +28,7 @@ class WithDrawController extends Controller
                 $inputs,
                 [
                     'user_id' => $player->id,
-                    'agent_id' => $player->agent_id
+                    'agent_id' => $player->agent_id,
                 ]
             ));
 

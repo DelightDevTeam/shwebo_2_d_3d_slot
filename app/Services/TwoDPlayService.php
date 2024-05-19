@@ -180,46 +180,46 @@ class TwoDPlayService
     }
 
     protected function createLotteryTwoDigitPivot($lotteryId, $twoDigitId, $betDigit, $subAmount)
-{
-    $today = Carbon::now()->format('Y-m-d');
-    // Retrieve results for today where status is 'open'
-    $results = TwodSetting::where('result_date', $today) // Match today's date
-        ->where('status', 'open')      // Check if the status is 'open'
-        ->first();
+    {
+        $today = Carbon::now()->format('Y-m-d');
+        // Retrieve results for today where status is 'open'
+        $results = TwodSetting::where('result_date', $today) // Match today's date
+            ->where('status', 'open')      // Check if the status is 'open'
+            ->first();
 
-    if ($results) {
-        $two_id = $results->id;
-        Log::info("TwoDSetting id is: {$two_id}");
+        if ($results) {
+            $two_id = $results->id;
+            Log::info("TwoDSetting id is: {$two_id}");
 
-        $play_date = Carbon::now()->format('Y-m-d');  // Correct date format
-        $play_time = Carbon::now()->format('H:i:s');  // Correct time format
-        $player_id = Auth::user();
-        $current_session = SessionHelper::getCurrentSession();
+            $play_date = Carbon::now()->format('Y-m-d');  // Correct date format
+            $play_time = Carbon::now()->format('H:i:s');  // Correct time format
+            $player_id = Auth::user();
+            $current_session = SessionHelper::getCurrentSession();
 
-        $pivot = LotteryTwoDigitPivot::create([
-            'lottery_id' => $lotteryId,
-            'twod_setting_id' => $two_id,
-            'two_digit_id' => $twoDigitId,
-            'user_id' => $player_id->id,
-            'bet_digit' => $betDigit,
-            'sub_amount' => $subAmount,
-            'prize_sent' => false,
-            'match_status' => $results->status,
-            'res_date' => $results->result_date,
-            'res_time' => $results->result_time,
-            'session' => $current_session,
-            'admin_log' => $results->admin_log,
-            'user_log' => $results->user_log,
-            'play_date' => $play_date,
-            'play_time' => $play_time,
-        ]);
+            $pivot = LotteryTwoDigitPivot::create([
+                'lottery_id' => $lotteryId,
+                'twod_setting_id' => $two_id,
+                'two_digit_id' => $twoDigitId,
+                'user_id' => $player_id->id,
+                'bet_digit' => $betDigit,
+                'sub_amount' => $subAmount,
+                'prize_sent' => false,
+                'match_status' => $results->status,
+                'res_date' => $results->result_date,
+                'res_time' => $results->result_time,
+                'session' => $current_session,
+                'admin_log' => $results->admin_log,
+                'user_log' => $results->user_log,
+                'play_date' => $play_date,
+                'play_time' => $play_time,
+            ]);
 
-        Log::info("Created LotteryTwoDigitPivot with ID: {$pivot->id}");
+            Log::info("Created LotteryTwoDigitPivot with ID: {$pivot->id}");
 
-    } else {
-        Log::error("No TwodSetting found for date: {$today} with status 'open'");
+        } else {
+            Log::error("No TwodSetting found for date: {$today} with status 'open'");
+        }
     }
-}
 
     // protected function createLotteryTwoDigitPivot($lotteryId, $twoDigitId, $betDigit, $subAmount)
     // {
@@ -230,7 +230,6 @@ class TwoDPlayService
     //         ->first();
     //         $two_id = $results->id;
     //         //Log::info("two d settin id is: {$two_id}");
-
 
     //     $play_date = Carbon::now()->format('Y-m-d');  // Correct date format
     //     $play_time = Carbon::now()->format('H:i:s');  // Correct time format

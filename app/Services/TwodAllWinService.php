@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services;
 
 use Carbon\Carbon;
@@ -15,7 +16,6 @@ class TwodAllWinService
      */
     public function AllWinPrizeSent()
     {
-       
 
         try {
             $results = DB::table('lottery_two_digit_pivots')
@@ -42,9 +42,9 @@ class TwodAllWinService
             }
 
             return [
-             'results' => $results, 
-             'totalPrizeAmount' => $totalPrizeAmount,
-             //'prizeAmount' => $prizeAmount
+                'results' => $results,
+                'totalPrizeAmount' => $totalPrizeAmount,
+                //'prizeAmount' => $prizeAmount
             ];
 
         } catch (\Exception $e) {

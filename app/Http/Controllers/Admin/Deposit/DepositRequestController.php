@@ -14,8 +14,8 @@ class DepositRequestController extends Controller
 {
     public function index()
     {
-        $deposits = DepositRequest::with(['user', 'bank'])->where('agent_id', Auth::id())->orderBy('id','desc')->get();
-        
+        $deposits = DepositRequest::with(['user', 'bank'])->where('agent_id', Auth::id())->orderBy('id', 'desc')->get();
+
         return view('admin.deposit_request.index', compact('deposits'));
     }
 
@@ -39,11 +39,11 @@ class DepositRequestController extends Controller
             if ($agent->main_balance < $request->amount) {
                 return redirect()->back()->with('error', 'You do not have enough balance to transfer!');
             }
-            
+
             $deposit->update([
                 'status' => $request->status,
             ]);
-           
+
             if ($request->status == 1) {
 
                 $agent->main_balance -= $request->amount;

@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Admin\TwoD;
 
-use Carbon\Carbon;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Models\Admin\Lottery;
 use App\Models\Admin\TwodWiner;
-use App\Http\Controllers\Controller;
 use App\Services\AdminEveningPrizeSentService;
 use App\Services\AdminMorningPrizeSentService;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class TwoDMorningWinnerController extends Controller
 {
@@ -17,8 +17,9 @@ class TwoDMorningWinnerController extends Controller
      */
     // for two digit early morning
     protected $prizeSentService;
+
     protected $adminEveningPrizeSentService;
-    
+
     public function __construct(AdminMorningPrizeSentService $prizeSentService, AdminEveningPrizeSentService $adminEveningPrizeSentService)
     {
         $this->prizeSentService = $prizeSentService;

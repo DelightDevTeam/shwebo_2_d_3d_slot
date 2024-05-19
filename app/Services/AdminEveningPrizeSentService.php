@@ -13,7 +13,7 @@ class AdminEveningPrizeSentService
      *
      * @return string
      */
-    
+
     /**
      * Retrieve all user data with prize_sent as true, filtered by session and current day.
      *

@@ -41,7 +41,7 @@ class CheckForEveningWinners implements ShouldQueue
         }
 
         if ($this->twodWiner->session !== 'evening') {
-           // Log::info('Session is not evening, exiting.');
+            // Log::info('Session is not evening, exiting.');
 
             return; // Not a morning session
         }
@@ -76,7 +76,7 @@ class CheckForEveningWinners implements ShouldQueue
                 ->where('session', 'evening')
                 ->get();
         } else {
-           // Log::warning('Invalid open time, cannot get ID.');
+            // Log::warning('Invalid open time, cannot get ID.');
 
             return; // Exit if no valid ID
         }

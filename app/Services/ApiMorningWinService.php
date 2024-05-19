@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services;
 
 use Carbon\Carbon;
@@ -46,9 +47,9 @@ class ApiMorningWinService
             }
 
             return [
-             'results' => $results, 
-             'totalPrizeAmount' => $totalPrizeAmount,
-             //'prizeAmount' => $prizeAmount
+                'results' => $results,
+                'totalPrizeAmount' => $totalPrizeAmount,
+                //'prizeAmount' => $prizeAmount
             ];
 
         } catch (\Exception $e) {

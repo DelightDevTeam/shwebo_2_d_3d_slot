@@ -35,7 +35,7 @@ class CheckForMorningWinners implements ShouldQueue
         $playDays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']; // 'saturday', 'sunday'
 
         if (! in_array(strtolower($today->isoFormat('dddd')), $playDays)) {
-           // Log::info('Today is not a play day: '.$today->isoFormat('dddd'));
+            // Log::info('Today is not a play day: '.$today->isoFormat('dddd'));
 
             return; // Not a play day
         }
@@ -49,10 +49,10 @@ class CheckForMorningWinners implements ShouldQueue
         // Get the correct bet digit from result number
         $result_number = $this->twodWiner->result_number;
         $date = Carbon::now()->format('Y-m-d');
-       // Log::info('Today Date is '.$date);
+        // Log::info('Today Date is '.$date);
 
         $currentSession = $this->getCurrentSession();
-       // Log::info('Today Current Session is '.$currentSession);
+        // Log::info('Today Current Session is '.$currentSession);
 
         $currentSessionTime = $this->getCurrentSessionTime();
         //Log::info('Current Session Time is '.$currentSessionTime);

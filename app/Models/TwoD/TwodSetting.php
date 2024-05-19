@@ -4,8 +4,8 @@ namespace App\Models\TwoD;
 
 use App\Jobs\CheckForEveningWinners;
 use App\Jobs\CheckForMorningWinners;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class TwodSetting extends Model
 {
@@ -16,10 +16,10 @@ class TwodSetting extends Model
     protected static function booted()
     {
         static::updated(function ($twodWiner) {
-             if ($twodWiner->session === 'morning') {
-            CheckForMorningWinners::dispatch($twodWiner);
-            }else {
-            CheckForEveningWinners::dispatch($twodWiner);
+            if ($twodWiner->session === 'morning') {
+                CheckForMorningWinners::dispatch($twodWiner);
+            } else {
+                CheckForEveningWinners::dispatch($twodWiner);
             }
         });
     }
