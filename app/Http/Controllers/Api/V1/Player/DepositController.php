@@ -24,9 +24,13 @@ class DepositController extends Controller
             if ($player->main_balance < $inputs['amount']) {
                 return $this->error('', 'Insuffience Balance', 401);
             }
-            $params = array_merge($inputs, ['user_id' => $player->id]);
-            
-            $deposit = DepositRequest::create($params);
+            $deposit = DepositRequest::create(array_merge(
+                $inputs,
+                [
+                    'user_id' => $player->id,
+                    'agent_id' => $player->agent_id
+                ]
+            ));
            
             return $this->success($deposit, 'Deposit Request Success');
         } catch (Exception $e) {

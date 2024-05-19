@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('with_draw_requests', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('agent_id');
             $table->unsignedBigInteger('bank_id');
             $table->unsignedBigInteger('amount');
             $table->integer('account_no');

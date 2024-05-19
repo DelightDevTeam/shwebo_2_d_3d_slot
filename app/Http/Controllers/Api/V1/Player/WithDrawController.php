@@ -24,8 +24,14 @@ class WithDrawController extends Controller
             if ($player->main_balance < $inputs['amount']) {
                 return $this->error('', 'Insuffience Balance', 401);
             }
-            $withdraw = ModelsWithDrawRequest::create(array_merge($inputs, ['user_id' => $player->id]));
-            
+            $withdraw = ModelsWithDrawRequest::create(array_merge(
+                $inputs,
+                [
+                    'user_id' => $player->id,
+                    'agent_id' => $player->agent_id
+                ]
+            ));
+
             return $this->success($withdraw, 'Withdraw Request Success');
         } catch (Exception $e) {
             $this->error('', $e->getMessage(), 401);
