@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers\Api\V1\TwoD;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\TwoD\TwoDPlayRequest;
-use App\Models\TwoD\CloseTwoDigit;
-use App\Models\TwoD\HeadDigit;
 use App\Models\TwoD\TwoDigit;
+use App\Traits\HttpResponses;
+use App\Models\TwoD\HeadDigit;
+use App\Models\TwoD\TwoDLimit;
 use App\Models\TwoD\TwodSetting;
 use App\Services\TwoDPlayService;
-use App\Traits\HttpResponses;
+use App\Models\TwoD\CloseTwoDigit;
 use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
+use App\Models\TwoD\LotteryTwoDigitCopy;
+use App\Http\Requests\TwoD\TwoDPlayRequest;
+use Illuminate\Support\Facades\Auth;
 
 class TwoDLotteryController extends Controller
 {
@@ -18,15 +21,30 @@ class TwoDLotteryController extends Controller
 
     protected $playService;
 
-    public function get_towdigit()
+   public function get_towdigit()
+{
+    $digits = TwoDigit::all();
+
+    $over_all_break = TwoDLimit::latest()->first()->two_d_limit;
+    $user = Auth::user();
+    $user_break = $user->limit;
+    
+    foreach($digits as $digit)
     {
-        $digits = TwoDigit::all();
-
-        return $this->success([
-
-            'two_digits' => $digits,
-        ]);
+        $totalAmount = LotteryTwoDigitCopy::where('two_digit_id', $digit->id)->sum('sub_amount');
+        $over_all_remaining = $over_all_break - $totalAmount;
+        $digit->over_all_remaining = $over_all_remaining;
+        $user_remaining = $user_break - $totalAmount;
+        $digit->user_remaining = $user_remaining;
     }
+
+    return $this->success([
+        'two_digits' => $digits,
+        'break'      => $over_all_break,
+        'user_break' => $user_break
+    ]);
+}
+
 
     public function store(TwoDPlayRequest $request, TwoDPlayService $playService)
     {
