@@ -36,9 +36,8 @@ class TwoDPlayService
             }
             $defaultBreak = TwoDLimit::lasted()->first();
             $user_default_break = $defaultBreak->two_d_limit ?? null;
-            if($user_default_break === null){
+            if ($user_default_break === null) {
                 throw new \Exception("'user's default limit' is not set for user.");
-
             }
 
             if ($user->main_balance < $totalAmount) {
@@ -110,9 +109,9 @@ class TwoDPlayService
         $defaultBreak = TwoDLimit::lasted()->first();
         $user_default_break = $defaultBreak->two_d_limit;
 
-        Log::info("User's  limit (limit): {$break}");
-        Log::info("Checking bet_digit: {$twoDigit}");
-        Log::info("User's default break: {$user_default_break}");
+        // Log::info("User's  limit (limit): {$break}");
+        // Log::info("Checking bet_digit: {$twoDigit}");
+        // Log::info("User's default break: {$user_default_break}");
 
         $current_session = SessionHelper::getCurrentSession();
         $current_day = Carbon::now()->format('Y-m-d');
@@ -123,7 +122,7 @@ class TwoDPlayService
             ->where('bet_digit', $twoDigit)
             ->sum('sub_amount');
 
-        Log::info("Total bet amount for {$twoDigit}: {$totalBetAmountForTwoDigit}");
+        //Log::info("Total bet amount for {$twoDigit}: {$totalBetAmountForTwoDigit}");
 
         $subAmount = $amount['amount'];
 
@@ -137,16 +136,14 @@ class TwoDPlayService
             //Log::info("Bet exceeds user limit for {$twoDigit}");
 
             //return [$amount['num']];
-        } elseif($totalBetAmountForTwoDigit + $subAmount > $user_default_break && $break){
+        } elseif ($totalBetAmountForTwoDigit + $subAmount > $user_default_break && $break) {
             Log::info("Bet exceeds user limit for {$twoDigit}");
 
             return [$amount['num']];
-        }
-        else {
+        } else {
             Log::info('Within both limits, allow the bet');
         }
         // Indicates no over-limit
-    return null;
 
     }
 
@@ -170,10 +167,10 @@ class TwoDPlayService
 
         $subAmount = $amount['amount'];
 
-        if ($totalBetAmountForTwoDigit + $subAmount < $user_default_break) {
+        if ($totalBetAmountForTwoDigit + $subAmount <= $user_default_break) {
             // Within default break, allow the bet
             $this->createLotteryTwoDigitPivot($lotteryId, $twoDigits->id, $amount['num'], $subAmount);
-        } elseif ($totalBetAmountForTwoDigit + $subAmount < $break) {
+        } elseif ($totalBetAmountForTwoDigit + $subAmount <= $break) {
             // Within user limit, allow the bet
             $this->createLotteryTwoDigitPivot($lotteryId, $twoDigits->id, $amount['num'], $subAmount);
         } else {
@@ -190,29 +187,73 @@ class TwoDPlayService
             ->where('status', 'open')      // Check if the status is 'open'
             ->first();
 
-        $play_date = Carbon::now()->format('Y-m-d');  // Correct date format
-        $play_time = Carbon::now()->format('H:i:s');  // Correct time format
-        $player_id = Auth::user();
-        $current_session = SessionHelper::getCurrentSession();
+        if ($results) {
+            $two_id = $results->id;
+            Log::info("TwoDSetting id is: {$two_id}");
 
-        LotteryTwoDigitPivot::create([
-            'lottery_id' => $lotteryId,
-            'twod_setting_id' => $results->id,
-            'two_digit_id' => $twoDigitId,
-            'user_id' => $player_id->id,
-            'bet_digit' => $betDigit,
-            'sub_amount' => $subAmount,
-            'prize_sent' => false,
-            'match_status' => $results->status,
-            'res_date' => $results->result_date,
-            'res_time' => $results->result_time,
-            'session' => $current_session,
-            'admin_log' => $results->admin_log,
-            'user_log' => $results->user_log,
-            'play_date' => $play_date,
-            'play_time' => $play_time,
-        ]);
+            $play_date = Carbon::now()->format('Y-m-d');  // Correct date format
+            $play_time = Carbon::now()->format('H:i:s');  // Correct time format
+            $player_id = Auth::user();
+            $current_session = SessionHelper::getCurrentSession();
+
+            $pivot = LotteryTwoDigitPivot::create([
+                'lottery_id' => $lotteryId,
+                'twod_setting_id' => $two_id,
+                'two_digit_id' => $twoDigitId,
+                'user_id' => $player_id->id,
+                'bet_digit' => $betDigit,
+                'sub_amount' => $subAmount,
+                'prize_sent' => false,
+                'match_status' => $results->status,
+                'res_date' => $results->result_date,
+                'res_time' => $results->result_time,
+                'session' => $current_session,
+                'admin_log' => $results->admin_log,
+                'user_log' => $results->user_log,
+                'play_date' => $play_date,
+                'play_time' => $play_time,
+            ]);
+
+            Log::info("Created LotteryTwoDigitPivot with ID: {$pivot->id}");
+
+        } else {
+            Log::error("No TwodSetting found for date: {$today} with status 'open'");
+        }
     }
+
+    // protected function createLotteryTwoDigitPivot($lotteryId, $twoDigitId, $betDigit, $subAmount)
+    // {
+    //     $today = Carbon::now()->format('Y-m-d');
+    //     // Retrieve results for today where status is 'open'
+    //     $results = TwodSetting::where('result_date', $today) // Match today's date
+    //         ->where('status', 'open')      // Check if the status is 'open'
+    //         ->first();
+    //         $two_id = $results->id;
+    //         //Log::info("two d settin id is: {$two_id}");
+
+    //     $play_date = Carbon::now()->format('Y-m-d');  // Correct date format
+    //     $play_time = Carbon::now()->format('H:i:s');  // Correct time format
+    //     $player_id = Auth::user();
+    //     $current_session = SessionHelper::getCurrentSession();
+
+    //     LotteryTwoDigitPivot::create([
+    //         'lottery_id' => $lotteryId,
+    //         'twod_setting_id' => $two_id,
+    //         'two_digit_id' => $twoDigitId,
+    //         'user_id' => $player_id->id,
+    //         'bet_digit' => $betDigit,
+    //         'sub_amount' => $subAmount,
+    //         'prize_sent' => false,
+    //         'match_status' => $results->status,
+    //         'res_date' => $results->result_date,
+    //         'res_time' => $results->result_time,
+    //         'session' => $current_session,
+    //         'admin_log' => $results->admin_log,
+    //         'user_log' => $results->user_log,
+    //         'play_date' => $play_date,
+    //         'play_time' => $play_time,
+    //     ]);
+    // }
 
     // protected function preProcessAmountCheck($amount)
     // {

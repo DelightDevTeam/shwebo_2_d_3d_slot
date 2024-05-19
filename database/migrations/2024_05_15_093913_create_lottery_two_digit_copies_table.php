@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('lottery_two_digit_copies', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('lottery_id');
-            $table->unsignedBigInteger('twod_setting_id')->nullable();
+            $table->unsignedBigInteger('twod_setting_id');
             $table->unsignedBigInteger('two_digit_id');
             $table->unsignedBigInteger('user_id');
             $table->string('bet_digit');

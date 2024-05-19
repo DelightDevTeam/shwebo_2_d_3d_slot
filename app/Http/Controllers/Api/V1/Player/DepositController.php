@@ -18,7 +18,7 @@ class DepositController extends Controller
     {
         try {
             $inputs = $request->validated();
-          
+
             $player = Auth::user();
 
             if ($player->main_balance < $inputs['amount']) {
@@ -28,10 +28,10 @@ class DepositController extends Controller
                 $inputs,
                 [
                     'user_id' => $player->id,
-                    'agent_id' => $player->agent_id
+                    'agent_id' => $player->agent_id,
                 ]
             ));
-           
+
             return $this->success($deposit, 'Deposit Request Success');
         } catch (Exception $e) {
             $this->error('', $e->getMessage(), 401);

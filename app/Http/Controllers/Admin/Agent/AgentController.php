@@ -77,13 +77,12 @@ class AgentController extends Controller
 
         // Get authenticated user
         $admin = Auth::user();
-        
+
         // Validate inputs
         $inputs = $request->validated();
-        if($admin->hasRole('Admin'))
-        {
+        if ($admin->hasRole('Admin')) {
             $balance = $admin->balanceFloat;
-        }else{
+        } else {
             $balance = $admin->main_balance;
         }
 
@@ -101,7 +100,7 @@ class AgentController extends Controller
                 'password' => Hash::make($request->input('password')),
                 'agent_id' => $admin->id,
                 'type' => UserType::Agent,
-                'main_balance' => $request->main_balance
+                'main_balance' => $request->main_balance,
             ]
         );
 
@@ -284,7 +283,7 @@ class AgentController extends Controller
 
                 return redirect()->back()->with('error', 'You do not have enough balance to transfer!');
             }
-            
+
             $agent->main_balance -= $cashOut;
             $agent->save();
 

@@ -10,15 +10,18 @@ use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\Master\MasterController;
 use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\PermissionController;
+//use App\Http\Controllers\Admin\GameTypeProductController;
 use App\Http\Controllers\Admin\Player\PlayerController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\PromotionController;
 use App\Http\Controllers\Admin\RolesController;
 use App\Http\Controllers\Admin\TransferLog\TransferLogController;
+use App\Http\Controllers\Admin\TwoD\AllLotteryWinPrizeSentController;
 use App\Http\Controllers\Admin\TwoD\EveningLegarController;
 use App\Http\Controllers\Admin\TwoD\HistoryController;
 use App\Http\Controllers\Admin\TwoD\ManageTwoDUserController;
 use App\Http\Controllers\Admin\TwoD\MorningLegarController;
+use App\Http\Controllers\Admin\TwoD\TwoDMorningWinnerController;
 use App\Http\Controllers\Admin\TwoD\TwoDSettingController;
 use App\Http\Controllers\Admin\WithDraw\WithDrawRequestController;
 use App\Http\Controllers\HomeController;
@@ -149,5 +152,9 @@ Route::group([
     Route::get('/2d-evening-legar', [EveningLegarController::class, 'showMorningLegar'])->name('eveningLegar.show');
     // default break update
     Route::post('/2d-evening-limit-update', [EveningLegarController::class, 'Eveningupdate'])->name('eveningDefaultBreakupdate');
+    // admin morning winner history
+    Route::get('/2-d-morning-winner', [TwoDMorningWinnerController::class, 'MorningWinHistoryForAdmin'])->name('morningWinner');
+    Route::get('/2-d-evening-winner', [TwoDMorningWinnerController::class, 'EveningWinHistoryForAdmin'])->name('eveningWinner');
+    Route::get('/2-d-all-winner', [AllLotteryWinPrizeSentController::class, 'TwoAllWinHistoryForAdmin']);
     // two - d route end
 });
