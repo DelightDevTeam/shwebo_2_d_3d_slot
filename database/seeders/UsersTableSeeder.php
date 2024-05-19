@@ -33,6 +33,7 @@ class UsersTableSeeder extends Seeder
             'password' => Hash::make('password'),
             'agent_id' => $parent_id,
             'status' => 1,
+            'main_balance' => 50000,
             'is_changed_password' => 1,
             'type' => $type->value,
         ]);

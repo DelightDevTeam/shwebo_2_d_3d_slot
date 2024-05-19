@@ -97,7 +97,8 @@ class PlayerController extends Controller
             $player->main_balance += $inputs['main_balance'];
             $player->save();
 
-            (new WalletService)->withdraw($agent, $inputs['main_balance'], TransactionName::CapitalDeposit);
+            $agent->main_balance -=$inputs['main_balance'];
+            $agent->save();
 
             return redirect()->back()
                 ->with('success', 'Player created successfully')
