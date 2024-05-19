@@ -59,18 +59,15 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/material-icons@1.13.12/iconfont/material-icons.min.css">
 @endsection
 @section('content')
+
 <div class="row justify-content-center">
   <div class="col-lg-12">
     <div class="container mt-2">
       <div class="d-flex justify-content-between">
-        <h6>Player Information -- <span>
+        <h4>Player Information -- <span>
             Player ID : {{ $cash->user->id }}
-          </span>
-          <span>
-            Player Balance :
-          </span>
-        </h6>
-        <a class="btn btn-icon btn-2 btn-primary" href="{{ url('/admin/real-live-master-list') }}">
+          </span></h4>
+        <a class="btn btn-icon btn-2 btn-primary" href="{{ route('admin.user.index') }}">
           <span class="btn-inner--icon mt-1"><i class="material-icons">arrow_back</i>Back</span>
         </a>
       </div>
@@ -84,12 +81,13 @@
               </tr>
               <tr>
                 <th>User Name</th>
-                <td>{!! $cash->user->name ?? "" !!}</td>
+                <td>{!! $cash->user->name !!}</td>
               </tr>
               <tr>
                 <th>Phone</th>
                 <td>{!! $cash->user->phone !!}</td>
               </tr>
+              
             </tbody>
           </table>
         </div>
@@ -97,8 +95,8 @@
     </div>
   </div>
 
-
 </div>
+
 <div class="row mt-4">
   <div class="col-lg-12">
     <div class="card">
@@ -106,22 +104,19 @@
       <div class="card-header pb-0">
         <div class="d-lg-flex">
           <div>
-            <h5 class="mb-0">{{ $admin->name ?? "" }} ထံမှ ငွေထုတ်ယူမည် ||
-              <span>Current Balance - {{ number_format($adminBalance['data'],2)  }} ||
-                <span id="current_date">{{ now()}}</span>
-              </span>
-            </h5>
-          </div>
+            <h5 class="mb-0">Player ထံသို့ ငွေလွဲပေးမည်</h5>
 
+          </div>
         </div>
       </div>
       <div class="card-body">
-        <form action="{{ route('admin.makeCashOut') }}" method="POST">
+        
+        <form action="{{ route('admin.makeTransfer') }}" method="POST">
           @csrf
           <div class="row">
             <div class="col-md-6">
               <div class="input-group input-group-outline is-valid my-3">
-                <label class="form-label">User Name</label>
+                <label class="form-label">Master Real Name</label>
                 <input type="text" class="form-control" name="name" value="{{ $cash->user->name }}" readonly>
 
               </div>
@@ -142,14 +137,14 @@
           </div>
           <input type="hidden" name="from_user_id" value="{{ Auth::user()->id }}">
           <input type="hidden" name="to_user_id" value="{{ $cash->user_id }}">
-        
           <div class="row">
             <div class="col-md-6">
               <div class="input-group input-group-outline is-valid my-3">
-                <label class="form-label">Admin ထံမှငွေနုတ်ယူမည့်ပမာဏ</label>
-                <input type="text" class="form-control" name="amount" required value="{{$cash->amount}}">
+                <label class="form-label">Player ထံသို့ ငွေလွဲပေးမည့်ပမာဏ</label>
+                <input type="decimal" class="form-control" name="amount" value="{{$cash->amount}}">
+
               </div>
-              @error('cash_out')
+              @error('cash_in')
               <span class="d-block text-danger">*{{ $message }}</span>
               @enderror
             </div>
@@ -172,7 +167,6 @@
               <div class="input-group input-group-outline is-valid my-3">
                 <label class="form-label">Addition Note (optional)</label>
                 <input type="text" class="form-control" name="note">
-
               </div>
               @error('note')
               <span class="d-block text-danger">*{{ $message }}</span>
@@ -183,7 +177,7 @@
           <div class="row">
             <div class="col-md-12">
               <div class="input-group input-group-outline is-valid my-3">
-                <button type="submit" class="btn btn-primary">Admin ထံမှ ငွေထုတ်ယူမည်</button>
+                <button type="submit" class="btn btn-primary">Player ထံသို့ ငွေလွဲပေးမည်</button>
               </div>
             </div>
           </div>
@@ -192,46 +186,6 @@
     </div>
   </div>
 </div>
-<div class="row mt-4">
-  <div class="col-md-12">
-    <div class="card">
-      <div class="card-header">
-        <h4>Admin To Player Transfer History</h4>
-      </div>
-      <div class="card-body">
-
-        <table class="table">
-          <tr>
-            <th>#</th>
-            <th>RefrenceId</th>
-            <th>From</th>
-            <th>To</th>
-            <th>Cash In</th>
-            <th>Cash Out</th>
-            <th>Status</th>
-            <th>Date</th>
-          </tr>
-          <tbody>
-            @foreach ($transfer_logs as  $log)
-            <tr>
-              <td>{{ $loop->iteration }}</td>
-              <td>{{$log->refrence_id}}</td>
-              <td>{{ $log->fromUser->name }} </td>
-              <td>{{ $log->toUser->name }}</td>
-              <td>{{$log->cash_in}}</td>
-              <td>{{$log->cash_out}}</td>
-              <td><small class="badge badge-success">{{$log->status}}</small></td>
-              <td>{{ $log->created_at->format('d-m-Y H:i:s') }}</td>
-            </tr>
-            @endforeach
-          </tbody>
-        </table>
-
-      </div>
-    </div>
-  </div>
-</div>
-
 @endsection
 @section('scripts')
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
@@ -239,25 +193,23 @@
 <script src="{{ asset('admin_app/assets/js/plugins/choices.min.js') }}"></script>
 <script src="{{ asset('admin_app/assets/js/plugins/quill.min.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
+
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     var errorMessage =  @json(session('error'));
     var successMessage =  @json(session('success'));
-   
-
-    @if(session()->has('success'))
+    @if(session('success'))
     Swal.fire({
       icon: 'success',
-      title: successMessage,
-      text: '{{ session('
-      SuccessRequest ') }}',
+      title: 'Success',
+      text: successMessage,
       timer: 3000,
       showConfirmButton: false
     });
-    @elseif(session()->has('error'))
+    @elseif(session('error'))
     Swal.fire({
       icon: 'error',
-      title: '',
+      title: 'Error',
       text: errorMessage,
       timer: 3000,
       showConfirmButton: false
@@ -265,4 +217,14 @@
     @endif
   });
 </script>
+
+<script>
+  if (document.getElementById('choices-tags-edit')) {
+    var tags = document.getElementById('choices-tags-edit');
+    const examples = new Choices(tags, {
+      removeItemButton: true
+    });
+  }
+</script>
+
 @endsection

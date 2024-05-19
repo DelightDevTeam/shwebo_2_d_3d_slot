@@ -6,13 +6,12 @@ use App\Models\Admin\Bank;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class WithDrawRequest extends Model
+class DepositRequest extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'user_id', 'agent_id' ,'bank_id', 'amount', 'status', 'account_no', 'account_name',
-    ];
+    protected $fillable = ['user_id', 'agent_id', 'bank_id', 'account_name', 'account_no', 'amount', 'refrence_no', 'status'];
+
 
     public function user()
     {

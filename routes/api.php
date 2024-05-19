@@ -7,9 +7,16 @@ use App\Http\Controllers\Admin\BannerTextController;
 use App\Http\Controllers\Api\V1\Auth\AuthController;
 use App\Http\Controllers\Api\V1\Bank\BankController;
 use App\Http\Controllers\Api\V1\Game\GameController;
-use App\Http\Controllers\Api\V1\PromotionController;
+use App\Http\Controllers\Api\V1\Game\LaunchGameController;
+use App\Http\Controllers\Api\V1\Player\PlayerTransactionLogController;
+use App\Http\Controllers\Api\V1\Player\TransactionController;
 use App\Http\Controllers\Api\V1\Player\WagerController;
+use App\Http\Controllers\Api\V1\Player\WithDrawController;
+use App\Http\Controllers\Api\V1\PromotionController;
+use App\Http\Controllers\Api\V1\TwoD\TwoDLotteryController;
 use App\Http\Controllers\Api\V1\TwoD\TwoDPlayController;
+use App\Http\Controllers\Api\V1\TwoD\UserEveningHistoryController;
+use App\Http\Controllers\Api\V1\TwoD\UserMorningHistoryController;
 use App\Http\Controllers\Api\V1\Webhook\BonusController;
 use App\Http\Controllers\Api\V1\Webhook\BuyInController;
 use App\Http\Controllers\Api\V1\Webhook\BuyOutController;
@@ -81,6 +88,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::group(['prefix' => 'transaction'], function () {
         Route::post('withdraw', [WithDrawController::class, 'withdraw']);
+        Route::post('deposit', [DepositController::class, 'deposit']);
         Route::get('player-transactionlog', [PlayerTransactionLogController::class, 'index']);
     });
 

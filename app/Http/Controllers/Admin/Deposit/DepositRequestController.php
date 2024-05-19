@@ -1,35 +1,36 @@
 <?php
 
-namespace App\Http\Controllers\Admin\WithDraw;
+namespace App\Http\Controllers\Admin\Deposit;
 
 use App\Http\Controllers\Controller;
+use App\Models\DepositRequest;
 use App\Models\User;
 use App\Models\WithDrawRequest;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class WithDrawRequestController extends Controller
+class DepositRequestController extends Controller
 {
     public function index()
     {
-        $withdraws = WithDrawRequest::with(['user', 'bank'])->where('agent_id', Auth::id())->orderby('id','desc')->get();
-
-        return view('admin.withdraw_request.index', compact('withdraws'));
+        $deposits = DepositRequest::with(['user', 'bank'])->where('agent_id', Auth::id())->orderBy('id','desc')->get();
+        
+        return view('admin.deposit_request.index', compact('deposits'));
     }
 
     public function show($id)
     {
-        $withdraw = WithDrawRequest::find($id);
+        $deposit = DepositRequest::find($id);
 
-        return view('admin.withdraw_request.show', compact('withdraw'));
+        return view('admin.deposit_request.show', compact('deposit'));
     }
 
-    public function statusChange(Request $request, WithDrawRequest $withdraw)
+    public function updateStatus(Request $request, DepositRequest $deposit)
     {
 
         $request->validate([
-            'status' => 'required|in:0,1,2',
+            'status' => 'required|in:0,1,2|integer',
         ]);
 
         try {
@@ -38,20 +39,21 @@ class WithDrawRequestController extends Controller
             if ($agent->main_balance < $request->amount) {
                 return redirect()->back()->with('error', 'You do not have enough balance to transfer!');
             }
-
-            $withdraw->update([
+            
+            $deposit->update([
                 'status' => $request->status,
             ]);
+           
             if ($request->status == 1) {
 
-                $agent->main_balance += $request->amount;
+                $agent->main_balance -= $request->amount;
                 $agent->save();
 
-                $player->main_balance -= $request->amount;
+                $player->main_balance += $request->amount;
                 $player->save();
             }
 
-            return back()->with('success', 'Withdraw request successfully!');
+            return back()->with('success', 'Deposit request successfully!');
         } catch (Exception $e) {
             return back()->with('error', $e->getMessage());
         }

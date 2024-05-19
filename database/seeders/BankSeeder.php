@@ -15,29 +15,36 @@ class BankSeeder extends Seeder
     {
         $banks = [
             [
-                'bank' => 'Bank A', // Required field
+                'name' => 'KBZ Banking', // Required field
                 'image' => '1.png',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [
-                'bank' => 'Bank B',
+                'name' => 'KBZPay',
                 'image' => '2.png',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [
-                'bank' => 'Bank C',
+                'name' => 'WavePay',
                 'image' => '3.png',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [
-                'bank' => 'Bank D',
+                'name' => 'AYA Banking',
                 'image' => '4.png',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
+            [
+                'name' => 'AYAPay',
+                'image' => '5.png',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            
         ];
 
         DB::table('banks')->insert($banks);

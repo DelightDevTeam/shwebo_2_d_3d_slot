@@ -10,8 +10,7 @@ use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\PromotionController;
 use App\Http\Controllers\Admin\BannerTextController;
-use App\Http\Controllers\Admin\PermissionController;
-use App\Http\Controllers\Admin\Agent\AgentController;
+use App\Http\Controllers\Admin\GameTypeProductController;
 use App\Http\Controllers\Admin\GetBetDetailController;
 use App\Http\Controllers\Admin\TwoD\HistoryController;
 use App\Http\Controllers\Admin\Master\MasterController;
@@ -30,9 +29,6 @@ Route::group([
     'prefix' => 'admin', 'as' => 'admin.',
     'middleware' => ['auth', 'checkBanned'],
 ], function () {
-    // Route::post('test', function () {
-    //     dd('here');
-    // })->name('test');
 
     Route::post('balance-up', [HomeController::class, 'balanceUp'])->name('balanceUp');
     Route::get('logs/{id}', [HomeController::class, 'logs'])
@@ -98,6 +94,11 @@ Route::group([
 
     Route::post('withdraw/{withdraw}', [WithDrawRequestController::class, 'statusChange'])->name('agent.statusChange');
 
+    Route::get('deposit', [DepositRequestController::class, 'index'])->name('agent.deposit');
+    Route::get('deposit/{id}', [DepositRequestController::class, 'show'])->name('agent.depositshow');
+
+    Route::post('deposit/{deposit}', [DepositRequestController::class, 'updateStatus'])->name('agent.updateStatus');
+
     Route::get('transer-log', [TransferLogController::class, 'index'])->name('transferLog');
     Route::group(['prefix' => 'report'], function () {
         Route::get('index', [ReportController::class, 'index'])->name('report.index');
@@ -109,8 +110,6 @@ Route::group([
     // get bet deatil
     Route::get('get-bet-detail', [GetBetDetailController::class, 'index'])->name('getBetDetail');
     Route::get('get-bet-detail/{wagerId}', [GetBetDetailController::class, 'getBetDetail'])->name('getBetDetail.show');
-
-    Route::resource('/product_code', App\Http\Controllers\Admin\ProductCodeController::class);
 
     // two - d route start
     Route::get('two-d-settins', [TwoDSettingController::class, 'index']);

@@ -21,52 +21,53 @@
       <div class="card-header pb-0">
         <div class="d-lg-flex">
           <div>
-            <h5 class="mb-0">Cash In Request Detail</h5>
+            <h5 class="mb-0">Deposit Requested Lists</h5>
 
           </div>
     </div>
   </div>
   <div class="table-responsive">
-    <table class="table">
+    <table class="table table-flush" id="users-search">
+      <thead class="thead-light">
+        <th>#</th>
+        <th>Name</th>
+        <th>Requested Amount</th>
+        <th>Payment Method</th>
+        <th>Bank Account Name</th>
+        <th>Bank Account No</th>
+        <th>RefrenceNo</th>
+        <th>Status</th>
+        <th>Created_at</th>
+        <th>Action</th>
+      </thead>
+      <tbody>
+        @foreach ($deposits as $deposit)
+
         <tr>
-            <th>UserName</th>
-            <td>{{ $cash->user->name }}</td>
+          <td>{{ $loop->iteration }}</td>
+          <td>
+            <span class="d-block">{{ $deposit->user->user_name }}</span>
+          </td>
+          <td>{{ number_format($deposit->amount) }}</td>
+          <td>{{ $deposit->bank->name }}</td>
+          <td>{{$deposit->account_name}}</td>
+          <td>{{$deposit->account_no}}</td>
+          <td>{{$deposit->refrence_no}}</td>
+          <td>
+          <span class="badge text-bg-{{ $deposit->status == 0 ? 'danger' : ($deposit->status == 1 ? 'success' : 'warning') }} text-white mb-2">
+            {{ $deposit->status == 0 ? "pending" : ($deposit->status == 1 ? "approved" : "rejected") }}
+        </span>
+          </td>
+
+          <td>{{ $deposit->created_at->format('d-m-Y') }}</td>
+          <td>
+            @if($deposit->status == 0 )
+            <a href="{{route('admin.agent.depositshow',$deposit->id)}}" class="btn btn-primary" disabled >Update</a>
+            @endif
+          </td>
         </tr>
-        <tr>
-            <th>Phone</th>
-            <td>{{ $cash->phone }}</td>
-        </tr>
-        <tr>
-            <th>Amount</th>
-            <td>{{ $cash->amount }}</td>
-        </tr>
-        <tr>
-            <th>Payment Method</th>
-            <td>{{ $cash->payment_method }}</td>
-        </tr>
-        <tr>
-            <th>နောက်ဆုံးဂဏန်း၆လုံး</th>
-            <td>{{ $cash->last_6_num }}</td>
-        </tr>
-        <tr>
-            <th>Payment Receipt</th>
-            <td>
-                <img src="{{ $cash->img_url }}" class="rounded" width="600px" alt="">
-            </td>
-        </tr>
-        <tr>
-            <th>Status</th>
-            <td>
-              <span class="badge text-white text-bg-{{ $cash->status == 1 ? 'success' : 'danger' }}">{{ $cash->status == 1 ? 'Done' : 'Pending' }}</span>
-                
-            </td>
-        </tr>
-        <tr>
-            <th>Created At</th>
-            <td>
-                {{ $cash->created_at->format('d-m-Y') }}
-            </td>
-        </tr>
+        @endforeach
+      </tbody>
     </table>
   </div>
 </div>
@@ -75,6 +76,7 @@
 @endsection
 @section('scripts')
 <script src="{{ asset('admin_app/assets/js/plugins/datatables.js') }}"></script>
+
 <script>
   if (document.getElementById('users-search')) {
     const dataTableSearch = new simpleDatatables.DataTable("#users-search", {

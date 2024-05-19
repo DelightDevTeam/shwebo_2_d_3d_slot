@@ -3,36 +3,36 @@
 namespace App\Http\Controllers\Api\V1\Player;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\WithdrawRequest;
-use App\Models\WithDrawRequest as ModelsWithDrawRequest;
-use App\Services\ApiService;
+use App\Http\Requests\Api\DepositRequest as ApiDepositRequest;
+use App\Models\DepositRequest;
 use App\Traits\HttpResponses;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class WithDrawController extends Controller
+class DepositController extends Controller
 {
     use HttpResponses;
 
-    public function withdraw(WithdrawRequest $request)
+    public function deposit(ApiDepositRequest $request)
     {
         try {
             $inputs = $request->validated();
+          
             $player = Auth::user();
 
             if ($player->main_balance < $inputs['amount']) {
                 return $this->error('', 'Insuffience Balance', 401);
             }
-            $withdraw = ModelsWithDrawRequest::create(array_merge(
+            $deposit = DepositRequest::create(array_merge(
                 $inputs,
                 [
                     'user_id' => $player->id,
                     'agent_id' => $player->agent_id
                 ]
             ));
-
-            return $this->success($withdraw, 'Withdraw Request Success');
+           
+            return $this->success($deposit, 'Deposit Request Success');
         } catch (Exception $e) {
             $this->error('', $e->getMessage(), 401);
         }
