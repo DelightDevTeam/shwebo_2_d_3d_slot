@@ -31,7 +31,6 @@
       <thead class="thead-light">
         <th>#</th>
         <th>Name</th>
-        <th>Phone</th>
         <th>Requested Amount</th>
         <th>Payment Method</th>
         <th>Bank Account Name</th>
@@ -43,18 +42,18 @@
       <tbody>
         @foreach ($withdraws as $withdraw)
         <tr>
-          <td>{{ $loop->index + 1 }}</td>
+          <td>{{ $loop->iteration }}</td>
           <td>
-            <span class="d-block">{{ $withdraw->user->name }}</span>
+            <span class="d-block">{{ $withdraw->user->user_name }}</span>
           </td>
-          <td>{{ $withdraw->user->phone }}</td>
           <td>{{ number_format($withdraw->amount) }}</td>
           <td>{{ $withdraw->bank->name }}</td>
           <td>{{$withdraw->account_name}}</td>
           <td>{{$withdraw->account_name}}</td>
           <td>
-          <span class="badge text-bg-{{ $withdraw->status == 0 ? 'danger' : 'success' }} text-white mb-2">{{ $withdraw->status == 0 ? "pending" : "done" }}</span>
-
+          <span class="badge text-bg-{{ $withdraw->status == 0 ? 'danger' : ($withdraw->status == 1 ? 'success' : 'warning') }} text-white mb-2">
+            {{ $withdraw->status == 0 ? "pending" : ($withdraw->status == 1 ? "approved" : "rejected") }}
+        </span>
           </td>
 
           <td>{{ $withdraw->created_at->format('d-m-Y') }}</td>

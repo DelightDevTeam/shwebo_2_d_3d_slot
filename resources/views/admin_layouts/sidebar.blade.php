@@ -26,19 +26,6 @@
         <span class="sidenav-normal  ms-2  ps-1"> Win/lose Report </span>
       </a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link text-white " href="{{ route('admin.product_code.index')}}">
-        <span class="sidenav-mini-icon"> <i class="fa-solid fa-chart-column"></i> </span>
-        <span class="sidenav-normal  ms-2  ps-1"> Product Code </span>
-      </a>
-    </li>
-
-    <!-- <li class="nav-item">
-      <a class="nav-link text-white " href="{{ route('admin.report.indexV2')}}">
-        <span class="sidenav-mini-icon"> <i class="fa-solid fa-chart-column"></i> </span>
-        <span class="sidenav-normal  ms-2  ps-1"> Win/lose Report v2</span>
-      </a>
-    </li> -->
     @can('agent_index')
     <li class="nav-item">
       <a class="nav-link text-white " href="{{ route('admin.agent.index')}}">
@@ -52,6 +39,22 @@
       <a class="nav-link text-white " href="{{ route('admin.player.index')}}">
         <span class="sidenav-mini-icon"> <i class="fa-solid fa-user"></i> </span>
         <span class="sidenav-normal  ms-2  ps-1">Player List</span>
+      </a>
+    </li>
+    @endcan
+    @can('withdraw_requests')
+    <li class="nav-item">
+      <a class="nav-link text-white " href="{{ route('admin.agent.withdraw')}}">
+        <span class="sidenav-mini-icon"> <i class="fa-solid fa-user"></i> </span>
+        <span class="sidenav-normal  ms-2  ps-1">WithDraw Requests</span>
+      </a>
+    </li>
+    @endcan
+    @can('deposit_requests')
+    <li class="nav-item">
+      <a class="nav-link text-white " href="{{ route('admin.agent.deposit')}}">
+        <span class="sidenav-mini-icon"> <i class="fa-solid fa-user"></i> </span>
+        <span class="sidenav-normal  ms-2  ps-1">Deposit Requests</span>
       </a>
     </li>
     @endcan

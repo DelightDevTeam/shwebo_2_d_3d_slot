@@ -159,6 +159,16 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'title' => 'withdraw_requests',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'title' => 'deposit_requests',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ];
 
         Permission::insert($permissions);

@@ -66,15 +66,15 @@
       <!-- Card header -->
       
       <div class="card-body">
-        <form action="{{ route('admin.agent.statusChange',$withdraw->id) }}" method="POST">
+        <form action="{{ route('admin.agent.updateStatus',$deposit->id) }}" method="POST">
           @csrf
           <div class="row">
-          <input type="hidden" class="form-control" name="player" value="{{ $withdraw->user->id }}" readonly>
+          <input type="hidden" class="form-control" name="player" value="{{ $deposit->user->id }}" readonly>
 
             <div class="col-md-6">
               <div class="input-group input-group-outline is-valid my-3">
                 <label class="form-label">User Name</label>
-                <input type="text" class="form-control" name="name" value="{{ $withdraw->user->name }}" readonly>
+                <input type="text" class="form-control" name="name" value="{{ $deposit->user->name }}" readonly>
 
               </div>
               @error('name')
@@ -84,7 +84,7 @@
             <div class="col-md-6">
               <div class="input-group input-group-outline is-valid my-3">
                 <label class="form-label">Phone</label>
-                <input type="text" class="form-control" name="phone" value="{{ $withdraw->user->phone }}" readonly>
+                <input type="text" class="form-control" name="phone" value="{{ $deposit->user->phone }}" readonly>
 
               </div>
             </div>
@@ -92,7 +92,7 @@
             <div class="col-md-6">
               <div class="input-group input-group-outline is-valid my-3">
                 <label class="form-label">Bank Account Name</label>
-                <input type="text" class="form-control" name="account_name" value="{{ $withdraw->account_name }}" readonly>
+                <input type="text" class="form-control" name="account_name" value="{{ $deposit->account_name }}" readonly>
 
               </div>
             </div>
@@ -100,29 +100,29 @@
             <div class="col-md-6">
               <div class="input-group input-group-outline is-valid my-3">
                 <label class="form-label">Bank Account No</label>
-                <input type="text" class="form-control" name="account_no" value="{{ $withdraw->account_no }}" readonly>
+                <input type="text" class="form-control" name="account_no" value="{{ $deposit->account_no }}" readonly>
               </div>
             </div>
 
             <div class="col-md-6">
               <div class="input-group input-group-outline is-valid my-3">
                 <label class="form-label">Payment Method</label>
-                <input type="text" class="form-control" name="" value="{{ $withdraw->bank->name }}" readonly>
+                <input type="text" class="form-control" name="" value="{{ $deposit->bank->name }}" readonly>
               </div>
             </div>
 
             <div class="col-md-6">
               <div class="input-group input-group-outline is-valid my-3">
                 <label class="form-label">Amount</label>
-                <input type="text" class="form-control" name="amount" value="{{ $withdraw->amount }}" readonly>
+                <input type="text" class="form-control" name="amount" value="{{ $deposit->amount }}" readonly>
               </div>
             </div>
             <div class="col-md-6">
               <div class="input-group input-group-outline is-valid my-3">
                 <select name="status" id="" class="form-control">
-                <option value="0" {{ $withdraw->status == 0 ? 'selected' : '' }}>Pending</option>
-                <option value="1" {{ $withdraw->status == 1 ? 'selected' : '' }}>Approved</option>
-                <option value="2" {{ $withdraw->status == 2 ? 'selected' : '' }}>Rejected</option>
+                <option value="0" {{ $deposit->status == 0 ? 'selected' : '' }}>Pending</option>
+                <option value="1" {{ $deposit->status == 1 ? 'selected' : '' }}>Approved</option>
+                <option value="2" {{ $deposit->status == 2 ? 'selected' : '' }}>Rejected</option>
 
                 </select>
                 @error('status')
