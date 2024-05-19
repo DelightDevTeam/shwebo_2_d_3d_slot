@@ -131,6 +131,12 @@
                     <span class="sidenav-normal  ms-2  ps-1">MoreSetting</span>
                   </a>
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link text-white " href="{{ url('admin/2-d-all-winner')}}">
+                    <span class="sidenav-mini-icon"> 2D </span>
+                    <span class="sidenav-normal  ms-2  ps-1">ပေါက်သူများ </span>
+                  </a>
+                </li>
                  <li class="nav-item">
                   <a class="nav-link text-white " href="{{ url('admin/2d-default-limit')}}">
                     <span class="sidenav-mini-icon"> 2D </span>
@@ -169,6 +175,12 @@
                   </a>
                 </li>
                 <li class="nav-item">
+                  <a class="nav-link text-white " href="{{ url('admin/2-d-morning-winner')}}">
+                    <span class="sidenav-mini-icon"> 2D </span>
+                    <span class="sidenav-normal  ms-2  ps-1"> 12:1-ပေါက်သူများ </span>
+                  </a>
+                </li>
+                <li class="nav-item">
                   <a class="nav-link text-white " href="{{ url('admin/2d-evening-history')}}">
                     <span class="sidenav-mini-icon"> 2D </span>
                     <span class="sidenav-normal  ms-2  ps-1"> 4:30-မှတ်တမ်း </span>
@@ -178,6 +190,12 @@
                   <a class="nav-link text-white " href="{{ url('admin/2d-evening-legar')}}">
                     <span class="sidenav-mini-icon"> 2D </span>
                     <span class="sidenav-normal  ms-2  ps-1"> 4:30-လယ်ဂျာ </span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-white " href="{{ url('admin/2-d-evening-winner')}}">
+                    <span class="sidenav-mini-icon"> 2D </span>
+                    <span class="sidenav-normal  ms-2  ps-1"> 4:30-ပေါက်သူများ </span>
                   </a>
                 </li>
 
