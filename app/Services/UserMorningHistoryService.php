@@ -43,6 +43,7 @@ class UserMorningHistoryService
                         'user_phone' => $pivot->user->phone,
                         'lottery_slip_no' => $pivot->lottery->slip_no,
                         'lottery_total_amount' => $pivot->lottery->total_amount,
+                        'prize_sent' => $pivot->lottery->prize_sent,
                     ];
                 });
 
