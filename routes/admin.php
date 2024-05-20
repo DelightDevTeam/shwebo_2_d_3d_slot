@@ -1,32 +1,35 @@
 <?php
 
-use App\Http\Controllers\Admin\Agent\AgentController;
-use App\Http\Controllers\Admin\BannerController;
-use App\Http\Controllers\Admin\BannerTextController;
-use App\Http\Controllers\Admin\Deposit\DepositRequestController;
-use App\Http\Controllers\Admin\GameTypeProductController;
-use App\Http\Controllers\Admin\GetBetDetailController;
-use App\Http\Controllers\Admin\LoginController;
-use App\Http\Controllers\Admin\Master\MasterController;
-use App\Http\Controllers\Admin\PaymentController;
-use App\Http\Controllers\Admin\PermissionController;
-//use App\Http\Controllers\Admin\GameTypeProductController;
-use App\Http\Controllers\Admin\Player\PlayerController;
-use App\Http\Controllers\Admin\ProfileController;
-use App\Http\Controllers\Admin\PromotionController;
-use App\Http\Controllers\Admin\RolesController;
-use App\Http\Controllers\Admin\TransferLog\TransferLogController;
-use App\Http\Controllers\Admin\TwoD\AllLotteryWinPrizeSentController;
-use App\Http\Controllers\Admin\TwoD\EveningLegarController;
-use App\Http\Controllers\Admin\TwoD\HistoryController;
-use App\Http\Controllers\Admin\TwoD\ManageTwoDUserController;
-use App\Http\Controllers\Admin\TwoD\MorningLegarController;
-use App\Http\Controllers\Admin\TwoD\TwoDMorningWinnerController;
-use App\Http\Controllers\Admin\TwoD\TwoDSettingController;
-use App\Http\Controllers\Admin\WithDraw\WithDrawRequestController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReportController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Admin\RolesController;
+use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\PaymentController;
+use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\PromotionController;
+use App\Http\Controllers\Admin\BannerTextController;
+//use App\Http\Controllers\Admin\GameTypeProductController;
+use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\Agent\AgentController;
+use App\Http\Controllers\Admin\GetBetDetailController;
+use App\Http\Controllers\Admin\TwoD\HistoryController;
+use App\Http\Controllers\Admin\Master\MasterController;
+use App\Http\Controllers\Admin\Player\PlayerController;
+use App\Http\Controllers\Admin\GameTypeProductController;
+use App\Http\Controllers\Admin\TwoD\TwoDManageController;
+use App\Http\Controllers\Admin\TwoD\TwoDSettingController;
+use App\Http\Controllers\Admin\TwoD\EveningLegarController;
+use App\Http\Controllers\Admin\TwoD\MorningLegarController;
+use App\Http\Controllers\Admin\TwoD\TwoDDashboardController;
+use App\Http\Controllers\Admin\ThreeD\ThreeDManageController;
+use App\Http\Controllers\Admin\TwoD\ManageTwoDUserController;
+use App\Http\Controllers\Admin\Deposit\DepositRequestController;
+use App\Http\Controllers\Admin\TwoD\TwoDMorningWinnerController;
+use App\Http\Controllers\Admin\TransferLog\TransferLogController;
+use App\Http\Controllers\Admin\WithDraw\WithDrawRequestController;
+use App\Http\Controllers\Admin\TwoD\AllLotteryWinPrizeSentController;
 
 Route::group([
     'prefix' => 'admin', 'as' => 'admin.',
@@ -115,6 +118,7 @@ Route::group([
     Route::get('get-bet-detail/{wagerId}', [GetBetDetailController::class, 'getBetDetail'])->name('getBetDetail.show');
 
     // two - d route start
+    Route::get('2-d-dashboard', [TwoDDashboardController::class, 'index'])->name('TwoD_dashboard');
     Route::get('two-d-settins', [TwoDSettingController::class, 'index']);
     Route::get('two-d-more-settings', [TwoDSettingController::class, 'getCurrentMonthSettings']);
 
@@ -156,5 +160,10 @@ Route::group([
     Route::get('/2-d-morning-winner', [TwoDMorningWinnerController::class, 'MorningWinHistoryForAdmin'])->name('morningWinner');
     Route::get('/2-d-evening-winner', [TwoDMorningWinnerController::class, 'EveningWinHistoryForAdmin'])->name('eveningWinner');
     Route::get('/2-d-all-winner', [AllLotteryWinPrizeSentController::class, 'TwoAllWinHistoryForAdmin']);
+    Route::post('/2-d-session-reset', [TwoDManageController::class, 'SessionReset'])->name('SessionReset');
     // two - d route end
+
+    // three 3 route start 
+    Route::post('/3-d-reset', [ThreeDManageController::class, 'ThreeDReset'])->name('ThreeDReset');
+    // three 3 route end
 });

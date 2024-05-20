@@ -30,7 +30,7 @@
     <li class="nav-item">
       <a class="nav-link text-white " href="{{ route('admin.agent.index')}}">
         <span class="sidenav-mini-icon"> <i class="fa-solid fa-user"></i> </span>
-        <span class="sidenav-normal  ms-2  ps-1">Slot Agent List</span>
+        <span class="sidenav-normal  ms-2  ps-1">Agent List</span>
       </a>
     </li>
     @endcan
@@ -115,6 +115,12 @@
           <li class="nav-item ">
             <div class="collapse " id="profileExample">
               <ul class="nav nav-sm flex-column">
+                <li class="nav-item">
+                  <a class="nav-link text-white " href="{{ url('admin/2-d-dashboard')}}">
+                    <span class="sidenav-mini-icon"> 2D </span>
+                    <span class="sidenav-normal  ms-2  ps-1"> Dashboard </span>
+                  </a>
+                </li>
                 <li class="nav-item">
                   <a class="nav-link text-white " href="{{ url('admin/2d-users-with-agents')}}">
                     <span class="sidenav-mini-icon"> 2D </span>
