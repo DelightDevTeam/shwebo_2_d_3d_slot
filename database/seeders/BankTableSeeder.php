@@ -12,30 +12,39 @@ class BankTableSeeder extends Seeder
      */
     public function run(): void
     {
-        $bank = [
+        $banks = [
             [
                 'name' => 'CB Bank',
+                'image' => 'cb.png',
                 'digit' => 13,
             ],
             [
                 'name' => 'AYA Bank',
+                'image' => 'aya.png',
                 'digit' => 16,
             ],
             [
                 'name' => 'KBZ Bank',
+                'image' => 'kbz.png',
                 'digit' => 17,
             ],
             [
                 'name' => 'KBZ Pay',
+                'image' => 'kpay.png',
                 'digit' => 11,
             ],
             [
                 'name' => 'Yoma Bank',
+                'image' => 'yoma.png',
                 'digit' => 16,
             ],
         ];
 
-        Bank::insert($bank);
+        foreach($banks as $bank)
+        {
+            Bank::create($bank);
+        }
+        // Bank::insert($bank);
 
     }
 }

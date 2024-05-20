@@ -9,5 +9,11 @@ class Bank extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'digit'];
+    protected $fillable = ['name', 'digit', 'image'];
+    protected $appends = ['img_url'];
+
+    public function getImgUrlAttribute()
+    {
+        return asset('assets/img/banks/'.$this->image);
+    }
 }

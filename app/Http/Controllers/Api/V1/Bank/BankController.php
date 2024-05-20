@@ -20,4 +20,6 @@ class BankController extends Controller
 
         return $this->success($data);
     }
+
+    
 }
