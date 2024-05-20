@@ -64,6 +64,7 @@ class PlayerController extends Controller
      */
     public function store(PlayerRequest $request)
     {
+        //dd($request->all());
         abort_if(
             Gate::denies('player_store'),
             Response::HTTP_FORBIDDEN,

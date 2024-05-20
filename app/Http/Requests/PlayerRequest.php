@@ -24,6 +24,7 @@ class PlayerRequest extends FormRequest
         return [
             'user_name' => 'required', 'string', 'unique:users,user_name',
             'name' => 'required|min:3|string',
+            'phone' => ['regex:/^([0-9\s\-\+\(\)]*)$/', 'unique:users,phone'],
             'password' => 'required|min:6',
             'main_balance' => 'nullable|numeric',
             'limit' => ['required'],
