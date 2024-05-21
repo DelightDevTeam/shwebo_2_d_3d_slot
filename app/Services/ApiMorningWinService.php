@@ -39,6 +39,8 @@ class ApiMorningWinService
                 ->get();
 
             // Calculate total prize amount
+            $win_price = $results->sub_amount * 85;
+            
             $totalPrizeAmount = 0;
             //$prizeAmount = 0;
             foreach ($results as $result) {
@@ -48,6 +50,7 @@ class ApiMorningWinService
 
             return [
                 'results' => $results,
+                'win_price' => $win_price,
                 'totalPrizeAmount' => $totalPrizeAmount,
                 //'prizeAmount' => $prizeAmount
             ];
