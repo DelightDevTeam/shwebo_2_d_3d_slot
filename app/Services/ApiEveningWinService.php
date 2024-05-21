@@ -43,6 +43,7 @@ class ApiEveningWinService
             //$prizeAmount = 0;
             foreach ($results as $result) {
                 $prizeAmount = $result->sub_amount * 85; // Prize multiplier
+                $result->win_prize = $prizeAmount;
                 $totalPrizeAmount += $prizeAmount;
             }
 
