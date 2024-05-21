@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin\TwoD;
 
+use App\Helpers\SessionHelper;
 use App\Http\Controllers\Controller;
 use App\Models\TwoD\CloseTwoDigit;
 use App\Models\TwoD\HeadDigit;
+use App\Models\TwoD\LotteryTwoDigitPivot;
 use App\Models\TwoD\TwoDLimit;
 use App\Models\TwoD\TwodSetting;
 use Carbon\Carbon;
@@ -94,6 +96,16 @@ class TwoDSettingController extends Controller
         $result->result_number = $result_number;
         $result->save();
 
+        $today = Carbon::today();
+        $session = SessionHelper::getCurrentSession();
+        $twod_data = LotteryTwoDigitPivot::where('res_date', $today)
+        ->where('session', $session)->get();
+        
+        foreach($twod_data as $twod)
+        {
+            $twod->update(['win_lose' => 1]);
+        }
+        
         // Return a response (like a JSON object)
         return redirect()->back()->with('success', 'Result number updated successfully.'); // Redirect back with success message
     }
