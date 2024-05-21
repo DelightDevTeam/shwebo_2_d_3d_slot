@@ -76,7 +76,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::get('wager-logs', [WagerController::class, 'index']);
     Route::get('transactions', [TransactionController::class, 'index']);
-    Route::post('exchange-balance', [TransactionController::class, 'exchangeBalance']);
+    Route::post('exchange-main-to-game', [TransactionController::class, 'MainToGame']);
+    Route::post('exchange-game-to-main', [TransactionController::class, 'GameToMain']);
 
     //logout
     Route::get('user', [AuthController::class, 'getUser']);

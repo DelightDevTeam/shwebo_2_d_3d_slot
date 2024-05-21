@@ -15,7 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('image');
-            $table->integer('digit')->nullable();
+            $table->string('bank_account_name');
+            $table->string('bank_account_no');
+            $table->unsignedBigInteger('agent_id');
+            $table->foreign('agent_id')->references('id')->on('users')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

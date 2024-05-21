@@ -42,6 +42,14 @@
       </a>
     </li>
     @endcan
+    @can('bank')
+        <li class="nav-item ">
+            <a class="nav-link text-white " href="{{ route('admin.bank.index') }}">
+              <span class="sidenav-mini-icon"> <i class="fa-solid fa-panorama"></i> </span>
+              <span class="sidenav-normal  ms-2  ps-1"> Bank </span>
+            </a>
+          </li>
+        @endcan
     @can('withdraw_requests')
     <li class="nav-item">
       <a class="nav-link text-white " href="{{ route('admin.agent.withdraw')}}">
@@ -73,8 +81,6 @@
       </a>
       <div class="collapse " id="dashboardsExamples">
         <ul class="nav ">
-
-
           <li class="nav-item ">
             <a class="nav-link text-white " href="{{ route('admin.banners.index') }}">
               <span class="sidenav-mini-icon"> <i class="fa-solid fa-panorama"></i> </span>

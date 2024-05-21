@@ -3,11 +3,8 @@
 namespace App\Http\Controllers\Api\V1\Bank;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\BankRequest;
 use App\Models\Admin\Bank;
-use App\Models\UserBank;
 use App\Traits\HttpResponses;
-use Exception;
 use Illuminate\Support\Facades\Auth;
 
 class BankController extends Controller
@@ -16,10 +13,10 @@ class BankController extends Controller
 
     public function all()
     {
-        $data = Bank::all();
+        $player = Auth::user();
+
+        $data = Bank::where('agent_id', $player->agent_id)->get();
 
         return $this->success($data);
     }
-
-    
 }

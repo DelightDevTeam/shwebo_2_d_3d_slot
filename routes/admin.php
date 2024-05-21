@@ -3,14 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReportController;
-use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\RolesController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\PromotionController;
 use App\Http\Controllers\Admin\BannerTextController;
-//use App\Http\Controllers\Admin\GameTypeProductController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\Agent\AgentController;
 use App\Http\Controllers\Admin\GetBetDetailController;
@@ -30,6 +28,7 @@ use App\Http\Controllers\Admin\TwoD\TwoDMorningWinnerController;
 use App\Http\Controllers\Admin\TransferLog\TransferLogController;
 use App\Http\Controllers\Admin\WithDraw\WithDrawRequestController;
 use App\Http\Controllers\Admin\TwoD\AllLotteryWinPrizeSentController;
+use App\Http\Controllers\Admin\BankController;
 
 Route::group([
     'prefix' => 'admin', 'as' => 'admin.',
@@ -44,6 +43,8 @@ Route::group([
     // Roles
     Route::delete('roles/destroy', [RolesController::class, 'massDestroy'])->name('roles.massDestroy');
     Route::resource('roles', RolesController::class);
+    //Bank
+    Route::resource('bank',BankController::class);
     // Players
     Route::delete('user/destroy', [PlayerController::class, 'massDestroy'])->name('user.massDestroy');
 
