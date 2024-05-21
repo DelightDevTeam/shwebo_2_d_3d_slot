@@ -44,6 +44,7 @@ class UserMorningHistoryService
                         'lottery_slip_no' => $pivot->lottery->slip_no,
                         // 'lottery_total_amount' => $pivot->lottery->total_amount,
                         'prize_sent' => $pivot->prize_sent,
+                        'win_lose' => $pivot->win_lose,
                     ];
                 });
 
