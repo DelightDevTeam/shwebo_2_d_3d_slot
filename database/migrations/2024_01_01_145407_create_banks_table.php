@@ -14,7 +14,12 @@ return new class extends Migration
         Schema::create('banks', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('digit')->nullable();
+            $table->string('image');
+            $table->string('bank_account_name');
+            $table->string('bank_account_no');
+            $table->unsignedBigInteger('agent_id');
+            $table->foreign('agent_id')->references('id')->on('users')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

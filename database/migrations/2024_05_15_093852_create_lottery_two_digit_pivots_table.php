@@ -30,6 +30,7 @@ return new class extends Migration
             $table->enum('user_log', ['open', 'closed'])->default('closed'); // New status column
             $table->date('play_date')->default('2024-5-9');
             $table->time('play_time')->default('12:01:00');
+            $table->boolean('win_lose')->default(false);
             $table->foreign('twod_setting_id')->references('id')->on('twod_settings')->onDelete('cascade');
             $table->foreign('lottery_id')->references('id')->on('lotteries')->onDelete('cascade');
             $table->foreign('two_digit_id')->references('id')->on('two_digits')->onDelete('cascade');

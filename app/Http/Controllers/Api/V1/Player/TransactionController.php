@@ -35,7 +35,7 @@ class TransactionController extends Controller
         return $this->success(TransactionResource::collection($transactions));
     }
 
-    public function exchangeBalance(Request $request)
+    public function MainToGame(Request $request)
     {
         $player = Auth::user();
         $inputs = $request->validate([
@@ -48,6 +48,25 @@ class TransactionController extends Controller
 
         (new WalletService)->deposit($player, $inputs['amount'], TransactionName::CapitalDeposit);
         $player->main_balance -= $inputs['amount'];
+        $player->save();
+
+        return $this->success('', 'successfully exchange balance', 201);
+
+    }
+
+    public function GameToMain(Request $request)
+    {
+        $player = Auth::user();
+        $inputs = $request->validate([
+            'amount' => 'required',
+        ]);
+
+        if ($inputs['amount'] > $player->balanceFloat) {
+            return $this->error('', 'You do not have enough balance to transfer', 201);
+        }
+
+        (new WalletService)->withdraw($player, $inputs['amount'], TransactionName::CapitalWithdraw);
+        $player->main_balance += $inputs['amount'];
         $player->save();
 
         return $this->success('', 'successfully exchange balance', 201);

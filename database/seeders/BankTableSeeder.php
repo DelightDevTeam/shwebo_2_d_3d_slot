@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Admin\Bank;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class BankTableSeeder extends Seeder
 {
@@ -12,30 +13,46 @@ class BankTableSeeder extends Seeder
      */
     public function run(): void
     {
-        $bank = [
+        $banks = [
             [
                 'name' => 'CB Bank',
-                'digit' => 13,
+                'image' => 'cb.png',
+                'agent_id' => 2,
+                'bank_account_name' => 'Testing CBBank Account',
+                'bank_account_no' => '1278767876767',
             ],
             [
                 'name' => 'AYA Bank',
-                'digit' => 16,
+                'image' => 'aya.png',
+                'agent_id' => 2,
+                'bank_account_name' => 'Testing AYABank Account',
+                'bank_account_no' => '1298789986678656',
             ],
             [
                 'name' => 'KBZ Bank',
-                'digit' => 17,
+                'image' => 'kbz.png',
+                'agent_id' => 2,
+                'bank_account_name' => 'Testing KBZBanking Account',
+                'bank_account_no' => '123456789878765',
+
             ],
             [
                 'name' => 'KBZ Pay',
-                'digit' => 11,
+                'image' => 'kpay.png',
+                'agent_id' => 2,
+                'bank_account_name' => 'Testing KBZPay Account',
+                'bank_account_no' => '09787676567',
             ],
             [
                 'name' => 'Yoma Bank',
-                'digit' => 16,
+                'image' => 'yoma.png',
+                'agent_id' => 2,
+                'bank_account_name' => 'Testing YomaBank Account',
+                'bank_account_no' => '09878767656',
             ],
         ];
 
-        Bank::insert($bank);
+        DB::table('banks')->insert($banks);
 
     }
 }
