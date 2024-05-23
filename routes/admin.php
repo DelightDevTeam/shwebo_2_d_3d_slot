@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\TwoD\HistoryController;
 use App\Http\Controllers\Admin\Master\MasterController;
 use App\Http\Controllers\Admin\Player\PlayerController;
 use App\Http\Controllers\Admin\GameTypeProductController;
+use App\Http\Controllers\Admin\ThreeD\SettingsController;
 use App\Http\Controllers\Admin\TwoD\TwoDManageController;
 use App\Http\Controllers\Admin\TwoD\TwoDSettingController;
 use App\Http\Controllers\Admin\TwoD\EveningLegarController;
@@ -165,5 +166,33 @@ Route::group([
 
     // three 3 route start 
     Route::post('/3-d-reset', [ThreeDManageController::class, 'ThreeDReset'])->name('ThreeDReset');
+
+    Route::get('3d-settings', [SettingsController::class, 'index']);
+    Route::get('3d-more-setting', [SettingsController::class, 'getCurrentMonthResultsSetting']);
+    // result date update
+    Route::patch('/3d-results/{id}/status', [SettingsController::class, 'updateStatus'])
+        ->name('ThreedOpenClose');
+    Route::patch('/three-d-results/{id}/status', [SettingsController::class, 'updateResultNumber'])
+        ->name('UpdateResult_number');
+
+     Route::post('/store-permutations', [SettingsController::class, 'PermutationStore'])->name('storePermutations');
+    //deletePermutation
+    Route::delete('/delete-permutation/{id}', [SettingsController::class, 'deletePermutation'])->name('deletePermutation');
+     Route::post('/permutation-reset', [SettingsController::class, 'PermutationReset'])->name('PermutationReset');
+
+     Route::post('/3d-prizes-store', [SettingsController::class, 'store'])->name('PrizeStore');
+    //deletePermutation
+    Route::delete('/delete-prize/{id}', [SettingsController::class, 'destroy'])->name('DeletePrize');
+
+    Route::get('3d-close-digit', [ThreeDManageController::class, 'index'])->name('ThreedCloseIndex');
+    Route::post('3d-close-digit-store', [ThreeDManageController::class, 'store'])->name('CloseDigitStore');
+    Route::delete('/delete-close-digit/{id}', [ThreeDManageController::class, 'destroy'])->name('DeleteCloseDigit');
+
+    Route::get('3d-default-limits', [ThreeDManageController::class, 'ThreedDefaultLimitindex'])->name('ThreeddefaultLimitIndex');
+    Route::post('3d-default-limit-store', [ThreeDManageController::class, 'ThreedLimitstore'])->name('ThreedDefaultlimitStore');
+    Route::delete('/3d-delete-defalut-limit/{id}', [ThreeDManageController::class, 'ThreedLimitdestroy'])->name('ThreedDefaultLimitDelete');
+
+    
+     
     // three 3 route end
 });

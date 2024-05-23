@@ -214,7 +214,67 @@
         </ul>
       </div>
     </li>
-    @endcan 
+    @endcan
+    
+    
+    @can('admin_access')
+    <li class="nav-item">
+      <a data-bs-toggle="collapse" href="#three_d" class="nav-link text-white" aria-controls="pagesExamples" role="button" aria-expanded="false">
+        <i class="material-icons-round {% if page.brand == 'RTL' %}ms-2{% else %} me-2{% endif %}">settings</i>
+        <span class="nav-link-text ms-2 ps-1">3D Control</span>
+      </a>
+      <div class="collapse show" id="pagesExamples">
+        <ul class="nav">
+          <li class="nav-item ">
+            <div class="collapse " id="three_d">
+              <ul class="nav nav-sm flex-column">
+                <li class="nav-item">
+                  <a class="nav-link text-white " href="{{ url('admin/2-d-dashboard')}}">
+                    <span class="sidenav-mini-icon"> 3D </span>
+                    <span class="sidenav-normal  ms-2  ps-1"> Dashboard </span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-white " href="{{ url('admin/2d-users-with-agents')}}">
+                    <span class="sidenav-mini-icon"> 3D </span>
+                    <span class="sidenav-normal  ms-2  ps-1"> ထိုးသားများစီမံရန် </span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-white " href="{{ url('admin/3d-settings') }}">
+                    <span class="sidenav-mini-icon">3D</span>
+                    <span class="sidenav-normal  ms-2  ps-1">Setting</span>
+                  </a>
+                </li>
+
+                 <li class="nav-item">
+                  <a class="nav-link text-white " href="{{ url('admin/two-d-more-settings') }}">
+                    <span class="sidenav-mini-icon">3D</span>
+                    <span class="sidenav-normal  ms-2  ps-1">MoreSetting</span>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link text-white " href="{{ url('admin/3d-close-digit') }}">
+                    <span class="sidenav-mini-icon">3D</span>
+                    <span class="sidenav-normal  ms-2  ps-1">စိတ်ကြိုက်ဂဏန်းပိတ်ရန်</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-white " href="{{ url('admin/3d-default-limits') }}">
+                    <span class="sidenav-mini-icon">3D</span>
+                    <span class="sidenav-normal  ms-2  ps-1">Default-ဘရိတ်သတ်မှတ်ရန်</span>
+                  </a>
+                </li>
+                
+
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </li>
+    @endcan
 
     <li class="nav-item">
       <a href="{{ route('logout') }}" onclick="event.preventDefault();
