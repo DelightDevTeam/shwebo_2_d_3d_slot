@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Permutation extends Model
 {
     use HasFactory;
-    protected $fillable = ['digit'];
 
+    protected $fillable = ['digit'];
 }

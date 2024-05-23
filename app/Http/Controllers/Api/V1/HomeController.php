@@ -12,15 +12,17 @@ use Illuminate\Support\Facades\Auth;
 class HomeController extends Controller
 {
     use HttpResponses;
+
     public function home()
     {
         $banners = Banner::all();
         $bannerText = BannerText::latest()->first();
         $user = Auth::user();
+
         return $this->success([
             'banners' => $banners,
             'bannerText' => $bannerText,
-            'user' => $user
+            'user' => $user,
         ]);
     }
 }

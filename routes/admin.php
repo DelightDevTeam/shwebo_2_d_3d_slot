@@ -1,35 +1,35 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ReportController;
-use App\Http\Controllers\Admin\RolesController;
+use App\Http\Controllers\Admin\Agent\AgentController;
+use App\Http\Controllers\Admin\BankController;
 use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\BannerTextController;
+use App\Http\Controllers\Admin\Deposit\DepositRequestController;
+use App\Http\Controllers\Admin\GameTypeProductController;
+use App\Http\Controllers\Admin\GetBetDetailController;
+use App\Http\Controllers\Admin\Master\MasterController;
 use App\Http\Controllers\Admin\PaymentController;
+use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\Player\PlayerController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\PromotionController;
-use App\Http\Controllers\Admin\BannerTextController;
-use App\Http\Controllers\Admin\PermissionController;
-use App\Http\Controllers\Admin\Agent\AgentController;
-use App\Http\Controllers\Admin\GetBetDetailController;
-use App\Http\Controllers\Admin\TwoD\HistoryController;
-use App\Http\Controllers\Admin\Master\MasterController;
-use App\Http\Controllers\Admin\Player\PlayerController;
-use App\Http\Controllers\Admin\GameTypeProductController;
+use App\Http\Controllers\Admin\RolesController;
 use App\Http\Controllers\Admin\ThreeD\SettingsController;
-use App\Http\Controllers\Admin\TwoD\TwoDManageController;
-use App\Http\Controllers\Admin\TwoD\TwoDSettingController;
+use App\Http\Controllers\Admin\ThreeD\ThreeDManageController;
+use App\Http\Controllers\Admin\TransferLog\TransferLogController;
+use App\Http\Controllers\Admin\TwoD\AllLotteryWinPrizeSentController;
 use App\Http\Controllers\Admin\TwoD\EveningLegarController;
+use App\Http\Controllers\Admin\TwoD\HistoryController;
+use App\Http\Controllers\Admin\TwoD\ManageTwoDUserController;
 use App\Http\Controllers\Admin\TwoD\MorningLegarController;
 use App\Http\Controllers\Admin\TwoD\TwoDDashboardController;
-use App\Http\Controllers\Admin\ThreeD\ThreeDManageController;
-use App\Http\Controllers\Admin\TwoD\ManageTwoDUserController;
-use App\Http\Controllers\Admin\Deposit\DepositRequestController;
+use App\Http\Controllers\Admin\TwoD\TwoDManageController;
 use App\Http\Controllers\Admin\TwoD\TwoDMorningWinnerController;
-use App\Http\Controllers\Admin\TransferLog\TransferLogController;
+use App\Http\Controllers\Admin\TwoD\TwoDSettingController;
 use App\Http\Controllers\Admin\WithDraw\WithDrawRequestController;
-use App\Http\Controllers\Admin\TwoD\AllLotteryWinPrizeSentController;
-use App\Http\Controllers\Admin\BankController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ReportController;
+use Illuminate\Support\Facades\Route;
 
 Route::group([
     'prefix' => 'admin', 'as' => 'admin.',
@@ -45,7 +45,7 @@ Route::group([
     Route::delete('roles/destroy', [RolesController::class, 'massDestroy'])->name('roles.massDestroy');
     Route::resource('roles', RolesController::class);
     //Bank
-    Route::resource('bank',BankController::class);
+    Route::resource('bank', BankController::class);
     // Players
     Route::delete('user/destroy', [PlayerController::class, 'massDestroy'])->name('user.massDestroy');
 
@@ -165,7 +165,7 @@ Route::group([
     Route::post('/2-d-session-reset', [TwoDManageController::class, 'SessionReset'])->name('SessionReset');
     // two - d route end
 
-    // three 3 route start 
+    // three 3 route start
     Route::post('/3-d-reset', [ThreeDManageController::class, 'ThreeDReset'])->name('ThreeDReset');
 
     Route::get('3d-settings', [SettingsController::class, 'index']);
@@ -176,12 +176,12 @@ Route::group([
     Route::patch('/three-d-results/{id}/status', [SettingsController::class, 'updateResultNumber'])
         ->name('UpdateResult_number');
 
-     Route::post('/store-permutations', [SettingsController::class, 'PermutationStore'])->name('storePermutations');
+    Route::post('/store-permutations', [SettingsController::class, 'PermutationStore'])->name('storePermutations');
     //deletePermutation
     Route::delete('/delete-permutation/{id}', [SettingsController::class, 'deletePermutation'])->name('deletePermutation');
-     Route::post('/permutation-reset', [SettingsController::class, 'PermutationReset'])->name('PermutationReset');
+    Route::post('/permutation-reset', [SettingsController::class, 'PermutationReset'])->name('PermutationReset');
 
-     Route::post('/3d-prizes-store', [SettingsController::class, 'store'])->name('PrizeStore');
+    Route::post('/3d-prizes-store', [SettingsController::class, 'store'])->name('PrizeStore');
     //deletePermutation
     Route::delete('/delete-prize/{id}', [SettingsController::class, 'destroy'])->name('DeletePrize');
 
@@ -193,7 +193,5 @@ Route::group([
     Route::post('3d-default-limit-store', [ThreeDManageController::class, 'ThreedLimitstore'])->name('ThreedDefaultlimitStore');
     Route::delete('/3d-delete-defalut-limit/{id}', [ThreeDManageController::class, 'ThreedLimitdestroy'])->name('ThreedDefaultLimitDelete');
 
-    
-     
     // three 3 route end
 });

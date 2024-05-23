@@ -98,7 +98,7 @@ class PlayerController extends Controller
             $player->main_balance += $inputs['main_balance'];
             $player->save();
 
-            $agent->main_balance -=$inputs['main_balance'];
+            $agent->main_balance -= $inputs['main_balance'];
             $agent->save();
 
             return redirect()->back()

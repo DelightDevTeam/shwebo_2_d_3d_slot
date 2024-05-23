@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Prize extends Model
 {
     use HasFactory;
-     protected $table = 'prizes';
+
+    protected $table = 'prizes';
 
     protected $fillable = ['prize_one', 'prize_two'];
 
@@ -16,7 +17,7 @@ class Prize extends Model
     protected static function booted()
     {
         static::created(function ($prize) {
-           // WinnerPrizeCheck::dispatch($prize);
+            // WinnerPrizeCheck::dispatch($prize);
             //WinnerPrizeCheckUpdate::dispatch($prize);
         });
     }

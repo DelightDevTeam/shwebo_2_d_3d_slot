@@ -99,13 +99,12 @@ class TwoDSettingController extends Controller
         $today = Carbon::today();
         $session = SessionHelper::getCurrentSession();
         $twod_data = LotteryTwoDigitPivot::where('res_date', $today)
-        ->where('session', $session)->get();
-        
-        foreach($twod_data as $twod)
-        {
+            ->where('session', $session)->get();
+
+        foreach ($twod_data as $twod) {
             $twod->update(['win_lose' => 1]);
         }
-        
+
         // Return a response (like a JSON object)
         return redirect()->back()->with('success', 'Result number updated successfully.'); // Redirect back with success message
     }

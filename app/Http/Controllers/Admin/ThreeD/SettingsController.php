@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin\ThreeD;
 
-use Carbon\Carbon;
-use App\Models\ThreeD\Prize;
-use Illuminate\Http\Request;
-use App\Models\ThreeD\Permutation;
 use App\Http\Controllers\Controller;
+use App\Models\ThreeD\Permutation;
+use App\Models\ThreeD\Prize;
 use App\Models\ThreeD\ThreedSetting;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class SettingsController extends Controller
 {
@@ -52,7 +52,7 @@ class SettingsController extends Controller
 
     public function getCurrentMonthResultsSetting()
     {
-         $currentMonthStart = Carbon::now()->startOfMonth();
+        $currentMonthStart = Carbon::now()->startOfMonth();
 
         // Get the end of the next month
         $nextMonthEnd = Carbon::now()->addMonth()->endOfMonth();
@@ -84,6 +84,7 @@ class SettingsController extends Controller
 
         return redirect()->back()->with('success', "Status changed to '{$newStatus}' successfully.");
     }
+
     public function updateResultNumber(Request $request, $id)
     {
         $result_number = $request->input('result_number'); // The new status
@@ -99,8 +100,7 @@ class SettingsController extends Controller
         return redirect()->back()->with('success', 'Result number updated successfully.'); // Redirect back with success message
     }
 
-
-     public function PermutationStore(Request $request)
+    public function PermutationStore(Request $request)
     {
         // Logic to store permutations in the database
         if ($request->has('permutations')) {
@@ -135,7 +135,6 @@ class SettingsController extends Controller
         return redirect()->back()->with('message', 'Data reset successfully!');
     }
 
-
     public function store(Request $request)
     {
         //
@@ -159,6 +158,4 @@ class SettingsController extends Controller
 
         return redirect()->back()->with('success', 'Three Digit Lottery Prize Number Deleted Successfully');
     }
-
-
 }

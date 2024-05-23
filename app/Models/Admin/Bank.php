@@ -10,8 +10,8 @@ class Bank extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'digit', 'image','bank_account_name', 'bank_account_no', 'agent_id'];
-    
+    protected $fillable = ['name', 'digit', 'image', 'bank_account_name', 'bank_account_no', 'agent_id'];
+
     protected $appends = ['img_url'];
 
     public function getImgUrlAttribute()

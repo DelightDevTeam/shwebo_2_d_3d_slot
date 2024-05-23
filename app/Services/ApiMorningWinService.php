@@ -39,7 +39,7 @@ class ApiMorningWinService
                 ->get();
 
             // Calculate total prize amount
-            
+
             $totalPrizeAmount = 0;
             //$prizeAmount = 0;
             foreach ($results as $result) {

@@ -32,7 +32,6 @@ use App\Http\Controllers\Api\V1\Webhook\RollbackController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
-
 //login route post
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/player-change-password', [AuthController::class, 'playerChangePassword']);
@@ -109,6 +108,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::get('user/evening-history', [UserEveningHistoryController::class, 'index']);
         Route::get('user/morning-winner-prize', [MorningWinPrizeController::class, 'getMorningPrizeSent']);
         Route::get('user/evening-winner-prize', [EveningWinPrizeController::class, 'getEveningPrizeSent']);
-         Route::get('user/all-winner-prize', [AllWinnerPrizeSentController::class, 'getAllWinnerPrizeSent']);
+        Route::get('user/all-winner-prize', [AllWinnerPrizeSentController::class, 'getAllWinnerPrizeSent']);
     });
 });

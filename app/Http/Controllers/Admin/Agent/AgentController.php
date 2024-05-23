@@ -107,14 +107,14 @@ class AgentController extends Controller
         // Create agent and assign roles
         $agent = User::create($userPrepare);
         $agent->roles()->sync(self::AGENT_ROLE);
-       
-        if($admin->hasRole('Admin'))
-        {
-        (new WalletService)->withdraw($admin, $inputs['main_balance'], TransactionName::CapitalWithdraw);
-        }else{
+
+        if ($admin->hasRole('Admin')) {
+            (new WalletService)->withdraw($admin, $inputs['main_balance'], TransactionName::CapitalWithdraw);
+        } else {
             $admin->main_balance -= $inputs['main_balance'];
             $admin->save();
         }
+
         // Redirect back with success message
         return redirect()->back()
             ->with('success', 'Agent created successfully')
@@ -229,10 +229,9 @@ class AgentController extends Controller
             $admin = Auth::user();
             $cashIn = $inputs['main_balance'];
 
-            if($admin->hasRole('Admin'))
-            {
+            if ($admin->hasRole('Admin')) {
                 $balance = $admin->balanceFloat;
-            }else{
+            } else {
                 $balance = $admin->main_balance;
             }
 
@@ -242,14 +241,13 @@ class AgentController extends Controller
 
             $agent->main_balance += $inputs['main_balance'];
             $agent->save();
-           
-            if($admin->hasRole('Admin'))
-            {
+
+            if ($admin->hasRole('Admin')) {
                 (new WalletService)->withdraw($admin, $inputs['main_balance'], TransactionName::CapitalWithdraw);
-                
+
             }
 
-            $admin->main_balance -=$inputs['main_balance'];
+            $admin->main_balance -= $inputs['main_balance'];
             $admin->save();
             // Transfer money
 
@@ -278,7 +276,7 @@ class AgentController extends Controller
             $agent = User::findOrFail($id);
             $admin = Auth::user();
             $cashOut = $inputs['main_balance'];
-            
+
             if ($cashOut > $agent->main_balance) {
 
                 return redirect()->back()->with('error', 'You do not have enough balance to transfer!');
@@ -287,9 +285,8 @@ class AgentController extends Controller
             $agent->main_balance -= $cashOut;
             $agent->save();
 
-            if(!$admin->hasRole('Admin'))
-            {
-                $admin->main_balance +=$cashOut;
+            if (! $admin->hasRole('Admin')) {
+                $admin->main_balance += $cashOut;
                 $admin->save();
             }
 

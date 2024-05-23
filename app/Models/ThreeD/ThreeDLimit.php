@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ThreeDLimit extends Model
 {
     use HasFactory;
+
     protected $table = 'three_d_limits';
 
     protected $fillable = [

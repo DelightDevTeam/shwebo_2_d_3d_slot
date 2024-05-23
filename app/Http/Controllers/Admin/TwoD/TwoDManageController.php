@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin\TwoD;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\TwoD\LotteryTwoDigitCopy;
+use Illuminate\Http\Request;
 
 class TwoDManageController extends Controller
 {
@@ -15,5 +15,4 @@ class TwoDManageController extends Controller
 
         return redirect()->back()->with('message', 'Data reset successfully!');
     }
-
 }

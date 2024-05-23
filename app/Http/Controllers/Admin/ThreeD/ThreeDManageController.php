@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin\ThreeD;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\ThreeD\LotteryThreeDigitCopy;
 use App\Models\ThreeD\ThreedClose;
 use App\Models\ThreeD\ThreeDLimit;
-use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Models\ThreeD\LotteryThreeDigitCopy;
 
 class ThreeDManageController extends Controller
 {
@@ -17,6 +17,7 @@ class ThreeDManageController extends Controller
 
         return view('admin.three_d.close_digit.index', compact('digits'));
     }
+
     public function ThreeDReset()
     {
         LotteryThreeDigitCopy::truncate();
@@ -55,7 +56,6 @@ class ThreeDManageController extends Controller
         return redirect()->route('admin.ThreedCloseIndex')->with('toast_success', 'CloseThreeDigit deleted successfully.');
     }
 
-
     public function ThreedDefaultLimitindex()
     {
         $limits = ThreeDLimit::all();
@@ -92,6 +92,4 @@ class ThreeDManageController extends Controller
 
         return redirect()->route('admin.ThreeddefaultLimitIndex')->with('toast_success', 'Limit deleted successfully.');
     }
-
-
 }

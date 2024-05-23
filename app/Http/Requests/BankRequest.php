@@ -15,9 +15,9 @@ class BankRequest extends FormRequest
     {
         return [
             'name' => 'required', 'string',
-            'bank_account_name' => ['required' , 'string'],
+            'bank_account_name' => ['required', 'string'],
             'bank_account_no' => ['required', 'integer'],
-            'image' => ['image']
+            'image' => ['image'],
         ];
     }
 }

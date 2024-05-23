@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin\TwoD;
 
+use App\Http\Controllers\Controller;
 use App\Models\TwoD\Lottery;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class TwoDDashboardController extends Controller
@@ -26,7 +26,6 @@ class TwoDDashboardController extends Controller
                 ->sum('total_amount');
             $yearlyTotal = Lottery::whereYear('created_at', '=', now()->year)->sum('total_amount');
 
-            
             // Return data to admin dashboard
             return view('admin.two_d.dashboard', [
                 'dailyTotal' => $dailyTotal,
