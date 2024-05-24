@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\V1\Player\TransactionController;
 use App\Http\Controllers\Api\V1\Player\WagerController;
 use App\Http\Controllers\Api\V1\Player\WithDrawController;
 use App\Http\Controllers\Api\V1\PromotionController;
+use App\Http\Controllers\Api\V1\ThreeD\PlayController;
 use App\Http\Controllers\Api\V1\TwoD\AllWinnerPrizeSentController;
 use App\Http\Controllers\Api\V1\TwoD\EveningWinPrizeController;
 use App\Http\Controllers\Api\V1\TwoD\MorningWinPrizeController;
@@ -109,5 +110,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::get('user/morning-winner-prize', [MorningWinPrizeController::class, 'getMorningPrizeSent']);
         Route::get('user/evening-winner-prize', [EveningWinPrizeController::class, 'getEveningPrizeSent']);
         Route::get('user/all-winner-prize', [AllWinnerPrizeSentController::class, 'getAllWinnerPrizeSent']);
+    });
+
+    Route::group(['prefix' => '3d'], function () {
+        Route::get('/user/all-3-digit', [PlayController::class, 'get_threedigit']);
+        Route::post('/user/three-d-play', [PlayController::class, 'store']);
     });
 });

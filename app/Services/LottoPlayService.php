@@ -1,0 +1,168 @@
+<?php 
+namespace App\Services;
+
+use App\Helpers\DrawDateHelper;
+use App\Models\ThreeD\LotteryThreeDigitPivot;
+use App\Models\ThreeD\Lotto;
+use App\Models\ThreeD\ThreeDigit;
+use App\Models\ThreeD\ThreeDLimit;
+use App\Models\ThreeD\ThreedSetting;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+
+class LottoPlayService
+{
+    public function play($totalAmount, $amounts)
+    {
+        if (!Auth::check()) {
+            return response()->json(['message' => 'You are not authenticated! please login.'], 401);
+        }
+
+        $user = Auth::user();
+        Log::info('Auth user is: ' . $user->name);
+
+        try {
+            DB::beginTransaction();
+
+            $limit = $user->limit ?? null;
+            Log::info('User limit is: ' . $limit);
+
+            if ($limit === null) {
+                throw new \Exception("'limit' is not set for user.");
+            }
+
+            $defaultBreak = ThreeDLimit::latest()->first();
+            $user_default_break = $defaultBreak->three_d_limit ?? null;
+
+            if ($user_default_break === null) {
+                throw new \Exception("'user's default limit' is not set.");
+            }
+
+            if ($user->main_balance < $totalAmount) {
+                return 'Insufficient funds.';
+            }
+
+            $preOver = [];
+            foreach ($amounts as $amount) {
+                $preCheck = $this->preProcessAmountCheck($amount);
+                if (is_array($preCheck)) {
+                    $preOver[] = $preCheck[0];
+                }
+            }
+
+            if (!empty($preOver)) {
+                return $preOver;
+            }
+
+            $lottery = Lotto::create([
+                'total_amount' => $totalAmount,
+                'user_id' => $user->id,
+            ]);
+
+            $over = [];
+            foreach ($amounts as $amount) {
+                $check = $this->processAmount($amount, $lottery->id);
+                if (is_array($check)) {
+                    $over[] = $check[0];
+                }
+            }
+
+            if (!empty($over)) {
+                return $over;
+            }
+
+            $user->decrement('main_balance', $totalAmount);
+
+            DB::commit();
+
+        } catch (ModelNotFoundException $e) {
+            DB::rollback();
+            Log::error('Model not found in LottoService play method: ' . $e->getMessage());
+            return 'Resource not found.';
+        } catch (\Exception $e) {
+            DB::rollback();
+            Log::error('Error in LottoService play method: ' . $e->getMessage());
+            return $e->getMessage(); // Handle general exceptions
+        }
+    }
+
+    protected function preProcessAmountCheck($item)
+    {
+        $num = str_pad($item['num'], 3, '0', STR_PAD_LEFT);
+        $sub_amount = $item['amount'];
+
+        $draw_date = DrawDateHelper::getResultDate();
+        $start_date = $draw_date['match_start_date'];
+        $end_date = $draw_date['result_date'];
+
+        $totalBetAmount = DB::table('lottery_three_digit_pivots')
+            ->where('match_start_date', $start_date)
+            ->where('res_date', $end_date)
+            ->where('bet_digit', $num)
+            ->sum('sub_amount');
+
+        $break = ThreeDLimit::latest()->first()->three_d_limit;
+
+        if ($totalBetAmount + $sub_amount > $break) {
+            return [$item['num']];
+        }
+    }
+
+    protected function processAmount($item, $lotteryId)
+    {
+        $num = str_pad($item['num'], 3, '0', STR_PAD_LEFT);
+        $sub_amount = $item['amount'];
+
+        $threeDigits = ThreeDigit::where('three_digit', $num)->firstOrFail();
+
+        $draw_date = DrawDateHelper::getResultDate();
+        $start_date = $draw_date['match_start_date'];
+        $end_date = $draw_date['result_date'];
+
+        $totalBetAmount = DB::table('lottery_three_digit_pivots')
+            ->where('match_start_date', $start_date)
+            ->where('res_date', $end_date)
+            ->where('bet_digit', $num)
+            ->sum('sub_amount');
+
+        $break = ThreeDLimit::latest()->first()->three_d_limit;
+
+        if ($totalBetAmount + $sub_amount <= $break) {
+            $results = ThreedSetting::where('status', 'open')
+                ->whereBetween('result_date', [$start_date, $end_date])
+                ->first();
+
+            if ($results && $results->status == 'closed') {
+                return response()->json(['message' => '3D game does not open for this time']);
+            }
+
+            $play_date = Carbon::now()->format('Y-m-d');
+            $play_time = Carbon::now()->format('H:i:s');
+            $player_id = Auth::user()->id;
+
+            $pivot = new LotteryThreeDigitPivot([
+                'threed_setting_id' => $results->id,
+                'lotto_id' => $lotteryId,
+                'three_digit_id' => $threeDigits->id,
+                'user_id' => $player_id,
+                'bet_digit' => $num,
+                'sub_amount' => $sub_amount,
+                'prize_sent' => false,
+                'match_status' => $results->status,
+                'play_date' => $play_date,
+                'play_time' => $play_time,
+                'res_date' => $results->result_date,
+                'match_start_date' => $start_date,
+                'admin_log' => $results->admin_log,
+                'user_log' => $results->user_log,
+            ]);
+
+            $pivot->save();
+        } else {
+            throw new \Exception('The bet amount exceeds the limit.');
+        }
+    }
+}
