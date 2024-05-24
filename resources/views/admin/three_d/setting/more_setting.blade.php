@@ -28,6 +28,7 @@
     <table class="table table-flush" id="permission-search">
      <thead>
         <tr>
+            <th>MatchStartDate</th>
             <th>Date</th>
             <th>Time</th>
             <th>Result Number</th>
@@ -38,6 +39,7 @@
     <tbody>
         @foreach ($results as $result)
             <tr>
+                <td>{{ $result->match_start_date }}</td>
                 <td>{{ $result->result_date }}</td>
                 <td>{{ $result->result_time }}</td>
                 <td>{{ $result->result_number ?? 'N/A' }}</td>
