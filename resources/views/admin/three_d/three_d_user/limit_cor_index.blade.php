@@ -42,8 +42,8 @@
                 <th>User Name</th>
                 <th>User Phone</th>
                 <th>Creator</th>
-                <th>2DLimit</th>
-                <th>2D Cor</th>
+                <th>3DLimit</th>
+                <th>3D Cor</th>
             </tr>
         </thead>
         <tbody>
@@ -56,7 +56,7 @@
                      <td>
                        <form method="POST" action="{{ route('admin.ThreeDupdate_limits') }}">
                         @csrf
-                      <input type="number" name="users[{{ $user->id }}][limit]" value="{{ $user->limit }}">
+                      <input type="number" name="users[{{ $user->id }}][limit3]" value="{{ $user->limit3 }}">
                      <span>
                       <button type="submit" class="btn btn-primary btn-sm">Update Limits</button>
                      </span>
@@ -67,7 +67,7 @@
                      <form method="POST" action="{{ route('admin.ThreeDupdate_cor') }}">
                         @csrf
                       
-                       <input type="number" name="users[{{ $user->id }}][cor]" value="{{ $user->cor }}">
+                       <input type="number" name="users[{{ $user->id }}][cor3]" value="{{ $user->cor3 }}">
                       <span>
                       <button type="submit" class="btn btn-primary btn-sm">Update Cor</button>
                      </span>
