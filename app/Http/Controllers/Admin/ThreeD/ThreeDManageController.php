@@ -2,15 +2,23 @@
 
 namespace App\Http\Controllers\Admin\ThreeD;
 
-use App\Http\Controllers\Controller;
-use App\Models\ThreeD\LotteryThreeDigitCopy;
+use App\Models\User;
+use Illuminate\Http\Request;
+use App\Services\TwoDUserService;
 use App\Models\ThreeD\ThreedClose;
 use App\Models\ThreeD\ThreeDLimit;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use App\Models\ThreeD\LotteryThreeDigitCopy;
 
 class ThreeDManageController extends Controller
 {
+   protected $userService;
+
+    public function __construct(TwoDUserService $userService)
+    {
+        $this->userService = $userService;
+    }
     public function index()
     {
         $digits = ThreedClose::all();
@@ -91,5 +99,51 @@ class ThreeDManageController extends Controller
         $limit->delete();
 
         return redirect()->route('admin.ThreeddefaultLimitIndex')->with('toast_success', 'Limit deleted successfully.');
+    }
+
+    public function Userindex()
+    {
+        $users = $this->userService->getAllTwoDUsersWithAgents();
+
+        return view('admin.three_d.three_d_user.index', compact('users'));
+    }
+
+    public function limitCorindex()
+    {
+        $users = $this->userService->getAllTwoDUsersWithAgents();
+
+        return view('admin.three_d.three_d_user.limit_cor_index', compact('users'));
+    }
+
+    public function updateLimits(Request $request)
+    {
+        $data = $request->input('users', []);
+
+        try {
+            foreach ($data as $userId => $limits) {
+                $user = User::findOrFail($userId);
+                $user->update($limits);
+            }
+
+            return redirect()->route('admin.3dusers.limit_cor')->with('success', 'User limits updated successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('admin.3dusers.limit_cor')->with('error', 'An error occurred while updating user limits: '.$e->getMessage());
+        }
+    }
+
+    public function updateCor(Request $request)
+    {
+        $data = $request->input('users', []);
+
+        try {
+            foreach ($data as $userId => $commission) {
+                $user = User::findOrFail($userId);
+                $user->update($commission);
+            }
+
+            return redirect()->route('admin.3dusers.limit_cor')->with('success', 'User commission updated successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('admin.3dusers.limit_cor')->with('error', 'An error occurred while updating user commission: '.$e->getMessage());
+        }
     }
 }

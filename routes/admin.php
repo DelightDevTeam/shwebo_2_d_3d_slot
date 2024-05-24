@@ -170,6 +170,14 @@ Route::group([
 
     Route::get('3d-settings', [SettingsController::class, 'index']);
     Route::get('3d-more-setting', [SettingsController::class, 'getCurrentMonthResultsSetting']);
+    Route::get('/3d-users-with-agents', [ThreeDManageController::class, 'Userindex'])->name('2dusers.with_agents');
+
+    Route::get('/3d-users-limit-cor', [ThreeDManageController::class, 'limitCorindex'])->name('3dusers.limit_cor');
+
+    Route::post('/3d-users/update-limits', [ThreeDManageController::class, 'updateLimits'])->name('ThreeDupdate_limits');
+
+    Route::post('/3d-users/update-cor', [ThreeDManageController::class, 'updateCor'])->name('ThreeDupdate_cor');
+
     // result date update
     Route::patch('/3d-results/{id}/status', [SettingsController::class, 'updateStatus'])
         ->name('ThreedOpenClose');

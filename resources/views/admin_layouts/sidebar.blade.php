@@ -241,7 +241,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link text-white " href="{{ url('admin/2d-users-with-agents')}}">
+                  <a class="nav-link text-white " href="{{ url('admin/3d-users-with-agents')}}">
                     <span class="sidenav-mini-icon"> 3D </span>
                     <span class="sidenav-normal  ms-2  ps-1"> ထိုးသားများစီမံရန် </span>
                   </a>
@@ -257,6 +257,13 @@
                   <a class="nav-link text-white " href="{{ url('admin/3d-more-setting') }}">
                     <span class="sidenav-mini-icon">3D</span>
                     <span class="sidenav-normal  ms-2  ps-1">MoreSetting</span>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link text-white " href="{{ url('admin/3d-users-limit-cor')}}">
+                    <span class="sidenav-mini-icon"> 3D </span>
+                    <span class="sidenav-normal  ms-2  ps-1"> ထိုးသားဘရိတ်/ကော်-သတ်မှတ်ရန် </span>
                   </a>
                 </li>
 
