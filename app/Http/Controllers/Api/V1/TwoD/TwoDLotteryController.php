@@ -30,14 +30,13 @@ class TwoDLotteryController extends Controller
         $user = Auth::user();
         $user_break = $user->limit;
         $draw_date = TwodSetting::where('status', 'open')->first();
-        $start_date = $draw_date->match_start_date;
-        $end_date = $draw_date->result_date;
+        //$start_date = $draw_date->match_start_date;
+        $win_date = $draw_date->result_date;
         $current_session = SessionHelper::getCurrentSession();
 
         foreach ($digits as $digit) {
             $totalAmount = LotteryTwoDigitCopy::where('two_digit_id', $digit->id)
-            ->where('match_start_date', $start_date)
-            ->where('res_date', $end_date)
+            ->where('res_date', $win_date)
             ->where('session', $current_session)
             ->sum('sub_amount');
             $over_all_remaining = $over_all_break - $totalAmount;
