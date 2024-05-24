@@ -254,7 +254,7 @@
                 </li>
 
                  <li class="nav-item">
-                  <a class="nav-link text-white " href="{{ url('admin/two-d-more-settings') }}">
+                  <a class="nav-link text-white " href="{{ url('admin/3d-more-setting') }}">
                     <span class="sidenav-mini-icon">3D</span>
                     <span class="sidenav-normal  ms-2  ps-1">MoreSetting</span>
                   </a>
