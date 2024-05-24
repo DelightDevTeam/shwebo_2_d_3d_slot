@@ -29,9 +29,14 @@ class PlayController extends Controller
         $over_all_break = ThreeDLimit::latest()->first()->three_d_limit;
         $user = Auth::user();
         $user_break = $user->limit;
-
+        $draw_date = ThreedSetting::where('status', 'open')->first();
+        $start_date = $draw_date->match_start_date;
+        $end_date = $draw_date->result_date;
         foreach ($digits as $digit) {
-            $totalAmount = LotteryThreeDigitCopy::where('three_digit_id', $digit->id)->sum('sub_amount');
+            $totalAmount = LotteryThreeDigitCopy::where('three_digit_id', $digit->id)
+            ->where('match_start_date', $start_date)
+            ->where('res_date', $end_date)
+            ->sum('sub_amount');
             $over_all_remaining = $over_all_break - $totalAmount;
             $digit->over_all_remaining = $over_all_remaining;
             $user_remaining = $user_break - $totalAmount;
