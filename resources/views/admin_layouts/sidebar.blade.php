@@ -279,6 +279,13 @@
                     <span class="sidenav-normal  ms-2  ps-1">Default-ဘရိတ်သတ်မှတ်ရန်</span>
                   </a>
                 </li>
+
+                <li class="nav-item">
+                  <a class="nav-link text-white " href="{{ url('admin/3d-one-week-records') }}">
+                    <span class="sidenav-mini-icon">3D</span>
+                    <span class="sidenav-normal  ms-2  ps-1">တပါတ်မှတ်တမ်း</span>
+                  </a>
+                </li>
                 
 
               </ul>
