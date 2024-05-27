@@ -33,7 +33,7 @@ class PlayController extends Controller
         $start_date = $draw_date->match_start_date;
         $end_date = $draw_date->result_date;
         foreach ($digits as $digit) {
-            $totalAmount = LotteryThreeDigitCopy::where('three_digit_id', $digit->id)
+            $totalAmount = LotteryThreeDigitCopy::where('bet_digit', $digit->three_digit)
             ->where('match_start_date', $start_date)
             ->where('res_date', $end_date)
             ->sum('sub_amount');
