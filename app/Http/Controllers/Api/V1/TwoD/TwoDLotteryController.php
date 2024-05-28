@@ -47,7 +47,7 @@ class TwoDLotteryController extends Controller
 
         return $this->success([
             'two_digits' => $digits,
-            'break' => $over_all_break,
+            'default_break' => $over_all_break,
             'user_break' => $user_break,
         ]);
     }
