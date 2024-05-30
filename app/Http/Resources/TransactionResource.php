@@ -15,10 +15,10 @@ class TransactionResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
-            'closing_balance' => $this->amountFloat + $this->meta['opening_balance'],
+            'from_user_id' => $this->fromUser->name,
+            'to_user_id' => $this->toUser->name,
             'type' => $this->type,
-            'amount' => $this->amountFloat,
+            'amount' => $this->amount,
             'datetime' => $this->created_at->format('Y-m-d H:i:s'),
         ];
     }

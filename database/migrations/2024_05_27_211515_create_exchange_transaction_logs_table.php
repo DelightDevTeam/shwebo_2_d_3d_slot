@@ -13,7 +13,13 @@ return new class extends Migration
     {
         Schema::create('exchange_transaction_logs', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->decimal('amount');
+            $table->string('type');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
         });
     }
 

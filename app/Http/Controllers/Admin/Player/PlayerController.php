@@ -7,6 +7,7 @@ use App\Enums\UserType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PlayerRequest;
 use App\Http\Requests\TransferLogRequest;
+use App\Models\Admin\TransferLog;
 use App\Models\User;
 use App\Services\WalletService;
 use Exception;
@@ -100,6 +101,13 @@ class PlayerController extends Controller
 
             $agent->main_balance -= $inputs['main_balance'];
             $agent->save();
+
+            TransferLog::create([
+                'from_user_id' => $agent->id,
+                'to_user_id' => $player->id,
+                'amount' => $request['main_balance'],
+                'type' => 'deposit'
+            ]);
 
             return redirect()->back()
                 ->with('success', 'Player created successfully')
@@ -234,6 +242,13 @@ class PlayerController extends Controller
             $agent->main_balance -= $cashIn;
             $agent->save();
 
+            TransferLog::create([
+                'from_user_id' => $agent->id,
+                'to_user_id' => $player->id,
+                'amount' => $inputs['main_balance'],
+                'type' => 'deposit'
+            ]);
+
             return redirect()->back()
                 ->with('success', 'CashIn submitted successfully!');
         } catch (Exception $e) {
@@ -280,6 +295,13 @@ class PlayerController extends Controller
 
             $agent->main_balance += $cashOut;
             $agent->save();
+
+            TransferLog::create([
+                'from_user_id' => $player->id,
+                'to_user_id' => $agent->id,
+                'amount' => $inputs['main_balance'],
+                'type' => 'withdraw'
+            ]);
 
             return redirect()->back()
                 ->with('success', 'CashOut submitted successfully!');

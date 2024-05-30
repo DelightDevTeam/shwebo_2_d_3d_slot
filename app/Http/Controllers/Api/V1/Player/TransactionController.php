@@ -5,7 +5,11 @@ namespace App\Http\Controllers\Api\V1\Player;
 use App\Enums\TransactionName;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\TransactionResource;
+use App\Models\Admin\TransferLog;
+use App\Models\DepositRequest;
+use App\Models\ExchangeTransactionLog;
 use App\Models\User;
+use App\Models\WithDrawRequest;
 use App\Services\WalletService;
 use App\Traits\HttpResponses;
 use Illuminate\Http\Request;
@@ -26,9 +30,7 @@ class TransactionController extends Controller
             default => [now()->startOfDay(), now()],
         };
 
-        $user = auth()->user();
-
-        $transactions = $user->transactions()->whereBetween('created_at', [$from, $to])
+        $transactions = TransferLog::with('fromUser', 'toUser')->where('from_user_id', Auth::id())->orWhere('to_user_id', Auth::id())->whereBetween('created_at', [$from, $to])
             ->orderBy('id', 'DESC')
             ->paginate();
 
@@ -50,8 +52,12 @@ class TransactionController extends Controller
         $player->main_balance -= $inputs['amount'];
         $player->save();
 
+        ExchangeTransactionLog::create([
+            'user_id' => $player->id,
+            'amount' => $inputs['amount'],
+            'type' => 'mainBalanceToGaming'
+        ]);
         return $this->success('', 'successfully exchange balance', 201);
-
     }
 
     public function GameToMain(Request $request)
@@ -69,7 +75,39 @@ class TransactionController extends Controller
         $player->main_balance += $inputs['amount'];
         $player->save();
 
-        return $this->success('', 'successfully exchange balance', 201);
+        ExchangeTransactionLog::create([
+            'user_id' => $player->id,
+            'amount' => $inputs['amount'],
+            'type' => 'GamingToMainBalance'
+        ]);
 
+        return $this->success('', 'successfully exchange balance', 201);
+    }
+
+    public function exchangeTransactionLog()
+    {
+        $transactions = ExchangeTransactionLog::with('user')->where('user_id', Auth::id())
+            ->orderBy('id', 'DESC')
+            ->paginate();
+
+        return $this->success($transactions);
+    }
+
+    public function depositRequestLog()
+    {
+        $transactions = DepositRequest::with('user')->where('user_id', Auth::id())
+            ->orderBy('id', 'DESC')
+            ->paginate();
+
+        return $this->success($transactions);
+    }
+
+    public function withDrawRequestLog()
+    {
+        $transactions = WithDrawRequest::with('user')->where('user_id', Auth::id())
+            ->orderBy('id', 'DESC')
+            ->paginate();
+
+        return $this->success($transactions);
     }
 }
