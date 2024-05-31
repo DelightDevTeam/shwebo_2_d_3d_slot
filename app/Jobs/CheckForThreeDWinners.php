@@ -57,10 +57,10 @@ class CheckForThreeDWinners implements ShouldQueue
         }
         $draw_date = ThreedSetting::where('status', 'open')->first();
         $start_date = $draw_date->match_start_date;
-        //Log::info('Match Start Date is : ' . $start_date);
+        Log::info('Match Start Date is : '.$start_date);
 
         $end_date = $draw_date->result_date;
-        //Log::info('Result Date is: ' . $end_date);
+        Log::info('Result Date is: '.$end_date);
         $winningEntries = LotteryThreeDigitPivot::whereBetween('match_start_date', [$start_date, $end_date])
             ->whereBetween('res_date', [$start_date, $end_date])
             ->where('prize_sent', false)
