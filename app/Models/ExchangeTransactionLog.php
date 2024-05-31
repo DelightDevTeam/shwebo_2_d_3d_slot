@@ -12,9 +12,9 @@ class ExchangeTransactionLog extends Model
     protected $fillable = [
         'user_id',
         'type',
-        'amount'
+        'amount',
     ];
-    
+
     public function user()
     {
         return $this->belongsTo(User::class);

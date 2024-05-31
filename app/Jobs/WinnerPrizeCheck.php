@@ -2,18 +2,18 @@
 
 namespace App\Jobs;
 
-use Carbon\Carbon;
+use App\Models\ThreeD\LotteryThreeDigitPivot;
 use App\Models\ThreeD\Lotto;
-use Illuminate\Bus\Queueable;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use App\Models\ThreeD\ThreedSetting;
 use App\Models\ThreeDigit\ResultDate;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
+use Carbon\Carbon;
+use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use App\Models\ThreeD\LotteryThreeDigitPivot;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class WinnerPrizeCheck implements ShouldQueue
 {
@@ -32,13 +32,14 @@ class WinnerPrizeCheck implements ShouldQueue
 
         // Ensure prize object is valid and has the required attributes
         if (! isset($this->prize->prize_one) || ! isset($this->prize->prize_two)) {
-           // Log::warning('Invalid prize object provided. Exiting job.');
+            // Log::warning('Invalid prize object provided. Exiting job.');
             return;
         }
 
         $open_dates = ThreedSetting::where('status', 'open')->get();
         if ($open_dates->isEmpty()) {
             Log::warning('No open result dates found.');
+
             return;
         }
 
@@ -60,18 +61,18 @@ class WinnerPrizeCheck implements ShouldQueue
         }
 
         $today = Carbon::today(); // Current date
-         $draw_date = ThreedSetting::where('status', 'open')->first();
+        $draw_date = ThreedSetting::where('status', 'open')->first();
         $start_date = $draw_date->match_start_date;
         $end_date = $draw_date->result_date;
         $winningEntries = LotteryThreeDigitPivot::whereIn('threed_setting_id', $date_ids)
-        ->whereBetween('match_start_date', [$start_date, $end_date])
-        ->whereBetween('res_date', [$start_date, $end_date])    
-        ->where('bet_digit', $prize_digit)
+            ->whereBetween('match_start_date', [$start_date, $end_date])
+            ->whereBetween('res_date', [$start_date, $end_date])
+            ->where('bet_digit', $prize_digit)
             //->whereDate('created_at', $today)
             ->get();
 
         if ($winningEntries->isEmpty()) {
-           // Log::info("No winning entries found for bet_digit: {$prize_digit} on date: {$today->toDateString()}");
+            // Log::info("No winning entries found for bet_digit: {$prize_digit} on date: {$today->toDateString()}");
             return;
         }
 

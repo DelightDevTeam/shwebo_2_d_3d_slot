@@ -55,8 +55,9 @@ class TransactionController extends Controller
         ExchangeTransactionLog::create([
             'user_id' => $player->id,
             'amount' => $inputs['amount'],
-            'type' => 'mainBalanceToGaming'
+            'type' => 'mainBalanceToGaming',
         ]);
+
         return $this->success('', 'successfully exchange balance', 201);
     }
 
@@ -78,7 +79,7 @@ class TransactionController extends Controller
         ExchangeTransactionLog::create([
             'user_id' => $player->id,
             'amount' => $inputs['amount'],
-            'type' => 'GamingToMainBalance'
+            'type' => 'GamingToMainBalance',
         ]);
 
         return $this->success('', 'successfully exchange balance', 201);

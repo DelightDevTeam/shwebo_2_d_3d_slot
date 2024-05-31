@@ -2,18 +2,18 @@
 
 namespace App\Jobs;
 
-use Carbon\Carbon;
+use App\Models\ThreeD\LotteryThreeDigitPivot;
 use App\Models\ThreeD\Lotto;
-use Illuminate\Bus\Queueable;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use App\Models\ThreeD\ThreedSetting;
 use App\Models\ThreeDigit\ResultDate;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
+use Carbon\Carbon;
+use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use App\Models\ThreeD\LotteryThreeDigitPivot;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class CheckForThreeDWinnersWithPermutations implements ShouldQueue
 {
@@ -26,8 +26,7 @@ class CheckForThreeDWinnersWithPermutations implements ShouldQueue
         $this->threedWinner = $threedWinner;
     }
 
-    
-     public function handle()
+    public function handle()
     {
         //Log::info('CheckForThreeDWinnersWithPermutations job started');
 
@@ -35,7 +34,7 @@ class CheckForThreeDWinnersWithPermutations implements ShouldQueue
         $result_number = $this->threedWinner->result_number ?? null;
 
         if (is_null($result_number)) {
-           // Log::info('No result number provided. Exiting job.');
+            // Log::info('No result number provided. Exiting job.');
             return;
         }
 
@@ -46,6 +45,7 @@ class CheckForThreeDWinnersWithPermutations implements ShouldQueue
         $open_dates = ThreedSetting::where('status', 'open')->get();
         if ($open_dates->isEmpty()) {
             Log::warning('No open result dates found.');
+
             return;
         }
 
@@ -59,7 +59,7 @@ class CheckForThreeDWinnersWithPermutations implements ShouldQueue
         Log::info('CheckForThreeDWinnersWithPermutations job completed.');
     }
 
-     protected function processWinningEntries($permutation, array $date_ids)
+    protected function processWinningEntries($permutation, array $date_ids)
     {
         $today = Carbon::today(); // Current date
         $draw_date = ThreedSetting::where('status', 'open')->first();
@@ -93,9 +93,6 @@ class CheckForThreeDWinnersWithPermutations implements ShouldQueue
             });
         }
     }
-
-
-    
 
     protected function generatePermutationsExcludeOriginal($original)
     {

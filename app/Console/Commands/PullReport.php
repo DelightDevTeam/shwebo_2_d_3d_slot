@@ -18,35 +18,40 @@ class PullReport extends Command
     protected $signature = 'make:pull-report';
 
     protected $operatorCode;
+
     protected $secretKey;
+
     protected $apiUrl;
+
     public const VERSION_KEY = 1;
 
     public function __construct()
     {
         parent::__construct();
-        $this->operatorCode =   config('game.api.operator_code');
-        $this->secretKey =  config('game.api.secret_key');
-        $this->apiUrl =  config('game.api.url');
+        $this->operatorCode = config('game.api.operator_code');
+        $this->secretKey = config('game.api.secret_key');
+        $this->apiUrl = config('game.api.url');
     }
+
     /**
      * The console command description.
      *
      * @var string
      */
     protected $description = 'Command description';
+
     /**
      * Execute the console command.
      */
     public function handle()
     {
-        $apiUrl = $this->apiUrl . '/Seamless/PullReport';
+        $apiUrl = $this->apiUrl.'/Seamless/PullReport';
 
         $operatorCode = Config::get('game.api.operator_code');
         $secretKey = Config::get('game.api.secret_key');
         // Generate the signature
         $requestTime = now()->format('YmdHis');
-        $signature = md5($operatorCode . $requestTime . 'pullreport' . $secretKey);
+        $signature = md5($operatorCode.$requestTime.'pullreport'.$secretKey);
         // Prepare the payload
         $startDate = now()->subMinutes(2);
 
@@ -88,9 +93,9 @@ class PullReport extends Command
                             'status' => $report['Status'],
                             'created_on' => $report['CreatedOn'],
                             'modified_on' => $report['ModifiedOn'],
-                            'settlement_date' => $report['SettlementDate']
+                            'settlement_date' => $report['SettlementDate'],
                         ]);
-                    }else{
+                    } else {
                         Report::create([
                             'member_name' => $report['MemberName'],
                             'wager_id' => $report['WagerID'],
@@ -107,8 +112,8 @@ class PullReport extends Command
                             'status' => $report['Status'],
                             'created_on' => $report['CreatedOn'],
                             'modified_on' => $report['ModifiedOn'],
-                            'settlement_date' => $report['SettlementDate']
-                        ]); 
+                            'settlement_date' => $report['SettlementDate'],
+                        ]);
                     }
                 }
             }

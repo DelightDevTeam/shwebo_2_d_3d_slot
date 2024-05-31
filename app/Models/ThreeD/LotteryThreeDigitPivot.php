@@ -28,8 +28,6 @@ class LotteryThreeDigitPivot extends Model
         });
     }
 
-     
-
     public function lotto()
     {
         return $this->belongsTo(Lotto::class, 'lotto_id');

@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Admin\ThreeD;
 
-use App\Models\ThreeD\Lotto;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\ThreeD\LotteryThreeDigitPivot;
+use App\Models\ThreeD\Lotto;
 use App\Models\ThreeD\ThreedSetting;
 use App\Services\LottoOneWeekRecordService;
-use App\Models\ThreeD\LotteryThreeDigitPivot;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OneWeekRecordController extends Controller
 {
@@ -34,9 +34,10 @@ class OneWeekRecordController extends Controller
             ->select('lottery_three_digit_pivots.user_id', 'lottos.slip_no', DB::raw('SUM(lottery_three_digit_pivots.sub_amount) as total_sub_amount'))
             ->groupBy('lottery_three_digit_pivots.user_id', 'lottos.slip_no')
             ->get();
-             // Calculate the total amount from the lottos table within the date range
+        // Calculate the total amount from the lottos table within the date range
         $total_amount = Lotto::whereBetween('created_at', [$start_date, $end_date])
             ->sum('total_amount');
+
         // You can return the records to your view
         return view('admin.three_d.records.one_week_slip', compact('records', 'total_amount'));
     }

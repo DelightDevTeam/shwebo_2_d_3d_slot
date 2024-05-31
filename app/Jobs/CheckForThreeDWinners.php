@@ -2,17 +2,17 @@
 
 namespace App\Jobs;
 
-use Carbon\Carbon;
+use App\Models\ThreeD\LotteryThreeDigitPivot;
 use App\Models\ThreeD\Lotto;
+use App\Models\ThreeD\ThreedSetting;
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use App\Models\ThreeD\LotteryThreeDigitPivot;
-use App\Models\ThreeD\ThreedSetting;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class CheckForThreeDWinners implements ShouldQueue
 {
@@ -52,6 +52,7 @@ class CheckForThreeDWinners implements ShouldQueue
         // Check if the $dates array is empty
         if (empty($dates) || ! is_array($dates)) {
             Log::warning('No open result dates found or $dates is not an array');
+
             return; // Exit the function if no valid open dates
         }
         $draw_date = ThreedSetting::where('status', 'open')->first();
@@ -67,16 +68,15 @@ class CheckForThreeDWinners implements ShouldQueue
             //->whereDate('created_at', $today)
             ->get(); // Fetch the results
         //Log::info('Winning entries fetched:', ['count' => $winningEntries->count()]);
-        
 
         foreach ($winningEntries as $entry) {
-        //     Log::info('Winning entry details', [
-        //     'entry_id' => $entry->id,
-        //     'user_id' => $entry->user_id,
-        //     'lotto_id' => $entry->lotto_id,
-        //     'bet_digit' => $entry->bet_digit,
-        //     'created_at' => $entry->created_at
-        // ]);
+            //     Log::info('Winning entry details', [
+            //     'entry_id' => $entry->id,
+            //     'user_id' => $entry->user_id,
+            //     'lotto_id' => $entry->lotto_id,
+            //     'bet_digit' => $entry->bet_digit,
+            //     'created_at' => $entry->created_at
+            // ]);
             DB::transaction(function () use ($entry) {
                 try {
                     $lottery = Lotto::findOrFail($entry->lotto_id);
@@ -88,14 +88,14 @@ class CheckForThreeDWinners implements ShouldQueue
                     $user = $lottery->user;
 
                     $prize = $entry->sub_amount * 700;
-                     Log::info('Prize calculated:', ['prize' => $prize, 'user_id' => $user->id]);
+                    Log::info('Prize calculated:', ['prize' => $prize, 'user_id' => $user->id]);
                     $user->main_balance += $prize;
                     $user->save();
                     //Log::info('User balance updated:', ['user_id' => $user->id, 'new_balance' => $user->main_balance]);
                     // Now the entry is also an Eloquent model, so this works
                     $entry->prize_sent = true;
                     $entry->save();
-                     //Log::info('Prize sent flag updated:', ['entry_id' => $entry->id]);
+                    //Log::info('Prize sent flag updated:', ['entry_id' => $entry->id]);
                 } catch (\Exception $e) {
                     Log::error("Error during transaction for entry ID {$entry->id}: ".$e->getMessage());
                     throw $e; // Ensure rollback if needed

@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Api\V1\TwoD;
 
-use App\Models\TwoD\TwoDigit;
-use App\Traits\HttpResponses;
 use App\Helpers\SessionHelper;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\TwoD\TwoDPlayRequest;
+use App\Models\TwoD\CloseTwoDigit;
 use App\Models\TwoD\HeadDigit;
+use App\Models\TwoD\LotteryTwoDigitCopy;
+use App\Models\TwoD\TwoDigit;
 use App\Models\TwoD\TwoDLimit;
 use App\Models\TwoD\TwodSetting;
 use App\Services\TwoDPlayService;
-use App\Models\TwoD\CloseTwoDigit;
-use Illuminate\Support\Facades\Log;
-use App\Http\Controllers\Controller;
+use App\Traits\HttpResponses;
 use Illuminate\Support\Facades\Auth;
-use App\Models\TwoD\LotteryTwoDigitCopy;
-use App\Http\Requests\TwoD\TwoDPlayRequest;
+use Illuminate\Support\Facades\Log;
 
 class TwoDLotteryController extends Controller
 {
@@ -36,9 +36,9 @@ class TwoDLotteryController extends Controller
 
         foreach ($digits as $digit) {
             $totalAmount = LotteryTwoDigitCopy::where('two_digit_id', $digit->id)
-            ->where('res_date', $win_date)
-            ->where('session', $current_session)
-            ->sum('sub_amount');
+                ->where('res_date', $win_date)
+                ->where('session', $current_session)
+                ->sum('sub_amount');
             $over_all_remaining = $over_all_break - $totalAmount;
             $digit->over_all_remaining = $over_all_remaining;
             $user_remaining = $user_break - $totalAmount;

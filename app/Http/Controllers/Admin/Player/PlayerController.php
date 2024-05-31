@@ -106,7 +106,7 @@ class PlayerController extends Controller
                 'from_user_id' => $agent->id,
                 'to_user_id' => $player->id,
                 'amount' => $request['main_balance'],
-                'type' => 'deposit'
+                'type' => 'deposit',
             ]);
 
             return redirect()->back()
@@ -246,7 +246,7 @@ class PlayerController extends Controller
                 'from_user_id' => $agent->id,
                 'to_user_id' => $player->id,
                 'amount' => $inputs['main_balance'],
-                'type' => 'deposit'
+                'type' => 'deposit',
             ]);
 
             return redirect()->back()
@@ -300,7 +300,7 @@ class PlayerController extends Controller
                 'from_user_id' => $player->id,
                 'to_user_id' => $agent->id,
                 'amount' => $inputs['main_balance'],
-                'type' => 'withdraw'
+                'type' => 'withdraw',
             ]);
 
             return redirect()->back()

@@ -3,9 +3,9 @@
 namespace App\Models\ThreeD;
 
 use App\Jobs\CheckForThreeDWinners;
-use Illuminate\Database\Eloquent\Model;
 use App\Jobs\CheckForThreeDWinnersWithPermutations;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class ThreedSetting extends Model
 {

@@ -2,23 +2,24 @@
 
 namespace App\Http\Controllers\Admin\ThreeD;
 
-use App\Models\User;
-use Illuminate\Http\Request;
-use App\Services\TwoDUserService;
+use App\Http\Controllers\Controller;
+use App\Models\ThreeD\LotteryThreeDigitCopy;
 use App\Models\ThreeD\ThreedClose;
 use App\Models\ThreeD\ThreeDLimit;
-use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Services\TwoDUserService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Models\ThreeD\LotteryThreeDigitCopy;
 
 class ThreeDManageController extends Controller
 {
-   protected $userService;
+    protected $userService;
 
     public function __construct(TwoDUserService $userService)
     {
         $this->userService = $userService;
     }
+
     public function index()
     {
         $digits = ThreedClose::all();

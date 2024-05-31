@@ -3,8 +3,8 @@
 namespace App\Models\ThreeD;
 
 use App\Jobs\WinnerPrizeCheck;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Prize extends Model
 {
