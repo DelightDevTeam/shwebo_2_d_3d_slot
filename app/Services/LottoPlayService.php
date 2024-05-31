@@ -56,10 +56,16 @@ class LottoPlayService
             if (!empty($preOver)) {
                 return $preOver;
             }
+             $currentDate = Carbon::now()->format('Y-m-d'); // Format the date and time as needed
+            $currentTime = Carbon::now()->format('H:i:s');
+            $customString = 'shwebo-3d';
+            $randomNumber = rand(1000, 9999); // Generate a random 4-digit number
+            $slipNo = $randomNumber.'-'.$customString.'-'.$currentDate.'-'.$currentTime; // Combine date, string, and random number
 
             $lottery = Lotto::create([
                 'total_amount' => $totalAmount,
                 'user_id' => $user->id,
+                'slip_no' => $slipNo
             ]);
 
             $over = [];

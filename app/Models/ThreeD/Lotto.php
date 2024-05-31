@@ -3,8 +3,9 @@
 namespace App\Models\ThreeD;
 
 use App\Models\User;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\ThreeD\LotteryThreeDigitPivot;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Lotto extends Model
 {
@@ -22,5 +23,12 @@ class Lotto extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    
+
+    public function lotteryThreeDigitPivots()
+    {
+        return $this->hasMany(LotteryThreeDigitPivot::class, 'lotto_id');
     }
 }

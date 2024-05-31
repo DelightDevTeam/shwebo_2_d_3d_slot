@@ -25,6 +25,7 @@ return new class extends Migration
             $table->time('res_time')->nullable();
             $table->date('match_start_date')->nullable();
             $table->string('result_number')->nullable();
+            $table->boolean('win_lose')->default(false);
             $table->date('play_date')->default('2024-5-20');
             $table->time('play_time')->default('15:30:00');
             $table->enum('admin_log', ['open', 'closed'])->default('open'); // New status column

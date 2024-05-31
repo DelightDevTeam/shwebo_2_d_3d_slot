@@ -3,19 +3,20 @@
 namespace App\Models;
 
 use App\Enums\UserType;
+use App\Models\Admin\Role;
+use App\Models\ThreeD\Lotto;
+use App\Models\TwoD\Lottery;
 use App\Events\UserCreatedEvent;
 use App\Models\Admin\Permission;
-use App\Models\Admin\Role;
+use Laravel\Sanctum\HasApiTokens;
 use App\Models\SeamlessTransaction;
-use App\Models\TwoD\Lottery;
-use App\Models\TwoD\LotteryTwoDigitPivot;
 use Bavix\Wallet\Interfaces\Wallet;
+use Illuminate\Support\Facades\Auth;
 use Bavix\Wallet\Traits\HasWalletFloat;
+use Illuminate\Notifications\Notifiable;
+use App\Models\TwoD\LotteryTwoDigitPivot;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Auth;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable implements Wallet
 {
@@ -195,5 +196,10 @@ class User extends Authenticatable implements Wallet
     public function referredUsers()
     {
         return $this->hasMany(User::class, 'agent_id');
+    }
+
+    public function lottos()
+    {
+        return $this->hasMany(Lotto::class, 'user_id');
     }
 }

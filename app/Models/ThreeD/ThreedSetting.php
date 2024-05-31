@@ -2,8 +2,10 @@
 
 namespace App\Models\ThreeD;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Jobs\CheckForThreeDWinners;
 use Illuminate\Database\Eloquent\Model;
+use App\Jobs\CheckForThreeDWinnersWithPermutations;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ThreedSetting extends Model
 {
@@ -14,10 +16,8 @@ class ThreedSetting extends Model
     protected static function booted()
     {
         static::updated(function ($three_d_winner) {
-
-            //CheckForThreeDWinners::dispatch($three_d_winner);
-            //CheckForThreeDWinnersWithPermutations::dispatch($three_d_winner);
-
+            CheckForThreeDWinners::dispatch($three_d_winner);
+            CheckForThreeDWinnersWithPermutations::dispatch($three_d_winner);
         });
     }
 }

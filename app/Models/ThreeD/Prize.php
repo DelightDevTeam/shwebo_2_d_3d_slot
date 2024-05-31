@@ -2,8 +2,9 @@
 
 namespace App\Models\ThreeD;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Jobs\WinnerPrizeCheck;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Prize extends Model
 {
@@ -17,7 +18,7 @@ class Prize extends Model
     protected static function booted()
     {
         static::created(function ($prize) {
-            // WinnerPrizeCheck::dispatch($prize);
+            WinnerPrizeCheck::dispatch($prize);
             //WinnerPrizeCheckUpdate::dispatch($prize);
         });
     }
