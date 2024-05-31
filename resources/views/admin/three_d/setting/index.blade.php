@@ -50,8 +50,8 @@
        <th>ResNumber</th>
        {{-- <th>3DMatch</th> --}}
        <th>CreatePrizeNumber</th>
+       <th>Status</th>
        <th>3DMatch Open/Close</th>
-       {{-- <th>Permutation</th> --}}
       </tr>
      </thead>
      <tbody>
@@ -84,6 +84,7 @@
                 Open/Close
             </button>
         </td> --}}
+        <td>{{ ucfirst($result->status) }}</td>
         <td>
     <form action="{{ route('admin.ThreedOpenClose', ['id' => $result->id]) }}" method="post">
     @csrf
