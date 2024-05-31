@@ -83,6 +83,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('changePassword', [AuthController::class, 'changePassword']);
     Route::post('profile', [AuthController::class, 'profile']);
+    Route::get('transactions', [TransactionController::class, 'index']);
 
     Route::group(['prefix' => 'transaction'], function () {
         Route::post('withdraw', [WithDrawController::class, 'withdraw']);
