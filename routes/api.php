@@ -75,7 +75,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/home', [HomeController::class, 'home']);
 
     Route::get('wager-logs', [WagerController::class, 'index']);
-    Route::get('transactions', [TransactionController::class, 'index']);
     Route::post('exchange-main-to-game', [TransactionController::class, 'MainToGame']);
     Route::post('exchange-game-to-main', [TransactionController::class, 'GameToMain']);
 
@@ -84,11 +83,14 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('changePassword', [AuthController::class, 'changePassword']);
     Route::post('profile', [AuthController::class, 'profile']);
+    Route::get('transactions', [TransactionController::class, 'index']);
 
     Route::group(['prefix' => 'transaction'], function () {
         Route::post('withdraw', [WithDrawController::class, 'withdraw']);
         Route::post('deposit', [DepositController::class, 'deposit']);
-        Route::get('player-transactionlog', [PlayerTransactionLogController::class, 'index']);
+        Route::get('exchange-transactionlog', [TransactionController::class, 'exchangeTransactionLog']);
+        Route::get('deposit-requestlog', [TransactionController::class, 'depositRequestLog']);
+        Route::get('withdraw-requestlog', [TransactionController::class, 'withDrawRequestLog']);
     });
 
     Route::group(['prefix' => 'bank'], function () {

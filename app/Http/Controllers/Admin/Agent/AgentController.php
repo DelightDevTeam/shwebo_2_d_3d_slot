@@ -114,6 +114,12 @@ class AgentController extends Controller
             $admin->main_balance -= $inputs['main_balance'];
             $admin->save();
         }
+        TransferLog::create([
+            'from_user_id' => $admin->id,
+            'to_user_id' => $agent->id,
+            'amount' => $request->main_balance,
+            'type' => 'deposit'
+        ]);
 
         // Redirect back with success message
         return redirect()->back()
@@ -250,6 +256,12 @@ class AgentController extends Controller
             $admin->main_balance -= $inputs['main_balance'];
             $admin->save();
             // Transfer money
+            TransferLog::create([
+                'from_user_id' => $admin->id,
+                'to_user_id' => $agent->id,
+                'amount' => $inputs['main_balance'],
+                'type' => 'deposit'
+            ]);
 
             return redirect()->back()->with('success', 'Money fill request submitted successfully!');
         } catch (Exception $e) {
@@ -262,7 +274,6 @@ class AgentController extends Controller
 
     public function makeCashOut(Request $request, string $id)
     {
-
         abort_if(
             Gate::denies('make_transfer') || ! $this->ifChildOfParent(request()->user()->id, $id),
             Response::HTTP_FORBIDDEN,
@@ -289,6 +300,13 @@ class AgentController extends Controller
                 $admin->main_balance += $cashOut;
                 $admin->save();
             }
+
+            TransferLog::create([
+                'from_user_id' => $agent->id,
+                'to_user_id' => $admin->id,
+                'amount' => $request->main_balance,
+                'type' => 'withdraw'
+            ]);
 
             return redirect()->back()->with('success', 'Money fill request submitted successfully!');
         } catch (Exception $e) {

@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('transfer_logs', function (Blueprint $table) {
+        Schema::create('exchange_transaction_logs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('from_user_id');
-            $table->unsignedBigInteger('to_user_id');
-            $table->integer('amount');
+            $table->unsignedBigInteger('user_id');
+            $table->decimal('amount');
             $table->string('type');
             $table->timestamps();
-            $table->foreign('from_user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('to_user_id')->references('id')->on('users')->onDelete('cascade');
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('transfer_logs');
+        Schema::dropIfExists('exchange_transaction_logs');
     }
 };

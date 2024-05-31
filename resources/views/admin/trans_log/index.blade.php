@@ -38,6 +38,7 @@
 
         <tr>
             <th>Date</th>
+            <th>From User</th>
             <th>To User</th>
             <th>Amount</th>
         </tr>
@@ -48,12 +49,12 @@
                 <td>
                   {{ $log->created_at }}
                 </td>
-                <td>{{ $log->targetUser->name }}</td>
+                <td>{{ $log->fromUser->name}}</td>
+                <td>{{ $log->toUser->name}}</td>
                 <td>
-                  <div class="d-flex align-items-center text-{{$log->type =='deposit' ? 'success' : 'danger'}} text-gradient text-sm font-weight-bold ms-auto"> {{$log->type == 'deposit' ? '+' : ''}}{{ $log->amountFloat }}</div>
-              
+                  <div class="d-flex align-items-center text-{{$log->type =='deposit' ? 'success' : 'danger'}} text-gradient text-sm font-weight-bold ms-auto"> {{$log->type == 'deposit' ? '+' : ''}}{{ $log->amount }}</div>
                 </td>
-                
+              
             </tr>
         @endforeach
     </tbody>
