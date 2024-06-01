@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\WithDraw;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\TransferLog;
 use App\Models\User;
 use App\Models\WithDrawRequest;
 use Exception;
@@ -49,6 +50,13 @@ class WithDrawRequestController extends Controller
 
                 $player->main_balance -= $request->amount;
                 $player->save();
+
+                TransferLog::create([
+                    'from_user_id' => $player->id,
+                    'to_user_id' => $agent->id,
+                    'amount' => $request->amount,
+                    'type' => 'withdraw'
+                ]);
             }
 
             return back()->with('success', 'Withdraw request successfully!');

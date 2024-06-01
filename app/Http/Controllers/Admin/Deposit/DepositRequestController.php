@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Deposit;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\TransferLog;
 use App\Models\DepositRequest;
 use App\Models\User;
 use App\Models\WithDrawRequest;
@@ -51,7 +52,16 @@ class DepositRequestController extends Controller
 
                 $player->main_balance += $request->amount;
                 $player->save();
+
+                TransferLog::create([
+                    'from_user_id' => $agent->id,
+                    'to_user_id' => $player->id,
+                    'amount' => $request->amount,
+                    'type' => 'deposit'
+                ]);
             }
+
+
 
             return back()->with('success', 'Deposit request successfully!');
         } catch (Exception $e) {
