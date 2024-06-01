@@ -7,6 +7,7 @@ use App\Events\UserCreatedEvent;
 use App\Models\Admin\Permission;
 use App\Models\Admin\Role;
 use App\Models\SeamlessTransaction;
+use App\Models\ThreeD\Lotto;
 use App\Models\TwoD\Lottery;
 use App\Models\TwoD\LotteryTwoDigitPivot;
 use Bavix\Wallet\Interfaces\Wallet;
@@ -195,5 +196,10 @@ class User extends Authenticatable implements Wallet
     public function referredUsers()
     {
         return $this->hasMany(User::class, 'agent_id');
+    }
+
+    public function lottos()
+    {
+        return $this->hasMany(Lotto::class, 'user_id');
     }
 }

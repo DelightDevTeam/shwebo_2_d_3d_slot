@@ -2,14 +2,14 @@
 
 namespace App\Services;
 
-use App\Models\ThreeD\ThreedSetting;
 use App\Models\ThreeD\LotteryThreeDigitPivot;
+use App\Models\ThreeD\ThreedSetting;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
-class LottoOneWeekRecordService 
+class LottoOneWeekRecordService
 {
-    public function GetRecordForOneWeek () 
+    public function GetRecordForOneWeek()
     {
         // Get the match start date and result date from ThreedSetting
         $draw_date = ThreedSetting::where('status', 'open')->first();
@@ -28,7 +28,7 @@ class LottoOneWeekRecordService
         // Return the records and total sub_amount
         return [
             'records' => $records,
-            'total_sub_amount' => $total_sub_amount
+            'total_sub_amount' => $total_sub_amount,
         ];
     }
 }

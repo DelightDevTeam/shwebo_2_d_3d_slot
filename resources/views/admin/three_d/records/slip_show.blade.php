@@ -21,7 +21,7 @@
    <div class="card-header pb-0">
     <div class="d-lg-flex">
      <div>
-      <h5 class="mb-0">3D တပါတ်မှတ်တမ်း Dashboards</h5>
+      <h5 class="mb-0">3D တပါတ်တွင်း ဘောင်ချာ User တဦးချင်း၏ အသေးစိပ်မှတ်တမ်း Dashboards</h5>
       {{-- <p class="text-sm mb-0">
                     A lightweight, extendable, dependency-free javascript HTML table plugin.
                   </p> --}}
@@ -42,33 +42,33 @@
    </div>
    <div class="table-responsive">
     <table class="table table-flush" id="permission-search">
-      <thead class="thead-light">
+     <thead>
+            <tr>
+                <th>User ID</th>
+                <th>User Name</th>
+                <th>Bet Digit</th>
+                <th>Sub Amount</th>
+                <th>Match Status</th>
+                <th>Play Date</th>
+                <th>Play Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($records as $record)
                 <tr>
-                    <th>#</th>
-                    <th>User Name</th>
-                    <th>Bet Digit</th>
-                    <th>Sub Amount</th>
-                    {{-- <th>Match Status</th> --}}
-                    <th>PlayDate</th>
-                    <th>PlayTime</th>
+                    <td>{{ $record->user_id }}</td>
+                    <td>{{ $record->user->name }}</td>
+                    <td>{{ $record->bet_digit }}</td>
+                    <td>{{ $record->sub_amount }}</td>
+                    <td>{{ $record->match_status }}</td>
+                    <td>{{ $record->play_date }}</td>
+                    <td>{{ $record->play_time }}</td>
                 </tr>
-            </thead>
-            <tbody>
-             @foreach ($data['records'] as $record)
-                 <tr>
-                     <td>{{ $loop->iteration }}</td>
-                     <td>{{ $record->user->name }}</td>
-                     <td>{{ $record->bet_digit }}</td>
-                     <td>{{ $record->sub_amount }}</td>
-                     {{-- <td>{{ $record->match_status }}</td> --}}
-                     <td>{{ $record->play_date }}</td>
-                     <td>{{ $record->play_time }}</td>
-                 </tr>
-             @endforeach
-         </tbody>
-
+            @endforeach
+        </tbody>
     </table>
-   </div>
+    <a href="{{ route('admin.OneWeekSlipIndex') }}" class="btn btn-secondary">Back to List</a>
+</div>
    
   </div>
   <div class="card mt-2">
@@ -77,7 +77,7 @@
     </div>
     <div class="card-body">
      <div>
-           <h4 class="text-center">Total Sub Amount: {{ $data['total_sub_amount'] }}</h4>
+           {{-- <h4 class="text-center">Total Sub Amount: {{ $data['total_sub_amount'] }}</h4> --}}
      </div>
     </div>
    </div>

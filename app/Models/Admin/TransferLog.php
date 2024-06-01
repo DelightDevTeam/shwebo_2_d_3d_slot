@@ -14,7 +14,7 @@ class TransferLog extends Model
         'from_user_id',
         'to_user_id',
         'type',
-        'amount'
+        'amount',
     ];
 
     protected $dates = ['created_at', 'updated_at'];

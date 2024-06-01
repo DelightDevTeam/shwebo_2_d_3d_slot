@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 namespace App\Services;
 
 use App\Helpers\DrawDateHelper;
@@ -17,18 +18,18 @@ class LottoPlayService
 {
     public function play($totalAmount, $amounts)
     {
-        if (!Auth::check()) {
+        if (! Auth::check()) {
             return response()->json(['message' => 'You are not authenticated! please login.'], 401);
         }
 
         $user = Auth::user();
-        Log::info('Auth user is: ' . $user->name);
+        Log::info('Auth user is: '.$user->name);
 
         try {
             DB::beginTransaction();
 
             $limit = $user->limit ?? null;
-            Log::info('User limit is: ' . $limit);
+            Log::info('User limit is: '.$limit);
 
             if ($limit === null) {
                 throw new \Exception("'limit' is not set for user.");
@@ -53,13 +54,19 @@ class LottoPlayService
                 }
             }
 
-            if (!empty($preOver)) {
+            if (! empty($preOver)) {
                 return $preOver;
             }
+            $currentDate = Carbon::now()->format('Y-m-d'); // Format the date and time as needed
+            $currentTime = Carbon::now()->format('H:i:s');
+            $customString = 'shwebo-3d';
+            $randomNumber = rand(1000, 9999); // Generate a random 4-digit number
+            $slipNo = $randomNumber.'-'.$customString.'-'.$currentDate.'-'.$currentTime; // Combine date, string, and random number
 
             $lottery = Lotto::create([
                 'total_amount' => $totalAmount,
                 'user_id' => $user->id,
+                'slip_no' => $slipNo,
             ]);
 
             $over = [];
@@ -70,7 +77,7 @@ class LottoPlayService
                 }
             }
 
-            if (!empty($over)) {
+            if (! empty($over)) {
                 return $over;
             }
 
@@ -80,11 +87,13 @@ class LottoPlayService
 
         } catch (ModelNotFoundException $e) {
             DB::rollback();
-            Log::error('Model not found in LottoService play method: ' . $e->getMessage());
+            Log::error('Model not found in LottoService play method: '.$e->getMessage());
+
             return 'Resource not found.';
         } catch (\Exception $e) {
             DB::rollback();
-            Log::error('Error in LottoService play method: ' . $e->getMessage());
+            Log::error('Error in LottoService play method: '.$e->getMessage());
+
             return $e->getMessage(); // Handle general exceptions
         }
     }

@@ -118,7 +118,7 @@ class AgentController extends Controller
             'from_user_id' => $admin->id,
             'to_user_id' => $agent->id,
             'amount' => $request->main_balance,
-            'type' => 'deposit'
+            'type' => 'deposit',
         ]);
 
         // Redirect back with success message
@@ -260,7 +260,7 @@ class AgentController extends Controller
                 'from_user_id' => $admin->id,
                 'to_user_id' => $agent->id,
                 'amount' => $inputs['main_balance'],
-                'type' => 'deposit'
+                'type' => 'deposit',
             ]);
 
             return redirect()->back()->with('success', 'Money fill request submitted successfully!');
@@ -305,7 +305,7 @@ class AgentController extends Controller
                 'from_user_id' => $agent->id,
                 'to_user_id' => $admin->id,
                 'amount' => $request->main_balance,
-                'type' => 'withdraw'
+                'type' => 'withdraw',
             ]);
 
             return redirect()->back()->with('success', 'Money fill request submitted successfully!');

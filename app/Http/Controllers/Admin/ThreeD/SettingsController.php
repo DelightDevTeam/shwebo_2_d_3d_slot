@@ -8,6 +8,7 @@ use App\Models\ThreeD\Prize;
 use App\Models\ThreeD\ThreedSetting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class SettingsController extends Controller
 {

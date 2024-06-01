@@ -13,7 +13,7 @@ class LotteryThreeDigitPivot extends Model
 
     protected $table = 'lottery_three_digit_pivots';
 
-    protected $fillable = ['threed_setting_id', 'lotto_id', 'three_digit_id', 'user_id', 'bet_digit', 'sub_amount', 'prize_sent', 'match_status', 'res_date', 'res_time', 'match_start_date', 'result_number', 'play_date', 'play_time', 'admin_log', 'user_log'];
+    protected $fillable = ['threed_setting_id', 'lotto_id', 'three_digit_id', 'user_id', 'bet_digit', 'sub_amount', 'prize_sent', 'match_status', 'res_date', 'res_time', 'match_start_date', 'result_number', 'win_lose', 'play_date', 'play_time', 'admin_log', 'user_log'];
 
     public function user()
     {
@@ -26,5 +26,10 @@ class LotteryThreeDigitPivot extends Model
         static::created(function ($pivot) {
             LotteryThreeDigitCopy::create($pivot->toArray());
         });
+    }
+
+    public function lotto()
+    {
+        return $this->belongsTo(Lotto::class, 'lotto_id');
     }
 }
