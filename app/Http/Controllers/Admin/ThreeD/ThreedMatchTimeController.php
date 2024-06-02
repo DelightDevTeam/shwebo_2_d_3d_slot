@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin\ThreeD;
 
+use App\Helpers\MatchTimeHelper;
 use App\Http\Controllers\Controller;
 use App\Models\ThreeD\ThreedMatchTime;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ThreedMatchTimeController extends Controller
 {
@@ -14,7 +16,7 @@ class ThreedMatchTimeController extends Controller
         $currentYear = Carbon::now()->year;
         $currentDate = Carbon::now()->toDateString();
 
-        logger()->info("Fetching match times for year: $currentYear and date: $currentDate");
+        //logger()->info("Fetching match times for year: $currentYear and date: $currentDate");
 
         // Get all match times for the current year
         $yearMatchTimes = ThreedMatchTime::whereYear('result_date', $currentYear)->get();
@@ -22,7 +24,7 @@ class ThreedMatchTimeController extends Controller
         // Get the match times for the current date
         $currentMatchTimes = ThreedMatchTime::whereDate('result_date', $currentDate)->get();
 
-        logger()->info('Current match times count: '.$currentMatchTimes->count());
+        //logger()->info('Current match times count: '.$currentMatchTimes->count());
 
         // If no match times for the current date, fetch the first match time of the next month
         if ($currentMatchTimes->isEmpty()) {
@@ -34,11 +36,19 @@ class ThreedMatchTimeController extends Controller
 
             $currentMatchTimes = collect([$nextMonthMatchTimes]);
         }
+        $matchTimes = MatchTimeHelper::getCurrentYearAndMatchTimes();
 
-        return response()->json([
-            'year_match_times' => $yearMatchTimes,
-            'current_match_times' => $currentMatchTimes,
+        return view('admin.three_d.match_time.index', [
+            'currentYear' => $currentYear,
+            'yearMatchTimes' => $yearMatchTimes,
+            'currentMatchTimes' => $currentMatchTimes,
+            'matchTimes' => $matchTimes,
         ]);
+
+        // return response()->json([
+        //     'year_match_times' => $yearMatchTimes,
+        //     'current_match_times' => $currentMatchTimes,
+        // ]);
     }
 
     public function getCurrentMatchTimes()
@@ -101,6 +111,7 @@ class ThreedMatchTimeController extends Controller
 
             $currentMatchTimes = [$nextMonthMatchTimes];
         }
+        $matchTimes = MatchTimeHelper::getCurrentYearAndMatchTimes();
 
         // Log current match times count
         logger()->info('Current match times count: '.count($currentMatchTimes));
@@ -108,6 +119,15 @@ class ThreedMatchTimeController extends Controller
         return response()->json([
             'year_match_times' => $yearMatchTimes,
             'current_match_times' => $currentMatchTimes,
+            'match_time' => $matchTimes,
         ]);
+    }
+
+    public function CurrentMatchTimes()
+    {
+        $matchTimes = MatchTimeHelper::getCurrentYearAndMatchTimes();
+        //Log::info('Session Data', session()->all());
+
+        return response()->json($matchTimes);
     }
 }

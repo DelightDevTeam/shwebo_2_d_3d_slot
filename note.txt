@@ -5,3 +5,127 @@ php -r "file_put_contents('/var/www/html/shwebo_2_d_3d_slot/storage/logs/laravel
 SET FOREIGN_KEY_CHECKS = 0;
 TRUNCATE TABLE twod_settings;
 SET FOREIGN_KEY_CHECKS = 1;
+
+
+php artisan cache:clear
+php artisan config:clear
+php artisan route:clear
+php artisan view:clear
+
+
+// public static function getCurrentYearAndMatchTimes()
+    // {
+    //     $currentYear = Carbon::now()->year;
+    //     $currentDate = Carbon::now()->toDateString();
+    //     $currentMonth = Carbon::now()->month;
+
+    //     // Get all match times for the current year
+    //     $yearMatchTimes = ThreedMatchTime::whereYear('result_date', $currentYear)->get();
+
+    //     // Get the match times for the current month sorted by date
+    //     $currentMonthMatchTimes = ThreedMatchTime::whereYear('result_date', $currentYear)
+    //         ->whereMonth('result_date', $currentMonth)
+    //         ->orderBy('result_date', 'asc')
+    //         ->get();
+
+    //     // Get the first match time for the current month
+    //     $currentMatchTime = $currentMonthMatchTimes->first();
+
+    //     // If no match times for the current date, fetch the first match time of the next month
+    //     if (! $currentMatchTime) {
+    //         $nextMonth = Carbon::now()->addMonth()->month;
+    //         $nextMonthMatchTime = ThreedMatchTime::whereYear('result_date', $currentYear)
+    //             ->whereMonth('result_date', $nextMonth)
+    //             ->orderBy('result_date', 'asc')
+    //             ->first();
+
+    //         if ($nextMonthMatchTime) {
+    //             $currentMatchTime = $nextMonthMatchTime;
+    //         }
+    //     }
+
+    //     return [
+    //         'currentYear' => $currentYear,
+    //         'yearMatchTimes' => $yearMatchTimes,
+    //         'currentMatchTime' => $currentMatchTime ? [
+    //             'id' => $currentMatchTime->id,
+    //             'result_date' => $currentMatchTime->result_date,
+    //             'match_time' => $currentMatchTime->match_time,
+    //         ] : null,
+    //     ];
+    // }
+    // public static function getCurrentYearAndMatchTimes()
+    //   {
+    //       $currentYear = Carbon::now()->year;
+    //       $currentDate = Carbon::now()->toDateString();
+    //       // logger()->info("Fetching match times for year: $currentYear and date: $currentDate");
+
+    //       // Get all match times for the current year
+    //       $yearMatchTimes = ThreedMatchTime::whereYear('result_date', $currentYear)->get();
+
+    //       // Get the match times for the current date
+    //       $currentMatchTimes = ThreedMatchTime::whereDate('result_date', $currentDate)->get();
+
+    //       // logger()->info('Current match times count: ' . $currentMatchTimes->count());
+
+    //       // If no match times for the current date, fetch the first match time of the next month
+    //       if ($currentMatchTimes->isEmpty()) {
+    //           $nextMonth = Carbon::now()->addMonth()->month;
+    //           $nextMonthMatchTime = ThreedMatchTime::whereYear('result_date', $currentYear)
+    //               ->whereMonth('result_date', $nextMonth)
+    //               ->orderBy('result_date', 'asc')
+    //               ->first();
+
+    //           if ($nextMonthMatchTime) {
+    //               $currentMatchTimes = collect([$nextMonthMatchTime]);
+    //           }
+    //       }
+
+    //       $currentMatchTime = $currentMatchTimes->first();
+
+    //       return [
+    //           'currentYear' => $currentYear,
+    //           'yearMatchTimes' => $yearMatchTimes,
+    //           'currentMatchTime' => $currentMatchTime ? [
+    //               'id' => $currentMatchTime->id,
+    //               'result_date' => $currentMatchTime->result_date,
+    //               'result_time' => $currentMatchTime->result_time,
+    //               'match_time' => $currentMatchTime->match_time,
+    //           ] : null
+    //       ];
+    //   }
+    // public static function getCurrentYearAndMatchTimes()
+    // {
+    //     $currentYear = Carbon::now()->year;
+    //     $currentDate = Carbon::now()->toDateString();
+    //     // logger()->info("Fetching match times for year: $currentYear and date: $currentDate");
+
+    //     // Get all match times for the current year
+    //     $yearMatchTimes = ThreedMatchTime::whereYear('result_date', $currentYear)->get();
+
+    //     // Get the match times for the current date
+    //     $currentMatchTimes = ThreedMatchTime::whereDate('result_date', $currentDate)->get();
+
+    //     // logger()->info('Current match times count: ' . $currentMatchTimes->count());
+
+    //     // If no match times for the current date, fetch the first match time of the next month
+    //     if ($currentMatchTimes->isEmpty()) {
+    //         $nextMonth = Carbon::now()->addMonth()->month;
+    //         $nextMonthMatchTime = ThreedMatchTime::whereYear('result_date', $currentYear)
+    //             ->whereMonth('result_date', $nextMonth)
+    //             ->orderBy('result_date', 'asc')
+    //             ->first();
+
+    //         if ($nextMonthMatchTime) {
+    //             $currentMatchTimes = collect([$nextMonthMatchTime]);
+    //         }
+    //     }
+
+    //     $currentMatchTime = $currentMatchTimes->first();
+
+    //     return [
+    //         'currentYear' => $currentYear,
+    //         'yearMatchTimes' => $yearMatchTimes,
+    //         'currentMatchTime' => $currentMatchTime ? $currentMatchTime->match_time : null
+    //     ];
+    // }

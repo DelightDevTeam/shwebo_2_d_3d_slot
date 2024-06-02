@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Helpers\DrawDateHelper;
+use App\Helpers\MatchTimeHelper;
 use App\Models\ThreeD\LotteryThreeDigitPivot;
 use App\Models\ThreeD\Lotto;
 use App\Models\ThreeD\ThreeDigit;
@@ -151,11 +152,20 @@ class LottoPlayService
             $play_date = Carbon::now()->format('Y-m-d');
             $play_time = Carbon::now()->format('H:i:s');
             $player_id = Auth::user()->id;
+            $matchTimes = MatchTimeHelper::getCurrentYearAndMatchTimes();
+
+            if (empty($matchTimes['currentMatchTime'])) {
+                return response()->json(['message' => 'No current match time available']);
+            }
+
+            $currentMatchTime = $matchTimes['currentMatchTime'];
+            //Log::info('Running Match Time ID: ' . $currentMatchTime['id'] . ' - Time: ' . $currentMatchTime['match_time']);
 
             $pivot = new LotteryThreeDigitPivot([
                 'threed_setting_id' => $results->id,
                 'lotto_id' => $lotteryId,
                 'three_digit_id' => $threeDigits->id,
+                'threed_match_time_id' => $currentMatchTime['id'],
                 'user_id' => $player_id,
                 'bet_digit' => $num,
                 'sub_amount' => $sub_amount,
@@ -164,9 +174,9 @@ class LottoPlayService
                 'play_date' => $play_date,
                 'play_time' => $play_time,
                 'res_date' => $results->result_date,
+                'res_time' => $results->result_time,
                 'match_start_date' => $start_date,
-                'admin_log' => $results->admin_log,
-                'user_log' => $results->user_log,
+                'running_match' => $currentMatchTime['match_time'],
             ]);
 
             $pivot->save();

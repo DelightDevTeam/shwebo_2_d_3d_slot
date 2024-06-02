@@ -259,7 +259,12 @@
                     <span class="sidenav-normal  ms-2  ps-1">MoreSetting</span>
                   </a>
                 </li>
-
+                <li class="nav-item">
+                  <a class="nav-link text-white " href="{{ url('admin/3d-year-match-times')}}">
+                    <span class="sidenav-mini-icon"> 3D </span>
+                    <span class="sidenav-normal  ms-2  ps-1"> ပွဲစဉ်များ </span>
+                  </a>
+                </li>
                 <li class="nav-item">
                   <a class="nav-link text-white " href="{{ url('admin/3d-users-limit-cor')}}">
                     <span class="sidenav-mini-icon"> 3D </span>

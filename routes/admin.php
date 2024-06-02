@@ -207,6 +207,6 @@ Route::group([
     Route::get('/3d-one-week-slip', [OneWeekRecordController::class, 'index'])->name('OneWeekSlipIndex');
     Route::get('/3d-oneweek-slip-no/{userId}/{slipNo}', [OneWeekRecordController::class, 'show'])->name('OneWeekSlipDetail');
 
-    Route::get('/current-year-match-times', [ThreedMatchTimeController::class, 'getCurrentMatchTimes']);
+    Route::get('/3d-year-match-times', [ThreedMatchTimeController::class, 'getCurrentYearAndMatchTimes']);
     // three 3 route end
 });

@@ -52,7 +52,7 @@ class ThreedMatchTimeSeeder extends Seeder
     private function createMatchTime(int $year, int $month, int $day, int $matchCounter): void
     {
         $resultDate = Carbon::createFromDate($year, $month, $day);
-        $matchDescription = "{$year}-".$resultDate->format('F').' '.$this->ordinal($matchCounter).' 3D Match';
+        $matchDescription = "{$year}-".$resultDate->format('m').'-'.$this->ordinal($matchCounter);
 
         ThreedMatchTime::create([
             'result_date' => $resultDate->format('Y-m-d'),
@@ -60,7 +60,22 @@ class ThreedMatchTimeSeeder extends Seeder
             'match_time' => $matchDescription,
             'status' => 'closed',
         ]);
+
     }
+
+    // private function createMatchTime(int $year, int $month, int $day, int $matchCounter): void
+    // {
+    //     $resultDate = Carbon::createFromDate($year, $month, $day);
+    //     $matchDescription = "{$year}-".$resultDate->format('F').'-'.$this->ordinal($matchCounter).'-3D-Match';
+
+    //     ThreedMatchTime::create([
+    //         'result_date' => $resultDate->format('Y-m-d'),
+    //         'result_time' => '15:30:00',
+    //         'match_time' => $matchDescription,
+    //         'run_match' => $i,
+    //         'status' => 'closed',
+    //     ]);
+    // }
 
     private function ordinal(int $number): string
     {
@@ -70,5 +85,12 @@ class ThreedMatchTimeSeeder extends Seeder
         }
 
         return $number.$suffixes[$number % 10];
+    }
+
+    private function MatchName(int $num)
+    {
+        $match_name = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'];
+
+        return $match_name[$num];
     }
 }

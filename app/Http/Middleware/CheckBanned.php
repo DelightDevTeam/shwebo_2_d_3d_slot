@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
 class CheckBanned
@@ -21,6 +22,8 @@ class CheckBanned
 
             return redirect()->route('login')->with('error', 'You are banned. Please contact the administrator for more information.');
         }
+
+        Log::info('User Authenticated', ['user' => Auth::user(), 'session' => session()->all()]);
 
         return $next($request);
     }

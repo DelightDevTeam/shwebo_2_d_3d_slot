@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\V1\Player\TransactionController;
 use App\Http\Controllers\Api\V1\Player\WagerController;
 use App\Http\Controllers\Api\V1\Player\WithDrawController;
 use App\Http\Controllers\Api\V1\PromotionController;
+use App\Http\Controllers\Api\V1\ThreeD\OneWeekRecWihtSlipController;
 use App\Http\Controllers\Api\V1\ThreeD\PlayController;
 use App\Http\Controllers\Api\V1\TwoD\AllWinnerPrizeSentController;
 use App\Http\Controllers\Api\V1\TwoD\EveningWinPrizeController;
@@ -117,5 +118,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::group(['prefix' => '3d'], function () {
         Route::get('/user/all-3-digit', [PlayController::class, 'get_threedigit']);
         Route::post('/user/three-d-play', [PlayController::class, 'store']);
+        Route::get('/user/one-week-rec-slip', [OneWeekRecWihtSlipController::class, 'index'])->name('OneWeekRecSlipIndex');
+        Route::get('/user/one-week-slip-no/{userId}/{slipNo}', [OneWeekRecWihtSlipController::class, 'show'])->name('SlipDetail');
+
     });
 });

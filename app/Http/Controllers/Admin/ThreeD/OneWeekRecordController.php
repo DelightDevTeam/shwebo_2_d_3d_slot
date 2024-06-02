@@ -37,6 +37,7 @@ class OneWeekRecordController extends Controller
         // Calculate the total amount from the lottos table within the date range
         $total_amount = Lotto::whereBetween('created_at', [$start_date, $end_date])
             ->sum('total_amount');
+        //return response()->json($records, $total_amount);
 
         // You can return the records to your view
         return view('admin.three_d.records.one_week_slip', compact('records', 'total_amount'));

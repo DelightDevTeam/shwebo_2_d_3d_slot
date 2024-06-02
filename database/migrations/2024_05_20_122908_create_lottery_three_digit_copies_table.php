@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('threed_setting_id')->nullable();
             $table->unsignedBigInteger('lotto_id');
             $table->unsignedBigInteger('three_digit_id');
+            $table->unsignedBigInteger('threed_match_time_id');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('bet_digit');
             $table->integer('sub_amount')->default(0);
@@ -28,10 +29,13 @@ return new class extends Migration
             $table->boolean('win_lose')->default(false);
             $table->date('play_date')->default('2024-5-20');
             $table->time('play_time')->default('15:30:00');
-            $table->enum('admin_log', ['open', 'closed'])->default('open'); // New status column
-            $table->enum('user_log', ['open', 'closed'])->default('open'); // New status column
+            $table->string('running_match')->default('2024-01-16');
+            //$table->string('match_name')->default('1');
+            //$table->enum('admin_log', ['open', 'closed'])->default('open'); // New status column
+            //$table->enum('user_log', ['open', 'closed'])->default('open'); // New status column
             $table->foreign('threed_setting_id')->references('id')->on('threed_settings')->onDelete('cascade');
             $table->foreign('lotto_id')->references('id')->on('lottos')->onDelete('cascade');
+            $table->foreign('threed_match_time_id')->references('id')->on('threed_match_times')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
