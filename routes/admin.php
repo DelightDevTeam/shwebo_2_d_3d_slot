@@ -14,10 +14,12 @@ use App\Http\Controllers\Admin\Player\PlayerController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\PromotionController;
 use App\Http\Controllers\Admin\RolesController;
+use App\Http\Controllers\Admin\ThreeD\ALlHistoryController;
 use App\Http\Controllers\Admin\ThreeD\OneWeekRecordController;
 use App\Http\Controllers\Admin\ThreeD\SettingsController;
 use App\Http\Controllers\Admin\ThreeD\ThreeDManageController;
 use App\Http\Controllers\Admin\ThreeD\ThreedMatchTimeController;
+use App\Http\Controllers\Admin\ThreeD\WinnerController;
 use App\Http\Controllers\Admin\TransferLog\TransferLogController;
 use App\Http\Controllers\Admin\TwoD\AllLotteryWinPrizeSentController;
 use App\Http\Controllers\Admin\TwoD\EveningLegarController;
@@ -204,9 +206,17 @@ Route::group([
     Route::delete('/3d-delete-defalut-limit/{id}', [ThreeDManageController::class, 'ThreedLimitdestroy'])->name('ThreedDefaultLimitDelete');
     Route::get('/3d-one-week-records', [OneWeekRecordController::class, 'showRecordsForOneWeek'])->name('oneWeekRec');
 
+    Route::get('/3d-all-history', [ALlHistoryController::class, 'showRecords'])->name('AllHistory');
+
     Route::get('/3d-one-week-slip', [OneWeekRecordController::class, 'index'])->name('OneWeekSlipIndex');
     Route::get('/3d-oneweek-slip-no/{userId}/{slipNo}', [OneWeekRecordController::class, 'show'])->name('OneWeekSlipDetail');
 
     Route::get('/3d-year-match-times', [ThreedMatchTimeController::class, 'getCurrentYearAndMatchTimes']);
+
+    Route::get('/3d-slip-history', [ALlHistoryController::class, 'index'])->name('SlipHistoryIndex');
+    Route::get('/3d-slip-no-history/{userId}/{slipNo}', [ALlHistoryController::class, 'show'])->name('SlipHistoryShow');
+    Route::get('/3d-first-winner', [WinnerController::class, 'ThreeDFirstWinner'])->name('WinnerFirst');
+    Route::get('/3d-second-winner', [WinnerController::class, 'ThreeDSecondWinner'])->name('WinnerSecond');
+    Route::get('/3d-third-winner', [WinnerController::class, 'ThreeDThirdWinner'])->name('WinnerThird');
     // three 3 route end
 });

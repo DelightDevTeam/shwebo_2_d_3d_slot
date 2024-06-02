@@ -57,11 +57,9 @@ class DepositRequestController extends Controller
                     'from_user_id' => $agent->id,
                     'to_user_id' => $player->id,
                     'amount' => $request->amount,
-                    'type' => 'deposit'
+                    'type' => 'deposit',
                 ]);
             }
-
-
 
             return back()->with('success', 'Deposit request successfully!');
         } catch (Exception $e) {

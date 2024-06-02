@@ -55,7 +55,7 @@ class WithDrawRequestController extends Controller
                     'from_user_id' => $player->id,
                     'to_user_id' => $agent->id,
                     'amount' => $request->amount,
-                    'type' => 'withdraw'
+                    'type' => 'withdraw',
                 ]);
             }
 

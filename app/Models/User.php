@@ -97,6 +97,11 @@ class User extends Authenticatable implements Wallet
         return $this->roles()->where('id', 1)->exists();
     }
 
+    public function isAdmin()
+    {
+        return $this->roles()->where('id', 1);
+    }
+
     public function getIsMasterAttribute()
     {
         return $this->roles()->where('id', 2)->exists();

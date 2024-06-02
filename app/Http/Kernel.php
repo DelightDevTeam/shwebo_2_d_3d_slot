@@ -68,5 +68,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'checkBanned' => \App\Http\Middleware\CheckBanned::class,
         'webhook_log' => WebhookLogMiddleware::class,
+        'check_admin' => \App\Http\Middleware\AdminMiddleware::class,
     ];
 }

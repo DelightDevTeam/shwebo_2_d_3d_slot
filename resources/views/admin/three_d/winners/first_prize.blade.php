@@ -48,6 +48,7 @@
                     <th>User Name</th>
                     <th>Bet Digit</th>
                     <th>Sub Amount</th>
+                    <th>WinAmount</th>
                     <th>Match Time</th>
                     <th>PlayDate</th>
                     <th>PlayTime</th>
@@ -61,6 +62,7 @@
                      <td>{{ $record->user->name }}</td>
                      <td>{{ $record->bet_digit }}</td>
                      <td>{{ $record->sub_amount }}</td>
+                     <td>{{ $record->sub_amount * 700 }}</td>
                      <td>{{ $record->running_match }}</td>
                      <td>{{ $record->play_date }}</td>
                      <td>{{ $record->play_time }}</td>
@@ -87,7 +89,7 @@
     </div>
     <div class="card-body">
      <div>
-           <h4 class="text-center">Total Sub Amount: {{ $data['total_sub_amount'] }}</h4>
+           <h4 class="text-center">Total Sub Amount: {{ $data['total_sub_amount'] * 700 }}</h4>
      </div>
     </div>
    </div>

@@ -21,7 +21,7 @@
    <div class="card-header pb-0">
     <div class="d-lg-flex">
      <div>
-      <h5 class="mb-0">3D တပါတ်မှတ်တမ်း Dashboards</h5>
+      <h5 class="mb-0">3D All မှတ်တမ်း Dashboards</h5>
       {{-- <p class="text-sm mb-0">
                     A lightweight, extendable, dependency-free javascript HTML table plugin.
                   </p> --}}
@@ -49,6 +49,7 @@
                     <th>Bet Digit</th>
                     <th>Sub Amount</th>
                     <th>Match Time</th>
+                    <th>ResultDate</th>
                     <th>PlayDate</th>
                     <th>PlayTime</th>
                     <th>W/L</th>
@@ -62,6 +63,7 @@
                      <td>{{ $record->bet_digit }}</td>
                      <td>{{ $record->sub_amount }}</td>
                      <td>{{ $record->running_match }}</td>
+                     <td>{{ $record->res_date }}</td>
                      <td>{{ $record->play_date }}</td>
                      <td>{{ $record->play_time }}</td>
                      <td>

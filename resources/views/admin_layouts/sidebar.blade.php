@@ -292,9 +292,41 @@
                   </a>
                 </li>
                 <li class="nav-item">
+                  <a class="nav-link text-white " href="{{ url('admin/3d-all-history') }}">
+                    <span class="sidenav-mini-icon">3D</span>
+                    <span class="sidenav-normal  ms-2  ps-1">All မှတ်တမ်း</span>
+                  </a>
+                </li>
+                <li class="nav-item">
                   <a class="nav-link text-white " href="{{ url('admin/3d-one-week-slip') }}">
                     <span class="sidenav-mini-icon">3D</span>
                     <span class="sidenav-normal  ms-2  ps-1">တပါတ်တွင်း Slip</span>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link text-white " href="{{ url('admin/3d-slip-history') }}">
+                    <span class="sidenav-mini-icon">3D</span>
+                    <span class="sidenav-normal  ms-2  ps-1">All Slip</span>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link text-white " href="{{ url('admin/3d-first-winner') }}">
+                    <span class="sidenav-mini-icon">3D</span>
+                    <span class="sidenav-normal  ms-2  ps-1">FirstPrize</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-white " href="{{ url('admin/3d-second-winner') }}">
+                    <span class="sidenav-mini-icon">3D</span>
+                    <span class="sidenav-normal  ms-2  ps-1">SecondPrize</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-white " href="{{ url('admin/3d-third-winner') }}">
+                    <span class="sidenav-mini-icon">3D</span>
+                    <span class="sidenav-normal  ms-2  ps-1">ThirdPrize</span>
                   </a>
                 </li>
                 

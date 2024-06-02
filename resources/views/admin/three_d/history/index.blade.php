@@ -21,7 +21,7 @@
    <div class="card-header pb-0">
     <div class="d-lg-flex">
      <div>
-      <h5 class="mb-0">3D တပါတ်မှတ်တမ်း Dashboards</h5>
+      <h5 class="mb-0">3D All Slip (ဘောင်ချာ) မှတ်တမ်း Dashboards</h5>
       {{-- <p class="text-sm mb-0">
                     A lightweight, extendable, dependency-free javascript HTML table plugin.
                   </p> --}}
@@ -42,40 +42,29 @@
    </div>
    <div class="table-responsive">
     <table class="table table-flush" id="permission-search">
-      <thead class="thead-light">
-                <tr>
-                    <th>#</th>
-                    <th>User Name</th>
-                    <th>Bet Digit</th>
-                    <th>Sub Amount</th>
-                    <th>Match Time</th>
-                    <th>PlayDate</th>
-                    <th>PlayTime</th>
-                    <th>W/L</th>
-                </tr>
-            </thead>
-            <tbody>
-             @foreach ($data['records'] as $record)
-                 <tr>
-                     <td>{{ $loop->iteration }}</td>
-                     <td>{{ $record->user->name }}</td>
-                     <td>{{ $record->bet_digit }}</td>
-                     <td>{{ $record->sub_amount }}</td>
-                     <td>{{ $record->running_match }}</td>
-                     <td>{{ $record->play_date }}</td>
-                     <td>{{ $record->play_time }}</td>
-                     <td>
-                      @if($record->prize_sent == 1)
-                      <p class="text-success">Win</p>
-                      @elseif($record->win_lose == 1)
-                      <p class="text-danger">Lose</p>
-                      @else
-                      <p class="text-warning">Pending</p>
-                      @endif
-                     </td>
-                 </tr>
-             @endforeach
-         </tbody>
+      <thead>
+            <tr>
+                <th>User ID</th>
+                <th>User Name</th>
+                <th>Slip No</th>
+                <th>Total Sub Amount</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+         @foreach ($records as $record)
+             <tr>
+                 <td>{{ $record->user_id }}</td>
+                 <td>{{ $record->user->name }}</td>
+                 <td>{{ $record->slip_no }}</td>
+                 <td>{{ $record->total_sub_amount }}</td>
+                 <td>
+                     <a href="{{ route('admin.SlipHistoryShow', ['userId' => $record->user_id, 'slipNo' => $record->slip_no]) }}" class="btn btn-primary">View Details</a>
+                 </td>
+             </tr>
+         @endforeach
+     </tbody>
+
 
     </table>
    </div>
@@ -87,7 +76,8 @@
     </div>
     <div class="card-body">
      <div>
-           <h4 class="text-center">Total Sub Amount: {{ $data['total_sub_amount'] }}</h4>
+           {{-- <h4 class="text-center">Total Sub Amount: {{ $data['total_sub_amount'] }}</h4> --}}
+           <h4 class="text-center">Total Amount: {{ $total_amount }}</h4>
      </div>
     </div>
    </div>

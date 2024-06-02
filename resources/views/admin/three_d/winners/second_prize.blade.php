@@ -21,7 +21,7 @@
    <div class="card-header pb-0">
     <div class="d-lg-flex">
      <div>
-      <h5 class="mb-0">3D တပါတ်မှတ်တမ်း Dashboards</h5>
+      <h5 class="mb-0">3D ပတ်လယ်ပေါက်သူများ Dashboards</h5>
       {{-- <p class="text-sm mb-0">
                     A lightweight, extendable, dependency-free javascript HTML table plugin.
                   </p> --}}
@@ -48,6 +48,7 @@
                     <th>User Name</th>
                     <th>Bet Digit</th>
                     <th>Sub Amount</th>
+                    <th>WinAmount</th>
                     <th>Match Time</th>
                     <th>PlayDate</th>
                     <th>PlayTime</th>
@@ -61,11 +62,12 @@
                      <td>{{ $record->user->name }}</td>
                      <td>{{ $record->bet_digit }}</td>
                      <td>{{ $record->sub_amount }}</td>
+                     <td>{{ $record->sub_amount * 10 }}</td>
                      <td>{{ $record->running_match }}</td>
                      <td>{{ $record->play_date }}</td>
                      <td>{{ $record->play_time }}</td>
                      <td>
-                      @if($record->prize_sent == 1)
+                      @if($record->prize_sent == 2)
                       <p class="text-success">Win</p>
                       @elseif($record->win_lose == 1)
                       <p class="text-danger">Lose</p>
@@ -87,7 +89,7 @@
     </div>
     <div class="card-body">
      <div>
-           <h4 class="text-center">Total Sub Amount: {{ $data['total_sub_amount'] }}</h4>
+           <h4 class="text-center">Total Sub Amount: {{ $data['total_sub_amount'] * 10 }}</h4>
      </div>
     </div>
    </div>
