@@ -59,7 +59,7 @@ class PlayController extends Controller
         if (! $currentDate || $currentDate->status === 'closed') {
             return response()->json([
                 'success' => false,
-                'message' => 'This 3D lottery match is closed for at this time. Welcome back Next Time!',
+                'message' => '3Dထိုးရန် ပိတ်ထားပါသည်။!',
             ], 401);
         }
 
