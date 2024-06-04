@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class SessionHelper
 {
@@ -13,13 +14,19 @@ class SessionHelper
      */
     public static function getCurrentSession()
     {
-        $currentTime = Carbon::now()->format('H:i:s');
+        // Create a Carbon instance and set the desired time zone
+        $currentTime = Carbon::now()->setTimezone('Asia/Yangon')->format('H:i:s'); // Replace with your actual time zone
+        Log::info("Current time is: {$currentTime}");
 
-        if ($currentTime >= '04:00:00' || $currentTime <= '12:01:00') {
+        // Determine the session based on the current time
+        if ($currentTime >= '04:00:00' && $currentTime <= '12:00:00') {
+            Log::info("Session is morning");
             return 'morning';
-        } elseif ($currentTime >= '12:01:01' || $currentTime <= '16:30:00') {
+        } elseif ($currentTime > '12:00:00' && $currentTime <= '23:30:00') {
+            Log::info("Session is evening");
             return 'evening';
         } else {
+            Log::info("Session is closed");
             return 'closed';
         }
     }

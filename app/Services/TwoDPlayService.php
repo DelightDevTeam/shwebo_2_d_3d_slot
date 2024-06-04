@@ -109,9 +109,9 @@ class TwoDPlayService
         $defaultBreak = TwoDLimit::lasted()->first();
         $user_default_break = $defaultBreak->two_d_limit;
 
-        // Log::info("User's  limit (limit): {$break}");
-        // Log::info("Checking bet_digit: {$twoDigit}");
-        // Log::info("User's default break: {$user_default_break}");
+        Log::info("User's  limit (limit): {$break}");
+        Log::info("Checking bet_digit: {$twoDigit}");
+        Log::info("User's default break: {$user_default_break}");
 
         $current_session = SessionHelper::getCurrentSession();
         $current_day = Carbon::now()->format('Y-m-d');
@@ -122,7 +122,7 @@ class TwoDPlayService
             ->where('bet_digit', $twoDigit)
             ->sum('sub_amount');
 
-        //Log::info("Total bet amount for {$twoDigit}: {$totalBetAmountForTwoDigit}");
+        Log::info("Total bet amount for {$twoDigit}: {$totalBetAmountForTwoDigit}");
 
         $subAmount = $amount['amount'];
 

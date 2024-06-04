@@ -56,7 +56,7 @@ class WinnerPrizeCheck implements ShouldQueue
     protected function processWinningEntries($prize_digit, array $date_ids)
     {
         if (empty($prize_digit)) {
-            //Log::warning('Empty prize_digit provided. Skipping processing.');
+            Log::warning('Empty prize_digit provided. Skipping processing.');
             return;
         }
 
@@ -72,7 +72,7 @@ class WinnerPrizeCheck implements ShouldQueue
             ->get();
 
         if ($winningEntries->isEmpty()) {
-            // Log::info("No winning entries found for bet_digit: {$prize_digit} on date: {$today->toDateString()}");
+            Log::info("No winning entries found for bet_digit: {$prize_digit} on date: {$today->toDateString()}");
             return;
         }
 
@@ -89,7 +89,7 @@ class WinnerPrizeCheck implements ShouldQueue
                     $entry->prize_sent = 3; // Mark as prize sent
                     $entry->save();
 
-                    //Log::info("Prize awarded and prize_sent set to 3 for entry ID {$entry->id}.");
+                    Log::info("Prize awarded and prize_sent set to 3 for entry ID {$entry->id}.");
                 } catch (\Exception $e) {
                     Log::error("Error during transaction for entry ID {$entry->id}: {$e->getMessage()}");
                     throw $e; // Ensure rollback if needed
