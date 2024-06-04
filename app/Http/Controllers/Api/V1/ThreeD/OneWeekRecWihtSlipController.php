@@ -45,7 +45,7 @@ class OneWeekRecWihtSlipController extends Controller
                 ->get();
 
             $slipNumbers = $records->pluck('slip_no')->toArray();
-            $slipDetails = Lotto::whereIn('slip_no', $slipNumbers)->get();
+            $slipDetails = LotteryThreeDigitPivot::whereIn('slip_no', $slipNumbers)->get();
             $slipDetailMap = $slipDetails->groupBy('slip_no');
 
             foreach($records as $record)
