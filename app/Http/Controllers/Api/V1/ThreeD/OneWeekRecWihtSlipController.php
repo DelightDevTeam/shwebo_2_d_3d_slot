@@ -48,9 +48,11 @@ class OneWeekRecWihtSlipController extends Controller
             $total_amount = Lotto::where('user_id', $userId)
                 ->whereBetween('created_at', [$start_date, $end_date])
                 ->sum('total_amount');
+            
+            $data = [$records, $total_amount];
 
             // Success message
-            return $this->success('Records retrieved successfully', $records, $total_amount);
+            return $this->success($data, 'Records retrieved successfully', 200);
             // return response()->json([
             //     'message' => 'Records retrieved successfully',
             //     'records' => $records,
