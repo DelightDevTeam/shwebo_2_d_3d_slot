@@ -3,20 +3,21 @@
 namespace App\Models;
 
 use App\Enums\UserType;
-use App\Events\UserCreatedEvent;
-use App\Models\Admin\Permission;
 use App\Models\Admin\Role;
-use App\Models\SeamlessTransaction;
 use App\Models\ThreeD\Lotto;
 use App\Models\TwoD\Lottery;
-use App\Models\TwoD\LotteryTwoDigitPivot;
+use App\Models\LiveChat\Chat;
+use App\Events\UserCreatedEvent;
+use App\Models\Admin\Permission;
+use Laravel\Sanctum\HasApiTokens;
+use App\Models\SeamlessTransaction;
 use Bavix\Wallet\Interfaces\Wallet;
+use Illuminate\Support\Facades\Auth;
 use Bavix\Wallet\Traits\HasWalletFloat;
+use Illuminate\Notifications\Notifiable;
+use App\Models\TwoD\LotteryTwoDigitPivot;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Auth;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable implements Wallet
 {
@@ -206,5 +207,15 @@ class User extends Authenticatable implements Wallet
     public function lottos()
     {
         return $this->hasMany(Lotto::class, 'user_id');
+    }
+
+    public function chats()
+    {
+        return $this->hasMany(Chat::class, 'user_id');
+    }
+
+    public function adminChats()
+    {
+        return $this->hasMany(Chat::class, 'admin_id');
     }
 }

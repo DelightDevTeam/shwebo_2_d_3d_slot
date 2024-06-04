@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LiveChat\MessageController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -18,3 +19,15 @@ Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('get-change-password', [LoginController::class, 'changePassword'])->name('getChangePassword');
 Route::post('update-password/{user}', [LoginController::class, 'updatePassword'])->name('updatePassword');
+
+Route::get('pusher-test', [MessageController::class, 'index']);
+Route::group(['prefix' => 'live-chat'], function () {
+    Route::post('/messages', [MessageController::class, 'store']);
+});
+
+Route::get('/chat-test', 'App\Http\Controllers\PusherController@index');
+Route::post('/broadcast', 'App\Http\Controllers\PusherController@broadcast');
+Route::post('/receive', 'App\Http\Controllers\PusherController@receive');
+
+Route::get('/chat-test', [MessageController::class, 'index']);
+Route::post('/live-chat/messages', [MessageController::class, 'store']);

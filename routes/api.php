@@ -31,6 +31,7 @@ use App\Http\Controllers\Api\V1\Webhook\MobileLoginController;
 use App\Http\Controllers\Api\V1\Webhook\PlaceBetController;
 use App\Http\Controllers\Api\V1\Webhook\PushBetController;
 use App\Http\Controllers\Api\V1\Webhook\RollbackController;
+use App\Http\Controllers\LiveChat\MessageController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
@@ -121,5 +122,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::get('/user/one-week-rec-slip', [OneWeekRecWihtSlipController::class, 'index'])->name('OneWeekRecSlipIndex');
         Route::get('/user/one-week-slip-no/{userId}/{slipNo}', [OneWeekRecWihtSlipController::class, 'show'])->name('SlipDetail');
 
+    });
+    Route::group(['prefix' => 'live-chat'], function () {
+        Route::post('/messages', [MessageController::class, 'store']);
     });
 });
