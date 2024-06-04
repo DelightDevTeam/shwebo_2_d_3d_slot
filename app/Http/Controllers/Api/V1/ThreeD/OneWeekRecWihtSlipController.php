@@ -44,6 +44,11 @@ class OneWeekRecWihtSlipController extends Controller
                 ->groupBy('lottery_three_digit_pivots.user_id', 'lottos.slip_no')
                 ->get();
 
+            foreach($records as $record)
+            {
+                $record->detail = Lotto::where('slip_no', $record->slip_no)->first();
+            }
+
             // Calculate the total amount from the lottos table for the authenticated user within the date range
             $total_amount = Lotto::where('user_id', $userId)
                 ->whereBetween('created_at', [$start_date, $end_date])
