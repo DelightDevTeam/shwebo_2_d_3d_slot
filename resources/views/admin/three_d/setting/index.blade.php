@@ -70,12 +70,15 @@
         </td>
        {{-- <td id="status-{{ $result->id }}">{{ $result->status }}</td> --}}
        <td>
+       @if($result->status == 'open')
+
             <form method="POST" action="{{ route('admin.UpdateResult_number', ['id' => $result->id]) }}">
                 @csrf
                 @method('PATCH')
                 <input type="text" name="result_number" placeholder="Enter result number" required class="form-control">
                 <button type="submit" class="btn btn-primary">ထွက်ဂဏန်းထဲ့ရန်</button>
             </form>
+        @endif
         </td>
         {{-- <td>
             <button class="toggle-status"
