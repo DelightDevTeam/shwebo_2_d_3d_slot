@@ -28,13 +28,13 @@ class CheckForThreeDWinnersWithPermutations implements ShouldQueue
 
     public function handle()
     {
-        //Log::info('CheckForThreeDWinnersWithPermutations job started');
+        Log::info('CheckForThreeDWinnersWithPermutations job started');
 
         $today = Carbon::today(); // Get today's date
         $result_number = $this->threedWinner->result_number ?? null;
 
         if (is_null($result_number)) {
-            // Log::info('No result number provided. Exiting job.');
+             Log::info('No result number provided. Exiting job.');
             return;
         }
 

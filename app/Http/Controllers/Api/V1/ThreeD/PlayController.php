@@ -91,13 +91,15 @@ class PlayController extends Controller
         }
 
         $result = $playService->play($totalAmount, $amounts);
-
+        //dd($result);
         if ($result == 'Insufficient funds.') {
             $message = 'လက်ကျန်ငွေ မလုံလောက်ပါ။';
         } elseif (is_array($result)) {
             $digit = [];
             foreach ($result as $r) {
-                $digit[] = ThreeDigit::find($r)->three_digit;
+                //$digit[] = ThreeDigit::find($r)->three_digit;
+                $digit[] = ThreeDigit::where('three_digit', $r)->first()->three_digit;
+
             }
             $d = implode(',', $digit);
             $message = "{$d} ဂဏန်းမှာ သတ်မှတ် Limit ထက်ကျော်လွန်နေပါသည်။";
