@@ -46,7 +46,7 @@ class OneWeekRecWihtSlipController extends Controller
 
             foreach($records as $record)
             {
-                $record->detail = Lotto::where('slip_no', $record->slip_no)->first();
+                $record->detail = Lotto::where('slip_no', $record->slip_no)->get();
             }
 
             // Calculate the total amount from the lottos table for the authenticated user within the date range
