@@ -49,7 +49,10 @@ class OneWeekRecWihtSlipController extends Controller
                 ->whereBetween('created_at', [$start_date, $end_date])
                 ->sum('total_amount');
             
-            $data = [$records, $total_amount];
+            $data = [
+                "records" => $records, 
+                "total_amount" => $total_amount
+            ];
 
             // Success message
             return $this->success($data, 'Records retrieved successfully', 200);
