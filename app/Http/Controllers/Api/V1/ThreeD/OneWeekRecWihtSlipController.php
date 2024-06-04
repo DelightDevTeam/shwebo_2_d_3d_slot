@@ -6,12 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\ThreeD\LotteryThreeDigitPivot;
 use App\Models\ThreeD\Lotto;
 use App\Models\ThreeD\ThreedSetting;
+use App\Traits\HttpResponses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class OneWeekRecWihtSlipController extends Controller
 {
+    use HttpResponses;
     public function index()
     {
         try {
@@ -48,11 +50,12 @@ class OneWeekRecWihtSlipController extends Controller
                 ->sum('total_amount');
 
             // Success message
-            return response()->json([
-                'message' => 'Records retrieved successfully',
-                'records' => $records,
-                'total_amount' => $total_amount,
-            ], 200);
+            return $this->success('Records retrieved successfully', $records, $total_amount);
+            // return response()->json([
+            //     'message' => 'Records retrieved successfully',
+            //     'records' => $records,
+            //     'total_amount' => $total_amount,
+            // ], 200);
 
         } catch (\Exception $e) {
             // Log the exception
