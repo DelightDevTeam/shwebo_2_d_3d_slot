@@ -195,7 +195,7 @@ class TwoDPlayService
             $play_time = Carbon::now()->format('H:i:s');  // Correct time format
             $player_id = Auth::user();
             $current_session = SessionHelper::getCurrentSession();
-
+            Log::info('session time' . $current_session);
             $pivot = LotteryTwoDigitPivot::create([
                 'lottery_id' => $lotteryId,
                 'twod_setting_id' => $two_id,
