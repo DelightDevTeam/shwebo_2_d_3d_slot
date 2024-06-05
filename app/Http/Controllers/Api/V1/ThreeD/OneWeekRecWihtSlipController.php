@@ -86,6 +86,7 @@ class OneWeekRecWihtSlipController extends Controller
                 ->where('lottery_three_digit_pivots.user_id', $user_id)
                 ->where('lottos.slip_no', $slip_no)
                 ->select('lottery_three_digit_pivots.*', 'lottos.slip_no')
+                ->latest()
                 ->get();
 
             // Check if records are found
