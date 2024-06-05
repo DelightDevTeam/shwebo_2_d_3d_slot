@@ -43,6 +43,7 @@ class OneWeekRecWihtSlipController extends Controller
                 ->whereBetween('lottery_three_digit_pivots.res_date', [$start_date, $end_date])
                 ->select('lottery_three_digit_pivots.user_id', 'lottos.slip_no', DB::raw('SUM(lottery_three_digit_pivots.sub_amount) as total_sub_amount'))
                 ->groupBy('lottery_three_digit_pivots.user_id', 'lottos.slip_no')
+                ->latest()
                 ->get();
 
             // Calculate the total amount from the lottos table for the authenticated user within the date range
@@ -86,7 +87,6 @@ class OneWeekRecWihtSlipController extends Controller
                 ->where('lottery_three_digit_pivots.user_id', $user_id)
                 ->where('lottos.slip_no', $slip_no)
                 ->select('lottery_three_digit_pivots.*', 'lottos.slip_no')
-                ->latest()
                 ->get();
 
             // Check if records are found
