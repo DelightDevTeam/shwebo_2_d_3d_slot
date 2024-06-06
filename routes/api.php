@@ -37,6 +37,7 @@ use Illuminate\Support\Facades\Route;
 
 //login route post
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
 Route::post('/player-change-password', [AuthController::class, 'playerChangePassword']);
 
 // logout
