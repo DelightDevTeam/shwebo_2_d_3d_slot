@@ -29,7 +29,7 @@ return new class extends Migration
             $table->integer('cor')->default('5');
             $table->integer('cor3')->default('5');
             $table->string('referral_code')->nullable()->unique();
-            $table->float('main_balance');
+            $table->float('main_balance')->default(0);
             $table->integer('is_changed_password')->default(0);
             $table->unsignedBigInteger('agent_id')->nullable();
             $table->rememberToken();

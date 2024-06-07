@@ -90,6 +90,8 @@ class AuthController extends Controller
             $agent = User::where('referral_code', $request->referral_code)->first();
             if ($agent) {
                 return $agent->id;
+            }else{
+                return $this->error('', 'Invalid Referral Code.', 401);
             }
         }else{
             return 2;
