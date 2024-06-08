@@ -68,9 +68,16 @@
     }
   }
 </script>
-<script>
-  (async () => {
-    const sdk = new DSChatSDK("eu_Y3kd14", "chat-frame", "pub_784176304c706e677737674135532d5874357152546731633835506858686f436e4776425445476f5959414e7a392d52")
-    await sdk.connect();
-});
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6663f988981b6c56477acd9b/1hvr8dga3';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
 </script>
+<!--End of Tawk.to Script-->
