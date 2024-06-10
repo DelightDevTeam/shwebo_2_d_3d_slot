@@ -60,12 +60,14 @@ class TwoDPlayService
             $customString = 'shwebo-2d';
             $randomNumber = rand(1000, 9999); // Generate a random 4-digit number
             $slipNo = $randomNumber.'-'.$customString.'-'.$currentDate.'-'.$currentTime; // Combine date, string, and random number
+            $current_session = SessionHelper::getCurrentSession();
 
             $lottery = Lottery::create([
                 'pay_amount' => $totalAmount,
                 'total_amount' => $totalAmount,
                 'user_id' => $user->id,
                 'slip_no' => $slipNo, // Add the generated slip_no here
+                'session' => $current_session
             ]);
 
             $over = [];
@@ -109,9 +111,9 @@ class TwoDPlayService
         $defaultBreak = TwoDLimit::lasted()->first();
         $user_default_break = $defaultBreak->two_d_limit;
 
-        Log::info("User's  limit (limit): {$break}");
-        Log::info("Checking bet_digit: {$twoDigit}");
-        Log::info("User's default break: {$user_default_break}");
+        //Log::info("User's  limit (limit): {$break}");
+        //Log::info("Checking bet_digit: {$twoDigit}");
+        //Log::info("User's default break: {$user_default_break}");
 
         $current_session = SessionHelper::getCurrentSession();
         $current_day = Carbon::now()->format('Y-m-d');
@@ -122,7 +124,7 @@ class TwoDPlayService
             ->where('bet_digit', $twoDigit)
             ->sum('sub_amount');
 
-        Log::info("Total bet amount for {$twoDigit}: {$totalBetAmountForTwoDigit}");
+        //Log::info("Total bet amount for {$twoDigit}: {$totalBetAmountForTwoDigit}");
 
         $subAmount = $amount['amount'];
 

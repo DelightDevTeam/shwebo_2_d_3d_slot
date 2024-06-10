@@ -183,6 +183,20 @@
                     <span class="sidenav-normal  ms-2  ps-1"> 12:1-မှတ်တမ်း </span>
                   </a>
                 </li>
+          <li class="nav-item ">
+            <a class="nav-link text-white " href="{{ url('admin/2d-morning-slip') }}">
+              <span class="sidenav-mini-icon"> 2D </span>
+              <span class="sidenav-normal  ms-2  ps-1">(12:1) Slip မှတ်တမ်း </span>
+            </a>
+          </li>
+          
+          <li class="nav-item ">
+            <a class="nav-link text-white " href="{{ url('admin/2d-morning-all-slip') }}">
+              <span class="sidenav-mini-icon"> 2D </span>
+              <span class="sidenav-normal  ms-2  ps-1">(12:1) AllSlip မှတ်တမ်း </span>
+            </a>
+          </li>
+          
                 <li class="nav-item">
                   <a class="nav-link text-white " href="{{ url('admin/2d-morning-legar')}}">
                     <span class="sidenav-mini-icon"> 2D </span>
@@ -201,6 +215,19 @@
                     <span class="sidenav-normal  ms-2  ps-1"> 4:30-မှတ်တမ်း </span>
                   </a>
                 </li>
+          <li class="nav-item ">
+            <a class="nav-link text-white " href="{{ url('admin/2d-evening-slip') }}">
+              <span class="sidenav-mini-icon"> 2D </span>
+              <span class="sidenav-normal  ms-2  ps-1">  (4:30) Slip မှတ်တမ်း </span>
+            </a>
+          </li>
+          
+          <li class="nav-item ">
+            <a class="nav-link text-white " href="{{ url('admin/2d-evening-all-slip') }}">
+              <span class="sidenav-mini-icon"> 2D </span>
+              <span class="sidenav-normal  ms-2  ps-1">  (4:30) AllSlip မှတ်တမ်း </span>
+            </a>
+          </li>
                 <li class="nav-item">
                   <a class="nav-link text-white " href="{{ url('admin/2d-evening-legar')}}">
                     <span class="sidenav-mini-icon"> 2D </span>

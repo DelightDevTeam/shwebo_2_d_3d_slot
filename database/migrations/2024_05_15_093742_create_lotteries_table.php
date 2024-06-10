@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('pay_amount')->default(0);
             $table->integer('total_amount')->default(0);
             $table->string('slip_no')->default('shwebo-2d-123456');
+            $table->enum('session', ['morning', 'evening']);
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

@@ -1,39 +1,40 @@
 <?php
 
-use App\Http\Controllers\Admin\Agent\AgentController;
-use App\Http\Controllers\Admin\BankController;
-use App\Http\Controllers\Admin\BannerController;
-use App\Http\Controllers\Admin\BannerTextController;
-use App\Http\Controllers\Admin\Deposit\DepositRequestController;
-use App\Http\Controllers\Admin\GameTypeProductController;
-use App\Http\Controllers\Admin\GetBetDetailController;
-use App\Http\Controllers\Admin\Master\MasterController;
-use App\Http\Controllers\Admin\PaymentController;
-use App\Http\Controllers\Admin\PermissionController;
-use App\Http\Controllers\Admin\Player\PlayerController;
-use App\Http\Controllers\Admin\ProfileController;
-use App\Http\Controllers\Admin\PromotionController;
-use App\Http\Controllers\Admin\RolesController;
-use App\Http\Controllers\Admin\ThreeD\ALlHistoryController;
-use App\Http\Controllers\Admin\ThreeD\OneWeekRecordController;
-use App\Http\Controllers\Admin\ThreeD\SettingsController;
-use App\Http\Controllers\Admin\ThreeD\ThreeDManageController;
-use App\Http\Controllers\Admin\ThreeD\ThreedMatchTimeController;
-use App\Http\Controllers\Admin\ThreeD\WinnerController;
-use App\Http\Controllers\Admin\TransferLog\TransferLogController;
-use App\Http\Controllers\Admin\TwoD\AllLotteryWinPrizeSentController;
-use App\Http\Controllers\Admin\TwoD\EveningLegarController;
-use App\Http\Controllers\Admin\TwoD\HistoryController;
-use App\Http\Controllers\Admin\TwoD\ManageTwoDUserController;
-use App\Http\Controllers\Admin\TwoD\MorningLegarController;
-use App\Http\Controllers\Admin\TwoD\TwoDDashboardController;
-use App\Http\Controllers\Admin\TwoD\TwoDManageController;
-use App\Http\Controllers\Admin\TwoD\TwoDMorningWinnerController;
-use App\Http\Controllers\Admin\TwoD\TwoDSettingController;
-use App\Http\Controllers\Admin\WithDraw\WithDrawRequestController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReportController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\BankController;
+use App\Http\Controllers\Admin\RolesController;
+use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\PaymentController;
+use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\PromotionController;
+use App\Http\Controllers\Admin\TwoD\SlipController;
+use App\Http\Controllers\Admin\BannerTextController;
+use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\Agent\AgentController;
+use App\Http\Controllers\Admin\GetBetDetailController;
+use App\Http\Controllers\Admin\TwoD\HistoryController;
+use App\Http\Controllers\Admin\Master\MasterController;
+use App\Http\Controllers\Admin\Player\PlayerController;
+use App\Http\Controllers\Admin\ThreeD\WinnerController;
+use App\Http\Controllers\Admin\GameTypeProductController;
+use App\Http\Controllers\Admin\ThreeD\SettingsController;
+use App\Http\Controllers\Admin\TwoD\TwoDManageController;
+use App\Http\Controllers\Admin\TwoD\TwoDSettingController;
+use App\Http\Controllers\Admin\ThreeD\ALlHistoryController;
+use App\Http\Controllers\Admin\TwoD\EveningLegarController;
+use App\Http\Controllers\Admin\TwoD\MorningLegarController;
+use App\Http\Controllers\Admin\TwoD\TwoDDashboardController;
+use App\Http\Controllers\Admin\ThreeD\ThreeDManageController;
+use App\Http\Controllers\Admin\TwoD\ManageTwoDUserController;
+use App\Http\Controllers\Admin\ThreeD\OneWeekRecordController;
+use App\Http\Controllers\Admin\Deposit\DepositRequestController;
+use App\Http\Controllers\Admin\ThreeD\ThreedMatchTimeController;
+use App\Http\Controllers\Admin\TwoD\TwoDMorningWinnerController;
+use App\Http\Controllers\Admin\TransferLog\TransferLogController;
+use App\Http\Controllers\Admin\WithDraw\WithDrawRequestController;
+use App\Http\Controllers\Admin\TwoD\AllLotteryWinPrizeSentController;
 
 Route::group([
     'prefix' => 'admin', 'as' => 'admin.',
@@ -167,6 +168,18 @@ Route::group([
     Route::get('/2-d-evening-winner', [TwoDMorningWinnerController::class, 'EveningWinHistoryForAdmin'])->name('eveningWinner');
     Route::get('/2-d-all-winner', [AllLotteryWinPrizeSentController::class, 'TwoAllWinHistoryForAdmin']);
     Route::post('/2-d-session-reset', [TwoDManageController::class, 'SessionReset'])->name('SessionReset');
+    Route::get('/2d-morning-slip', [SlipController::class, 'index'])->name('MorningSlipIndex');
+    Route::get('/2d-morningslip/{userId}/{slipNo}', [SlipController::class, 'show'])->name('MorningSlipShow');
+
+    Route::get('/2d-morning-all-slip', [SlipController::class, 'AllSlipForMorningindex'])->name('MorningAllSlipIndex');
+
+    Route::get('/2d-morningallslip/{userId}/{slipNo}', [SlipController::class, 'MorningAllSlipshow'])->name('MorningAllSlipShow');
+
+    Route::get('/2d-evening-slip', [SlipController::class, 'Eveningindex'])->name('EveningSlipIndex');
+    Route::get('/2d-eveningslip/{userId}/{slipNo}', [SlipController::class, 'Eveningshow'])->name('EveningSlipShow');
+
+    Route::get('/2d-evening-all-slip', [SlipController::class, 'AllSlipForEveningindex'])->name('EveningAllSlipIndex');
+    Route::get('/2d-eveningallslip/{userId}/{slipNo}', [SlipController::class, 'EveningAllSlipshow'])->name('EveningAllSlipShow');
     // two - d route end
 
     // three 3 route start

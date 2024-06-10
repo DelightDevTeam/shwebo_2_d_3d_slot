@@ -16,6 +16,7 @@ class Lottery extends Model
         'total_amount',
         'user_id',
         'slip_no',
+        'session'
     ];
 
     protected $dates = ['created_at', 'updated_at'];
