@@ -118,7 +118,7 @@
               <span class="text-danger d-block">*{{ $message }}</span>
               @enderror
             </div>
-
+            
             <div class="custom-form-group">
               <label for="title">Agent Name <span class="text-danger">*</span></label>
               <input type="text" name="name" class="form-control" value="{{old('name')}}" placeholder="Enter Agent Name">
@@ -142,7 +142,7 @@
             </div>
             <div class="custom-form-group">
               <label>Max Balance Transfer : </label>
-              <span class="badge badge-sm bg-gradient-success">{{ auth()->user()->main_balance }}</span>
+              <span class="badge badge-sm bg-gradient-success">{{ auth()->user()->balanceFloat }}</span>
             </div>
             <div class="custom-form-group">
               <label for="title">Transfer Amount</label>
@@ -219,6 +219,8 @@
   var url = 'https://shwebo2d3dapi.online/login';
   var name = @json(session('username'));
   var pw = @json(session('password'));
+  var referral_code = @json(session('referral_code'));
+  console.log(referral_code);
 
   @if(session()->has('success'))
   Swal.fire({
@@ -236,6 +238,10 @@
   <tr>
     <td>pw</td>
     <td id="tpassword"> ${pw}</td>
+  </tr>
+  <tr>
+    <td>referral code</td>
+    <td id="treferralcode"> ${referral_code}</td>
   </tr>
   <tr>
     <td>url</td>
@@ -261,7 +267,9 @@
   function copy() {
     var username = $('#tusername').text();
     var password = $('#tpassword').text();
-    var copy = "url : " + url + "\nusername : " + username + "\npw : " + password;
+    var referral_code = $('#treferralcode').text();
+
+    var copy = "url : " + url + "\nusername : " + username + "\npw : " + password+ "\nreferral_code : " + referral_code;
     copyToClipboard(copy)
   }
 

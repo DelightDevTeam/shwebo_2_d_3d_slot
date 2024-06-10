@@ -6,12 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Models\ThreeD\LotteryThreeDigitPivot;
 use App\Models\ThreeD\Lotto;
 use App\Models\ThreeD\ThreedSetting;
+use App\Traits\HttpResponses;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class OneWeekRecWihtSlipController extends Controller
 {
+    use HttpResponses;
     public function index()
     {
         try {
@@ -46,13 +49,19 @@ class OneWeekRecWihtSlipController extends Controller
             $total_amount = Lotto::where('user_id', $userId)
                 ->whereBetween('created_at', [$start_date, $end_date])
                 ->sum('total_amount');
+            
+            $data = [
+                "records" => $records, 
+                "total_amount" => $total_amount
+            ];
 
             // Success message
-            return response()->json([
-                'message' => 'Records retrieved successfully',
-                'records' => $records,
-                'total_amount' => $total_amount,
-            ], 200);
+            return $this->success($data, 'Records retrieved successfully', 200);
+            // return response()->json([
+            //     'message' => 'Records retrieved successfully',
+            //     'records' => $records,
+            //     'total_amount' => $total_amount,
+            // ], 200);
 
         } catch (\Exception $e) {
             // Log the exception
@@ -88,13 +97,20 @@ class OneWeekRecWihtSlipController extends Controller
             $total_sub_amount = $records->sum('sub_amount');
 
             // Return the response with records and total sub_amount
-            return response()->json([
-                'message' => 'Records retrieved successfully',
-                'records' => $records,
-                'total_sub_amount' => $total_sub_amount,
-                'slip_no' => $slip_no,
-                'user_id' => $user_id,
-            ], 200);
+            $data = [
+                "records" => $records,
+                "total_sub_amount" => $total_sub_amount,
+                "user_id" => $user_id,
+                "slip_no" => $slip_no
+            ];
+            return $this->success($data, 'Records retrieved successfully', 200);
+            // return response()->json([
+            //     'message' => 'Records retrieved successfully',
+            //     'records' => $records,
+            //     'total_sub_amount' => $total_sub_amount,
+            //     'slip_no' => $slip_no,
+            //     'user_id' => $user_id,
+            // ], 200);
 
         } catch (\Exception $e) {
             // Log the exception

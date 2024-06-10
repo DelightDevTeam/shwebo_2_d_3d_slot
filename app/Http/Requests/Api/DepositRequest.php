@@ -26,7 +26,7 @@ class DepositRequest extends FormRequest
             'bank_id' => ['required', 'exists:banks,id'],
             'amount' => ['required', 'integer', 'min:1000'],
             'account_name' => ['required', 'string', 'min:3', 'max:1024'],
-            'account_no' => ['required', 'integer', 'min:1'],
+            'account_no' => ['required', 'numeric', 'min:1'],
             'refrence_no' => ['required', 'integer'],
         ];
     }

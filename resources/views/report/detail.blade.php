@@ -89,6 +89,7 @@
                                 <tbody>
                                     @if(count($report)>0)
                                     @foreach ($report as $detail)
+
                                     <tr>
                                         <td class="text-sm font-weight-normal">{{$detail->settlement_date}}</td>
                                         <td class="text-sm font-weight-normal">{{$detail->product_name}}</td>
