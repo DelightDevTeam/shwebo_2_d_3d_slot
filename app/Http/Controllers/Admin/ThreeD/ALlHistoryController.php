@@ -29,7 +29,7 @@ class ALlHistoryController extends Controller
 
     public function index()
     {
-        try {
+        // try {
             // Ensure the user is authenticated and is an admin
             if (! auth()->check() || ! auth()->user()->isAdmin()) {
                 return response()->json(['error' => 'Unauthorized'], 401);
@@ -56,13 +56,13 @@ class ALlHistoryController extends Controller
                 'total_amount' => $total_amount,
             ]);
 
-        } catch (\Exception $e) {
-            // Log the exception
-            Log::error('Error retrieving records. Error: '.$e->getMessage());
+        // } catch (\Exception $e) {
+        //     // Log the exception
+        //     Log::error('Error retrieving records. Error: '.$e->getMessage());
 
-            // Error message
-            return response()->json(['error' => 'Failed to retrieve records'], 500);
-        }
+        //     // Error message
+        //     return response()->json(['error' => 'Failed to retrieve records'], 500);
+        // }
     }
 
     public function show($user_id, $slip_no)

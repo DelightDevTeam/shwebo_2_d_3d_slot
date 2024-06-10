@@ -3,7 +3,7 @@ php -r "file_put_contents('/var/www/html/shwebo_2_d_3d_slot/storage/logs/laravel
 // created dev branch for kzt
 
 SET FOREIGN_KEY_CHECKS = 0;
-TRUNCATE TABLE twod_settings;
+TRUNCATE TABLE users;
 SET FOREIGN_KEY_CHECKS = 1;
 
 

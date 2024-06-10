@@ -52,7 +52,7 @@ class PlayController extends Controller
 
     public function store(ThreedPlayRequest $request, LottoPlayService $playService)
     {
-        Log::info('Store method called.');
+        //Log::info('Store method called.');
 
         $currentDate = ThreedSetting::where('status', 'open')->first();
 
