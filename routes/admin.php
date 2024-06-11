@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\ThreeD\WinnerController;
 use App\Http\Controllers\Admin\GameTypeProductController;
 use App\Http\Controllers\Admin\ThreeD\SettingsController;
 use App\Http\Controllers\Admin\TwoD\TwoDManageController;
+use App\Http\Controllers\Admin\TwoD\Agent\LegarController;
 use App\Http\Controllers\Admin\TwoD\TwoDSettingController;
 use App\Http\Controllers\Admin\ThreeD\ALlHistoryController;
 use App\Http\Controllers\Admin\TwoD\EveningLegarController;
@@ -30,8 +31,10 @@ use App\Http\Controllers\Admin\ThreeD\ThreeDManageController;
 use App\Http\Controllers\Admin\TwoD\ManageTwoDUserController;
 use App\Http\Controllers\Admin\ThreeD\OneWeekRecordController;
 use App\Http\Controllers\Admin\TwoD\Agent\AgentSlipController;
+use App\Http\Controllers\Admin\TwoD\Agent\WinHistoryController;
 use App\Http\Controllers\Admin\Deposit\DepositRequestController;
 use App\Http\Controllers\Admin\ThreeD\ThreedMatchTimeController;
+use App\Http\Controllers\Admin\TwoD\Agent\TwoDHistoryController;
 use App\Http\Controllers\Admin\TwoD\TwoDMorningWinnerController;
 use App\Http\Controllers\Admin\TransferLog\TransferLogController;
 use App\Http\Controllers\Admin\WithDraw\WithDrawRequestController;
@@ -195,7 +198,15 @@ Route::group([
 
     Route::get('/2d-agent-evening-all-slip', [SlipController::class, 'AllSlipForEveningindex'])->name('EveningAllSlipIndex');
     Route::get('/2d-eveningallslip/{userId}/{slipNo}', [SlipController::class, 'EveningAllSlipshow'])->name('AgentEveningAllSlipShow');
+    Route::get('2d-agent-morning-history', [TwoDHistoryController::class, 'showMorningHistory']);
+    Route::get('2d-agent-evening-history', [TwoDHistoryController::class, 'showEveningHistory']);
 
+    Route::get('/2d-agentmorning-legar', [LegarController::class, 'showMorningLegar'])->name('AgentmorningLegar.show');
+
+    Route::get('/2d-agentevening-legar', [LegarController::class, 'showEveningLegar'])->name('AgentEveningLegar.show');
+    Route::get('/2-d-agent-morning-winner', [WinHistoryController::class, 'MorningWinHistoryForAgent'])->name('AgentmorningWinner');
+    Route::get('/2-d-agent-evening-winner', [WinHistoryController::class, 'EveningWinHistoryForAgent'])->name('AgenteveningWinner');
+    Route::get('/2-d-agent-all-winner', [WinHistoryController::class, 'TwoAllWinHistoryForAgent']);
     // two - d route end
 
     // three 3 route start

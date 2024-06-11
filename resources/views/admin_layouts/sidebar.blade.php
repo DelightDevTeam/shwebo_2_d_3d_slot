@@ -127,12 +127,14 @@
                     <span class="sidenav-normal  ms-2  ps-1"> Dashboard </span>
                   </a>
                 </li>
+                @can('admin_access')
                 <li class="nav-item">
                   <a class="nav-link text-white " href="{{ url('admin/2d-users-with-agents')}}">
                     <span class="sidenav-mini-icon"> 2D </span>
                     <span class="sidenav-normal  ms-2  ps-1"> ထိုးသားများစီမံရန် </span>
                   </a>
                 </li>
+                @endcan
                 @can('admin_access')
                 <li class="nav-item">
                   <a class="nav-link text-white " href="{{ url('admin/two-d-settins') }}">
@@ -152,6 +154,15 @@
                 @can('admin_access')
                 <li class="nav-item">
                   <a class="nav-link text-white " href="{{ url('admin/2-d-all-winner')}}">
+                    <span class="sidenav-mini-icon"> 2D </span>
+                    <span class="sidenav-normal  ms-2  ps-1">ပေါက်သူများ </span>
+                  </a>
+                </li>
+                @endcan
+
+                @can('two_d_all_win')
+                <li class="nav-item">
+                  <a class="nav-link text-white " href="{{ url('admin/2-d-agent-all-winner')}}">
                     <span class="sidenav-mini-icon"> 2D </span>
                     <span class="sidenav-normal  ms-2  ps-1">ပေါက်သူများ </span>
                   </a>
@@ -189,12 +200,22 @@
                   </a>
                 </li>
                 @endcan
+                @can('admin_acess')
                 <li class="nav-item">
                   <a class="nav-link text-white " href="{{ url('admin/2d-morning-history')}}">
                     <span class="sidenav-mini-icon"> 2D </span>
                     <span class="sidenav-normal  ms-2  ps-1"> 12:1-မှတ်တမ်း </span>
                   </a>
                 </li>
+                @endcan
+                @can('two_d_history')
+                <li class="nav-item">
+                  <a class="nav-link text-white " href="{{ url('admin/2d-agent-morning-history')}}">
+                    <span class="sidenav-mini-icon"> 2D </span>
+                    <span class="sidenav-normal  ms-2  ps-1"> 12:1-မှတ်တမ်း </span>
+                  </a>
+                </li>
+                @endcan
             @can('admin_access')
           <li class="nav-item ">
             <a class="nav-link text-white " href="{{ url('admin/2d-morning-slip') }}">
@@ -228,19 +249,46 @@
             </a>
           </li>
           @endcan
-          
+            @can('two_d_history')
+            <li class="nav-item">
+                  <a class="nav-link text-white " href="{{ url('admin/2d-agentmorning-legar')}}">
+                    <span class="sidenav-mini-icon"> 2D </span>
+                    <span class="sidenav-normal  ms-2  ps-1"> 12:1-လယ်ဂျာ </span>
+                  </a>
+                </li>
+            @endcan
+            @can('admin_access')
                 <li class="nav-item">
                   <a class="nav-link text-white " href="{{ url('admin/2d-morning-legar')}}">
                     <span class="sidenav-mini-icon"> 2D </span>
                     <span class="sidenav-normal  ms-2  ps-1"> 12:1-လယ်ဂျာ </span>
                   </a>
                 </li>
+              @endcan
+              @can('admin_access')
                 <li class="nav-item">
                   <a class="nav-link text-white " href="{{ url('admin/2-d-morning-winner')}}">
                     <span class="sidenav-mini-icon"> 2D </span>
                     <span class="sidenav-normal  ms-2  ps-1"> 12:1-ပေါက်သူများ </span>
                   </a>
                 </li>
+                @endcan
+                 @can('morning_win')
+                <li class="nav-item">
+                  <a class="nav-link text-white " href="{{ url('admin/2-d-agent-morning-winner')}}">
+                    <span class="sidenav-mini-icon"> 2D </span>
+                    <span class="sidenav-normal  ms-2  ps-1"> 12:1-ပေါက်သူများ </span>
+                  </a>
+                </li>
+                @endcan
+                @can('two_d_history')
+                <li class="nav-item">
+                  <a class="nav-link text-white " href="{{ url('admin/2d-agent-evening-history')}}">
+                    <span class="sidenav-mini-icon"> 2D </span>
+                    <span class="sidenav-normal  ms-2  ps-1"> 4:30-မှတ်တမ်း </span>
+                  </a>
+                </li>
+                @endcan
               @can('admin_access')
                 <li class="nav-item">
                   <a class="nav-link text-white " href="{{ url('admin/2d-evening-history')}}">
@@ -277,19 +325,36 @@
             </a>
           </li>
           @endcan
-
-                <li class="nav-item">
-                  <a class="nav-link text-white " href="{{ url('admin/2d-evening-legar')}}">
+          @can('admin_access')
+          <li class="nav-item">
+            <a class="nav-link text-white " href="{{ url('admin/2d-evening-legar')}}">
+              <span class="sidenav-mini-icon"> 2D </span>
+              <span class="sidenav-normal  ms-2  ps-1"> 4:30-လယ်ဂျာ </span>
+            </a>
+          </li>
+          @endcan
+                @can('two_d_history')
+            <li class="nav-item">
+                  <a class="nav-link text-white " href="{{ url('admin/2d-agentevening-legar')}}">
                     <span class="sidenav-mini-icon"> 2D </span>
                     <span class="sidenav-normal  ms-2  ps-1"> 4:30-လယ်ဂျာ </span>
                   </a>
                 </li>
+            @endcan
                 <li class="nav-item">
                   <a class="nav-link text-white " href="{{ url('admin/2-d-evening-winner')}}">
                     <span class="sidenav-mini-icon"> 2D </span>
                     <span class="sidenav-normal  ms-2  ps-1"> 4:30-ပေါက်သူများ </span>
                   </a>
                 </li>
+                @can('evening_win')
+                <li class="nav-item">
+                  <a class="nav-link text-white " href="{{ url('admin/2-d-agent-evening-winner')}}">
+                    <span class="sidenav-mini-icon"> 2D </span>
+                    <span class="sidenav-normal  ms-2  ps-1"> 4:30-ပေါက်သူများ </span>
+                  </a>
+                </li>
+                @endcan
 
               </ul>
             </div>
