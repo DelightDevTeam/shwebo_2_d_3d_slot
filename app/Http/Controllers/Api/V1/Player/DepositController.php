@@ -21,9 +21,9 @@ class DepositController extends Controller
 
             $player = Auth::user();
 
-            if ($player->main_balance < $inputs['amount']) {
-                return $this->error('', 'Insuffience Balance', 401);
-            }
+            // if ($player->main_balance < $inputs['amount']) {
+            //     return $this->error('', 'Insuffience Balance', 401);
+            // }
             $deposit = DepositRequest::create(array_merge(
                 $inputs,
                 [
