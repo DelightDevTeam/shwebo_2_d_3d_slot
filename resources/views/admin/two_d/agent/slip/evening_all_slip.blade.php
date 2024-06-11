@@ -16,38 +16,26 @@
 @section('content')
 <div class="row mt-4">
  <div class="col-12">
-  <div class="card">
-   <!-- Card header -->
-   <div class="card-header pb-0">
-    <div class="d-lg-flex">
-     <div>
-      <h5 class="mb-0">2D Evening Slip (ဘောင်ချာ) မှတ်တမ်း Dashboards</h5>
-      {{-- <p class="text-sm mb-0">
-                    A lightweight, extendable, dependency-free javascript HTML table plugin.
-                  </p> --}}
-     </div>
-     <div class="ms-auto my-auto mt-lg-0 mt-4">
-      <div class="ms-auto my-auto">
-       {{-- <a href="" class="btn bg-gradient-primary btn-sm mb-0">+&nbsp; New Product</a> --}}
-       {{-- <button type="button" class="btn btn-outline-primary btn-sm mb-0 py-2" data-bs-toggle="modal"
-        data-bs-target="#import">
-        +&nbsp; New Permission
-       </button> --}}
-       
-       <button class="btn btn-outline-primary btn-sm export mb-0 mt-sm-0 mt-1 py-2" data-type="csv" type="button"
-        name="button">Export</button>
-      </div>
-     </div>
-    </div>
-   </div>
-   <div class="table-responsive">
-    <table class="table table-flush" id="permission-search">
-      <thead>
+  
+    
+        <h2>All Evening Slips</h2>
+
+        <div class="card mt-1">
+            <div class="card-header">
+                <p style="color: #f5bd02" class="text-center">Total Evening Amount: {{ $total_amount }}</p>
+            </div>
+        </div>
+
+        @if ($records->isNotEmpty())
+            <div class="table-responsive">
+                <table class="table table-flush" id="users-search">
+                    <thead>
             <tr>
                 <th>User ID</th>
                 <th>User Name</th>
                 <th>Slip No</th>
                 <th>Total Sub Amount</th>
+                <th>OpenDate</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -58,29 +46,22 @@
                  <td>{{ $record->user->name }}</td>
                  <td>{{ $record->slip_no }}</td>
                  <td>{{ $record->total_sub_amount }}</td>
+                 <td>{{ $record->res_date }}</td>
                  <td>
-                     <a href="{{ route('admin.EveningSlipShow', ['userId' => $record->user_id, 'slipNo' => $record->slip_no]) }}" class="btn btn-primary">View Details</a>
+                     <a href="{{ route('admin.EveningAllSlipShow', ['userId' => $record->user_id, 'slipNo' => $record->slip_no]) }}" class="btn btn-primary">View Details</a>
                  </td>
              </tr>
          @endforeach
      </tbody>
 
-
-    </table>
-   </div>
+                </table>
+            </div>
+        @else
+            <div class="alert alert-warning">
+                No records found for the evening session.
+            </div>
+        @endif
    
-  </div>
-  <div class="card mt-2">
-    <div class="card-header">
-     <p class="text-center">Morning Slip History</p>
-    </div>
-    <div class="card-body">
-     <div>
-           {{-- <h4 class="text-center">Total Sub Amount: {{ $data['total_sub_amount'] }}</h4> --}}
-           <h4 class="text-center">Total Amount: {{ $total_amount }}</h4>
-     </div>
-    </div>
-   </div>
  </div>
 </div>
 @endsection

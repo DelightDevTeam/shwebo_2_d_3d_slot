@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('twod_setting_id');
             $table->unsignedBigInteger('two_digit_id');
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('agent_id');
             $table->string('bet_digit');
             // sub amount
             $table->integer('sub_amount')->default(0);
@@ -25,9 +26,9 @@ return new class extends Migration
             $table->string('match_status');
             $table->date('res_date');
             $table->time('res_time');
-            $table->enum('session', ['morning', 'evening']); // Game session (morning or evening)
-            $table->enum('admin_log', ['open', 'closed'])->default('closed'); // New status column
-            $table->enum('user_log', ['open', 'closed'])->default('closed'); // New status column
+            $table->enum('session', ['morning', 'evening']); 
+            // $table->enum('admin_log', ['open', 'closed'])->default('closed'); // New status column
+            // $table->enum('user_log', ['open', 'closed'])->default('closed'); // New status column
             $table->date('play_date')->default('2024-5-9');
             $table->time('play_time')->default('12:01:00');
             $table->boolean('win_lose')->default(false);

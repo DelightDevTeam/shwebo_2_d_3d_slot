@@ -29,6 +29,7 @@ use App\Http\Controllers\Admin\TwoD\TwoDDashboardController;
 use App\Http\Controllers\Admin\ThreeD\ThreeDManageController;
 use App\Http\Controllers\Admin\TwoD\ManageTwoDUserController;
 use App\Http\Controllers\Admin\ThreeD\OneWeekRecordController;
+use App\Http\Controllers\Admin\TwoD\Agent\AgentSlipController;
 use App\Http\Controllers\Admin\Deposit\DepositRequestController;
 use App\Http\Controllers\Admin\ThreeD\ThreedMatchTimeController;
 use App\Http\Controllers\Admin\TwoD\TwoDMorningWinnerController;
@@ -180,6 +181,21 @@ Route::group([
 
     Route::get('/2d-evening-all-slip', [SlipController::class, 'AllSlipForEveningindex'])->name('EveningAllSlipIndex');
     Route::get('/2d-eveningallslip/{userId}/{slipNo}', [SlipController::class, 'EveningAllSlipshow'])->name('EveningAllSlipShow');
+
+    // 2d agent 
+    Route::get('/2d-morning-agent-slip', [AgentSlipController::class, 'index'])->name('MorningAgentSlipIndex');
+    Route::get('/2d-morningagent-slip/{userId}/{slipNo}', [AgentSlipController::class, 'show'])->name('MorningAgentSlipShow');
+
+    Route::get('/2d-agentmorning-all-slip', [AgentSlipController::class, 'AllSlipForMorningindex'])->name('AgentMorningAllSlipIndex');
+
+    Route::get('/2d-agentmorningallslip/{userId}/{slipNo}', [AgentSlipController::class, 'MorningAllSlipshow'])->name('AgentMorningAllSlipShow');
+
+    Route::get('/2d-agent-evening-slip', [SlipController::class, 'Eveningindex'])->name('AgentEveningSlipIndex');
+    Route::get('/2d-agenteveningslip/{userId}/{slipNo}', [SlipController::class, 'Eveningshow'])->name('AgentEveningSlipShow');
+
+    Route::get('/2d-agent-evening-all-slip', [SlipController::class, 'AllSlipForEveningindex'])->name('EveningAllSlipIndex');
+    Route::get('/2d-eveningallslip/{userId}/{slipNo}', [SlipController::class, 'EveningAllSlipshow'])->name('AgentEveningAllSlipShow');
+
     // two - d route end
 
     // three 3 route start

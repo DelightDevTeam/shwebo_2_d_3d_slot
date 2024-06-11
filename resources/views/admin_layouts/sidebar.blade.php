@@ -110,7 +110,7 @@
       </div>
     </li>
     @endcan
-    @can('admin_access')
+    @can('two_d_access')
     <li class="nav-item">
       <a data-bs-toggle="collapse" href="#profileExample" class="nav-link text-white" aria-controls="pagesExamples" role="button" aria-expanded="false">
         <i class="material-icons-round {% if page.brand == 'RTL' %}ms-2{% else %} me-2{% endif %}">settings</i>
@@ -133,69 +133,101 @@
                     <span class="sidenav-normal  ms-2  ps-1"> ထိုးသားများစီမံရန် </span>
                   </a>
                 </li>
+                @can('admin_access')
                 <li class="nav-item">
                   <a class="nav-link text-white " href="{{ url('admin/two-d-settins') }}">
                     <span class="sidenav-mini-icon">2D</span>
                     <span class="sidenav-normal  ms-2  ps-1">Setting</span>
                   </a>
                 </li>
-
+                @endcan
+                @can('admin_access')
                  <li class="nav-item">
                   <a class="nav-link text-white " href="{{ url('admin/two-d-more-settings') }}">
                     <span class="sidenav-mini-icon">2D</span>
                     <span class="sidenav-normal  ms-2  ps-1">MoreSetting</span>
                   </a>
                 </li>
+                @endcan
+                @can('admin_access')
                 <li class="nav-item">
                   <a class="nav-link text-white " href="{{ url('admin/2-d-all-winner')}}">
                     <span class="sidenav-mini-icon"> 2D </span>
                     <span class="sidenav-normal  ms-2  ps-1">ပေါက်သူများ </span>
                   </a>
                 </li>
+                @endcan
+                @can('admin_access')
                  <li class="nav-item">
                   <a class="nav-link text-white " href="{{ url('admin/2d-default-limit')}}">
                     <span class="sidenav-mini-icon"> 2D </span>
                     <span class="sidenav-normal  ms-2  ps-1"> DefaultLimit-သတ်မှတ်ရန် </span>
                   </a>
                 </li>
+                @endcan
+                @can('admin_access')
                 <li class="nav-item">
                   <a class="nav-link text-white " href="{{ url('admin/2d-users-limit-cor')}}">
                     <span class="sidenav-mini-icon"> 2D </span>
                     <span class="sidenav-normal  ms-2  ps-1"> ထိုးသားဘရိတ်/ကော်-သတ်မှတ်ရန် </span>
                   </a>
                 </li>
+                @endcan
+                @can('admin_access')
                 <li class="nav-item">
                   <a class="nav-link text-white " href="{{ url('admin/close-2d-digit')}}">
                     <span class="sidenav-mini-icon"> 2D </span>
                     <span class="sidenav-normal  ms-2  ps-1"> စိတ်ကြိုက်ဂဏန်းပိတ်ရန် </span>
                   </a>
                 </li>
-
+                @endcan
+                @can('admin_access')
                 <li class="nav-item">
                   <a class="nav-link text-white " href="{{ url('admin/close-head-2d-digit')}}">
                     <span class="sidenav-mini-icon"> 2D </span>
                     <span class="sidenav-normal  ms-2  ps-1"> ထိပ်စီးသုံးလုံးပိတ်ရန် </span>
                   </a>
                 </li>
+                @endcan
                 <li class="nav-item">
                   <a class="nav-link text-white " href="{{ url('admin/2d-morning-history')}}">
                     <span class="sidenav-mini-icon"> 2D </span>
                     <span class="sidenav-normal  ms-2  ps-1"> 12:1-မှတ်တမ်း </span>
                   </a>
                 </li>
+            @can('admin_access')
           <li class="nav-item ">
             <a class="nav-link text-white " href="{{ url('admin/2d-morning-slip') }}">
               <span class="sidenav-mini-icon"> 2D </span>
               <span class="sidenav-normal  ms-2  ps-1">(12:1) Slip မှတ်တမ်း </span>
             </a>
           </li>
-          
+          @endcan
+          @can('two_d_agent_slip_access')
+           <li class="nav-item ">
+            <a class="nav-link text-white " href="{{ url('admin/2d-morning-agent-slip') }}">
+              <span class="sidenav-mini-icon"> 2D </span>
+              <span class="sidenav-normal  ms-2  ps-1">(12:1) Slip မှတ်တမ်း </span>
+            </a>
+          </li>
+          @endcan
+
+          @can('two_d_agent_slip_access')
+           <li class="nav-item ">
+            <a class="nav-link text-white " href="{{ url('admin/2d-agentmorning-all-slip') }}">
+              <span class="sidenav-mini-icon"> 2D </span>
+              <span class="sidenav-normal  ms-2  ps-1">(12:1)All Slip မှတ်တမ်း </span>
+            </a>
+          </li>
+          @endcan
+          @can('admin_access')
           <li class="nav-item ">
             <a class="nav-link text-white " href="{{ url('admin/2d-morning-all-slip') }}">
               <span class="sidenav-mini-icon"> 2D </span>
               <span class="sidenav-normal  ms-2  ps-1">(12:1) AllSlip မှတ်တမ်း </span>
             </a>
           </li>
+          @endcan
           
                 <li class="nav-item">
                   <a class="nav-link text-white " href="{{ url('admin/2d-morning-legar')}}">
@@ -209,6 +241,7 @@
                     <span class="sidenav-normal  ms-2  ps-1"> 12:1-ပေါက်သူများ </span>
                   </a>
                 </li>
+              @can('admin_access')
                 <li class="nav-item">
                   <a class="nav-link text-white " href="{{ url('admin/2d-evening-history')}}">
                     <span class="sidenav-mini-icon"> 2D </span>
@@ -228,6 +261,23 @@
               <span class="sidenav-normal  ms-2  ps-1">  (4:30) AllSlip မှတ်တမ်း </span>
             </a>
           </li>
+          @endcan
+          @can('two_d_agent_slip_access')
+          <li class="nav-item ">
+            <a class="nav-link text-white " href="{{ url('admin/2d-agent-evening-slip') }}">
+              <span class="sidenav-mini-icon"> 2D </span>
+              <span class="sidenav-normal  ms-2  ps-1">  (4:30) Slip မှတ်တမ်း </span>
+            </a>
+          </li>
+          
+          <li class="nav-item ">
+            <a class="nav-link text-white " href="{{ url('admin/2d-agent-evening-all-slip') }}">
+              <span class="sidenav-mini-icon"> 2D </span>
+              <span class="sidenav-normal  ms-2  ps-1">  (4:30) AllSlip မှတ်တမ်း </span>
+            </a>
+          </li>
+          @endcan
+
                 <li class="nav-item">
                   <a class="nav-link text-white " href="{{ url('admin/2d-evening-legar')}}">
                     <span class="sidenav-mini-icon"> 2D </span>
@@ -250,7 +300,7 @@
     @endcan
     
     
-    @can('admin_access')
+    @can('three_d_access')
     <li class="nav-item">
       <a data-bs-toggle="collapse" href="#three_d" class="nav-link text-white" aria-controls="pagesExamples" role="button" aria-expanded="false">
         <i class="material-icons-round {% if page.brand == 'RTL' %}ms-2{% else %} me-2{% endif %}">settings</i>

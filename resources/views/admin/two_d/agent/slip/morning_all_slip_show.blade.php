@@ -21,7 +21,7 @@
    <div class="card-header pb-0">
     <div class="d-lg-flex">
      <div>
-      <h5 class="mb-0">2D Evening Slip (ဘောင်ချာ) မှတ်တမ်း Dashboards</h5>
+      <h5 class="mb-0">2D Morning Slip (ဘောင်ချာ) User တဦးချင်း၏ အသေးစိပ်မှတ်တမ်း Dashboards</h5>
       {{-- <p class="text-sm mb-0">
                     A lightweight, extendable, dependency-free javascript HTML table plugin.
                   </p> --}}
@@ -42,42 +42,41 @@
    </div>
    <div class="table-responsive">
     <table class="table table-flush" id="permission-search">
-      <thead>
+     <thead>
             <tr>
-                <th>User ID</th>
                 <th>User Name</th>
-                <th>Slip No</th>
-                <th>Total Sub Amount</th>
-                <th>Actions</th>
+                <th>Bet Digit</th>
+                <th>Sub Amount</th>
+                <th>Open Time</th>
+                <th>Play Date</th>
+                <th>Play Time</th>
             </tr>
         </thead>
         <tbody>
-         @foreach ($records as $record)
-             <tr>
-                 <td>{{ $record->user_id }}</td>
-                 <td>{{ $record->user->name }}</td>
-                 <td>{{ $record->slip_no }}</td>
-                 <td>{{ $record->total_sub_amount }}</td>
-                 <td>
-                     <a href="{{ route('admin.EveningSlipShow', ['userId' => $record->user_id, 'slipNo' => $record->slip_no]) }}" class="btn btn-primary">View Details</a>
-                 </td>
-             </tr>
-         @endforeach
-     </tbody>
-
-
+            @foreach ($records as $record)
+                <tr>
+                    {{-- <td>{{ $record->user_id }}</td> --}}
+                    <td>{{ $record->user->name }}</td>
+                    <td>{{ $record->bet_digit }}</td>
+                    <td>{{ $record->sub_amount }}</td>
+                    <td>{{ $record->res_time }}</td>
+                    <td>{{ $record->play_date }}</td>
+                    <td>{{ $record->play_time }}</td>
+                </tr>
+            @endforeach
+        </tbody>
     </table>
-   </div>
+    <a href="{{ route('admin.AgentMorningAllSlipIndex') }}" class="btn btn-secondary">Back to List</a>
+</div>
    
   </div>
   <div class="card mt-2">
     <div class="card-header">
-     <p class="text-center">Morning Slip History</p>
+     <p class="text-center">Total Amount 2D Morning History</p>
     </div>
     <div class="card-body">
      <div>
            {{-- <h4 class="text-center">Total Sub Amount: {{ $data['total_sub_amount'] }}</h4> --}}
-           <h4 class="text-center">Total Amount: {{ $total_amount }}</h4>
      </div>
     </div>
    </div>

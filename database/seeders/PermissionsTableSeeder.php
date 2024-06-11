@@ -174,6 +174,86 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'title' => 'two_d_access',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+             [
+                'title' => 'two_d_agent_slip_access',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+             [
+                'title' => 'two_d_agent_all_slip_access',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'title' => 'morning_win',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'title' => 'evening_win',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'title' => 'two_d_all_win',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'title' => 'two_d_history',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'title' => 'three_d_access',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+                        [
+                'title' => 'three_d_agent_slip',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+                        [
+                'title' => 'three_d_agent_all_slip',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+                        [
+                'title' => 'first_win',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+                        [
+                'title' => 'second_win',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+                        [
+                'title' => 'third_win',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'title' => 'three_d_all_win',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+                        [
+                'title' => 'three_d_agent_histroy',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+                        [
+                'title' => 'three_d_agent_all_histroy',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ];
 
         Permission::insert($permissions);

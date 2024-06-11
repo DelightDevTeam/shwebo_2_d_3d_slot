@@ -196,6 +196,7 @@ class TwoDPlayService
             $play_date = Carbon::now()->format('Y-m-d');  // Correct date format
             $play_time = Carbon::now()->format('H:i:s');  // Correct time format
             $player_id = Auth::user();
+            $agent_id = Auth::user();
             $current_session = SessionHelper::getCurrentSession();
             Log::info('session time' . $current_session);
             $pivot = LotteryTwoDigitPivot::create([
@@ -203,6 +204,7 @@ class TwoDPlayService
                 'twod_setting_id' => $two_id,
                 'two_digit_id' => $twoDigitId,
                 'user_id' => $player_id->id,
+                'agent_id' => $agent_id->agent_id,
                 'bet_digit' => $betDigit,
                 'sub_amount' => $subAmount,
                 'prize_sent' => false,
@@ -210,8 +212,6 @@ class TwoDPlayService
                 'res_date' => $results->result_date,
                 'res_time' => $results->result_time,
                 'session' => $current_session,
-                'admin_log' => $results->admin_log,
-                'user_log' => $results->user_log,
                 'play_date' => $play_date,
                 'play_time' => $play_time,
             ]);

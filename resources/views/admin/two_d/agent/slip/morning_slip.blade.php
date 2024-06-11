@@ -21,7 +21,7 @@
    <div class="card-header pb-0">
     <div class="d-lg-flex">
      <div>
-      <h5 class="mb-0">2D Evening Slip (ဘောင်ချာ) မှတ်တမ်း Dashboards</h5>
+      <h5 class="mb-0">2D Morning Slip (ဘောင်ချာ) မှတ်တမ်း Dashboards</h5>
       {{-- <p class="text-sm mb-0">
                     A lightweight, extendable, dependency-free javascript HTML table plugin.
                   </p> --}}
@@ -59,7 +59,7 @@
                  <td>{{ $record->slip_no }}</td>
                  <td>{{ $record->total_sub_amount }}</td>
                  <td>
-                     <a href="{{ route('admin.EveningSlipShow', ['userId' => $record->user_id, 'slipNo' => $record->slip_no]) }}" class="btn btn-primary">View Details</a>
+                     <a href="{{ route('admin.MorningAgentSlipShow', ['userId' => $record->user_id, 'slipNo' => $record->slip_no]) }}" class="btn btn-primary">View Details</a>
                  </td>
              </tr>
          @endforeach
