@@ -24,11 +24,12 @@ class AllWinnerPrizeSentController extends Controller
     {
 
         $data = $this->apiAllWinService->AllWinPrizeSent();
+        $winners = $data['results'];
 
         return response()->json([
             'status' => 'Request was successful.',
             'message' => null,
-            'data' => $data,
+            'data' => $winners,
         ]);
     }
 }
