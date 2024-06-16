@@ -33,8 +33,8 @@
         <th>Name</th>
         <th>Requested Amount</th>
         <th>Payment Method</th>
-        <th>Bank Account Name</th>
-        <th>Bank Account No</th>
+        <th>Account Name</th>
+        <th>Account No</th>
         <th>RefrenceNo</th>
         <th>Status</th>
         <th>Created_at</th>
@@ -49,9 +49,9 @@
             <span class="d-block">{{ $deposit->user->user_name }}</span>
           </td>
           <td>{{ number_format($deposit->amount) }}</td>
-          <td>{{ $deposit->bank->name }}</td>
-          <td>{{$deposit->account_name}}</td>
-          <td>{{$deposit->account_no}}</td>
+          <td>{{ $deposit->userPayment->paymentType->name}}</td>
+          <td>{{ $deposit->userPayment->account_name }}</td>
+          <td>{{$deposit->userPayment->account_no}}</td>
           <td>{{$deposit->refrence_no}}</td>
           <td>
           <span class="badge text-bg-{{ $deposit->status == 0 ? 'danger' : ($deposit->status == 1 ? 'success' : 'warning') }} text-white mb-2">
@@ -59,7 +59,7 @@
         </span>
           </td>
 
-          <td>{{ $deposit->created_at->format('d-m-Y') }}</td>
+          <td>{{ $deposit->created_at}}</td>
           <td>
             @if($deposit->status == 0 )
             <a href="{{route('admin.agent.depositshow',$deposit->id)}}" class="btn btn-primary" disabled >Update</a>

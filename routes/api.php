@@ -1,14 +1,14 @@
 <?php
 
 use App\Http\Controllers\Api\V1\Auth\AuthController;
-use App\Http\Controllers\Api\V1\Bank\BankController;
 use App\Http\Controllers\Api\V1\BannerController;
 use App\Http\Controllers\Api\V1\Game\GameController;
 use App\Http\Controllers\Api\V1\Game\LaunchGameController;
 use App\Http\Controllers\Api\V1\HomeController;
+use App\Http\Controllers\Api\V1\PaymentType\PaymentTypeController;
 use App\Http\Controllers\Api\V1\Player\DepositController;
-use App\Http\Controllers\Api\V1\Player\PlayerTransactionLogController;
 use App\Http\Controllers\Api\V1\Player\TransactionController;
+use App\Http\Controllers\Api\V1\Player\UserPaymentControler;
 use App\Http\Controllers\Api\V1\Player\WagerController;
 use App\Http\Controllers\Api\V1\Player\WithDrawController;
 use App\Http\Controllers\Api\V1\PromotionController;
@@ -87,6 +87,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('changePassword', [AuthController::class, 'changePassword']);
     Route::post('profile', [AuthController::class, 'profile']);
     Route::get('transactions', [TransactionController::class, 'index']);
+    Route::get('user-payment',[UserPaymentControler::class, 'index']);
+    Route::post('user-payment-create',[UserPaymentControler::class, 'create']);
 
     Route::group(['prefix' => 'transaction'], function () {
         Route::post('withdraw', [WithDrawController::class, 'withdraw']);
@@ -95,16 +97,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::get('deposit-requestlog', [TransactionController::class, 'depositRequestLog']);
         Route::get('withdraw-requestlog', [TransactionController::class, 'withDrawRequestLog']);
     });
+        
+    Route::get('payment-type', [PaymentTypeController::class, 'all']);
 
-    Route::group(['prefix' => 'bank'], function () {
-        Route::get('all', [BankController::class, 'all']);
-    });
     Route::group(['prefix' => 'game'], function () {
-        // Route::get('gameType', [GameController::class, 'gameType']);
-        // Route::get('gameTypeProducts/{id}', [GameController::class, 'gameTypeProducts']);
         Route::post('Seamless/LaunchGame', [LaunchGameController::class, 'launchGame']);
-        // Route::post('Seamless/PullReport', [LaunchGameController::class, 'pullReport']);
-        // Route::get('gamelist/{provider_id}/{game_type_id}', [GameController::class, 'gameList']);
     });
     Route::group(['prefix' => '2d'], function () {
         Route::get('user/all-2-digit', [TwoDLotteryController::class, 'get_towdigit']);

@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('banks', function (Blueprint $table) {
+        Schema::create('user_payments', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('image');
-            $table->string('bank_account_name');
-            $table->string('bank_account_no');
-            $table->unsignedBigInteger('agent_id');
-            $table->foreign('agent_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('account_name');
+            $table->string('account_no');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('payment_type_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('payment_type_id')->references('id')->on('payment_types')->onDelete('cascade');
 
             $table->timestamps();
         });

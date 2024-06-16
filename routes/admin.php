@@ -33,6 +33,7 @@ use App\Http\Controllers\Admin\ThreeD\OneWeekRecordController;
 use App\Http\Controllers\Admin\TwoD\Agent\AgentSlipController;
 use App\Http\Controllers\Admin\TwoD\Agent\WinHistoryController;
 use App\Http\Controllers\Admin\Deposit\DepositRequestController;
+use App\Http\Controllers\Admin\PaymentTypeController;
 use App\Http\Controllers\Admin\ThreeD\ThreedMatchTimeController;
 use App\Http\Controllers\Admin\TwoD\Agent\TwoDHistoryController;
 use App\Http\Controllers\Admin\TwoD\TwoDMorningWinnerController;
@@ -54,7 +55,7 @@ Route::group([
     Route::delete('roles/destroy', [RolesController::class, 'massDestroy'])->name('roles.massDestroy');
     Route::resource('roles', RolesController::class);
     //Bank
-    Route::resource('bank', BankController::class);
+    Route::resource('paymentType', PaymentTypeController::class);
     // Players
     Route::delete('user/destroy', [PlayerController::class, 'massDestroy'])->name('user.massDestroy');
 

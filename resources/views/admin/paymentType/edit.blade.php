@@ -76,26 +76,27 @@
               </div>
             </div>
             <div class="card-body">
-              <form role="form" class="text-start" action="{{ route('admin.bank.update', $bank->id) }}" method="post" enctype="multipart/form-data">
+              <form role="form" class="text-start" action="{{ route('admin.paymentType.update', $userPayment->id) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="custom-form-group">
-                  <label for="title">Name</label>
-                  <input type="text" class="form-control" id="" name="name" value="{{$bank->name}}">
+                <label for="title">Payment Type <span class="text-danger">*</span></label>
+                <div class="custom-select-wrapper">
+                <select name="payment_type_id" class="form-control custom-select">
+                  @foreach ($paymentType as $type)
+                  <option value="{{ $type->id}}" >{{$type->name}}</option>
+                  @endforeach
+                </select>
+               </div>
+                <div class="custom-form-group">
+                  <label for="title">Account Name</label>
+                  <input type="text" class="form-control" id="" name="account_name" value="{{$userPayment->account_name}}">
                 </div>
                 <div class="custom-form-group">
-                  <label for="title">Bank Account Name</label>
-                  <input type="text" class="form-control" id="" name="bank_account_name" value="{{$bank->bank_account_name}}">
+                  <label for="title">Account No</label>
+                  <input type="text" class="form-control" id="" name="account_no" value="{{$userPayment->account_no}}">
                 </div>
-                <div class="custom-form-group">
-                  <label for="title">Bank Account No</label>
-                  <input type="text" class="form-control" id="" name="bank_account_no" value="{{$bank->bank_account_no}}">
-                </div>
-                <div class="custom-form-group">
-                  <label for="title">Image</label>
-                  <input type="file" class="form-control"  name="image">
-                  <img src="{{ $bank->img_url }}" width="150px" class="img-thumbnail" alt="">
-                </div>
+                
                 <div class="custom-form-group">
                   <button class="btn btn-primary" type="submit">Edit</button>
                 </div>

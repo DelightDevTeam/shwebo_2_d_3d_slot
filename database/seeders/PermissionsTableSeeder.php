@@ -170,7 +170,7 @@ class PermissionsTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'title' => 'bank',
+                'title' => 'payment_type',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

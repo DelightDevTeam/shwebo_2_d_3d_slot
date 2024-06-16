@@ -42,11 +42,11 @@
       </a>
     </li>
     @endcan
-    @can('bank')
+    @can('payment_type')
         <li class="nav-item ">
-            <a class="nav-link text-white " href="{{ route('admin.bank.index') }}">
+            <a class="nav-link text-white " href="{{ route('admin.paymentType.index') }}">
               <span class="sidenav-mini-icon"> <i class="fa-solid fa-panorama"></i> </span>
-              <span class="sidenav-normal  ms-2  ps-1"> Bank </span>
+              <span class="sidenav-normal  ms-2  ps-1"> Payment Type </span>
             </a>
           </li>
         @endcan
