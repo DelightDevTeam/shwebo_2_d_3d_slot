@@ -66,7 +66,7 @@
             @endforeach
         </tbody>
     </table>
-    <a href="{{ route('admin.EveningAllSlipIndex') }}" class="btn btn-secondary">Back to List</a>
+    <a href="{{ route('admin.AgentEveningAllSlipIndex') }}" class="btn btn-secondary">Back to List</a>
 </div>
    
   </div>

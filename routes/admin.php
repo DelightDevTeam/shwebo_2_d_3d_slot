@@ -199,7 +199,7 @@ Route::group([
     Route::get('/2d-agent-evening-slip', [SlipController::class, 'Eveningindex'])->name('AgentEveningSlipIndex');
     Route::get('/2d-agenteveningslip/{userId}/{slipNo}', [SlipController::class, 'Eveningshow'])->name('AgentEveningSlipShow');
 
-    Route::get('/2d-agent-evening-all-slip', [SlipController::class, 'AllSlipForEveningindex'])->name('EveningAllSlipIndex');
+    Route::get('/2d-agent-evening-all-slip', [SlipController::class, 'AllSlipForEveningindex'])->name('AgentEveningAllSlipIndex');
     Route::get('/2d-eveningallslip/{userId}/{slipNo}', [SlipController::class, 'EveningAllSlipshow'])->name('AgentEveningAllSlipShow');
     Route::get('2d-agent-morning-history', [TwoDHistoryController::class, 'showMorningHistory']);
     Route::get('2d-agent-evening-history', [TwoDHistoryController::class, 'showEveningHistory']);
