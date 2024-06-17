@@ -25,7 +25,7 @@ class RegisterRequest extends FormRequest
             'name' => ['required', 'string'],
             'phone' => ['required', 'max:15'],
             'password' => ['required', 'string', 'min:6'],
-            'referral_code' => ['nullable','string']
+            'referral_code' => ['nullable', 'string'],
         ];
     }
 }

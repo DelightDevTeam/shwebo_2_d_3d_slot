@@ -3,21 +3,21 @@
 namespace App\Models;
 
 use App\Enums\UserType;
-use App\Models\Admin\Role;
-use App\Models\ThreeD\Lotto;
-use App\Models\TwoD\Lottery;
-use App\Models\LiveChat\Chat;
 use App\Events\UserCreatedEvent;
 use App\Models\Admin\Permission;
-use Laravel\Sanctum\HasApiTokens;
+use App\Models\Admin\Role;
+use App\Models\LiveChat\Chat;
 use App\Models\SeamlessTransaction;
-use Bavix\Wallet\Interfaces\Wallet;
-use Illuminate\Support\Facades\Auth;
-use Bavix\Wallet\Traits\HasWalletFloat;
-use Illuminate\Notifications\Notifiable;
+use App\Models\ThreeD\Lotto;
+use App\Models\TwoD\Lottery;
 use App\Models\TwoD\LotteryTwoDigitPivot;
+use Bavix\Wallet\Interfaces\Wallet;
+use Bavix\Wallet\Traits\HasWalletFloat;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable implements Wallet
 {
@@ -64,7 +64,7 @@ class User extends Authenticatable implements Wallet
         'type',
         'main_balance',
         'is_changed_password',
-        'referral_code'
+        'referral_code',
     ];
 
     protected $dispatchesEvents = [

@@ -341,12 +341,14 @@
                   </a>
                 </li>
             @endcan
+            @can('admin_access')
                 <li class="nav-item">
                   <a class="nav-link text-white " href="{{ url('admin/2-d-evening-winner')}}">
                     <span class="sidenav-mini-icon"> 2D </span>
                     <span class="sidenav-normal  ms-2  ps-1"> 4:30-ပေါက်သူများ </span>
                   </a>
                 </li>
+            @endcan
                 @can('evening_win')
                 <li class="nav-item">
                   <a class="nav-link text-white " href="{{ url('admin/2-d-agent-evening-winner')}}">
@@ -388,23 +390,18 @@
                     <span class="sidenav-normal  ms-2  ps-1"> ထိုးသားများစီမံရန် </span>
                   </a>
                 </li>
+                @can('admin_access')
                 <li class="nav-item">
                   <a class="nav-link text-white " href="{{ url('admin/3d-settings') }}">
                     <span class="sidenav-mini-icon">3D</span>
                     <span class="sidenav-normal  ms-2  ps-1">Setting</span>
                   </a>
                 </li>
-
+                
                  <li class="nav-item">
                   <a class="nav-link text-white " href="{{ url('admin/3d-more-setting') }}">
                     <span class="sidenav-mini-icon">3D</span>
                     <span class="sidenav-normal  ms-2  ps-1">MoreSetting</span>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link text-white " href="{{ url('admin/3d-year-match-times')}}">
-                    <span class="sidenav-mini-icon"> 3D </span>
-                    <span class="sidenav-normal  ms-2  ps-1"> ပွဲစဉ်များ </span>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -471,6 +468,64 @@
                     <span class="sidenav-normal  ms-2  ps-1">ThirdPrize</span>
                   </a>
                 </li>
+
+                @endcan
+                <li class="nav-item">
+                  <a class="nav-link text-white " href="{{ url('admin/3d-year-match-times')}}">
+                    <span class="sidenav-mini-icon"> 3D </span>
+                    <span class="sidenav-normal  ms-2  ps-1"> ပွဲစဉ်များ </span>
+                  </a>
+                </li>
+                @can('three_d_agent_histroy')
+                <li class="nav-item">
+                  <a class="nav-link text-white " href="{{ url('admin/3d-agent-one-week-records') }}">
+                    <span class="sidenav-mini-icon">3D</span>
+                    <span class="sidenav-normal  ms-2  ps-1">တပါတ်မှတ်တမ်း</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-white " href="{{ url('admin/3d-agent-all-history') }}">
+                    <span class="sidenav-mini-icon">3D</span>
+                    <span class="sidenav-normal  ms-2  ps-1">All-မှတ်တမ်း</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-white " href="{{ url('admin/3d-agent-one-week-slip') }}">
+                    <span class="sidenav-mini-icon">3D</span>
+                    <span class="sidenav-normal  ms-2  ps-1">တပါတ် Slip-မှတ်တမ်း</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-white " href="{{ url('admin/3d-agent-slip-history') }}">
+                    <span class="sidenav-mini-icon">3D</span>
+                    <span class="sidenav-normal  ms-2  ps-1">All Slip-မှတ်တမ်း</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-white " href="{{ url('admin/3d-agent-all-first-winner') }}">
+                    <span class="sidenav-mini-icon">3D</span>
+                    <span class="sidenav-normal  ms-2  ps-1">All Win-မှတ်တမ်း</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-white " href="{{ url('admin/3d-agent-first-winner') }}">
+                    <span class="sidenav-mini-icon">3D</span>
+                    <span class="sidenav-normal  ms-2  ps-1">ဒဲ့ပေါက်-မှတ်တမ်း</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-white " href="{{ url('admin/3d-agent-second-winner') }}">
+                    <span class="sidenav-mini-icon">3D</span>
+                    <span class="sidenav-normal  ms-2  ps-1">ပတ်လယ်ပေါက်-မှတ်တမ်း</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-white " href="{{ url('admin/3d-agent-third-winner') }}">
+                    <span class="sidenav-mini-icon">3D</span>
+                    <span class="sidenav-normal  ms-2  ps-1">သွဋ်ပေါက်-မှတ်တမ်း</span>
+                  </a>
+                </li>
+                @endcan
                 
 
               </ul>

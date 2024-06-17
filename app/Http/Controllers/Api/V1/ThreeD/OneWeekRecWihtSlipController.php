@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Log;
 class OneWeekRecWihtSlipController extends Controller
 {
     use HttpResponses;
+
     public function index()
     {
         try {
@@ -49,10 +50,10 @@ class OneWeekRecWihtSlipController extends Controller
             $total_amount = Lotto::where('user_id', $userId)
                 ->whereBetween('created_at', [$start_date, $end_date])
                 ->sum('total_amount');
-            
+
             $data = [
-                "records" => $records, 
-                "total_amount" => $total_amount
+                'records' => $records,
+                'total_amount' => $total_amount,
             ];
 
             // Success message
@@ -98,11 +99,12 @@ class OneWeekRecWihtSlipController extends Controller
 
             // Return the response with records and total sub_amount
             $data = [
-                "records" => $records,
-                "total_sub_amount" => $total_sub_amount,
-                "user_id" => $user_id,
-                "slip_no" => $slip_no
+                'records' => $records,
+                'total_sub_amount' => $total_sub_amount,
+                'user_id' => $user_id,
+                'slip_no' => $slip_no,
             ];
+
             return $this->success($data, 'Records retrieved successfully', 200);
             // return response()->json([
             //     'message' => 'Records retrieved successfully',

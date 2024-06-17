@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers\Admin\TwoD\Agent;
 
-use Illuminate\Http\Request;
-use App\Models\TwoD\TwoDLimit;
 use App\Http\Controllers\Controller;
+use App\Models\TwoD\TwoDLimit;
 use App\Services\AgentEveningLegarService;
-use App\Services\AgentMorningLegarService;
 use App\Services\AgentMorningHistoryService;
+use App\Services\AgentMorningLegarService;
+use Illuminate\Http\Request;
 
 class LegarController extends Controller
 {
     protected $morningLegarService;
-    protected $eveningLegarService;
 
+    protected $eveningLegarService;
 
     public function __construct(AgentMorningLegarService $morningLegarService, AgentEveningLegarService $eveningLegarService)
     {

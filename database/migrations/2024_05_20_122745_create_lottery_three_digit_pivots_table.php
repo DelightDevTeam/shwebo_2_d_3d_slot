@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('three_digit_id');
             $table->unsignedBigInteger('threed_match_time_id');
             $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('agent_id')->nullable();
             $table->string('bet_digit');
             $table->integer('sub_amount')->default(0);
             $table->boolean('prize_sent')->default(false);

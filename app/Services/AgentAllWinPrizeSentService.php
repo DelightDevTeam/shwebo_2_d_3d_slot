@@ -2,17 +2,17 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Auth;
 
 class AgentAllWinPrizeSentService
 {
     public function AllWinPrizeSentForAgent()
     {
         $user = Auth::user();
-        $agent_id = $user->id;   
-     try {
+        $agent_id = $user->id;
+        try {
             $results = DB::table('lottery_two_digit_pivots')
                 ->join('users', 'lottery_two_digit_pivots.user_id', '=', 'users.id')
                 ->select(

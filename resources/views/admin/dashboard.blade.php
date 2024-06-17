@@ -85,6 +85,7 @@
             </form>
         </div>
     </div>
+</div>
     @endcan
     @endsection
     @section('scripts')

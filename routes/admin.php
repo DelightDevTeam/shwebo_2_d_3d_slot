@@ -38,7 +38,9 @@ use App\Http\Controllers\Admin\TwoD\Agent\TwoDHistoryController;
 use App\Http\Controllers\Admin\TwoD\TwoDMorningWinnerController;
 use App\Http\Controllers\Admin\TransferLog\TransferLogController;
 use App\Http\Controllers\Admin\WithDraw\WithDrawRequestController;
+use App\Http\Controllers\Admin\ThreeD\Agent\WinnerHistoryController;
 use App\Http\Controllers\Admin\TwoD\AllLotteryWinPrizeSentController;
+use App\Http\Controllers\Admin\ThreeD\Agent\LottoOneWeekHistoryController;
 
 Route::group([
     'prefix' => 'admin', 'as' => 'admin.',
@@ -185,7 +187,7 @@ Route::group([
     Route::get('/2d-evening-all-slip', [SlipController::class, 'AllSlipForEveningindex'])->name('EveningAllSlipIndex');
     Route::get('/2d-eveningallslip/{userId}/{slipNo}', [SlipController::class, 'EveningAllSlipshow'])->name('EveningAllSlipShow');
 
-    // 2d agent 
+    // 2d agent
     Route::get('/2d-morning-agent-slip', [AgentSlipController::class, 'index'])->name('MorningAgentSlipIndex');
     Route::get('/2d-morningagent-slip/{userId}/{slipNo}', [AgentSlipController::class, 'show'])->name('MorningAgentSlipShow');
 
@@ -258,5 +260,20 @@ Route::group([
     Route::get('/3d-first-winner', [WinnerController::class, 'ThreeDFirstWinner'])->name('WinnerFirst');
     Route::get('/3d-second-winner', [WinnerController::class, 'ThreeDSecondWinner'])->name('WinnerSecond');
     Route::get('/3d-third-winner', [WinnerController::class, 'ThreeDThirdWinner'])->name('WinnerThird');
+
+    Route::get('/3d-agent-one-week-records', [LottoOneWeekHistoryController::class, 'AgentRecordsForOneWeek'])->name('AgentoneWeekRec');
+    Route::get('/3d-agent-all-history', [LottoOneWeekHistoryController::class, 'showRecords'])->name('AllHistory');
+
+    Route::get('/3d-agent-one-week-slip', [LottoOneWeekHistoryController::class, 'index'])->name('AgentOneWeekSlipIndex');
+    Route::get('/3d-agent-oneweek-slip-no/{userId}/{slipNo}', [LottoOneWeekHistoryController::class, 'show'])->name('AgentOneWeekSlipDetail');
+
+    Route::get('/3d-agent-slip-history', [LottoOneWeekHistoryController::class, 'Agentindex'])->name('AgentSlipHistoryIndex');
+    Route::get('/3d-agent-slip-no-history/{userId}/{slipNo}', [LottoOneWeekHistoryController::class, 'Agentshow'])->name('AgentSlipHistoryShow');
+
+    Route::get('/3d-agent-first-winner', [WinnerHistoryController::class, 'ThreeDFirstWinner'])->name('AgentWinnerFirst');
+    Route::get('/3d-agent-second-winner', [WinnerHistoryController::class, 'ThreeDSecondWinner'])->name('AgentWinnerSecond');
+    Route::get('/3d-agent-third-winner', [WinnerHistoryController::class, 'ThreeDThirdWinner'])->name('AgentWinnerThird');
+    Route::get('/3d-agent-all-first-winner', [WinnerHistoryController::class, 'AllWinner'])->name('AgentAllWinnerFirst');
+
     // three 3 route end
 });

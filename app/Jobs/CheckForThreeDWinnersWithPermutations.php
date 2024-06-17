@@ -34,7 +34,8 @@ class CheckForThreeDWinnersWithPermutations implements ShouldQueue
         $result_number = $this->threedWinner->result_number ?? null;
 
         if (is_null($result_number)) {
-             Log::info('No result number provided. Exiting job.');
+            Log::info('No result number provided. Exiting job.');
+
             return;
         }
 

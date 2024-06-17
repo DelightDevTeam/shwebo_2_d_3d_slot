@@ -152,6 +152,7 @@ class LottoPlayService
             $play_date = Carbon::now()->format('Y-m-d');
             $play_time = Carbon::now()->format('H:i:s');
             $player_id = Auth::user()->id;
+            $agent_id = Auth::user();
             $matchTimes = MatchTimeHelper::getCurrentYearAndMatchTimes();
 
             if (empty($matchTimes['currentMatchTime'])) {
@@ -167,6 +168,7 @@ class LottoPlayService
                 'three_digit_id' => $threeDigits->id,
                 'threed_match_time_id' => $currentMatchTime['id'],
                 'user_id' => $player_id,
+                'agent_id' => $agent_id->agent_id,
                 'bet_digit' => $num,
                 'sub_amount' => $sub_amount,
                 'prize_sent' => false,

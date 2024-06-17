@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers\Admin\TwoD\Agent;
 
+use App\Http\Controllers\Controller;
 use App\Models\TwoD\Lottery;
-use Illuminate\Http\Request;
+use App\Models\TwoD\LotteryTwoDigitPivot;
 use App\Models\TwoD\TwodSetting;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use App\Models\TwoD\LotteryTwoDigitPivot;
 
 class AgentSlipController extends Controller
 {
     public function index()
     {
-        
+
         $user = Auth::user();
         $agent_id = $user->id;
         // Get the match start date and result date from TwodSetting
@@ -59,11 +59,11 @@ class AgentSlipController extends Controller
         //     ->where('session', 'morning')
         //     ->sum('total_amount');
         $total_amount = Lottery::whereHas('lotteryTwoDigitPivots', function ($query) use ($agent_id) {
-        $query->where('agent_id', $agent_id)
-              ->where('session', 'morning');
-    })
-    ->whereDate('created_at', $start_date)
-    ->sum('total_amount');
+            $query->where('agent_id', $agent_id)
+                ->where('session', 'morning');
+        })
+            ->whereDate('created_at', $start_date)
+            ->sum('total_amount');
         // Log the total amount for debugging
         Log::info('Total amount:', ['total_amount' => $total_amount]);
 
@@ -86,7 +86,6 @@ class AgentSlipController extends Controller
 
         return view('admin.two_d.agent.slip.morning_slip_show', compact('records', 'total_sub_amount', 'slip_no', 'user_id'));
     }
-
 
     public function Eveningindex()
     {
@@ -128,11 +127,11 @@ class AgentSlipController extends Controller
         Log::info('Executed query:', ['queries' => $queries]);
 
         $total_amount = Lottery::whereHas('lotteryTwoDigitPivots', function ($query) use ($agent_id) {
-        $query->where('agent_id', $agent_id)
-              ->where('session', 'evening');
-    })
-    ->whereDate('created_at', $start_date)
-    ->sum('total_amount');
+            $query->where('agent_id', $agent_id)
+                ->where('session', 'evening');
+        })
+            ->whereDate('created_at', $start_date)
+            ->sum('total_amount');
         // Log the total amount for debugging
         Log::info('Total amount:', ['total_amount' => $total_amount]);
 
@@ -182,11 +181,11 @@ class AgentSlipController extends Controller
         // $total_amount = Lottery::where('session', 'morning')
         //     ->sum('total_amount');
 
-            $total_amount = Lottery::whereHas('lotteryTwoDigitPivots', function ($query) use ($agent_id) {
-        $query->where('agent_id', $agent_id)
-              ->where('session', 'morning');
-    })
-    ->sum('total_amount');
+        $total_amount = Lottery::whereHas('lotteryTwoDigitPivots', function ($query) use ($agent_id) {
+            $query->where('agent_id', $agent_id)
+                ->where('session', 'morning');
+        })
+            ->sum('total_amount');
 
         // Log the total amount for debugging
         Log::info('Total amount:', ['total_amount' => $total_amount]);
@@ -234,11 +233,11 @@ class AgentSlipController extends Controller
         Log::info('Executed query:', ['queries' => $queries]);
 
         // Calculate the total amount for the morning session from the lotteries table
-                    $total_amount = Lottery::whereHas('lotteryTwoDigitPivots', function ($query) use ($agent_id) {
-        $query->where('agent_id', $agent_id)
-              ->where('session', 'evening');
-    })
-    ->sum('total_amount');
+        $total_amount = Lottery::whereHas('lotteryTwoDigitPivots', function ($query) use ($agent_id) {
+            $query->where('agent_id', $agent_id)
+                ->where('session', 'evening');
+        })
+            ->sum('total_amount');
 
         // Log the total amount for debugging
         Log::info('Total amount:', ['total_amount' => $total_amount]);
@@ -261,5 +260,4 @@ class AgentSlipController extends Controller
 
         return view('admin.two_d.agent.slip.evening_all_slip_show', compact('records', 'total_sub_amount', 'slip_no', 'user_id'));
     }
-
 }

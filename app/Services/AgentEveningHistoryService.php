@@ -2,8 +2,8 @@
 
 namespace App\Services;
 
-use Illuminate\Support\Facades\Auth;
 use App\Models\TwoD\LotteryTwoDigitPivot;
+use Illuminate\Support\Facades\Auth;
 
 class AgentEveningHistoryService
 {

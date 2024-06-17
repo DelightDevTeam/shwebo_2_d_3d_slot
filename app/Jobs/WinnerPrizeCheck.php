@@ -57,6 +57,7 @@ class WinnerPrizeCheck implements ShouldQueue
     {
         if (empty($prize_digit)) {
             Log::warning('Empty prize_digit provided. Skipping processing.');
+
             return;
         }
 
@@ -73,6 +74,7 @@ class WinnerPrizeCheck implements ShouldQueue
 
         if ($winningEntries->isEmpty()) {
             Log::info("No winning entries found for bet_digit: {$prize_digit} on date: {$today->toDateString()}");
+
             return;
         }
 

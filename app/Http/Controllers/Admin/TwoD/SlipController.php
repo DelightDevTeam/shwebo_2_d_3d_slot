@@ -16,7 +16,7 @@ class SlipController extends Controller
 {
     public function index()
     {
-        
+
         // Get the match start date and result date from TwodSetting
         $draw_date = TwodSetting::where('status', 'open')->first();
         if (! $draw_date) {

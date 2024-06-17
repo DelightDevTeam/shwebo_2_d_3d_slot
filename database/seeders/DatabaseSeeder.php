@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
             ThreeDLimitTablesSeeder::class,
             ThreedSettingTableSeeder::class,
             ThreedMatchTimeSeeder::class,
-            ChatSeeder::class
+            ChatSeeder::class,
         ]);
     }
 }

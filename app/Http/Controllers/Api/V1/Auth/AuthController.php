@@ -32,7 +32,7 @@ class AuthController extends Controller
 
         $user = User::where('phone', $request->phone)->first();
 
-        if (!$user || !Hash::check($request->password, $user->password)) {
+        if (! $user || ! Hash::check($request->password, $user->password)) {
             return $this->error('', 'Credentail does not match!', 401);
         }
 
@@ -40,12 +40,12 @@ class AuthController extends Controller
         //     return $this->error($user, 'You have to change password', 200);
         // }
 
-        if (!Auth::attempt($credentials)) {
+        if (! Auth::attempt($credentials)) {
             return $this->error('', 'Credentials do not match!', 401);
         }
 
         $user = User::where('phone', $request->phone)->first();
-        if (!$user->hasRole('Player')) {
+        if (! $user->hasRole('Player')) {
             return $this->error('', 'You are not a player!', 401);
         }
 
@@ -65,7 +65,8 @@ class AuthController extends Controller
             $user = User::create($userData);
             $user->roles()->sync(self::PLAYER_ROLE);
         } catch (Exception $e) {
-             Log::error($e->getMessage());
+            Log::error($e->getMessage());
+
             return $this->error('', 'Registration failed. Please try again later.', 500);
         }
 
@@ -78,7 +79,7 @@ class AuthController extends Controller
             'user_name' => $this->generateRandomString(),
             'name' => $request->name,
             'phone' => $request->phone,
-            'password' =>$request->password,
+            'password' => $request->password,
             'agent_id' => $this->getAgentId($request),
             'type' => UserType::Player,
         ];
@@ -90,10 +91,10 @@ class AuthController extends Controller
             $agent = User::where('referral_code', $request->referral_code)->first();
             if ($agent) {
                 return $agent->id;
-            }else{
+            } else {
                 return $this->error('', 'Invalid Referral Code.', 401);
             }
-        }else{
+        } else {
             return 2;
         }
 
@@ -165,6 +166,6 @@ class AuthController extends Controller
     {
         $randomNumber = mt_rand(10000000, 99999999);
 
-        return 'SB' . $randomNumber;
+        return 'SB'.$randomNumber;
     }
 }

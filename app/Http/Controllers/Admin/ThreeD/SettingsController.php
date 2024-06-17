@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\ThreeD;
 
 use App\Http\Controllers\Controller;
+use App\Models\ThreeD\LotteryThreeDigitPivot;
 use App\Models\ThreeD\Permutation;
 use App\Models\ThreeD\Prize;
 use App\Models\ThreeD\ThreedSetting;
@@ -96,6 +97,18 @@ class SettingsController extends Controller
         // Update the status
         $result->result_number = $result_number;
         $result->save();
+
+        $draw_date = ThreedSetting::where('status', 'open')->first();
+        $start_date = $draw_date->match_start_date;
+        $end_date = $draw_date->result_date;
+        $today = Carbon::today();
+
+        $three_digits = LotteryThreeDigitPivot::whereBetween('match_start_date', [$start_date, $end_date])
+            ->whereBetween('res_date', [$start_date, $end_date])
+            ->get();
+        foreach ($three_digits as $digit) {
+            $digit->update(['win_lose' => 1]);
+        }
 
         // Return a response (like a JSON object)
         return redirect()->back()->with('success', 'Result number updated successfully.'); // Redirect back with success message

@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers\Admin\TwoD\Agent;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\AgentAllWinPrizeSentService;
 use App\Services\AgentEveningPrizeSentService;
 use App\Services\AgentMorningPrizeSentService;
+use Illuminate\Http\Request;
 
 class WinHistoryController extends Controller
 {
     protected $prizeSentService;
 
     protected $adminEveningPrizeSentService;
+
     protected $all_winner;
 
     public function __construct(AgentMorningPrizeSentService $prizeSentService, AgentEveningPrizeSentService $adminEveningPrizeSentService, AgentAllWinPrizeSentService $all_winner)

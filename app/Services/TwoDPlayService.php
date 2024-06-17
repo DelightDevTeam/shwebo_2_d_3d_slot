@@ -67,7 +67,7 @@ class TwoDPlayService
                 'total_amount' => $totalAmount,
                 'user_id' => $user->id,
                 'slip_no' => $slipNo, // Add the generated slip_no here
-                'session' => $current_session
+                'session' => $current_session,
             ]);
 
             $over = [];
@@ -198,7 +198,7 @@ class TwoDPlayService
             $player_id = Auth::user();
             $agent_id = Auth::user();
             $current_session = SessionHelper::getCurrentSession();
-            Log::info('session time' . $current_session);
+            Log::info('session time'.$current_session);
             $pivot = LotteryTwoDigitPivot::create([
                 'lottery_id' => $lotteryId,
                 'twod_setting_id' => $two_id,

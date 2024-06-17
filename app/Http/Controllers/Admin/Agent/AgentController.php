@@ -59,7 +59,7 @@ class AgentController extends Controller
             '403 Forbidden |You cannot  Access this page because you do not have permission'
         );
         $agent_name = $this->generateRandomString();
-        
+
         return view('admin.agent.create', compact('agent_name'));
     }
 
@@ -101,7 +101,7 @@ class AgentController extends Controller
                 'agent_id' => $admin->id,
                 'type' => UserType::Agent,
                 'main_balance' => $request->main_balance,
-                'referral_code' => $this->generateReferralCode()
+                'referral_code' => $this->generateReferralCode(),
             ]
         );
 
@@ -121,6 +121,7 @@ class AgentController extends Controller
             'amount' => $request->main_balance,
             'type' => 'deposit',
         ]);
+
         // Redirect back with success message
         return redirect()->back()
             ->with('success', 'Agent created successfully')

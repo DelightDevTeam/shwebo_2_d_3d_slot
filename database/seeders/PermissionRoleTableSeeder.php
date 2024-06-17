@@ -42,7 +42,7 @@ class PermissionRoleTableSeeder extends Seeder
             'make_transfer',
             'game_type_access',
             'two_d_access',
-            'three_d_access'
+            'three_d_access',
         ]);
         Role::findOrFail(1)->permissions()->sync($admin_permissions->pluck('id'));
         // Admin permissions

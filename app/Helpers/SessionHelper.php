@@ -20,13 +20,16 @@ class SessionHelper
 
         // Determine the session based on the current time
         if ($currentTime >= '04:00:00' && $currentTime <= '12:00:00') {
-            Log::info("Session is morning");
+            Log::info('Session is morning');
+
             return 'morning';
         } elseif ($currentTime > '12:00:00' && $currentTime <= '23:30:00') {
-            Log::info("Session is evening");
+            Log::info('Session is evening');
+
             return 'evening';
         } else {
-            Log::info("Session is closed");
+            Log::info('Session is closed');
+
             return 'closed';
         }
     }

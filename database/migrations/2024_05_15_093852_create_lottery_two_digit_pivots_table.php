@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('match_status');
             $table->date('res_date');
             $table->time('res_time');
-            $table->enum('session', ['morning', 'evening']); 
+            $table->enum('session', ['morning', 'evening']);
             // $table->enum('admin_log', ['open', 'closed'])->default('closed'); // New status column
             // $table->enum('user_log', ['open', 'closed'])->default('closed'); // New status column
             $table->date('play_date')->default('2024-5-9');

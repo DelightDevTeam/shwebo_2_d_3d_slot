@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin\TwoD\Agent;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\AgentEveningHistoryService;
 use App\Services\AgentMorningHistoryService;
+use Illuminate\Http\Request;
 
 class TwoDHistoryController extends Controller
 {
