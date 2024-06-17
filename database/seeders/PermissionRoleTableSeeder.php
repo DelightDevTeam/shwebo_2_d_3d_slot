@@ -43,6 +43,10 @@ class PermissionRoleTableSeeder extends Seeder
             'game_type_access',
             'two_d_access',
             'three_d_access',
+<<<<<<< HEAD
+=======
+            'payment_type'
+>>>>>>> a05c6915fe7053412161a73a0cad6a163d50f770
         ]);
         Role::findOrFail(1)->permissions()->sync($admin_permissions->pluck('id'));
         // Admin permissions
@@ -68,7 +72,7 @@ class PermissionRoleTableSeeder extends Seeder
             'make_transfer',
             'withdraw_requests',
             'deposit_requests',
-            'bank',
+            'payment_type',
             'two_d_access',
             'two_d_agent_slip_access',
             'two_d_agent_all_slip_access',

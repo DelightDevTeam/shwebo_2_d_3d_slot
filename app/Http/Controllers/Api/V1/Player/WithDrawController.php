@@ -10,6 +10,7 @@ use App\Traits\HttpResponses;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class WithDrawController extends Controller
 {
@@ -21,9 +22,10 @@ class WithDrawController extends Controller
             $inputs = $request->validated();
             $player = Auth::user();
 
-            if ($player->main_balance < $inputs['amount']) {
-                return $this->error('', 'Insuffience Balance', 401);
+            if (!$player || !Hash::check($request->password, $player->password)) {
+                return $this->error('', 'Credentail does not match!', 401);
             }
+            
             $withdraw = ModelsWithDrawRequest::create(array_merge(
                 $inputs,
                 [

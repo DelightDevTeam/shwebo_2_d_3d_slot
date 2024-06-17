@@ -20,10 +20,7 @@ class DepositController extends Controller
             $inputs = $request->validated();
 
             $player = Auth::user();
-
-            if ($player->main_balance < $inputs['amount']) {
-                return $this->error('', 'Insuffience Balance', 401);
-            }
+            
             $deposit = DepositRequest::create(array_merge(
                 $inputs,
                 [
@@ -31,7 +28,7 @@ class DepositController extends Controller
                     'agent_id' => $player->agent_id,
                 ]
             ));
-
+            
             return $this->success($deposit, 'Deposit Request Success');
         } catch (Exception $e) {
             $this->error('', $e->getMessage(), 401);

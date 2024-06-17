@@ -15,7 +15,7 @@ class DepositRequestController extends Controller
 {
     public function index()
     {
-        $deposits = DepositRequest::with(['user', 'bank'])->where('agent_id', Auth::id())->orderBy('id', 'desc')->get();
+        $deposits = DepositRequest::with(['user', 'userPayment'])->where('agent_id', Auth::id())->orderBy('id', 'desc')->get();
 
         return view('admin.deposit_request.index', compact('deposits'));
     }

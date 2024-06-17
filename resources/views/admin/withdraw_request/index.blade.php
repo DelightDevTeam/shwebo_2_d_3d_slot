@@ -47,9 +47,8 @@
             <span class="d-block">{{ $withdraw->user->user_name }}</span>
           </td>
           <td>{{ number_format($withdraw->amount) }}</td>
-          <td>{{ $withdraw->bank->name }}</td>
-          <td>{{$withdraw->account_name}}</td>
-          <td>{{$withdraw->account_name}}</td>
+          <td>{{ $withdraw->userPayment->account_name }}</td>
+          <td>{{ $withdraw->userPayment->account_no }}</td>
           <td>
           <span class="badge text-bg-{{ $withdraw->status == 0 ? 'danger' : ($withdraw->status == 1 ? 'success' : 'warning') }} text-white mb-2">
             {{ $withdraw->status == 0 ? "pending" : ($withdraw->status == 1 ? "approved" : "rejected") }}
