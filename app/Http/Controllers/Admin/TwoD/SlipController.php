@@ -30,10 +30,10 @@ class SlipController extends Controller
         $start_date = $draw_date->result_date;
 
         // Log the start date and conditions for debugging
-        Log::info('Start date:', ['start_date' => $start_date]);
+        //Log::info('Start date:', ['start_date' => $start_date]);
 
         // Enable query logging
-        DB::enableQueryLog();
+        //DB::enableQueryLog();
 
         // Retrieve and group records by user_id within the specified date range
         $records = LotteryTwoDigitPivot::with('user')
@@ -45,7 +45,7 @@ class SlipController extends Controller
             ->get();
 
         // Log the retrieved records for debugging
-        Log::info('Retrieved records:', ['records' => $records]);
+        //Log::info('Retrieved records:', ['records' => $records]);
 
         // Log the actual SQL query executed
         $queries = DB::getQueryLog();
@@ -94,10 +94,10 @@ class SlipController extends Controller
         $start_date = $draw_date->result_date;
 
         // Log the start date and conditions for debugging
-        Log::info('Start date:', ['start_date' => $start_date]);
+        //Log::info('Start date:', ['start_date' => $start_date]);
 
         // Enable query logging
-        DB::enableQueryLog();
+        //DB::enableQueryLog();
 
         // Retrieve and group records by user_id within the specified date range
         $records = LotteryTwoDigitPivot::with('user')
@@ -113,7 +113,7 @@ class SlipController extends Controller
 
         // Log the actual SQL query executed
         $queries = DB::getQueryLog();
-        Log::info('Executed query:', ['queries' => $queries]);
+        //Log::info('Executed query:', ['queries' => $queries]);
 
         // Calculate the total amount from the lotteries table within the date range
         //$total_amount = Lottery::whereDate('created_at', $start_date)->sum('total_amount');
@@ -122,7 +122,7 @@ class SlipController extends Controller
             ->where('session', 'evening')
             ->sum('total_amount');
         // Log the total amount for debugging
-        Log::info('Total amount:', ['total_amount' => $total_amount]);
+        //Log::info('Total amount:', ['total_amount' => $total_amount]);
 
         // Return the records to your view
         return view('admin.two_d.slip.evening_slip', compact('records', 'total_amount'));
