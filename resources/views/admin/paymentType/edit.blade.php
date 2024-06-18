@@ -88,7 +88,7 @@
                   <label for="title">Banner</label>
                   <input type="file" class="form-control" id="" name="image[]"  multiple> <br>
                   @foreach ($paymentType->paymentImages as $payment)
-                  <img src="{{ asset('img/paymentType/banners/'. $payment->image)}}" alt="" width="100px"  class="mb-3"> <br>
+                  <img src="{{ asset('assets/img/paymentType/banners/'. $payment->image)}}" alt="" width="100px"  class="mb-3"> <br>
                   @endforeach
                 </div>
                 <div class="custom-form-group">

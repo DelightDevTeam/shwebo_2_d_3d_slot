@@ -41,7 +41,7 @@ class UserPaymentControler extends Controller
     {
         $player = Auth::user();
 
-        $data = UserPayment::with('paymentType')->where('user_id', $player->agent_id)->get();
+        $data = UserPayment::with('paymentType', 'paymentType.paymentImages')->where('user_id', $player->agent_id)->get();
 
         return $this->success($data, 'User Payment List');
 

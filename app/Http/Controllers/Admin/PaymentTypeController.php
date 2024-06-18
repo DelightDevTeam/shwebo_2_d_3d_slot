@@ -72,10 +72,10 @@ class PaymentTypeController extends Controller
         }
 
         $paymentType->paymentImages()->delete();
-        
+
         foreach ($images as $image) {
             $imageName = $this->generateUniqueImageName($image);
-            $image->move('img/paymentType/banners', $imageName);
+            $image->move('assets/img/paymentType/banners', $imageName);
             $paymentImages[] = [
                 'payment_type_id' => $paymentType->id,
                 'image' => $imageName,

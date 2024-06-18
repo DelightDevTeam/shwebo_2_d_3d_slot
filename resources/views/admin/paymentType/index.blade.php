@@ -50,7 +50,7 @@
               </td>
               <td>
                 @foreach ($type->paymentImages as $payment)
-                <img src="{{ asset('img/paymentType/banners/'. $payment->image)}}" alt="" width="100px">
+                <img src="{{ asset('assets/img/paymentType/banners/'. $payment->image)}}" alt="" width="100px">
                 @endforeach
               </td>
               <td>
