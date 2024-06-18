@@ -30,10 +30,10 @@ class SlipController extends Controller
         $start_date = $draw_date->result_date;
 
         // Log the start date and conditions for debugging
-        //Log::info('Start date:', ['start_date' => $start_date]);
+        Log::info('Start date:', ['start_date' => $start_date]);
 
         // Enable query logging
-        //DB::enableQueryLog();
+        DB::enableQueryLog();
 
         // Retrieve and group records by user_id within the specified date range
         $records = LotteryTwoDigitPivot::with('user')
@@ -45,7 +45,7 @@ class SlipController extends Controller
             ->get();
 
         // Log the retrieved records for debugging
-        //Log::info('Retrieved records:', ['records' => $records]);
+        Log::info('Retrieved records:', ['records' => $records]);
 
         // Log the actual SQL query executed
         $queries = DB::getQueryLog();
