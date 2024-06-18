@@ -6,11 +6,16 @@ SET FOREIGN_KEY_CHECKS = 0;
 TRUNCATE TABLE users;
 SET FOREIGN_KEY_CHECKS = 1;
 
+php artisan session:update-status
+php artisan make:pull-report
+
 
 php artisan cache:clear
 php artisan config:clear
 php artisan route:clear
 php artisan view:clear
+
+crontab -e
 
 
 // public static function getCurrentYearAndMatchTimes()

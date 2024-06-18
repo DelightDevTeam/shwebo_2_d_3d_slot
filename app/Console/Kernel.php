@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\PullReport::class,
+        Commands\UpdateSessionStatus::class,
     ];
 
     /**
@@ -25,6 +26,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('make:pull-report')->everyFiveSeconds();
+        $schedule->command('session:update-status')->everyFiveMinutes();
     }
 
     /**

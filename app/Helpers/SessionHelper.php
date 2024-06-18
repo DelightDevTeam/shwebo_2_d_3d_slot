@@ -19,7 +19,7 @@ class SessionHelper
         Log::info("Current time is: {$currentTime}");
 
         // Determine the session based on the current time
-        if ($currentTime >= '04:00:00' && $currentTime <= '12:00:00') {
+        if ($currentTime >= '01:00:00' && $currentTime <= '12:00:00') {
             Log::info('Session is morning');
 
             return 'morning';
