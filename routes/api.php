@@ -38,7 +38,6 @@ use Illuminate\Support\Facades\Route;
 //login route post
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
-Route::post('/player-change-password', [AuthController::class, 'playerChangePassword']);
 
 // logout
 // Route::post('/logout', [AuthController::class, 'logout']);
@@ -89,6 +88,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('transactions', [TransactionController::class, 'index']);
     Route::get('user-payment',[UserPaymentControler::class, 'index']);
     Route::post('user-payment-create',[UserPaymentControler::class, 'create']);
+    Route::get('agent-payment-type', [UserPaymentControler::class, 'agentPayment']);
 
     Route::group(['prefix' => 'transaction'], function () {
         Route::post('withdraw', [WithDrawController::class, 'withdraw']);

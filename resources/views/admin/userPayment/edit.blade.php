@@ -62,7 +62,7 @@
 <div class="row">
   <div class="col-12">
     <div class="container mb-3">
-      <a class="btn btn-icon btn-2 btn-primary float-end me-5" href="{{ route('admin.paymentType.index') }}">
+      <a class="btn btn-icon btn-2 btn-primary float-end me-5" href="{{ route('admin.banners.index') }}">
         <span class="btn-inner--icon mt-1"><i class="material-icons">arrow_back</i>Back</span>
       </a>
     </div>
@@ -72,43 +72,33 @@
           <div class="card z-index-0 fadeIn3 fadeInBottom">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div class="bg-gradient-primary shadow-primary border-radius-lg py-2 pe-1">
-                <h4 class="text-white font-weight-bolder text-center mb-2">New Create</h4>
+                <h4 class="text-white font-weight-bolder text-center mb-2">Edit Bank</h4>
               </div>
             </div>
             <div class="card-body">
-              <form role="form" class="text-start" action="{{ route('admin.userPayment.store') }}" method="post" enctype="multipart/form-data">
+              <form role="form" class="text-start" action="{{ route('admin.userPayment.update', $userPayment->id) }}" method="post" enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
                 <div class="custom-form-group">
                 <label for="title">Payment Type <span class="text-danger">*</span></label>
                 <div class="custom-select-wrapper">
                 <select name="payment_type_id" class="form-control custom-select">
                   @foreach ($paymentType as $type)
-                  <option value="{{ $type->id}}">{{$type->name}}</option>
-
+                  <option value="{{ $type->id}}" >{{$type->name}}</option>
                   @endforeach
                 </select>
-              </div>
-                  @error('name')
-                  <span class="text-danger d-block">*{{ $message }}</span>
-                  @enderror
-                </div>
+               </div>
                 <div class="custom-form-group">
                   <label for="title">Account Name</label>
-                  <input type="text" class="form-control" name="account_name">
-                  @error('bank_account_name')
-                  <span class="text-danger d-block">*{{ $message }}</span>
-                  @enderror
+                  <input type="text" class="form-control" id="" name="account_name" value="{{$userPayment->account_name}}">
                 </div>
                 <div class="custom-form-group">
                   <label for="title">Account No</label>
-                  <input type="text" class="form-control" name="account_no">
-                  @error('bank_account_no')
-                  <span class="text-danger d-block">*{{ $message }}</span>
-                  @enderror
+                  <input type="text" class="form-control" id="" name="account_no" value="{{$userPayment->account_no}}">
                 </div>
                 
                 <div class="custom-form-group">
-                  <button class="btn btn-primary" type="submit">Create</button>
+                  <button class="btn btn-primary" type="submit">Edit</button>
                 </div>
               </form>
             </div>

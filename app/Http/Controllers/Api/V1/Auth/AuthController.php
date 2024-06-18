@@ -36,10 +36,6 @@ class AuthController extends Controller
             return $this->error('', 'Credentail does not match!', 401);
         }
 
-        // if ($user->is_changed_password == 0) {
-        //     return $this->error($user, 'You have to change password', 200);
-        // }
-
         if (! Auth::attempt($credentials)) {
             return $this->error('', 'Credentials do not match!', 401);
         }
@@ -80,24 +76,9 @@ class AuthController extends Controller
             'name' => $request->name,
             'phone' => $request->phone,
             'password' => $request->password,
-            'agent_id' => $this->getAgentId($request),
+            'agent_id' => 1,
             'type' => UserType::Player,
         ];
-    }
-
-    private function getAgentId(RegisterRequest $request)
-    {
-        if (isset($request->referral_code)) {
-            $agent = User::where('referral_code', $request->referral_code)->first();
-            if ($agent) {
-                return $agent->id;
-            } else {
-                return $this->error('', 'Invalid Referral Code.', 401);
-            }
-        } else {
-            return 2;
-        }
-
     }
 
     public function logout()
@@ -120,8 +101,7 @@ class AuthController extends Controller
         if (Hash::check($request->current_password, $player->password)) {
             $player->update([
                 'password' => $request->password,
-                'status' => 1,
-
+                'status' => 1
             ]);
         } else {
             return $this->error('', 'Old Passowrd is incorrect', 401);

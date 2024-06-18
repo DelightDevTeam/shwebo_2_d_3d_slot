@@ -19,12 +19,12 @@ class UsersTableSeeder extends Seeder
         $admin = $this->createUser(UserType::Admin, 'Owner', 'shwebo2024', '09123456789');
         (new WalletService)->deposit($admin, 10 * 100_000, TransactionName::CapitalDeposit);
 
-        $agent_1 = $this->createUser(UserType::Agent, 'SuperAgent', 'A898737', '09112345674', $admin->id, 'sbs00001');
+        $agent_1 = $this->createUser(UserType::Agent, 'SuperAgent', 'A898737', '09112345674', $admin->id);
 
         $this->createUser(UserType::Player, 'Player 1', 'SB111111', '09111111111', $agent_1->id);
     }
 
-    private function createUser(UserType $type, $name, $user_name, $phone, $parent_id = null, $referral_code = null)
+    private function createUser(UserType $type, $name, $user_name, $phone, $parent_id = null)
     {
         return User::create([
             'name' => $name,
@@ -34,9 +34,7 @@ class UsersTableSeeder extends Seeder
             'agent_id' => $parent_id,
             'status' => 1,
             'main_balance' => 50000,
-            'is_changed_password' => 1,
             'type' => $type->value,
-            'referral_code' => $referral_code,
         ]);
     }
 }

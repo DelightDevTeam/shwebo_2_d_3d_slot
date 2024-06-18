@@ -143,12 +143,6 @@ class PlayerController extends Controller
      */
     public function edit(User $player)
     {
-        abort_if(
-            Gate::denies('player_edit'),
-            Response::HTTP_FORBIDDEN,
-            '403 Forbidden |You cannot  Access this page because you do not have permission'
-        );
-
         return response()->view('admin.player.edit', compact('player'));
     }
 
@@ -157,7 +151,6 @@ class PlayerController extends Controller
      */
     public function update(Request $request, User $player)
     {
-
         $player->update($request->all());
 
         return redirect()->route('admin.player.index')->with('success', 'User updated successfully');
@@ -168,12 +161,6 @@ class PlayerController extends Controller
      */
     public function destroy(User $player)
     {
-        abort_if(
-            Gate::denies('user_delete') || ! $this->ifChildOfParent(request()->user()->id, $player->id),
-            Response::HTTP_FORBIDDEN,
-            '403 Forbidden |You cannot  Access this page because you do not have permission'
-        );
-        //$player->destroy();
         User::destroy($player->id);
 
         return redirect()->route('admin.player.index')->with('success', 'User deleted successfully');

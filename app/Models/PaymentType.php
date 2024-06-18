@@ -10,4 +10,9 @@ class PaymentType extends Model
     use HasFactory;
 
     protected $fillable = [ 'name' ];
+
+    public function paymentImages()
+    {
+        return $this->hasMany(PaymentImage::class, 'payment_type_id');
+    }
 }
