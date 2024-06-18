@@ -1,6 +1,7 @@
 <?php
 namespace App\Console\Commands;
 
+use Carbon\Carbon;
 use App\Helpers\SessionHelper;
 use Illuminate\Console\Command;
 use App\Models\TwoD\TwodSetting;
@@ -15,12 +16,27 @@ class UpdateSessionStatus extends Command
         parent::__construct();
     }
 
+    // public function handle()
+    // {
+    //     $currentSession = SessionHelper::getCurrentSession();
+    //     $status = ($currentSession == 'closed') ? 'closed' : 'open';
+
+    //     TwodSetting::where('session', $currentSession)->update(['status' => $status]);
+    //     $this->info('Session status updated successfully');
+    // }
     public function handle()
     {
         $currentSession = SessionHelper::getCurrentSession();
         $status = ($currentSession == 'closed') ? 'closed' : 'open';
 
-        TwodSetting::where('session', $currentSession)->update(['status' => $status]);
-        $this->info('Session status updated successfully');
+        // Get current date in Asia/Yangon timezone
+        $currentDate = Carbon::now()->setTimezone('Asia/Yangon')->format('Y-m-d');
+
+        // Update only today's sessions
+        TwodSetting::where('result_date', $currentDate)
+            ->where('session', $currentSession)
+            ->update(['status' => $status]);
+
+        $this->info('Session status updated successfully for ' . $currentSession . ' session.');
     }
 }
