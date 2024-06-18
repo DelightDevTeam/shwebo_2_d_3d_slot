@@ -65,7 +65,6 @@ class PlayerController extends Controller
      */
     public function store(PlayerRequest $request)
     {
-        //dd($request->all());
         abort_if(
             Gate::denies('player_store'),
             Response::HTTP_FORBIDDEN,
@@ -73,7 +72,6 @@ class PlayerController extends Controller
         );
 
         try {
-            // Validate input
             $agent = Auth::user();
             $inputs = $request->validated();
 
@@ -82,7 +80,7 @@ class PlayerController extends Controller
                     'main_balance' => 'Insufficient balance for transfer.',
                 ]);
             }
-
+          
             $userPrepare = array_merge(
                 $inputs,
                 [
@@ -92,7 +90,7 @@ class PlayerController extends Controller
                 ]
             );
             Log::info('User prepared: '.json_encode($userPrepare));
-
+           
             $player = User::create($userPrepare);
             $player->roles()->sync(self::PLAYER_ROLE);
 
