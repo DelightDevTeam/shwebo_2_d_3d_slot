@@ -22,11 +22,7 @@ class PaymentTypeTableSeeder extends Seeder
             [
                 'name' => 'Wave Account',
                 'image' => 'wave.png',
-<<<<<<< HEAD
-            ],
-=======
             ]
->>>>>>> 35c56e94e1fe85ce69663e6d5858cbd013d662fb
         ];
 
         DB::table('payment_types')->insert($types);
