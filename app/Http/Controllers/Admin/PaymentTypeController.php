@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\UserPayment;
 use App\Models\PaymentImage;
 use App\Models\PaymentType;
 use Illuminate\Http\Request;
@@ -15,11 +16,7 @@ class PaymentTypeController extends Controller
      */
     public function index()
     {
-<<<<<<< HEAD
         $paymentTypes = UserPayment::with('paymentType')->get();
-=======
-        $paymentTypes = PaymentType::all();
->>>>>>> 35c56e94e1fe85ce69663e6d5858cbd013d662fb
 
         return view('admin.paymentType.index', compact('paymentTypes'));
     }
@@ -71,7 +68,7 @@ class PaymentTypeController extends Controller
 
     private function updatePaymentTypeImages(PaymentType $paymentType, $images)
     {
-        if (!$images) {
+        if (! $images) {
             return;
         }
 
@@ -91,7 +88,7 @@ class PaymentTypeController extends Controller
 
     private function generateUniqueImageName(UploadedFile $image)
     {
-        return time() . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
+        return time().'-'.uniqid().'.'.$image->getClientOriginalExtension();
     }
 
     /**

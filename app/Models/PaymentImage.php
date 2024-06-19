@@ -9,5 +9,5 @@ class PaymentImage extends Model
 {
     use HasFactory;
 
-    protected $fillable = [ 'payment_type_id', 'image' ];
+    protected $fillable = ['payment_type_id', 'image'];
 }

@@ -22,19 +22,18 @@ class PaymentTypeTableSeeder extends Seeder
             [
                 'name' => 'Wave Account',
                 'image' => 'wave.png',
-            ]
+            ],
         ];
 
         DB::table('payment_types')->insert($types);
-        
-       $types = PaymentType::all();
 
-       foreach($types as $type)
-       {
-          PaymentImage::create([
-            'payment_type_id' => $type->id,
-            'image' => 'kpay.png'
-          ]);
-       }
+        $types = PaymentType::all();
+
+        foreach ($types as $type) {
+            PaymentImage::create([
+                'payment_type_id' => $type->id,
+                'image' => 'kpay.png',
+            ]);
+        }
     }
 }

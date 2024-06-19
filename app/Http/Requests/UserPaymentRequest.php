@@ -24,7 +24,7 @@ class UserPaymentRequest extends FormRequest
         return [
             'account_name' => 'required',
             'account_no' => 'required',
-            'payment_type_id' => 'required'
+            'payment_type_id' => 'required',
         ];
     }
 }

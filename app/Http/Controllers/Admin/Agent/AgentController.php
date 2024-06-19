@@ -100,7 +100,7 @@ class AgentController extends Controller
                 'password' => Hash::make($request->input('password')),
                 'agent_id' => $admin->id,
                 'type' => UserType::Agent,
-                'main_balance' => $request->main_balance
+                'main_balance' => $request->main_balance,
             ]
         );
 

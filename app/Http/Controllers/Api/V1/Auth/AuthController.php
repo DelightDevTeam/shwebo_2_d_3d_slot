@@ -101,7 +101,7 @@ class AuthController extends Controller
         if (Hash::check($request->current_password, $player->password)) {
             $player->update([
                 'password' => $request->password,
-                'status' => 1
+                'status' => 1,
             ]);
         } else {
             return $this->error('', 'Old Passowrd is incorrect', 401);

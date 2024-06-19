@@ -80,7 +80,7 @@ class PlayerController extends Controller
                     'main_balance' => 'Insufficient balance for transfer.',
                 ]);
             }
-          
+
             $userPrepare = array_merge(
                 $inputs,
                 [
@@ -90,7 +90,7 @@ class PlayerController extends Controller
                 ]
             );
             Log::info('User prepared: '.json_encode($userPrepare));
-           
+
             $player = User::create($userPrepare);
             $player->roles()->sync(self::PLAYER_ROLE);
 

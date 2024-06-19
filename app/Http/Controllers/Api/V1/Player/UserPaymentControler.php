@@ -17,22 +17,21 @@ class UserPaymentControler extends Controller
     public function index()
     {
         $data = UserPayment::with('paymentType')->where('user_id', Auth::id())->get();
-        
+
         return $this->success($data, 'User Payment List');
     }
 
     public function create(PaymentTypeRequest $request)
     {
-            $inputs = $request->validated();
-            $params = array_merge($inputs, ['user_id' => Auth::id()]);
-            $data = UserPayment::where('user_id', Auth::id())->first();
-          
-            if($data)
-            {
-                return $this->error('', 'Already Exist Account', 401);
-            }
+        $inputs = $request->validated();
+        $params = array_merge($inputs, ['user_id' => Auth::id()]);
+        $data = UserPayment::where('user_id', Auth::id())->first();
 
-            $data = UserPayment::create($params);
+        if ($data) {
+            return $this->error('', 'Already Exist Account', 401);
+        }
+
+        $data = UserPayment::create($params);
 
         return $this->success($data, 'User Payment Create');
     }

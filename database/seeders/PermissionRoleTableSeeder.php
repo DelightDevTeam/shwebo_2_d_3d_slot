@@ -44,7 +44,7 @@ class PermissionRoleTableSeeder extends Seeder
             'two_d_access',
             'three_d_access',
             'payment_type',
-            'player_index'
+            'player_index',
         ]);
         Role::findOrFail(1)->permissions()->sync($admin_permissions->pluck('id'));
         // Admin permissions

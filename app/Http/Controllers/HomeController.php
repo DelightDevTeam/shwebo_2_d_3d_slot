@@ -66,6 +66,7 @@ class HomeController extends Controller
             'withdraw'
         ));
     }
+
     public function logsIndex()
     {
         $logs = UserLog::with('user')->get();

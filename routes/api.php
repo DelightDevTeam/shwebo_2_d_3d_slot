@@ -86,8 +86,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('changePassword', [AuthController::class, 'changePassword']);
     Route::post('profile', [AuthController::class, 'profile']);
     Route::get('transactions', [TransactionController::class, 'index']);
-    Route::get('user-payment',[UserPaymentControler::class, 'index']);
-    Route::post('user-payment-create',[UserPaymentControler::class, 'create']);
+    Route::get('user-payment', [UserPaymentControler::class, 'index']);
+    Route::post('user-payment-create', [UserPaymentControler::class, 'create']);
     Route::get('agent-payment-type', [UserPaymentControler::class, 'agentPayment']);
 
     Route::group(['prefix' => 'transaction'], function () {
