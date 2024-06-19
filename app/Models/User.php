@@ -65,13 +65,14 @@ class User extends Authenticatable implements Wallet
         'main_balance',
         'is_changed_password',
         'referral_code',
+        'last_active_at',
     ];
 
     protected $dispatchesEvents = [
         'created' => UserCreatedEvent::class,
     ];
 
-    protected $dates = ['created_at', 'updated_at'];
+    protected $dates = ['last_active_at', 'created_at', 'updated_at'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -93,6 +94,11 @@ class User extends Authenticatable implements Wallet
         'password' => 'hashed',
         'type' => UserType::class,
     ];
+
+    public function scopeActive($query)
+    {
+        return $query->where('last_active_at', '>=', now()->subMinutes(5));
+    }
 
     public function getIsAdminAttribute()
     {

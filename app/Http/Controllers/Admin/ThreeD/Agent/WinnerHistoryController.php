@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin\ThreeD\Agent;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Services\AgentFirstWinnerService;
-use App\Services\AgentThirdWinnerService;
-use App\Services\AgentSecondWinnerService;
 use App\Services\AgentAllThreeDWinnerService;
+use App\Services\AgentFirstWinnerService;
+use App\Services\AgentSecondWinnerService;
+use App\Services\AgentThirdWinnerService;
+use Illuminate\Http\Request;
 
 class WinnerHistoryController extends Controller
 {
@@ -16,6 +16,7 @@ class WinnerHistoryController extends Controller
     protected $secondWinnerService;
 
     protected $thirdWinnerService;
+
     protected $all_winnerService;
 
     public function __construct(AgentFirstWinnerService $lottoService, AgentSecondWinnerService $secondWinnerService, AgentThirdWinnerService $thirdWinnerService, AgentAllThreeDWinnerService $all_winnerService)

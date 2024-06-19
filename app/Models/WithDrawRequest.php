@@ -12,7 +12,7 @@ class WithDrawRequest extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'agent_id', 'user_payment_id', 'amount', 'status'
+        'user_id', 'agent_id', 'user_payment_id', 'amount', 'status',
     ];
 
     public function user()

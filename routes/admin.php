@@ -1,47 +1,48 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ReportController;
+use App\Http\Controllers\Admin\Agent\AgentController;
 use App\Http\Controllers\Admin\BankController;
-use App\Http\Controllers\Admin\RolesController;
 use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\BannerTextController;
+use App\Http\Controllers\Admin\Deposit\DepositRequestController;
+use App\Http\Controllers\Admin\GameTypeProductController;
+use App\Http\Controllers\Admin\GetBetDetailController;
+use App\Http\Controllers\Admin\Master\MasterController;
 use App\Http\Controllers\Admin\PaymentController;
+use App\Http\Controllers\Admin\PaymentTypeController;
+use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\Player\PlayerController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\PromotionController;
-use App\Http\Controllers\Admin\TwoD\SlipController;
-use App\Http\Controllers\Admin\BannerTextController;
-use App\Http\Controllers\Admin\PermissionController;
-use App\Http\Controllers\Admin\Agent\AgentController;
-use App\Http\Controllers\Admin\GetBetDetailController;
-use App\Http\Controllers\Admin\TwoD\HistoryController;
-use App\Http\Controllers\Admin\Master\MasterController;
-use App\Http\Controllers\Admin\Player\PlayerController;
-use App\Http\Controllers\Admin\ThreeD\WinnerController;
-use App\Http\Controllers\Admin\GameTypeProductController;
-use App\Http\Controllers\Admin\ThreeD\SettingsController;
-use App\Http\Controllers\Admin\TwoD\TwoDManageController;
-use App\Http\Controllers\Admin\TwoD\Agent\LegarController;
-use App\Http\Controllers\Admin\TwoD\TwoDSettingController;
-use App\Http\Controllers\Admin\ThreeD\ALlHistoryController;
-use App\Http\Controllers\Admin\TwoD\EveningLegarController;
-use App\Http\Controllers\Admin\TwoD\MorningLegarController;
-use App\Http\Controllers\Admin\TwoD\TwoDDashboardController;
-use App\Http\Controllers\Admin\ThreeD\ThreeDManageController;
-use App\Http\Controllers\Admin\TwoD\ManageTwoDUserController;
-use App\Http\Controllers\Admin\ThreeD\OneWeekRecordController;
-use App\Http\Controllers\Admin\TwoD\Agent\AgentSlipController;
-use App\Http\Controllers\Admin\TwoD\Agent\WinHistoryController;
-use App\Http\Controllers\Admin\Deposit\DepositRequestController;
-use App\Http\Controllers\Admin\PaymentTypeController;
-use App\Http\Controllers\Admin\ThreeD\ThreedMatchTimeController;
-use App\Http\Controllers\Admin\TwoD\Agent\TwoDHistoryController;
-use App\Http\Controllers\Admin\TwoD\TwoDMorningWinnerController;
-use App\Http\Controllers\Admin\TransferLog\TransferLogController;
-use App\Http\Controllers\Admin\WithDraw\WithDrawRequestController;
-use App\Http\Controllers\Admin\ThreeD\Agent\WinnerHistoryController;
-use App\Http\Controllers\Admin\TwoD\AllLotteryWinPrizeSentController;
+use App\Http\Controllers\Admin\RolesController;
 use App\Http\Controllers\Admin\ThreeD\Agent\LottoOneWeekHistoryController;
+use App\Http\Controllers\Admin\ThreeD\Agent\WinnerHistoryController;
+use App\Http\Controllers\Admin\ThreeD\ALlHistoryController;
+use App\Http\Controllers\Admin\ThreeD\OneWeekRecordController;
+use App\Http\Controllers\Admin\ThreeD\SettingsController;
+use App\Http\Controllers\Admin\ThreeD\ThreeDManageController;
+use App\Http\Controllers\Admin\ThreeD\ThreedMatchTimeController;
+use App\Http\Controllers\Admin\ThreeD\WinnerController;
+use App\Http\Controllers\Admin\TransferLog\TransferLogController;
+use App\Http\Controllers\Admin\TwoD\Agent\AgentSlipController;
+use App\Http\Controllers\Admin\TwoD\Agent\LegarController;
+use App\Http\Controllers\Admin\TwoD\Agent\TwoDHistoryController;
+use App\Http\Controllers\Admin\TwoD\Agent\WinHistoryController;
+use App\Http\Controllers\Admin\TwoD\AllLotteryWinPrizeSentController;
+use App\Http\Controllers\Admin\TwoD\EveningLegarController;
+use App\Http\Controllers\Admin\TwoD\HistoryController;
+use App\Http\Controllers\Admin\TwoD\ManageTwoDUserController;
+use App\Http\Controllers\Admin\TwoD\MorningLegarController;
+use App\Http\Controllers\Admin\TwoD\SlipController;
+use App\Http\Controllers\Admin\TwoD\TwoDDashboardController;
+use App\Http\Controllers\Admin\TwoD\TwoDManageController;
+use App\Http\Controllers\Admin\TwoD\TwoDMorningWinnerController;
+use App\Http\Controllers\Admin\TwoD\TwoDSettingController;
+use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Admin\WithDraw\WithDrawRequestController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ReportController;
+use Illuminate\Support\Facades\Route;
 
 Route::group([
     'prefix' => 'admin', 'as' => 'admin.',
@@ -56,6 +57,7 @@ Route::group([
     // Roles
     Route::delete('roles/destroy', [RolesController::class, 'massDestroy'])->name('roles.massDestroy');
     Route::resource('roles', RolesController::class);
+    Route::get('active-user-online', [UsersController::class, 'ActiveUserindex']);
     //Bank
     Route::resource('paymentType', PaymentTypeController::class);
     // Players

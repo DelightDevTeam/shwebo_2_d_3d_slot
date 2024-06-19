@@ -1,14 +1,16 @@
 <?php
+
 namespace App\Console\Commands;
 
-use Carbon\Carbon;
 use App\Helpers\SessionHelper;
-use Illuminate\Console\Command;
 use App\Models\TwoD\TwodSetting;
+use Carbon\Carbon;
+use Illuminate\Console\Command;
 
 class UpdateSessionStatus extends Command
 {
     protected $signature = 'session:update-status';
+
     protected $description = 'Update session status based on time of day';
 
     public function __construct()
@@ -37,6 +39,6 @@ class UpdateSessionStatus extends Command
             ->where('session', $currentSession)
             ->update(['status' => $status]);
 
-        $this->info('Session status updated successfully for ' . $currentSession . ' session.');
+        $this->info('Session status updated successfully for '.$currentSession.' session.');
     }
 }

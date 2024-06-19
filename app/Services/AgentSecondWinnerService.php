@@ -2,19 +2,19 @@
 
 namespace App\Services;
 
-use App\Models\User;
-use Illuminate\Support\Facades\DB;
-use App\Models\ThreeD\ThreedSetting;
-use Illuminate\Support\Facades\Auth;
 use App\Models\ThreeD\LotteryThreeDigitPivot;
+use App\Models\ThreeD\ThreedSetting;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AgentSecondWinnerService
 {
     public function AgentSecondWinner()
     {
         $agent_id = Auth::user();
-        
-     // Get the match start date and result date from ThreedSetting
+
+        // Get the match start date and result date from ThreedSetting
         $draw_date = ThreedSetting::where('status', 'open')->first();
         $start_date = $draw_date->match_start_date;
         $end_date = $draw_date->result_date;

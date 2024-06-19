@@ -87,8 +87,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('changePassword', [AuthController::class, 'changePassword']);
     Route::post('profile', [AuthController::class, 'profile']);
     Route::get('transactions', [TransactionController::class, 'index']);
-    Route::get('user-payment',[UserPaymentControler::class, 'index']);
-    Route::post('user-payment-create',[UserPaymentControler::class, 'create']);
+    Route::get('user-payment', [UserPaymentControler::class, 'index']);
+    Route::post('user-payment-create', [UserPaymentControler::class, 'create']);
 
     Route::group(['prefix' => 'transaction'], function () {
         Route::post('withdraw', [WithDrawController::class, 'withdraw']);
@@ -97,7 +97,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::get('deposit-requestlog', [TransactionController::class, 'depositRequestLog']);
         Route::get('withdraw-requestlog', [TransactionController::class, 'withDrawRequestLog']);
     });
-        
+
     Route::get('payment-type', [PaymentTypeController::class, 'all']);
 
     Route::group(['prefix' => 'game'], function () {

@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('ip_address');
             $table->integer('lastupdate')->nullable();
             $table->string('func_access')->nullable();
+            //$table->text('user_agent')->nullable();
             $table->timestamps();
-
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
         });

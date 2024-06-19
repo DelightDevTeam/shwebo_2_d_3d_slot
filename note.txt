@@ -9,6 +9,15 @@ SET FOREIGN_KEY_CHECKS = 1;
 php artisan session:update-status
 php artisan make:pull-report
 
+# Adjust permissions
+sudo chown -R www-data:www-data /var/www/html/shweboslot/storage /var/www/html/shweboslot/bootstrap/cache
+
+# Ensure the directories are writable
+sudo chmod -R 775 /var/www/html/shweboslot/storage /var/www/html/shweboslot/bootstrap/cache
+
+
+tail -f /var/www/html/shweboslot/storage/logs/laravel.log
+
 
 php artisan cache:clear
 php artisan config:clear

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class PaymentTypeController extends Controller
 {
     use HttpResponses;
-    
+
     public function all()
     {
         $player = Auth::user();

@@ -2,19 +2,18 @@
 
 namespace App\Services;
 
-use App\Models\User;
-use Illuminate\Support\Facades\DB;
-use App\Models\ThreeD\ThreedSetting;
-use Illuminate\Support\Facades\Auth;
 use App\Models\ThreeD\LotteryThreeDigitPivot;
+use App\Models\ThreeD\ThreedSetting;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AgentAllThreeDWinnerService
 {
     public function AgentAllWinner()
     {
         $agent_id = Auth::user();
-        
-     
+
         $records = LotteryThreeDigitPivot::with('user')
             ->where('agent_id', $agent_id->id)
             ->where('prize_sent', true)

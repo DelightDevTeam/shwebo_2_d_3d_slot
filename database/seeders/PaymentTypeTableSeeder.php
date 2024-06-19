@@ -15,12 +15,12 @@ class PaymentTypeTableSeeder extends Seeder
         $data = [
             [
                 'name' => 'Kpay Account',
-                'image' => 'kpay.png'
+                'image' => 'kpay.png',
             ],
             [
                 'name' => 'Wave Account',
-                'image' => 'wave.png'
-            ]
+                'image' => 'wave.png',
+            ],
         ];
 
         DB::table('payment_types')->insert($data);

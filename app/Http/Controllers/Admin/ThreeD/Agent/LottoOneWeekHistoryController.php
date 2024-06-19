@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers\Admin\ThreeD\Agent;
 
-use App\Models\ThreeD\Lotto;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
-use App\Models\ThreeD\ThreedSetting;
-use Illuminate\Support\Facades\Auth;
 use App\Models\ThreeD\LotteryThreeDigitPivot;
+use App\Models\ThreeD\Lotto;
+use App\Models\ThreeD\ThreedSetting;
 use App\Services\AgentLottoHistoryRecordService;
 use App\Services\AgentLottoOneWeekRecordService;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class LottoOneWeekHistoryController extends Controller
 {
     protected $lottoService;
+
     protected $agentLotto;
 
     public function __construct(AgentLottoOneWeekRecordService $lottoService, AgentLottoHistoryRecordService $agentLotto)
@@ -43,7 +44,7 @@ class LottoOneWeekHistoryController extends Controller
     public function index()
     {
         $agent_id = Auth::user();
-        
+
         // Get the match start date and result date from ThreedSetting
         $draw_date = ThreedSetting::where('status', 'open')->first();
         $start_date = $draw_date->match_start_date;
@@ -83,8 +84,6 @@ class LottoOneWeekHistoryController extends Controller
         return view('admin.three_d.agent.records.slip_show', compact('records', 'total_sub_amount', 'slip_no', 'user_id'));
     }
 
-
-
     public function Agentindex()
     {
         // try {
@@ -123,7 +122,6 @@ class LottoOneWeekHistoryController extends Controller
     public function Agentshow($user_id, $slip_no)
     {
         try {
-            
 
             // Retrieve records for a specific user_id and slip_no with the user's name
             $records = LotteryThreeDigitPivot::with('user')
@@ -158,5 +156,4 @@ class LottoOneWeekHistoryController extends Controller
             return response()->json(['error' => 'Failed to retrieve records'], 500);
         }
     }
-
 }

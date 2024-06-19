@@ -55,6 +55,15 @@ class UsersController extends Controller
         return response()->view('admin.users.index', compact('users'));
     }
 
+    public function ActiveUserindex()
+    {
+        //$users = User::all();
+        //$activeUsers = User::active()->pluck('id')->toArray();
+        $activeUsers = User::active()->get();
+
+        return view('admin.users.active_user', compact('activeUsers'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */

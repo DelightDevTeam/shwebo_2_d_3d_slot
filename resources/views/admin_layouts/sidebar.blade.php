@@ -72,6 +72,14 @@
         <span class="sidenav-normal  ms-2  ps-1">Transfer Log</span>
       </a>
     </li>
+    @can('admin_access')
+      <li class="nav-item">
+      <a class="nav-link text-white " href="{{ url('admin/active-user-online')}}">
+        <span class="sidenav-mini-icon"> <i class="fas fa-right-left"></i> </span>
+        <span class="sidenav-normal  ms-2  ps-1">ActiveUserOnline</span>
+      </a>
+    </li>
+    @endcan
     <hr class="horizontal light mt-0">
     @can('admin_access')
     <li class="nav-item">

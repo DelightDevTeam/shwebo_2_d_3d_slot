@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 class UserPaymentControler extends Controller
 {
     use HttpResponses;
-    
+
     public function index()
     {
         $data = UserPayment::where('user_id', Auth::id())->get();
