@@ -71,12 +71,8 @@ return [
     */
 
     //'timezone' => 'Asia/Rangoon',
-<<<<<<< HEAD
-    //'timezone' => 'UTC',
-    'timezone' => 'Asia/Yangon',
-=======
     'timezone' => 'UTC',
->>>>>>> 35c56e94e1fe85ce69663e6d5858cbd013d662fb
+    //'timezone' => 'Asia/Yangon',
 
     /*
     |--------------------------------------------------------------------------
