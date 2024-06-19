@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\Admin\TwoD;
 
-use App\Helpers\SessionHelper;
-use App\Http\Controllers\Controller;
-use App\Models\ThreeDigit\LotteryThreeDigitPivot;
+use Carbon\Carbon;
 use App\Models\TwoD\Lottery;
-use App\Models\TwoD\LotteryTwoDigitPivot;
-use App\Models\TwoD\TwodSetting;
 use Illuminate\Http\Request;
+use App\Helpers\SessionHelper;
+use App\Models\TwoD\TwodSetting;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
+use App\Models\TwoD\LotteryTwoDigitPivot;
+use App\Models\ThreeDigit\LotteryThreeDigitPivot;
 
 class SlipController extends Controller
 {
