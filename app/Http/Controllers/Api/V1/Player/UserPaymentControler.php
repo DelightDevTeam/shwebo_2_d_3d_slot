@@ -16,22 +16,34 @@ class UserPaymentControler extends Controller
 
     public function index()
     {
-        $data = UserPayment::where('user_id', Auth::id())->get();
-
+        $data = UserPayment::with('paymentType')->where('user_id', Auth::id())->get();
+        
         return $this->success($data, 'User Payment List');
     }
 
     public function create(PaymentTypeRequest $request)
     {
-        try {
             $inputs = $request->validated();
             $params = array_merge($inputs, ['user_id' => Auth::id()]);
+            $data = UserPayment::where('user_id', Auth::id())->first();
+          
+            if($data)
+            {
+                return $this->error('', 'Already Exist Account', 401);
+            }
 
             $data = UserPayment::create($params);
-        } catch (Exception $e) {
-            $this->error('', $e->getMessage(), 401);
-        }
 
         return $this->success($data, 'User Payment Create');
+    }
+
+    public function agentPayment()
+    {
+        $player = Auth::user();
+
+        $data = UserPayment::with('paymentType', 'paymentType.paymentImages')->where('user_id', $player->agent_id)->get();
+
+        return $this->success($data, 'User Payment List');
+
     }
 }

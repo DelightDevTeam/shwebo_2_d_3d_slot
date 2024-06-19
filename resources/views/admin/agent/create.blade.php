@@ -219,8 +219,6 @@
   var url = 'https://shwebo2d3dapi.online/login';
   var name = @json(session('username'));
   var pw = @json(session('password'));
-  var referral_code = @json(session('referral_code'));
-  console.log(referral_code);
 
   @if(session()->has('success'))
   Swal.fire({
@@ -238,10 +236,6 @@
   <tr>
     <td>pw</td>
     <td id="tpassword"> ${pw}</td>
-  </tr>
-  <tr>
-    <td>referral code</td>
-    <td id="treferralcode"> ${referral_code}</td>
   </tr>
   <tr>
     <td>url</td>
@@ -267,9 +261,8 @@
   function copy() {
     var username = $('#tusername').text();
     var password = $('#tpassword').text();
-    var referral_code = $('#treferralcode').text();
 
-    var copy = "url : " + url + "\nusername : " + username + "\npw : " + password+ "\nreferral_code : " + referral_code;
+    var copy = "url : " + url + "\nusername : " + username + "\npw : " + password;
     copyToClipboard(copy)
   }
 

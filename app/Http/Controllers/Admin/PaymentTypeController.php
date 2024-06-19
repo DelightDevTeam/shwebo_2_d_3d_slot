@@ -3,12 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\PaymentTypeRequest;
-use App\Models\Admin\Bank;
-use App\Models\Admin\UserPayment;
+use App\Models\PaymentImage;
 use App\Models\PaymentType;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\File;
+use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 
 class PaymentTypeController extends Controller
 {
@@ -17,7 +15,11 @@ class PaymentTypeController extends Controller
      */
     public function index()
     {
+<<<<<<< HEAD
         $paymentTypes = UserPayment::with('paymentType')->get();
+=======
+        $paymentTypes = PaymentType::all();
+>>>>>>> 35c56e94e1fe85ce69663e6d5858cbd013d662fb
 
         return view('admin.paymentType.index', compact('paymentTypes'));
     }
@@ -27,68 +29,76 @@ class PaymentTypeController extends Controller
      */
     public function create()
     {
-        $paymentType = PaymentType::all();
-
-        return view('admin.paymentType.create', compact('paymentType'));
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(PaymentTypeRequest $request)
+    public function store(Request $request)
     {
-        $param = array_merge($request->validated(), ['user_id' => Auth::id()]);
-
-        UserPayment::create($param);
-
-        return redirect(route('admin.paymentType.index'))->with('success', 'New userPayment Added.');
-
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Bank $bank)
+    public function show(string $id)
     {
-
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit(string $id)
     {
-        $userPayment = UserPayment::where('id', $id)->first();
+        $paymentType = PaymentType::where('id', $id)->first();
 
-        $paymentType = PaymentType::all();
-
-        return view('admin.paymentType.edit', compact('userPayment', 'paymentType'));
+        return view('admin.paymentType.edit', compact('paymentType'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(PaymentTypeRequest $request, $id)
+    public function update(Request $request, string $id)
     {
+        $paymentType = PaymentType::findOrFail($id);
 
-        $param = array_merge($request->validated());
+        $this->updatePaymentTypeImages($paymentType, $request->image);
 
-        $userPayment = UserPayment::where('id', $id)->first();
+        return redirect()->route('admin.paymentType.index');
+    }
 
-        $userPayment->update($param);
+    private function updatePaymentTypeImages(PaymentType $paymentType, $images)
+    {
+        if (!$images) {
+            return;
+        }
 
-        return redirect(route('admin.paymentType.index'))->with('success', 'Bank Image Updated.');
+        $paymentType->paymentImages()->delete();
 
+        foreach ($images as $image) {
+            $imageName = $this->generateUniqueImageName($image);
+            $image->move('assets/img/paymentType/banners', $imageName);
+            $paymentImages[] = [
+                'payment_type_id' => $paymentType->id,
+                'image' => $imageName,
+            ];
+        }
+
+        $paymentType->paymentImages()->createMany($paymentImages);
+    }
+
+    private function generateUniqueImageName(UploadedFile $image)
+    {
+        return time() . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(string $id)
     {
-        $userPayment = UserPayment::where('id', $id)->first();
-        $userPayment->delete();
-
-        return redirect()->back()->with('success', 'Payment Type Deleted.');
+        //
     }
 }

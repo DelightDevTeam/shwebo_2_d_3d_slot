@@ -100,8 +100,7 @@ class AgentController extends Controller
                 'password' => Hash::make($request->input('password')),
                 'agent_id' => $admin->id,
                 'type' => UserType::Agent,
-                'main_balance' => $request->main_balance,
-                'referral_code' => $this->generateReferralCode(),
+                'main_balance' => $request->main_balance
             ]
         );
 
@@ -126,8 +125,7 @@ class AgentController extends Controller
         return redirect()->back()
             ->with('success', 'Agent created successfully')
             ->with('password', $request->password)
-            ->with('username', $agent->user_name)
-            ->with('referral_code', $agent->referral_code);
+            ->with('username', $agent->user_name);
     }
 
     /**

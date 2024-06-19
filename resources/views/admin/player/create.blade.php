@@ -134,7 +134,7 @@
               @enderror
             </div>
             <div class="custom-form-group">
-              <label for="title">Phone No</label>
+              <label for="title">Phone No <span class="text-danger">*</span></label>
               <input type="text" name="phone" class="form-control" value="{{old('phone')}}" placeholder="Enter Phone Number">
               @error('phone')
               <span class="text-danger d-block">*{{ $message }}</span>
@@ -145,14 +145,14 @@
               <span class="badge badge-sm bg-gradient-success">{{ auth()->user()->main_balance }}</span>
             </div>
             <div class="custom-form-group">
-              <label for="title">Transfer Amount</label>
+              <label for="title">Transfer Amount<span class="text-danger">*</span></label>
               <input type="text" name="main_balance" class="form-control" value="{{old('main_balance')}}" placeholder="0.00">
               @error('main_balance')
               <span class="text-danger d-block">*{{ $message }}</span>
               @enderror
             </div>
             <div class="custom-form-group">
-              <label for="title">2D Limit Amount</label>
+              <label for="title">2D Limit Amount <span class="text-danger">*</span></label>
               <input type="text" name="limit" class="form-control" value="{{old('limit')}}" placeholder="0.00">
               @error('limit')
               <span class="text-danger d-block">*{{ $message }}</span>
@@ -160,7 +160,7 @@
             </div>
 
             <div class="custom-form-group">
-              <label for="title">3D Limit Amount</label>
+              <label for="title">3D Limit Amount <span class="text-danger">*</span></label>
               <input type="text" name="limit3" class="form-control" value="{{old('limit3')}}" placeholder="0.00">
               @error('limit3')
               <span class="text-danger d-block">*{{ $message }}</span>
@@ -168,14 +168,14 @@
             </div>
 
             <div class="custom-form-group">
-              <label for="title">2D Commission Amount</label>
+              <label for="title">2D Commission Amount <span class="text-danger">*</span></label>
               <input type="text" name="cor" class="form-control" value="{{old('cor')}}" placeholder="0.00">
               @error('cor')
               <span class="text-danger d-block">*{{ $message }}</span>
               @enderror
             </div>
             <div class="custom-form-group">
-              <label for="title">3D Commission Amount</label>
+              <label for="title">3D Commission Amount <span class="text-danger">*</span></label>
               <input type="text" name="cor3" class="form-control" value="{{old('cor3')}}" placeholder="0.00">
               @error('cor3')
               <span class="text-danger d-block">*{{ $message }}</span>
