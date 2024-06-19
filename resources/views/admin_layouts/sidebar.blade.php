@@ -80,6 +80,14 @@
       </a>
     </li>
     @endcan
+        @can('admin_access')
+      <li class="nav-item">
+      <a class="nav-link text-white " href="{{ url('admin/user-logs')}}">
+        <span class="sidenav-mini-icon"> <i class="fas fa-right-left"></i> </span>
+        <span class="sidenav-normal  ms-2  ps-1">UserLogInLog</span>
+      </a>
+    </li>
+    @endcan
     <hr class="horizontal light mt-0">
     @can('admin_access')
     <li class="nav-item">

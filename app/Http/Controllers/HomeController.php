@@ -66,6 +66,12 @@ class HomeController extends Controller
             'withdraw'
         ));
     }
+    public function logsIndex()
+    {
+        $logs = UserLog::with('user')->get();
+
+        return view('admin.logs', compact('logs'));
+    }
 
     public function balanceUp(Request $request)
     {

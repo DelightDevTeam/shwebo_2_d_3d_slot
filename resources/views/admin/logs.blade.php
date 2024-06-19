@@ -32,8 +32,13 @@
           <thead class="thead-light">
             <th>#</th>
             <th>User Id</th>
+            <th>UserName</th>
+            <th>Phone</th>
+            <th>WalletBalance</th>
+            <th>MainBalance</th>
             <th>IP Address</th>
             <th>Login Time</th>
+            <th>UserAgent</th>
           </thead>
           <tbody>
             @if(isset($logs))
@@ -42,10 +47,23 @@
               <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>
-                  <span class="d-block">{{ $log->user->user_name }}</span>
+                  <span class="d-block">{{ $log->user->id ?? "" }}</span>
                 </td>
-                <td class="text-sm  font-weight-bold">{{ $log->ip_address }}</td>
+                <td>
+                  <span class="d-block">{{ $log->user->name ?? "" }}</span>
+                </td>
+                  <td>
+                  <span class="d-block">{{ $log->user->phone ?? "" }}</span>
+                </td>
+                <td>
+                  <span class="d-block">{{ $log->user->balanceFloat ?? "" }}</span>
+                </td>
+                                <td>
+                  <span class="d-block">{{ $log->user->main_balance ?? "" }}</span>
+                </td>
+                <td class="text-sm  font-weight-bold">{{ $log->ip_address ?? "" }}</td>
                 <td>{{ $log->created_at}}</td>
+                <td class="text-sm  font-weight-bold">{{ $log->user_agent ?? "" }}</td>
               </tr>
               @endforeach
             @else

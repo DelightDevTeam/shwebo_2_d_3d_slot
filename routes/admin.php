@@ -53,6 +53,8 @@ Route::group([
     Route::post('balance-up', [HomeController::class, 'balanceUp'])->name('balanceUp');
     Route::get('logs/{id}', [HomeController::class, 'logs'])
         ->name('logs');
+    Route::get('user-logs', [HomeController::class, 'logsIndex']);
+    
     // Permissions
     Route::resource('permissions', PermissionController::class);
     // Roles
