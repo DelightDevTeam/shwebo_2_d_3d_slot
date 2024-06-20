@@ -10,7 +10,7 @@ class PaymentType extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'image'];
-    protected $append = ['img_url'];
+    protected $appends = ['img_url'];
 
     public function getImgUrlAttribute()
     {
