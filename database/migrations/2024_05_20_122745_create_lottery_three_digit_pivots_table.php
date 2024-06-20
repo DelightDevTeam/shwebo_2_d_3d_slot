@@ -31,9 +31,6 @@ return new class extends Migration
             $table->date('play_date')->default('2024-5-20');
             $table->time('play_time')->default('15:30:00');
             $table->string('running_match')->default('2024-01-16');
-            //$table->string('match_name')->default('1');
-            //$table->enum('admin_log', ['open', 'closed'])->default('open'); // New status column
-            //$table->enum('user_log', ['open', 'closed'])->default('open'); // New status column
             $table->foreign('threed_setting_id')->references('id')->on('threed_settings')->onDelete('cascade');
             $table->foreign('lotto_id')->references('id')->on('lottos')->onDelete('cascade');
             $table->foreign('threed_match_time_id')->references('id')->on('threed_match_times')->onDelete('cascade');
