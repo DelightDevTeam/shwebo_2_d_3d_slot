@@ -23,7 +23,7 @@ class WithDrawController extends Controller
             $player = Auth::user();
 
             if (! $player || ! Hash::check($request->password, $player->password)) {
-                return $this->error('', 'Credentail does not match!', 401);
+                return $this->error('', 'လျို့ဝှက်နံပါတ်ကိုက်ညီမှု မရှိပါ။', 401);
             }
 
             $withdraw = ModelsWithDrawRequest::create(array_merge(
