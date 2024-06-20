@@ -22,9 +22,9 @@ class WithDrawController extends Controller
             $inputs = $request->validated();
             $player = Auth::user();
 
-            if (! $player || ! Hash::check($request->password, $player->password)) {
-                return $this->error('', 'Credentail does not match!', 401);
-            }
+            // if (! $player || ! Hash::check($request->password, $player->password)) {
+            //     return $this->error('', 'Credentail does not match!', 401);
+            // }
 
             $withdraw = ModelsWithDrawRequest::create(array_merge(
                 $inputs,
