@@ -92,7 +92,7 @@
             <div class="col-md-6">
               <div class="input-group input-group-outline is-valid my-3">
                 <label class="form-label">Bank Account Name</label>
-                <input type="text" class="form-control" name="account_name" value="{{ $withdraw->account_name }}" readonly>
+                <input type="text" class="form-control" name="account_name" value="{{ $withdraw->userPayment->account_name }}" readonly>
 
               </div>
             </div>
@@ -100,14 +100,14 @@
             <div class="col-md-6">
               <div class="input-group input-group-outline is-valid my-3">
                 <label class="form-label">Bank Account No</label>
-                <input type="text" class="form-control" name="account_no" value="{{ $withdraw->account_no }}" readonly>
+                <input type="text" class="form-control" name="account_no" value="{{ $withdraw->userPayment->account_no }}" readonly>
               </div>
             </div>
 
             <div class="col-md-6">
               <div class="input-group input-group-outline is-valid my-3">
                 <label class="form-label">Payment Method</label>
-                <input type="text" class="form-control" name="" value="{{ $withdraw->bank->name }}" readonly>
+                <input type="text" class="form-control" name="" value="{{ $withdraw->userPayment->paymentType->name }}" readonly>
               </div>
             </div>
 

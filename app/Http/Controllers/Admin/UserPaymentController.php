@@ -18,7 +18,7 @@ class UserPaymentController extends Controller
      */
     public function index()
     {
-        $paymentTypes = UserPayment::with('paymentType')->get();
+        $paymentTypes = UserPayment::with('paymentType')->where('user_id', Auth::id())->get();
 
         return view('admin.userPayment.index', compact('paymentTypes'));
     }
@@ -59,7 +59,7 @@ class UserPaymentController extends Controller
      */
     public function edit($id)
     {
-        $userPayment = UserPayment::where('id', $id)->first();
+        $userPayment = UserPayment::where('id', $id)->where('user_id', Auth::id())->first();
 
         $paymentType = PaymentType::all();
 
@@ -74,7 +74,7 @@ class UserPaymentController extends Controller
 
         $param = array_merge($request->validated());
 
-        $userPayment = UserPayment::where('id', $id)->first();
+        $userPayment = UserPayment::where('id', $id)->where('user_id', Auth::id())->first();
 
         $userPayment->update($param);
 
@@ -87,7 +87,7 @@ class UserPaymentController extends Controller
      */
     public function destroy($id)
     {
-        $userPayment = UserPayment::where('id', $id)->first();
+        $userPayment = UserPayment::where('id', $id)->where('user_id', Auth::id())->first();
         $userPayment->delete();
 
         return redirect()->back()->with('success', 'Payment Type Deleted.');

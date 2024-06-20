@@ -61,9 +61,9 @@ class DepositRequestController extends Controller
                 ]);
             }
 
-            return back()->with('success', 'Deposit request successfully!');
+            return redirect()->route('admin.agent.deposit')->with('success', 'Deposit request successfully!');
         } catch (Exception $e) {
-            return back()->with('error', $e->getMessage());
+            return redirect()->route('admin.agent.deposit')->with('error', $e->getMessage());
         }
     }
 }

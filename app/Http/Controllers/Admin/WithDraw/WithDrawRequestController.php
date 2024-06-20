@@ -59,9 +59,9 @@ class WithDrawRequestController extends Controller
                 ]);
             }
 
-            return back()->with('success', 'Withdraw request successfully!');
+            return redirect()->route('agent.withdraw')->with('success', 'Withdraw request successfully!');
         } catch (Exception $e) {
-            return back()->with('error', $e->getMessage());
+            return redirect()->route('agent.withdraw')->with('error', $e->getMessage());
         }
     }
 }

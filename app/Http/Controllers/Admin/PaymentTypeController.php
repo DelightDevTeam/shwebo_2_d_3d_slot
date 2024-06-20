@@ -17,8 +17,8 @@ class PaymentTypeController extends Controller
      */
     public function index()
     {
-        $paymentTypes = UserPayment::with('paymentType')->get();
-        Log::info($paymentTypes);
+        $paymentTypes = PaymentType::all();
+        
         return view('admin.paymentType.index', compact('paymentTypes'));
     }
 
