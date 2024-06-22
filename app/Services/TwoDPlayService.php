@@ -2,17 +2,18 @@
 
 namespace App\Services;
 
-use App\Helpers\SessionHelper;
+use Carbon\Carbon;
 use App\Models\TwoD\Lottery;
-use App\Models\TwoD\LotteryTwoDigitPivot;
 use App\Models\TwoD\TwoDigit;
+use App\Helpers\SessionHelper;
 use App\Models\TwoD\TwoDLimit;
 use App\Models\TwoD\TwodSetting;
-use Carbon\Carbon;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Support\Facades\Auth;
+use App\Helpers\TwoDSessionHelper;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+use App\Models\TwoD\LotteryTwoDigitPivot;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class TwoDPlayService
 {
@@ -60,7 +61,7 @@ class TwoDPlayService
             $customString = 'shwebo-2d';
             $randomNumber = rand(1000, 9999); // Generate a random 4-digit number
             $slipNo = $randomNumber.'-'.$customString.'-'.$currentDate.'-'.$currentTime; // Combine date, string, and random number
-            $current_session = SessionHelper::getCurrentSession();
+            $current_session = TwoDSessionHelper::getCurrentSession();
 
             $lottery = Lottery::create([
                 'pay_amount' => $totalAmount,
@@ -115,7 +116,7 @@ class TwoDPlayService
         //Log::info("Checking bet_digit: {$twoDigit}");
         //Log::info("User's default break: {$user_default_break}");
 
-        $current_session = SessionHelper::getCurrentSession();
+        $current_session = TwoDSessionHelper::getCurrentSession();
         $current_day = Carbon::now()->format('Y-m-d');
 
         $totalBetAmountForTwoDigit = DB::table('lottery_two_digit_pivots')
@@ -158,7 +159,7 @@ class TwoDPlayService
         $break = $user->limit;
         $defaultBreak = TwoDLimit::lasted()->first();
         $user_default_break = $defaultBreak->two_d_limit;
-        $current_session = SessionHelper::getCurrentSession();
+        $current_session = TwoDSessionHelper::getCurrentSession();
         $current_day = Carbon::now()->format('Y-m-d');
 
         $totalBetAmountForTwoDigit = DB::table('lottery_two_digit_pivots')
@@ -193,11 +194,11 @@ class TwoDPlayService
             $two_id = $results->id;
             Log::info("TwoDSetting id is: {$two_id}");
 
-            $play_date = Carbon::now()->format('Y-m-d');  // Correct date format
-            $play_time = Carbon::now()->format('H:i:s');  // Correct time format
+            $play_date = Carbon::now()->setTimezone('Asia/Yangon')->format('Y-m-d');  // Correct date format
+            $play_time = Carbon::now()->setTimezone('Asia/Yangon')->format('H:i:s');  // Correct time format
             $player_id = Auth::user();
             $agent_id = Auth::user();
-            $current_session = SessionHelper::getCurrentSession();
+            $current_session = TwoDSessionHelper::getCurrentSession();
             Log::info('session time'.$current_session);
             $pivot = LotteryTwoDigitPivot::create([
                 'lottery_id' => $lotteryId,

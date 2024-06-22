@@ -149,8 +149,8 @@ class LottoPlayService
                 return response()->json(['message' => '3D game does not open for this time']);
             }
 
-            $play_date = Carbon::now()->format('Y-m-d');
-            $play_time = Carbon::now()->format('H:i:s');
+            $play_date = Carbon::now()->setTimezone('Asia/Yangon')->format('Y-m-d');
+            $play_time = Carbon::now()->setTimezone('Asia/Yangon')->format('H:i:s');
             $player_id = Auth::user()->id;
             $agent_id = Auth::user();
             $matchTimes = MatchTimeHelper::getCurrentYearAndMatchTimes();
