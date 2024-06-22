@@ -122,6 +122,7 @@
         @csrf
         @method('PATCH')
         <select name="closed_time" id="">
+            <option value="">{{ $morningSession->closed_time ?? '' }}</option>
             <option value="10:30">10:30</option>
             <option value="11:00">11:00</option>
             <option value="11:30">11:30</option>
@@ -223,6 +224,7 @@
         @csrf
         @method('PATCH')
         <select name="closed_time" id="">
+            <option value="">{{ $eveningSession->closed_time ?? '' }}</option>
             <option value="15:30">3:30</option>
             <option value="15:45">3:45</option>
             <option value="15:50">3:50</option>

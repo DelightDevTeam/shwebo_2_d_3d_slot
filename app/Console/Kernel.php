@@ -18,6 +18,7 @@ class Kernel extends ConsoleKernel
         //Commands\UpdateSessionStatus::class,
         Commands\TwoDSessionStatusUpdate::class,
         Commands\CloseMorningSession::class,
+        Commands\EveningSessionClose::class,
         Commands\UpdateMatchStatus::class,
     ];
 
@@ -34,6 +35,8 @@ class Kernel extends ConsoleKernel
         //$schedule->command('match:update-status')->daily();
         $schedule->command('match:update-status')->everyMinute();
         $schedule->command('session:close-morning')->everyMinute();
+        $schedule->command('session:close-evening')->everyMinute();
+
     }
 
     /**
