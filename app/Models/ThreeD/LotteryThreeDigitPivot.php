@@ -18,6 +18,7 @@ class LotteryThreeDigitPivot extends Model
     protected $casts = [
         'running_match' => 'date',
     ];
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

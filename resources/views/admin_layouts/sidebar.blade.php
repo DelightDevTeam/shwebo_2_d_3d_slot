@@ -222,6 +222,22 @@
                   </a>
                 </li>
                 @endcan
+                @can('admin_access')
+                <li class="nav-item">
+                  <a class="nav-link text-white " href="{{ route('admin.moderns-digits.index')}}">
+                    <span class="sidenav-mini-icon"> 2D </span>
+                    <span class="sidenav-normal  ms-2  ps-1"> Modern ထွက်ဂဏန်းထဲ့ရန် </span>
+                  </a>
+                </li>
+                @endcan
+                @can('admin_access')
+                <li class="nav-item">
+                  <a class="nav-link text-white " href="{{ route('admin.internet-2d-digits.index')}}">
+                    <span class="sidenav-mini-icon"> 2D </span>
+                    <span class="sidenav-normal  ms-2  ps-1"> InterNet ထွက်ဂဏန်းထဲ့ရန် </span>
+                  </a> 
+                </li>
+                @endcan
                 @can('admin_acess')
                 <li class="nav-item">
                   <a class="nav-link text-white " href="{{ url('admin/2d-morning-history')}}">

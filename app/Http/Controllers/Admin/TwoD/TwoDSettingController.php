@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\Admin\TwoD;
 
+use App\Helpers\EveningSessionHelper;
+use App\Helpers\MorningSessionHelper;
 use App\Helpers\SessionHelper;
+use App\Helpers\TwoDSessionHelper;
 use App\Http\Controllers\Controller;
 use App\Models\TwoD\CloseTwoDigit;
 use App\Models\TwoD\HeadDigit;
@@ -107,6 +110,58 @@ class TwoDSettingController extends Controller
 
         // Return a response (like a JSON object)
         return redirect()->back()->with('success', 'Result number updated successfully.'); // Redirect back with success message
+    }
+
+    public function UpdateCloseSessionTime(Request $request, $id)
+    {
+        $closed_time = $request->input('closed_time'); // The new closed time
+
+        // Find the result by ID
+        $result = TwodSetting::findOrFail($id);
+
+        // Update the closed time
+        $result->closed_time = $closed_time;
+        $result->save();
+
+        // Fetch today's date and current session
+        $today = Carbon::today('Asia/Yangon');
+        $session = MorningSessionHelper::getCurrentSession();
+
+        // Update closed time for all twod_data in the current session
+        $twod_data = TwodSetting::where('session', $session)->get();
+        foreach ($twod_data as $twod) {
+            $twod->closed_time = $closed_time;
+            $twod->save();
+        }
+
+        // Return a response (like a JSON object)
+        return redirect()->back()->with('success', 'Closed time updated successfully.');
+    }
+
+    public function UpdateEveningCloseSessionTime(Request $request, $id)
+    {
+        $closed_time = $request->input('closed_time'); // The new closed time
+
+        // Find the result by ID
+        $result = TwodSetting::findOrFail($id);
+
+        // Update the closed time
+        $result->closed_time = $closed_time;
+        $result->save();
+
+        // Fetch today's date and current session
+        $today = Carbon::today('Asia/Yangon');
+        $session = EveningSessionHelper::getCurrentSession();
+
+        // Update closed time for all twod_data in the current session
+        $twod_data = TwodSetting::where('session', $session)->get();
+        foreach ($twod_data as $twod) {
+            $twod->closed_time = $closed_time;
+            $twod->save();
+        }
+
+        // Return a response (like a JSON object)
+        return redirect()->back()->with('success', 'Closed time updated successfully.');
     }
 
     public function closetwoDigitindex()

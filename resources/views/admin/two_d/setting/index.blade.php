@@ -60,6 +60,8 @@
             <th>Status</th>
             <th>Session</th>
             <th>Update</th>
+            <th>CloseTime</th>
+
         </tr>
     </thead>
     <tbody>
@@ -114,6 +116,20 @@
         </form>
                 
             </td>
+            <td>
+            
+    <form id="statusForm" action="{{ route('admin.TwoDCloseTime', ['id' => $morningSession->id]) }}" method="post">
+        @csrf
+        @method('PATCH')
+        <select name="closed_time" id="">
+            <option value="10:30">10:30</option>
+            <option value="11:00">11:00</option>
+            <option value="11:30">11:30</option>
+            <option value="11:45">11:45</option>
+        </select>
+        <button type="submit" class="btn btn-info btn-sm">CloseSession</button>
+    </form>
+</td>
         </tr>
         @else
         <tr>
@@ -149,6 +165,7 @@
             <th>Status</th>
             <th>Session</th>
             <th>Update</th>
+            <th>CloseTime</th>
         </tr>
     </thead>
     <tbody>
@@ -199,6 +216,22 @@
                         {{ $eveningSession->status == 'open' ? 'checked' : '' }}</button>
             </form>
             </td>
+
+            <td>
+            
+    <form id="statusForm" action="{{ route('admin.TwoDEveningCloseTime', ['id' => $eveningSession->id]) }}" method="post">
+        @csrf
+        @method('PATCH')
+        <select name="closed_time" id="">
+            <option value="15:30">3:30</option>
+            <option value="15:45">3:45</option>
+            <option value="15:50">3:50</option>
+            <option value="15:55">3:55</option>
+            <option value="16:00">4:00</option>
+        </select>
+        <button type="submit" class="btn btn-info btn-sm">CloseSession</button>
+    </form>
+</td>
 
         </tr>
         @else

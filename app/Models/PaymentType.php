@@ -10,11 +10,12 @@ class PaymentType extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'image'];
+
     protected $appends = ['img_url'];
 
     public function getImgUrlAttribute()
     {
-        return asset('assets/img/paymentType/' . $this->image);
+        return asset('assets/img/paymentType/'.$this->image);
     }
 
     public function paymentImages()

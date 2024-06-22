@@ -11,7 +11,7 @@ class TwodSetting extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['result_date', 'result_time', 'result_number', 'session', 'status'];
+    protected $fillable = ['result_date', 'result_time', 'result_number', 'session', 'status', 'closed_time'];
 
     protected static function booted()
     {

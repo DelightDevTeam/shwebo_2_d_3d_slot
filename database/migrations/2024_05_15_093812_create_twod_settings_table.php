@@ -16,10 +16,12 @@ return new class extends Migration
             $table->date('result_date'); // Date of the game result
             $table->time('result_time'); // Time of the game result
             $table->string('result_number', 2)->nullable(); // Nullable result number (two digits)
-            $table->enum('session', ['morning', 'evening']); // Game session (morning or evening)
+            $table->enum('session', ['morning', 'evening']);
             $table->enum('status', ['open', 'closed'])->default('closed'); // New status column
-            $table->enum('admin_log', ['open', 'closed'])->default('closed'); // New status column
-            $table->enum('user_log', ['open', 'closed'])->default('closed');
+            $table->time('closed_time')->nullable();
+
+            // $table->enum('admin_log', ['open', 'closed'])->default('closed'); // New status column
+            // $table->enum('user_log', ['open', 'closed'])->default('closed');
             $table->timestamps();
         });
     }

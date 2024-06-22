@@ -16,6 +16,7 @@ use App\Http\Controllers\Api\V1\ThreeD\OneWeekRecWihtSlipController;
 use App\Http\Controllers\Api\V1\ThreeD\PlayController;
 use App\Http\Controllers\Api\V1\TwoD\AllWinnerPrizeSentController;
 use App\Http\Controllers\Api\V1\TwoD\EveningWinPrizeController;
+use App\Http\Controllers\Api\V1\TwoD\InternetModernController;
 use App\Http\Controllers\Api\V1\TwoD\MorningWinPrizeController;
 use App\Http\Controllers\Api\V1\TwoD\TwoDLotteryController;
 use App\Http\Controllers\Api\V1\TwoD\UserEveningHistoryController;
@@ -112,6 +113,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::get('user/morning-winner-prize', [MorningWinPrizeController::class, 'getMorningPrizeSent']);
         Route::get('user/evening-winner-prize', [EveningWinPrizeController::class, 'getEveningPrizeSent']);
         Route::get('user/all-winner-prize', [AllWinnerPrizeSentController::class, 'getAllWinnerPrizeSent']);
+        Route::get('user/current-prize-digit', [InternetModernController::class, 'CurrentPrizeindex']);
+        Route::get('user/internet-digit', [InternetModernController::class, 'index']);
+        Route::get('user/modern-digit', [InternetModernController::class, 'Modernindex']);
     });
 
     Route::group(['prefix' => '3d'], function () {

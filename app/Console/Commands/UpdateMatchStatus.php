@@ -2,14 +2,14 @@
 
 namespace App\Console\Commands;
 
+use App\Models\ThreeD\LotteryThreeDigitPivot;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
-use App\Models\ThreeD\LotteryThreeDigitPivot;
 
 class UpdateMatchStatus extends Command
 {
-     /**
+    /**
      * The name and signature of the console command.
      *
      * @var string

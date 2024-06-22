@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\PaymentType;
-use App\Models\PaymentImage;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Models\Admin\UserPayment;
+use App\Models\PaymentImage;
+use App\Models\PaymentType;
+use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Log;
-use App\Http\Controllers\Controller;
 
 class PaymentTypeController extends Controller
 {
@@ -19,6 +19,7 @@ class PaymentTypeController extends Controller
     {
         $paymentTypes = UserPayment::with('paymentType')->get();
         Log::info($paymentTypes);
+
         return view('admin.paymentType.index', compact('paymentTypes'));
     }
 
