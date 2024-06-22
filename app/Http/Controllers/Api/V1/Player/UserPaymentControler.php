@@ -6,9 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\PaymentTypeRequest;
 use App\Models\Admin\UserPayment;
 use App\Traits\HttpResponses;
-use Exception;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserPaymentControler extends Controller
 {
@@ -16,7 +15,7 @@ class UserPaymentControler extends Controller
 
     public function index()
     {
-        $data = UserPayment::with('paymentType')->where('user_id', Auth::id())->get();
+        $data = UserPayment::with('paymentType')->where('user_id', Auth::id())->latest()->first();
 
         return $this->success($data, 'User Payment List');
     }
@@ -30,10 +29,12 @@ class UserPaymentControler extends Controller
         if ($data) {
             return $this->error('', 'Already Exist Account', 401);
         }
-
-        $data = UserPayment::create($params);
-
-        return $this->success($data, 'User Payment Create');
+        if(Hash::check($request->password, Auth::user()->password)){
+            $data = UserPayment::create($params);
+            return $this->success($data, 'User Payment Create');
+        }else{
+            return $this->error('', 'လျို့ဝှက်နံပါတ် ကိုက်ညီမှု မရှိပါ။ ထပ်မံကြိုးစားပါ။', 401);
+        }
     }
 
     public function agentPayment()

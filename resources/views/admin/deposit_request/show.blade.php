@@ -91,23 +91,23 @@
 
             <div class="col-md-6">
               <div class="input-group input-group-outline is-valid my-3">
-                <label class="form-label">Bank Account Name</label>
-                <input type="text" class="form-control" name="account_name" value="{{ $deposit->account_name }}" readonly>
+                <label class="form-label">Account Name</label>
+                <input type="text" class="form-control" name="account_name" value="{{ $deposit->userPayment->account_name }}" readonly>
 
               </div>
             </div>
 
             <div class="col-md-6">
               <div class="input-group input-group-outline is-valid my-3">
-                <label class="form-label">Bank Account No</label>
-                <input type="text" class="form-control" name="account_no" value="{{ $deposit->account_no }}" readonly>
+                <label class="form-label">Account No</label>
+                <input type="text" class="form-control" name="account_no" value="{{ $deposit->userPayment->account_no }}" readonly>
               </div>
             </div>
 
             <div class="col-md-6">
               <div class="input-group input-group-outline is-valid my-3">
                 <label class="form-label">Payment Method</label>
-                <input type="text" class="form-control" name="" value="{{ $deposit->bank->name }}" readonly>
+                <input type="text" class="form-control" name="" value="{{ $deposit->userPayment->paymentType->name}}" readonly>
               </div>
             </div>
 
@@ -157,8 +157,6 @@
   document.addEventListener('DOMContentLoaded', function() {
     var errorMessage =  @json(session('error'));
     var successMessage =  @json(session('success'));
-   
-
     @if(session()->has('success'))
     Swal.fire({
       icon: 'success',
