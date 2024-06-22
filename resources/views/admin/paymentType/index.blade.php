@@ -40,33 +40,41 @@
               <th>Action</th>
             </tr>
           </thead>
-          <tbody>
-            @foreach($paymentTypes as $type)
+<tbody>
+    @if($paymentTypes && $paymentTypes->count() > 0)
+        @foreach($paymentTypes as $type)
             <tr>
-              <td class="text-sm font-weight-normal">{{ $loop->iteration }}</td>
-              <td class="text-sm">{{$type->name}}</td>
-              <td>
-                <img src="{{ asset('assets/img/paymentType/'. $type->image)}}" alt="" width="100px">
-              </td>
-              <td>
-                @foreach ($type->paymentImages as $payment)
-                <img src="{{ asset('assets/img/paymentType/banners/'. $payment->image)}}" alt="" width="100px">
-                @endforeach
-              </td>
-              <td>
-                <a href="{{ route('admin.paymentType.edit', $type->id) }}" data-bs-toggle="tooltip" data-bs-original-title="Edit Bank"><i class="material-icons-round text-secondary position-relative text-lg">mode_edit</i></a>
-             
-                <form class="d-inline" action="{{ route('admin.paymentType.destroy', $type->id) }}" method="POST">
-                  @csrf
-                  @method('DELETE')
-                  <button type="submit" class="transparent-btn" data-bs-toggle="tooltip" data-bs-original-title="Delete Banner">
-                    <i class="material-icons text-secondary position-relative text-lg">delete</i>
-                  </button>
-                </form>
-              </td>
+                <td class="text-sm font-weight-normal">{{ $loop->iteration }}</td>
+                <td class="text-sm">{{ $type->paymentType->name ?? 'N/A' }}</td>
+                <td>
+                    <img src="{{ asset('assets/img/paymentType/' . ($type->paymentType->image ?? 'default.png')) }}" alt="" width="100px">
+                </td>
+                <td>
+                    @foreach ($type->paymentImages ?? [] as $payment)
+                        <img src="{{ asset('assets/img/paymentType/banners/' . ($payment->image ?? 'default.png')) }}" alt="" width="100px">
+                    @endforeach
+                </td>
+                <td>
+                    <a href="{{ route('admin.paymentType.edit', $type->id) }}" data-bs-toggle="tooltip" data-bs-original-title="Edit Bank">
+                        <i class="material-icons-round text-secondary position-relative text-lg">mode_edit</i>
+                    </a>
+                    <form class="d-inline" action="{{ route('admin.paymentType.destroy', $type->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="transparent-btn" data-bs-toggle="tooltip" data-bs-original-title="Delete Banner">
+                            <i class="material-icons text-secondary position-relative text-lg">delete</i>
+                        </button>
+                    </form>
+                </td>
             </tr>
-            @endforeach
-          </tbody>
+        @endforeach
+    @else
+        <tr>
+            <td colspan="5" class="text-center">No payment types found.</td>
+        </tr>
+    @endif
+</tbody>
+
         </table>
       </div>
     </div>
