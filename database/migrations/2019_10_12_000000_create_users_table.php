@@ -31,6 +31,7 @@ return new class extends Migration
             $table->float('main_balance')->default(0);
             $table->unsignedBigInteger('agent_id')->nullable();
             $table->timestamp('last_active_at')->nullable();
+            $table->string('note')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->foreign('agent_id')->references('id')->on('users')->onDelete('cascade');

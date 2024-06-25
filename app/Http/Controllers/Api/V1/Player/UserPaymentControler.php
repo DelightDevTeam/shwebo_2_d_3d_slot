@@ -24,7 +24,7 @@ class UserPaymentControler extends Controller
     {
         $inputs = $request->validated();
         $params = array_merge($inputs, ['user_id' => Auth::id()]);
-        $data = UserPayment::where('user_id', Auth::id())->first();
+        $data = UserPayment::where('user_id', Auth::id())->where('payment_type_id', $request->payment_type_id)->first();
 
         if ($data) {
             return $this->error('', 'Already Exist Account', 401);
