@@ -31,7 +31,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('make:pull-report')->everyFiveSeconds();
         //$schedule->command('session:update-status')->everyFiveMinutes();
-        $schedule->command('session:twod-update-status')->everyMinute();
+        $schedule->command('session:twod-update-status')->oneDay();
         //$schedule->command('match:update-status')->daily();
         $schedule->command('match:update-status')->everyMinute();
         $schedule->command('session:close-morning')->everyMinute();

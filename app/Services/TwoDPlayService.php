@@ -62,6 +62,7 @@ class TwoDPlayService
             $randomNumber = rand(1000, 9999); // Generate a random 4-digit number
             $slipNo = $randomNumber.'-'.$customString.'-'.$currentDate.'-'.$currentTime; // Combine date, string, and random number
             $current_session = TwoDSessionHelper::getCurrentSession();
+            Log::info('today current session is : ' . $current_session);
 
             $lottery = Lottery::create([
                 'pay_amount' => $totalAmount,
