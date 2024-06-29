@@ -18,14 +18,6 @@ class UpdateSessionStatus extends Command
         parent::__construct();
     }
 
-    // public function handle()
-    // {
-    //     $currentSession = SessionHelper::getCurrentSession();
-    //     $status = ($currentSession == 'closed') ? 'closed' : 'open';
-
-    //     TwodSetting::where('session', $currentSession)->update(['status' => $status]);
-    //     $this->info('Session status updated successfully');
-    // }
     public function handle()
     {
         $currentSession = SessionHelper::getCurrentSession();

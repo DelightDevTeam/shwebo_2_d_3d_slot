@@ -15,8 +15,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\PullReport::class,
-        //Commands\UpdateSessionStatus::class,
-        Commands\TwoDSessionStatusUpdate::class,
+        Commands\UpdateSessionStatus::class,
+        //Commands\TwoDSessionStatusUpdate::class,
         Commands\CloseMorningSession::class,
         Commands\EveningSessionClose::class,
         Commands\UpdateMatchStatus::class,
