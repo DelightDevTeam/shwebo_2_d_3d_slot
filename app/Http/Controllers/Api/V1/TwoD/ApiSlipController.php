@@ -46,7 +46,7 @@ class ApiSlipController extends Controller
     // ]);
 }
 
-public function show($userId, $slip_no)
+public function show($slip_no)
 {
     $userId = auth()->id();
     // Retrieve records for a specific user_id and slip_no
@@ -104,7 +104,7 @@ public function Eveningindex()
     // ]);
 }
 
-public function Eveningshow($userId, $slip_no)
+public function Eveningshow($slip_no)
 {
     $userId = auth()->id();
     // Retrieve records for a specific user_id and slip_no

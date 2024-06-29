@@ -120,10 +120,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
         // morning slip 
         Route::get('/user-morning-slip', [ApiSlipController::class, 'index']);
-        Route::get('/user-morningslip/{userId}/{slipNo}', [ApiSlipController::class, 'show']);
+        Route::get('/user-2d-slip/{slipNo}', [ApiSlipController::class, 'show']);
         // evening slip
         Route::get('/user-evening-slip', [ApiSlipController::class, 'Eveningindex']);
-        Route::get('/user-eveningslip/{userId}/{slipNo}', [ApiSlipController::class, 'Eveningshow']);
+        Route::get('/user-eveningslip/{slipNo}', [ApiSlipController::class, 'Eveningshow']);
 
     });
 
