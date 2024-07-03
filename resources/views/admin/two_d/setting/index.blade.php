@@ -127,7 +127,7 @@
             <option value="11:00">11:00</option>
             <option value="11:30">11:30</option>
             <option value="11:45">11:45</option>
-            <option value="11:45">7:30</option>
+            <option value="7:30">7:30</option>
         </select>
         <button type="submit" class="btn btn-info btn-sm">CloseSession</button>
     </form>
