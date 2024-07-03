@@ -1,5 +1,4 @@
-<?php
-
+<?php 
 namespace App\Console\Commands;
 
 use App\Models\TwoD\TwodSetting;
@@ -30,6 +29,8 @@ class CloseMorningSession extends Command
             ->where('session', 'morning')
             ->where('closed_time', '<=', $currentTime)
             ->get();
+
+        Log::info('Sessions to close:', ['sessions' => $sessionsToClose->toArray()]);
 
         foreach ($sessionsToClose as $session) {
             $session->status = 'closed';
