@@ -29,13 +29,13 @@ class CheckForEveningWinners implements ShouldQueue
 
     public function handle()
     {
-        Log::info('CheckForMorningWinners job started');
+        Log::info('CheckForEveningWinners job started');
 
         $today = Carbon::today();
         $playDays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday']; // 'saturday', 'sunday'
 
         if (! in_array(strtolower($today->isoFormat('dddd')), $playDays)) {
-            Log::info('Today is not a play day: '.$today->isoFormat('dddd'));
+            //Log::info('Today is not a play day: '.$today->isoFormat('dddd'));
 
             return; // Not a play day
         }
@@ -49,15 +49,15 @@ class CheckForEveningWinners implements ShouldQueue
         // Get the correct bet digit from result number
         $result_number = $this->twodWiner->result_number;
         $date = Carbon::now()->format('Y-m-d');
-        Log::info('Today Date is '.$date);
+        //Log::info('Today Date is '.$date);
 
         $currentSession = $this->getCurrentSession();
-        Log::info('Today Current Session is '.$currentSession);
+        //Log::info('Today Current Session is '.$currentSession);
 
         $currentSessionTime = $this->getCurrentSessionTime();
-        Log::info('Current Session Time is '.$currentSessionTime);
+        //Log::info('Current Session Time is '.$currentSessionTime);
 
-        $open_time = TwodSetting::where('status', 'open')->first();
+        $open_time = TwodSetting::where('prize_status', 'open')->first();
 
         if (! $open_time || ! is_object($open_time)) {
             //Log::warning('No valid open time found or invalid data structure.');
@@ -66,7 +66,7 @@ class CheckForEveningWinners implements ShouldQueue
         }
 
         if (isset($open_time->id)) {
-            Log::info('Open result date ID:', ['id' => $open_time->id]);
+            //Log::info('Open result date ID:', ['id' => $open_time->id]);
 
             // Retrieve winning entries using a valid `id`
             $winningEntries = LotteryTwoDigitPivot::where('twod_setting_id', $open_time->id)
@@ -98,13 +98,13 @@ class CheckForEveningWinners implements ShouldQueue
                     $entry->prize_sent = true;
                     $entry->save();
                 } catch (\Exception $e) {
-                    Log::error("Error during transaction for entry ID {$entry->id}: ".$e->getMessage());
+                    //Log::error("Error during transaction for entry ID {$entry->id}: ".$e->getMessage());
                     throw $e; // Ensure rollback if needed
                 }
             });
         }
 
-        Log::info('CheckForMorningWinners job completed.');
+        Log::info('CheckForEveningWinners job completed.');
     }
 
     protected function getCurrentSession()

@@ -57,7 +57,7 @@ class CheckForMorningWinners implements ShouldQueue
         $currentSessionTime = $this->getCurrentSessionTime();
         //Log::info('Current Session Time is '.$currentSessionTime);
 
-        $open_time = TwodSetting::where('status', 'open')->first();
+        $open_time = TwodSetting::where('prize_status', 'open')->first();
 
         if (! $open_time || ! is_object($open_time)) {
             //Log::warning('No valid open time found or invalid data structure.');
