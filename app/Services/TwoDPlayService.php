@@ -8,6 +8,7 @@ use App\Models\TwoD\TwoDigit;
 use App\Helpers\SessionHelper;
 use App\Models\TwoD\TwoDLimit;
 use App\Models\TwoD\TwodSetting;
+use App\Models\SlipNumberCounter;
 use App\Helpers\TwoDSessionHelper;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -60,7 +61,14 @@ class TwoDPlayService
             $currentTime = Carbon::now()->format('H:i:s');
             $customString = 'shwebo-2d';
             //$randomNumber = rand(1000, 9999); // Generate a random 4-digit number
-            $randomNumber = sprintf('%06d', rand(1, 999999)); // Generate a random 6-digit number with leading zeros
+            //$randomNumber = sprintf('%06d', rand(1, 999999)); // Generate a random 6-digit number with leading zeros
+
+            // Get the current counter or create one if it doesn't exist
+            $counter = SlipNumberCounter::firstOrCreate(['id' => 1], ['current_number' => 0]);
+            // Increment the counter
+            $counter->increment('current_number');
+            $randomNumber = sprintf('%06d', $counter->current_number); // Ensure it's a 6-digit number with leading zeros
+
             $slipNo = $randomNumber.'-'.$customString.'-'.$currentDate.'-'.$currentTime; // Combine date, string, and random number
             $current_session = SessionHelper::getCurrentSession();
             Log::info('today current session is : ' . $current_session);
