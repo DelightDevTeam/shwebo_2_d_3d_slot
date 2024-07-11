@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers\Admin\Player;
 
-use App\Enums\TransactionName;
 use App\Enums\UserType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PlayerRequest;
-use App\Http\Requests\TransferLogRequest;
 use App\Models\Admin\TransferLog;
 use App\Models\User;
-use App\Services\WalletService;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -149,6 +146,9 @@ class PlayerController extends Controller
      */
     public function update(Request $request, User $player)
     {
+        $request->validate([
+            'phone' => ['nullable', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'unique:users,phone,'.$player->id],
+        ]);
         $player->update($request->all());
 
         return redirect()->route('admin.player.index')->with('success', 'User updated successfully');
@@ -171,18 +171,20 @@ class PlayerController extends Controller
         return response(null, 204);
     }
 
-    public function banUser($id)
+    public function makeBanPlayer(Request $request, $id)
     {
         abort_if(
             ! $this->ifChildOfParent(request()->user()->id, $id),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden |You cannot  Access this page because you do not have permission'
         );
-
         $user = User::find($id);
-        $user->update(['status' => $user->status == 1 ? 0 : 1]);
+        $user->update([
+            'status' => $user->status == 1 ? 0 : 1,
+            'note' => $request->note ?? null
+        ]);
 
-        return redirect()->back()->with(
+        return redirect()->route('admin.player.index')->with(
             'success',
             'User '.($user->status == 1 ? 'activate' : 'inactive').' successfully'
         );
@@ -318,6 +320,13 @@ class PlayerController extends Controller
             ->with('success', 'Player Change Password successfully')
             ->with('password', $request->password)
             ->with('phone', $player->phone);
+    }
+
+    public function getbanPlayer($id)
+    {
+        $player = User::find($id);
+
+        return view('admin.player.ban', compact('player'));
     }
 
     private function generateRandomString()

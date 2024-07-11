@@ -20,7 +20,6 @@ class UsersTableSeeder extends Seeder
         (new WalletService)->deposit($admin, 10 * 100_000, TransactionName::CapitalDeposit);
 
         $agent_1 = $this->createUser(UserType::Agent, 'SuperAgent', 'A898737', '09112345674', $admin->id);
-
         $this->createUser(UserType::Player, 'Player 1', 'SB111111', '09111111111', $agent_1->id);
     }
 

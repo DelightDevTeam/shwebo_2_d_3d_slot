@@ -341,14 +341,7 @@ class AgentController extends Controller
         return 'SBA'.$randomNumber;
     }
 
-    private function generateReferralCode()
-    {
-        $randomNumber = mt_rand(10000000, 99999999);
-
-        return 'sbs'.$randomNumber;
-    }
-
-    public function banAgent($id)
+    public function makebanAgent(Request $request, $id)
     {
         abort_if(
             ! $this->ifChildOfParent(request()->user()->id, $id),
@@ -357,12 +350,16 @@ class AgentController extends Controller
         );
 
         $user = User::find($id);
-        $user->update(['status' => $user->status == 1 ? 2 : 1]);
+        $user->update([
+            'status' => $user->status == 1 ? 0 : 1,
+            'note' => $request->note ?? null
+        ]);
+
         if (Auth::check() && Auth::id() == $id) {
             Auth::logout();
         }
 
-        return redirect()->back()->with(
+        return redirect()->route('admin.agent.index')->with(
             'success',
             'User '.($user->status == 1 ? 'activated' : 'banned').' successfully'
         );
@@ -402,5 +399,12 @@ class AgentController extends Controller
             ->with('success', 'Agent Change Password successfully')
             ->with('password', $request->password)
             ->with('username', $agent->user_name);
+    }
+
+    public function getbanAgent($id)
+    {
+        $agent = User::find($id);
+
+        return view('admin.agent.ban', compact('agent'));
     }
 }

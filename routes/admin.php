@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Admin\Agent\AgentController;
-use App\Http\Controllers\Admin\BankController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\BannerTextController;
 use App\Http\Controllers\Admin\Deposit\DepositRequestController;
@@ -71,7 +70,6 @@ Route::group([
     // Players
     Route::delete('user/destroy', [PlayerController::class, 'massDestroy'])->name('user.massDestroy');
 
-    Route::put('player/{id}/ban', [PlayerController::class, 'banUser'])->name('player.ban');
     Route::resource('player', PlayerController::class);
     Route::get('player-cash-in/{player}', [PlayerController::class, 'getCashIn'])->name('player.getCashIn');
     Route::post('player-cash-in/{player}', [PlayerController::class, 'makeCashIn'])->name('player.makeCashIn');
@@ -80,6 +78,8 @@ Route::group([
         ->name('player.makeCashOut');
     Route::get('player-changepassword/{id}', [PlayerController::class, 'getChangePassword'])->name('player.getChangePassword');
     Route::post('player-changepassword/{id}', [PlayerController::class, 'makeChangePassword'])->name('player.makeChangePassword');
+    Route::get('player-ban/{id}', [PlayerController::class, 'getBanPlayer'])->name('player.getBan');
+    Route::post('player-ban/{id}', [PlayerController::class, 'makeBanPlayer'])->name('player.makeBan');
 
     Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::post('profile/change-password/{user}', [ProfileController::class, 'updatePassword'])
@@ -108,6 +108,8 @@ Route::group([
     Route::put('agent/{id}/ban', [AgentController::class, 'banAgent'])->name('agent.ban');
     Route::get('agent-changepassword/{id}', [AgentController::class, 'getChangePassword'])->name('agent.getChangePassword');
     Route::post('agent-changepassword/{id}', [AgentController::class, 'makeChangePassword'])->name('agent.makeChangePassword');
+    Route::get('agent-ban/{id}', [AgentController::class, 'getBanAgent'])->name('agent.getBan');
+    Route::post('agent-ban/{id}', [AgentController::class, 'makeBanAgent'])->name('agent.makeBan');
 
     Route::resource('master', MasterController::class);
     Route::get('master-cash-in/{id}', [MasterController::class, 'getCashIn'])->name('master.getCashIn');
