@@ -33,7 +33,7 @@ class TwoDLotteryController extends Controller
         $draw_date = TwodSetting::where('status', 'open')->first();
         //$start_date = $draw_date->match_start_date;
         $win_date = $draw_date->result_date;
-        $current_session = TwoDSessionHelper::getCurrentSession();
+        $current_session = SessionHelper::getCurrentSession();
 
         foreach ($digits as $digit) {
             $totalAmount = LotteryTwoDigitCopy::where('two_digit_id', $digit->id)
