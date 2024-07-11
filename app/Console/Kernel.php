@@ -37,7 +37,8 @@ class Kernel extends ConsoleKernel
         //$schedule->command('session:update-status')->everyFiveMinutes();
         //$schedule->command('session:twod-update-status')->oneDay();
         //$schedule->command('match:update-status')->daily();
-         $schedule->command('session:morning-status-open')->daily();
+        //$schedule->command('session:morning-status-open')->daily();
+         $schedule->command('session:morning-status-open')->dailyAt('11:28'); // Assuming this is when you want it to run
         $schedule->command('session:morning-prize-status-open')->daily();
         $schedule->command('session:morning-prize-status-close')->daily();
         $schedule->command('session:evening-status-open')->daily();
