@@ -59,9 +59,10 @@ class TwoDPlayService
             $currentDate = Carbon::now()->format('Y-m-d'); // Format the date and time as needed
             $currentTime = Carbon::now()->format('H:i:s');
             $customString = 'shwebo-2d';
-            $randomNumber = rand(1000, 9999); // Generate a random 4-digit number
+            //$randomNumber = rand(1000, 9999); // Generate a random 4-digit number
+            $randomNumber = sprintf('%06d', rand(1, 999999)); // Generate a random 6-digit number with leading zeros
             $slipNo = $randomNumber.'-'.$customString.'-'.$currentDate.'-'.$currentTime; // Combine date, string, and random number
-            $current_session = TwoDSessionHelper::getCurrentSession();
+            $current_session = SessionHelper::getCurrentSession();
             Log::info('today current session is : ' . $current_session);
 
             $lottery = Lottery::create([
@@ -117,7 +118,7 @@ class TwoDPlayService
         //Log::info("Checking bet_digit: {$twoDigit}");
         //Log::info("User's default break: {$user_default_break}");
 
-        $current_session = TwoDSessionHelper::getCurrentSession();
+        $current_session = SessionHelper::getCurrentSession();
         $current_day = Carbon::now()->format('Y-m-d');
 
         $totalBetAmountForTwoDigit = DB::table('lottery_two_digit_pivots')
@@ -160,7 +161,7 @@ class TwoDPlayService
         $break = $user->limit;
         $defaultBreak = TwoDLimit::lasted()->first();
         $user_default_break = $defaultBreak->two_d_limit;
-        $current_session = TwoDSessionHelper::getCurrentSession();
+        $current_session = SessionHelper::getCurrentSession();
         $current_day = Carbon::now()->format('Y-m-d');
 
         $totalBetAmountForTwoDigit = DB::table('lottery_two_digit_pivots')
@@ -199,7 +200,7 @@ class TwoDPlayService
             $play_time = Carbon::now()->setTimezone('Asia/Yangon')->format('H:i:s');  // Correct time format
             $player_id = Auth::user();
             $agent_id = Auth::user();
-            $current_session = TwoDSessionHelper::getCurrentSession();
+            $current_session = SessionHelper::getCurrentSession();
             Log::info('session time'.$current_session);
             $pivot = LotteryTwoDigitPivot::create([
                 'lottery_id' => $lotteryId,
