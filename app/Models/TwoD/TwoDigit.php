@@ -16,6 +16,6 @@ class TwoDigit extends Model
 
     public function lotteries()
     {
-        return $this->belongsToMany(Lottery::class, 'lottery_two_digit_pivot')->withPivot('sub_amount');
+        return $this->belongsToMany(Lottery::class, 'lottery_two_digit_pivots')->withPivot('sub_amount');
     }
 }
