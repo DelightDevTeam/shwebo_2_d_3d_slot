@@ -6,11 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\TwoD\Internet;
 use App\Models\TwoD\Modern;
 use App\Models\TwoD\TwodSetting;
+use App\Traits\HttpResponses;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class InternetModernController extends Controller
 {
+    use HttpResponses;
     public function CurrentPrizeindex()
     {
         // Get today's date
@@ -42,11 +44,15 @@ class InternetModernController extends Controller
         //         'error' => 'Data not found for one or both sessions',
         //     ], 404);
         // }
-
-        return response()->json([
-            'internet_morningData' => $morningData,
-            'internet_eveningData' => $eveningData,
+        return $this->success([
+            "morningData" => $morningData,
+            "eveningData" => $eveningData
         ]);
+
+        // return response()->json([
+        //     'internet_morningData' => $morningData,
+        //     'internet_eveningData' => $eveningData,
+        // ]);
     }
 
     public function Modernindex()
@@ -59,10 +65,14 @@ class InternetModernController extends Controller
         //         'error' => 'Data not found for one or both sessions',
         //     ], 404);
         // }
-
-        return response()->json([
-            'modern_morningData' => $modernMorningData,
-            'modern_eveningData' => $modernEveningData,
+        return $this->success([
+            "modern_morningData" => $modernMorningData,
+            "modern_eveningData" => $modernEveningData
         ]);
+
+        // return response()->json([
+        //     'modern_morningData' => $modernMorningData,
+        //     'modern_eveningData' => $modernEveningData,
+        // ]);
     }
 }
