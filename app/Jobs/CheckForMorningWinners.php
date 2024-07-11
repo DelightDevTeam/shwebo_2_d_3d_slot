@@ -60,7 +60,7 @@ class CheckForMorningWinners implements ShouldQueue
         $open_time = TwodSetting::where('status', 'open')->first();
 
         if (! $open_time || ! is_object($open_time)) {
-            Log::warning('No valid open time found or invalid data structure.');
+            //Log::warning('No valid open time found or invalid data structure.');
 
             return; // Exit early if no valid open time
         }
@@ -98,7 +98,7 @@ class CheckForMorningWinners implements ShouldQueue
                     $entry->prize_sent = true;
                     $entry->save();
                 } catch (\Exception $e) {
-                    Log::error("Error during transaction for entry ID {$entry->id}: ".$e->getMessage());
+                    //Log::error("Error during transaction for entry ID {$entry->id}: ".$e->getMessage());
                     throw $e; // Ensure rollback if needed
                 }
             });
