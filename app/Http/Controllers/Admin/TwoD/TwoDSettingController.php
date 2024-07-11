@@ -88,6 +88,40 @@ class TwoDSettingController extends Controller
 
     }
 
+    public function updatePrizeStatus(Request $request, $id)
+    {
+        //dd($request->all());
+        $status = $request->input('prize_status'); // The new status
+        //dd($status);
+        // Find the result by ID
+        $result = TwodSetting::findOrFail($id);
+
+        // Update the status
+        $result->prize_status = $status;
+        $result->save();
+        session()->flash('SuccessRequest', '2D Prize Status Open/Close  updated successfully');
+
+        return redirect()->back()->with('success', '2D Prize Status Open/Close  updated successfully.'); // Redirect back with success message
+
+    }
+
+    public function updatePrizeStatusEvening(Request $request, $id)
+    {
+        //dd($request->all());
+        $status = $request->input('prize_status'); // The new status
+        //dd($status);
+        // Find the result by ID
+        $result = TwodSetting::findOrFail($id);
+
+        // Update the status
+        $result->prize_status = $status;
+        $result->save();
+        session()->flash('SuccessRequest', '2D Prize Status Open/Close  updated successfully');
+
+        return redirect()->back()->with('success', '2D Prize Status Open/Close  updated successfully.'); // Redirect back with success message
+
+    }
+
     public function updateResultNumber(Request $request, $id)
     {
         $result_number = $request->input('result_number'); // The new status

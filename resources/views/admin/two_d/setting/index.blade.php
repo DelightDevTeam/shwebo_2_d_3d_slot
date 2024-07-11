@@ -61,6 +61,7 @@
             <th>Session</th>
             <th>Update</th>
             <th>CloseTime</th>
+            <th>PrizeStatus</th>
 
         </tr>
     </thead>
@@ -132,6 +133,44 @@
         <button type="submit" class="btn btn-info btn-sm">CloseSession</button>
     </form>
 </td>
+
+        {{-- morning prize status --}}
+        <td>
+                
+            <form id="PrizestatusForm" action="{{ route('admin.TwoDUpdatePrize', ['id' => $morningSession->id]) }}" method="post">
+            @csrf
+            @method('PATCH')
+
+            <!-- Switch for toggling status -->
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="statusSwitchPrize-{{ $morningSession->id }}"
+                    name="prize_status" value="{{ $morningSession->prize_status == 'open' ? 'closed' : 'open' }}"
+                    {{ $morningSession->prize_status == 'open' ? 'checked' : '' }}>
+
+                    <input class="form-check-input" type="checkbox" id="statusSwitchPrize-{{ $morningSession->id }}"
+                    name="prize_status" value="{{ $morningSession->prize_status == 'closed' ? 'open' : 'closed' }}"
+                    {{ $morningSession->prize_status == 'closed' ? 'checked' : '' }}>
+
+                <label class="form-check-label" for="statusSwitchPrize-{{ $morningSession->id }}">
+                    {{ $morningSession->prize_status == 'open' ? 'Open' : 'Closed' }}
+                </label>
+            </div>
+
+            <div class="form-check form-switch">
+                    <input type="hidden" class="form-check-input" type="checkbox" id="statusSwitchPrize-{{ $morningSession->id }}"
+                    name="prize_status" value="{{ $morningSession->prize_status == 'closed' ? 'open' : 'closed' }}"
+                    {{ $morningSession->prize_status == 'closed' ? 'checked' : '' }}>
+            </div>
+
+
+            <!-- Submit button -->
+             <button type="button" class="btn btn-primary mt-2" onclick="confirmPrizeStatusUpdateMorning()">
+        {{ $morningSession->prize_status == 'open' ? 'Close' : 'Open' }}
+    </button>
+        </form>
+                
+            </td>
+        {{-- morning prize status end --}}
         </tr>
         @else
         <tr>
@@ -168,6 +207,7 @@
             <th>Session</th>
             <th>Update</th>
             <th>CloseTime</th>
+            <th>PrizeStatus</th>
         </tr>
     </thead>
     <tbody>
@@ -236,6 +276,42 @@
     </form>
 </td>
 
+        <td>
+                
+            <form id="PrizestatusFormEvening" action="{{ route('admin.TwoDUpdatePrizeEvening', ['id' => $eveningSession->id]) }}" method="post">
+            @csrf
+            @method('PATCH')
+
+            <!-- Switch for toggling status -->
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="statusSwitchPrizeEvening-{{ $eveningSession->id }}"
+                    name="prize_status" value="{{ $eveningSession->prize_status == 'open' ? 'closed' : 'open' }}"
+                    {{ $eveningSession->prize_status == 'open' ? 'checked' : '' }}>
+
+                    <input class="form-check-input" type="checkbox" id="statusSwitchPrizeEvening-{{ $eveningSession->id }}"
+                    name="prize_status" value="{{ $eveningSession->prize_status == 'closed' ? 'open' : 'closed' }}"
+                    {{ $eveningSession->prize_status == 'closed' ? 'checked' : '' }}>
+
+                <label class="form-check-label" for="statusSwitchPrizeEvening-{{ $eveningSession->id }}">
+                    {{ $eveningSession->prize_status == 'open' ? 'Open' : 'Closed' }}
+                </label>
+            </div>
+
+            <div class="form-check form-switch">
+                    <input type="hidden" class="form-check-input" type="checkbox" id="statusSwitchPrizeEvening-{{ $eveningSession->id }}"
+                    name="prize_status" value="{{ $eveningSession->prize_status == 'closed' ? 'open' : 'closed' }}"
+                    {{ $eveningSession->prize_status == 'closed' ? 'checked' : '' }}>
+            </div>
+
+
+            <!-- Submit button -->
+             <button type="button" class="btn btn-primary mt-2" onclick="confirmPrizeStatusUpdateEvening()">
+        {{ $eveningSession->prize_status == 'open' ? 'Close' : 'Open' }}
+    </button>
+        </form>
+                
+            </td>
+
         </tr>
         @else
         <tr>
@@ -244,6 +320,18 @@
         @endif
     </tbody>
 </table>
+
+     @php 
+    $morning = '';
+    if (isset($morningSession)) { 
+        $morning = $morningSession->id;
+    }
+    $evening = '';
+    if (isset($eveningSession)) {
+        $evening = $eveningSession->id;
+    }
+    @endphp
+
 
    </div>
         </div>
@@ -295,6 +383,103 @@
     };
         
 </script>
+
+     {{-- prize status --}}
+    <script>
+    function confirmPrizeStatusUpdateMorning() {
+        // Show SweetAlert confirmation dialog
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You are about to change the status. Proceed?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, proceed!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            // If confirmed, submit the form
+            if (result.isConfirmed) {
+                // Set the value of 'status' to 'closed' if the checkbox is unchecked
+                document.getElementById('statusSwitchPrize-{{ $morning }}').value = 
+                    document.getElementById('statusSwitchPrize-{{ $morning }}').checked ? 'open' : 'closed';
+                document.getElementById('PrizestatusForm').submit();
+            }
+        });
+    }
+
+    // Function to show success Sweet Alert after form submission
+    function showSuccessAlert() {
+        Swal.fire({
+            title: 'Success!',
+            text: 'Status updated successfully.',
+            icon: 'success',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK'
+        });
+    }
+
+     // Call the showSuccessAlert function when the page loads
+    window.onload = function() {
+        // Check if the success message is present in the session
+        let successMessage = "{{ session('SuccessRequest') }}";
+        if (successMessage) {
+            showSuccessAlert();
+        }
+    };
+        
+</script>
+
+    {{-- prize status end --}}
+{{-- prize status --}}
+    <script>
+    function confirmPrizeStatusUpdateEvening() {
+        // Show SweetAlert confirmation dialog
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You are about to change the status. Proceed?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, proceed!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            // If confirmed, submit the form
+            if (result.isConfirmed) {
+                // Set the value of 'status' to 'closed' if the checkbox is unchecked
+                document.getElementById('statusSwitchPrizeEvening-{{ $evening }}').value = 
+                    document.getElementById('statusSwitchPrizeEvening-{{ $evening }}').checked ? 'open' : 'closed';
+                document.getElementById('PrizestatusFormEvening').submit();
+            }
+        });
+    }
+
+    // Function to show success Sweet Alert after form submission
+    function showSuccessAlert() {
+        Swal.fire({
+            title: 'Success!',
+            text: 'Status updated successfully.',
+            icon: 'success',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK'
+        });
+    }
+
+     // Call the showSuccessAlert function when the page loads
+    window.onload = function() {
+        // Check if the success message is present in the session
+        let successMessage = "{{ session('SuccessRequest') }}";
+        if (successMessage) {
+            showSuccessAlert();
+        }
+    };
+        
+</script>
+
+    {{-- prize status end --}}
+
+
 
  <script>
     function confirmStatusUpdateEvening() {

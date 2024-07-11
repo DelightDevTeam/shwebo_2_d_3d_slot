@@ -15,11 +15,15 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\PullReport::class,
-        Commands\UpdateSessionStatus::class,
-        //Commands\TwoDSessionStatusUpdate::class,
+        Commands\MorningSessionOpen::class,
+        Commands\MorningPrizeStatusOpen::class,
+        Commands\EveningPrizeStatusOpen::class,
+        Commands\MorningPrizeStatusClose::class,
+        Commands\EveningSessionOpen::class,
+        Commands\EveningPrizeStatusClose::class,
         Commands\CloseMorningSession::class,
         Commands\EveningSessionClose::class,
-        Commands\UpdateMatchStatus::class,
+        Commands\UpdateMatchStatus::class, // 3d
     ];
 
     /**
@@ -30,10 +34,16 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('make:pull-report')->everyFiveSeconds();
-        $schedule->command('session:update-status')->everyFiveMinutes();
+        //$schedule->command('session:update-status')->everyFiveMinutes();
         //$schedule->command('session:twod-update-status')->oneDay();
         //$schedule->command('match:update-status')->daily();
-        $schedule->command('match:update-status')->everyMinute();
+         $schedule->command('session:morning-status-open')->oneDay();
+        $schedule->command('session:morning-prize-status-open')->oneDay();
+        $schedule->command('session:morning-prize-status-close')->oneDay();
+        $schedule->command('session:evening-status-open')->oneDay();
+        $schedule->command('session:eveing-prize-status-open')->oneDay();
+        $schedule->command('session:evening-prize-status-close')->oneDay();
+        $schedule->command('match:update-status') ->everyMinute();// 3d 
         $schedule->command('session:close-morning')->everyMinute();
         $schedule->command('session:close-evening')->everyMinute();
 

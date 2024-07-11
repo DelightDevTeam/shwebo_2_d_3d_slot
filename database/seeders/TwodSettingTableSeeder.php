@@ -38,7 +38,9 @@ class TwodSettingTableSeeder extends Seeder
                         'result_date' => $date->format('Y-m-d'),
                         'result_time' => '12:01:00', // Morning open time
                         'session' => 'morning',
-                        'status' => $morningStatus,
+                        //'status' => $morningStatus,
+                        'status' => 'closed',
+
                     ]);
 
                     // Evening session
@@ -46,7 +48,8 @@ class TwodSettingTableSeeder extends Seeder
                         'result_date' => $date->format('Y-m-d'),
                         'result_time' => '16:30:00', // Evening open time
                         'session' => 'evening',
-                        'status' => $eveningStatus,
+                        //'status' => $eveningStatus,
+                        'status' => 'closed',
                     ]);
                 }
             }

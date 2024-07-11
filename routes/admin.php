@@ -154,6 +154,13 @@ Route::group([
     Route::patch('/two-2-close/{id}/eveningtime', [TwoDSettingController::class, 'UpdateEveningCloseSessionTime'])->name('TwoDEveningCloseTime');
     Route::patch('/two-d-results/{id}/status', [TwoDSettingController::class, 'updateResultNumber'])
         ->name('update_result_number');
+    // prize status
+    Route::patch('/two-2-results/{id}/prizestatus', [TwoDSettingController::class, 'updatePrizeStatus'])
+        ->name('TwoDUpdatePrize');
+
+    Route::patch('/two-2-results/{id}/prizeevening', [TwoDSettingController::class, 'updatePrizeStatusEvening'])
+        ->name('TwoDUpdatePrizeEvening');
+
     //close 2 digit (စိတ်ကြိုက်ပိတ်ဂဏန်း)
     Route::get('/close-2d-digit', [TwoDSettingController::class, 'closetwoDigitindex'])->name('two-digit-close');
     Route::post('/close-2-digit', [TwoDSettingController::class, 'store'])->name('CloseTwoDigitStore');

@@ -22,7 +22,8 @@
   @include('admin_layouts.setting')
   <!--   Core JS Files   -->
   {{-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> --}}
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
+  <script src="{{ asset('admin_app/assets/js/jquery.min.js')}}"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://kit.fontawesome.com/b829c5162c.js" crossorigin="anonymous"></script>
   <script src="{{ asset('admin_app/assets/js/core/popper.min.js')}}"></script>
