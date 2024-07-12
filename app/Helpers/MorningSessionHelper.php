@@ -20,7 +20,7 @@ class MorningSessionHelper
         Log::info("Current time is: {$currentHour}");
 
         // Define time ranges for morning and evening sessions
-        $morningSessionStart = Carbon::createFromTimeString('6:00:00', 'Asia/Yangon');
+        $morningSessionStart = Carbon::createFromTimeString('01:00:00', 'Asia/Yangon');
         $morningSessionEnd = Carbon::createFromTimeString('11:50:00', 'Asia/Yangon');
         if ($currentTime->between($morningSessionStart, $morningSessionEnd)) {
             Log::info('Session is morning');

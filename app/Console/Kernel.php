@@ -38,7 +38,7 @@ class Kernel extends ConsoleKernel
         //$schedule->command('session:twod-update-status')->oneDay();
         //$schedule->command('match:update-status')->daily();
         //$schedule->command('session:morning-status-open')->daily();
-          $schedule->command('session:morning-status-open')->dailyAt('01:00')->timezone('Asia/Yangon'); // Assuming this is when you want it to run
+          $schedule->command('session:morning-status-open')->dailyAt('07:42')->timezone('Asia/Yangon'); // Assuming this is when you want it to run
         $schedule->command('session:morning-prize-status-open')->dailyAt('12:01')->timezone('Asia/Yangon'); // Set a specific time
         $schedule->command('session:morning-prize-status-close')->dailyAt('12:50')->timezone('Asia/Yangon'); // Set a specific time
         $schedule->command('session:evening-status-open')->dailyAt('12:02')->timezone('Asia/Yangon'); // Assuming this is when you want it to run
