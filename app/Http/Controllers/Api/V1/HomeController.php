@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use App\Models\Admin\Banner;
 use App\Models\Admin\BannerText;
 use App\Traits\HttpResponses;
@@ -17,7 +18,7 @@ class HomeController extends Controller
     {
         $banners = Banner::all();
         $bannerText = BannerText::latest()->first();
-        $user = Auth::user();
+        $user = new UserResource(Auth::user());
 
         return $this->success([
             'banners' => $banners,
