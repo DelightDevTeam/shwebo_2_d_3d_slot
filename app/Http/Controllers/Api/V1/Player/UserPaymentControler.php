@@ -29,10 +29,11 @@ class UserPaymentControler extends Controller
         if ($data) {
             return $this->error('', 'Already Exist Account', 401);
         }
-        if(Hash::check($request->password, Auth::user()->password)){
+        if (Hash::check($request->password, Auth::user()->password)) {
             $data = UserPayment::create($params);
+
             return $this->success($data, 'User Payment Create');
-        }else{
+        } else {
             return $this->error('', 'လျို့ဝှက်နံပါတ် ကိုက်ညီမှု မရှိပါ။ ထပ်မံကြိုးစားပါ။', 401);
         }
     }

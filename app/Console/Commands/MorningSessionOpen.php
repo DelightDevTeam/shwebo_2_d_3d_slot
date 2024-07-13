@@ -1,11 +1,12 @@
 <?php
+
 namespace App\Console\Commands;
 
+use App\Helpers\MorningSessionHelper;
+use App\Models\TwoD\TwodSetting;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
-use App\Models\TwoD\TwodSetting;
 use Illuminate\Support\Facades\Log;
-use App\Helpers\MorningSessionHelper;
 
 class MorningSessionOpen extends Command
 {
@@ -36,10 +37,10 @@ class MorningSessionOpen extends Command
                 ->where('session', $currentSession)
                 ->where('status', 'closed')
                 ->update(['status' => 'open']);
-            $this->info('Morning Session status open updated successfully for ' . $currentSession . ' session.');
-            Log::info('Morning Session status open updated successfully for ' . $currentSession . ' session.');
+            $this->info('Morning Session status open updated successfully for '.$currentSession.' session.');
+            Log::info('Morning Session status open updated successfully for '.$currentSession.' session.');
         } catch (\Exception $e) {
-            Log::error('Error in MorningSessionOpen Command: ' . $e->getMessage());
+            Log::error('Error in MorningSessionOpen Command: '.$e->getMessage());
         }
     }
 }

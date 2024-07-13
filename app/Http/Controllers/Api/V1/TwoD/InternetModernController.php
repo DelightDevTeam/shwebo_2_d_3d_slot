@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 class InternetModernController extends Controller
 {
     use HttpResponses;
+
     public function CurrentPrizeindex()
     {
         // Get today's date
@@ -45,8 +46,8 @@ class InternetModernController extends Controller
         //     ], 404);
         // }
         return $this->success([
-            "morningData" => $morningData,
-            "eveningData" => $eveningData
+            'morningData' => $morningData,
+            'eveningData' => $eveningData,
         ]);
 
         // return response()->json([
@@ -66,8 +67,8 @@ class InternetModernController extends Controller
         //     ], 404);
         // }
         return $this->success([
-            "modern_morningData" => $modernMorningData,
-            "modern_eveningData" => $modernEveningData
+            'modern_morningData' => $modernMorningData,
+            'modern_eveningData' => $modernEveningData,
         ]);
 
         // return response()->json([

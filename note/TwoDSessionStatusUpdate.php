@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Console\Commands;
 
 use App\Helpers\TwoDSessionHelper;
@@ -58,7 +59,7 @@ class TwoDSessionStatusUpdate extends Command
             Log::info("Tomorrow's sessions updated: {$affectedRowsTomorrow}");
         }
 
-        $this->info('Session status updated successfully for ' . $currentSession . ' session.');
+        $this->info('Session status updated successfully for '.$currentSession.' session.');
     }
 
     // public function handle()

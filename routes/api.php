@@ -1,41 +1,41 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TestController;
-use App\Http\Controllers\Api\V1\HomeController;
-use App\Http\Controllers\Api\V1\BannerController;
 use App\Http\Controllers\Api\V1\Auth\AuthController;
+use App\Http\Controllers\Api\V1\BannerController;
 use App\Http\Controllers\Api\V1\Game\GameController;
-use App\Http\Controllers\Api\V1\PromotionController;
-use App\Http\Controllers\LiveChat\MessageController;
-use App\Http\Controllers\Api\V1\ThreeD\PlayController;
-use App\Http\Controllers\Api\V1\Player\WagerController;
-use App\Http\Controllers\Api\V1\TwoD\ApiSlipController;
-use App\Http\Controllers\Api\V1\Webhook\BonusController;
-use App\Http\Controllers\Api\V1\Webhook\BuyInController;
-use App\Http\Controllers\Api\V1\Player\DepositController;
-use App\Http\Controllers\Api\V1\Webhook\BuyOutController;
 use App\Http\Controllers\Api\V1\Game\LaunchGameController;
-use App\Http\Controllers\Api\V1\Player\WithDrawController;
-use App\Http\Controllers\Api\V1\Webhook\JackPotController;
-use App\Http\Controllers\Api\V1\Webhook\PushBetController;
-use App\Http\Controllers\Api\V1\TwoD\TwoDLotteryController;
-use App\Http\Controllers\Api\V1\Webhook\PlaceBetController;
-use App\Http\Controllers\Api\V1\Webhook\RollbackController;
-use App\Http\Controllers\Api\V1\Player\UserPaymentControler;
-use App\Http\Controllers\Api\V1\Webhook\CancelBetController;
-use App\Http\Controllers\Api\V1\Player\TransactionController;
-use App\Http\Controllers\Api\V1\Webhook\GameResultController;
-use App\Http\Controllers\Api\V1\Webhook\GetBalanceController;
-use App\Http\Controllers\Api\V1\TwoD\InternetModernController;
-use App\Http\Controllers\Api\V1\Webhook\MobileLoginController;
-use App\Http\Controllers\Api\V1\TwoD\EveningWinPrizeController;
-use App\Http\Controllers\Api\V1\TwoD\MorningWinPrizeController;
+use App\Http\Controllers\Api\V1\HomeController;
 use App\Http\Controllers\Api\V1\PaymentType\PaymentTypeController;
+use App\Http\Controllers\Api\V1\Player\DepositController;
+use App\Http\Controllers\Api\V1\Player\TransactionController;
+use App\Http\Controllers\Api\V1\Player\UserPaymentControler;
+use App\Http\Controllers\Api\V1\Player\WagerController;
+use App\Http\Controllers\Api\V1\Player\WithDrawController;
+use App\Http\Controllers\Api\V1\PromotionController;
+use App\Http\Controllers\Api\V1\ThreeD\OneWeekRecWihtSlipController;
+use App\Http\Controllers\Api\V1\ThreeD\PlayController;
 use App\Http\Controllers\Api\V1\TwoD\AllWinnerPrizeSentController;
+use App\Http\Controllers\Api\V1\TwoD\ApiSlipController;
+use App\Http\Controllers\Api\V1\TwoD\EveningWinPrizeController;
+use App\Http\Controllers\Api\V1\TwoD\InternetModernController;
+use App\Http\Controllers\Api\V1\TwoD\MorningWinPrizeController;
+use App\Http\Controllers\Api\V1\TwoD\TwoDLotteryController;
 use App\Http\Controllers\Api\V1\TwoD\UserEveningHistoryController;
 use App\Http\Controllers\Api\V1\TwoD\UserMorningHistoryController;
-use App\Http\Controllers\Api\V1\ThreeD\OneWeekRecWihtSlipController;
+use App\Http\Controllers\Api\V1\Webhook\BonusController;
+use App\Http\Controllers\Api\V1\Webhook\BuyInController;
+use App\Http\Controllers\Api\V1\Webhook\BuyOutController;
+use App\Http\Controllers\Api\V1\Webhook\CancelBetController;
+use App\Http\Controllers\Api\V1\Webhook\GameResultController;
+use App\Http\Controllers\Api\V1\Webhook\GetBalanceController;
+use App\Http\Controllers\Api\V1\Webhook\JackPotController;
+use App\Http\Controllers\Api\V1\Webhook\MobileLoginController;
+use App\Http\Controllers\Api\V1\Webhook\PlaceBetController;
+use App\Http\Controllers\Api\V1\Webhook\PushBetController;
+use App\Http\Controllers\Api\V1\Webhook\RollbackController;
+use App\Http\Controllers\LiveChat\MessageController;
+use App\Http\Controllers\TestController;
+use Illuminate\Support\Facades\Route;
 
 //login route post
 Route::post('/login', [AuthController::class, 'login']);
@@ -118,7 +118,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::get('user/internet-digit', [InternetModernController::class, 'index']);
         Route::get('user/modern-digit', [InternetModernController::class, 'Modernindex']);
 
-        // morning slip 
+        // morning slip
         Route::get('/user-morning-slip', [ApiSlipController::class, 'index']);
         Route::get('/user-2d-slip/{slipNo}', [ApiSlipController::class, 'show']);
         // evening slip

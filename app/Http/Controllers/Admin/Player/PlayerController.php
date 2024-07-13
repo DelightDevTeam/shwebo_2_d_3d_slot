@@ -181,7 +181,7 @@ class PlayerController extends Controller
         $user = User::find($id);
         $user->update([
             'status' => $user->status == 1 ? 0 : 1,
-            'note' => $request->note ?? null
+            'note' => $request->note ?? null,
         ]);
 
         return redirect()->route('admin.player.index')->with(

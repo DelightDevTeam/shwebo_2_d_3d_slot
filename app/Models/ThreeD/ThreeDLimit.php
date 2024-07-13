@@ -14,4 +14,9 @@ class ThreeDLimit extends Model
     protected $fillable = [
         'three_d_limit',
     ];
+
+    public function scopeLasted($query)
+    {
+        return $query->orderBy('created_at', 'desc');
+    }
 }

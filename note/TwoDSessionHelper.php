@@ -28,12 +28,15 @@ class TwoDSessionHelper
 
         if ($currentTime->between($morningSessionStart, $morningSessionEnd)) {
             Log::info('Session is morning');
+
             return 'morning';
         } elseif ($currentTime->between($eveningSessionStart, $eveningSessionEnd)) {
             Log::info('Session is evening');
+
             return 'evening';
         } else {
             Log::info('Session is closed');
+
             return 'closed';
         }
     }

@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\ThreeD\Agent\LottoOneWeekHistoryController;
 use App\Http\Controllers\Admin\ThreeD\Agent\WinnerHistoryController;
 use App\Http\Controllers\Admin\ThreeD\ALlHistoryController;
 use App\Http\Controllers\Admin\ThreeD\CurrentMonthHistoryController;
+use App\Http\Controllers\Admin\ThreeD\GetLottoDataByRunningMatchController;
 use App\Http\Controllers\Admin\ThreeD\OneWeekRecordController;
 use App\Http\Controllers\Admin\ThreeD\SettingsController;
 use App\Http\Controllers\Admin\ThreeD\ThreeDManageController;
@@ -267,6 +268,9 @@ Route::group([
     Route::delete('/delete-close-digit/{id}', [ThreeDManageController::class, 'destroy'])->name('DeleteCloseDigit');
 
     Route::get('3d-default-limits', [ThreeDManageController::class, 'ThreedDefaultLimitindex'])->name('ThreeddefaultLimitIndex');
+
+    Route::post('/3d-default-limit-update', [ThreeDManageController::class, 'update'])->name('ThreedDefaultBreakupdate');
+
     Route::post('3d-default-limit-store', [ThreeDManageController::class, 'ThreedLimitstore'])->name('ThreedDefaultlimitStore');
     Route::delete('/3d-delete-defalut-limit/{id}', [ThreeDManageController::class, 'ThreedLimitdestroy'])->name('ThreedDefaultLimitDelete');
     Route::get('/3d-one-week-records', [OneWeekRecordController::class, 'showRecordsForOneWeek'])->name('oneWeekRec');
@@ -283,6 +287,10 @@ Route::group([
     Route::get('/3d-first-winner', [WinnerController::class, 'ThreeDFirstWinner'])->name('WinnerFirst');
     Route::get('/3d-second-winner', [WinnerController::class, 'ThreeDSecondWinner'])->name('WinnerSecond');
     Route::get('/3d-third-winner', [WinnerController::class, 'ThreeDThirdWinner'])->name('WinnerThird');
+    Route::get('/3d-reports', [GetLottoDataByRunningMatchController::class, 'getGroupedByRunningMatch']);
+    Route::get('report/details/{running_match}', [GetLottoDataByRunningMatchController::class, 'getDetailsByRunningMatch'])->name('3dReportShow');
+
+    Route::get('legar/details/{running_match}', [GetLottoDataByRunningMatchController::class, 'LottoLegar'])->name('3dLegarShow');
 
     Route::get('/3d-agent-one-week-records', [LottoOneWeekHistoryController::class, 'AgentRecordsForOneWeek'])->name('AgentoneWeekRec');
     Route::get('/3d-agent-all-history', [LottoOneWeekHistoryController::class, 'showRecords'])->name('AllHistory');

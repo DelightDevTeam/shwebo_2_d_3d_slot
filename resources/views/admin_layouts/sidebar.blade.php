@@ -442,6 +442,12 @@
                     <span class="sidenav-normal  ms-2  ps-1">MoreSetting</span>
                   </a>
                 </li>
+                 <li class="nav-item">
+                  <a class="nav-link text-white " href="{{ url('admin/3d-reports') }}">
+                    <span class="sidenav-mini-icon">3D</span>
+                    <span class="sidenav-normal  ms-2  ps-1">Reports</span>
+                  </a>
+                </li>
                 <li class="nav-item">
                   <a class="nav-link text-white " href="{{ url('admin/3d-users-limit-cor')}}">
                     <span class="sidenav-mini-icon"> 3D </span>

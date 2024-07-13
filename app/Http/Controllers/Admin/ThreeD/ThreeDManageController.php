@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\ThreeD;
 use App\Http\Controllers\Controller;
 use App\Models\ThreeD\LotteryThreeDigitCopy;
 use App\Models\ThreeD\ThreedClose;
+use App\Models\ThreeD\ThreeDigit;
 use App\Models\ThreeD\ThreeDLimit;
 use App\Models\User;
 use App\Services\TwoDUserService;
@@ -147,4 +148,17 @@ class ThreeDManageController extends Controller
             return redirect()->route('admin.3dusers.limit_cor')->with('error', 'An error occurred while updating user commission: '.$e->getMessage());
         }
     }
+
+    public function update(Request $request)
+    {
+        $request->validate([
+            'three_d_limit' => 'required|numeric|min:0',
+        ]);
+
+        $defaultBreak = ThreeDLimit::latest()->first();
+        $defaultBreak->update(['three_d_limit' => $request->three_d_limit]);
+
+        return redirect()->route('admin.ThreedDefaultBreakupdate')->with('success', 'Default Break updated successfully.');
+    }
+
 }

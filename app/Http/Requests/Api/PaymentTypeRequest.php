@@ -17,7 +17,7 @@ class PaymentTypeRequest extends FormRequest
             'payment_type_id' => 'required',
             'account_name' => ['required', 'string'],
             'account_no' => ['required', 'numeric'],
-            "password" => 'required'
+            'password' => 'required',
         ];
     }
 }

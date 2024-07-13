@@ -352,7 +352,7 @@ class AgentController extends Controller
         $user = User::find($id);
         $user->update([
             'status' => $user->status == 1 ? 0 : 1,
-            'note' => $request->note ?? null
+            'note' => $request->note ?? null,
         ]);
 
         if (Auth::check() && Auth::id() == $id) {

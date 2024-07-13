@@ -26,120 +26,75 @@ php artisan view:clear
 
 crontab -e
 
-
-// public static function getCurrentYearAndMatchTimes()
-    // {
-    //     $currentYear = Carbon::now()->year;
-    //     $currentDate = Carbon::now()->toDateString();
-    //     $currentMonth = Carbon::now()->month;
-
-    //     // Get all match times for the current year
-    //     $yearMatchTimes = ThreedMatchTime::whereYear('result_date', $currentYear)->get();
-
-    //     // Get the match times for the current month sorted by date
-    //     $currentMonthMatchTimes = ThreedMatchTime::whereYear('result_date', $currentYear)
-    //         ->whereMonth('result_date', $currentMonth)
-    //         ->orderBy('result_date', 'asc')
-    //         ->get();
-
-    //     // Get the first match time for the current month
-    //     $currentMatchTime = $currentMonthMatchTimes->first();
-
-    //     // If no match times for the current date, fetch the first match time of the next month
-    //     if (! $currentMatchTime) {
-    //         $nextMonth = Carbon::now()->addMonth()->month;
-    //         $nextMonthMatchTime = ThreedMatchTime::whereYear('result_date', $currentYear)
-    //             ->whereMonth('result_date', $nextMonth)
-    //             ->orderBy('result_date', 'asc')
-    //             ->first();
-
-    //         if ($nextMonthMatchTime) {
-    //             $currentMatchTime = $nextMonthMatchTime;
-    //         }
-    //     }
-
-    //     return [
-    //         'currentYear' => $currentYear,
-    //         'yearMatchTimes' => $yearMatchTimes,
-    //         'currentMatchTime' => $currentMatchTime ? [
-    //             'id' => $currentMatchTime->id,
-    //             'result_date' => $currentMatchTime->result_date,
-    //             'match_time' => $currentMatchTime->match_time,
-    //         ] : null,
-    //     ];
-    // }
-    // public static function getCurrentYearAndMatchTimes()
-    //   {
-    //       $currentYear = Carbon::now()->year;
-    //       $currentDate = Carbon::now()->toDateString();
-    //       // logger()->info("Fetching match times for year: $currentYear and date: $currentDate");
-
-    //       // Get all match times for the current year
-    //       $yearMatchTimes = ThreedMatchTime::whereYear('result_date', $currentYear)->get();
-
-    //       // Get the match times for the current date
-    //       $currentMatchTimes = ThreedMatchTime::whereDate('result_date', $currentDate)->get();
-
-    //       // logger()->info('Current match times count: ' . $currentMatchTimes->count());
-
-    //       // If no match times for the current date, fetch the first match time of the next month
-    //       if ($currentMatchTimes->isEmpty()) {
-    //           $nextMonth = Carbon::now()->addMonth()->month;
-    //           $nextMonthMatchTime = ThreedMatchTime::whereYear('result_date', $currentYear)
-    //               ->whereMonth('result_date', $nextMonth)
-    //               ->orderBy('result_date', 'asc')
-    //               ->first();
-
-    //           if ($nextMonthMatchTime) {
-    //               $currentMatchTimes = collect([$nextMonthMatchTime]);
-    //           }
-    //       }
-
-    //       $currentMatchTime = $currentMatchTimes->first();
-
-    //       return [
-    //           'currentYear' => $currentYear,
-    //           'yearMatchTimes' => $yearMatchTimes,
-    //           'currentMatchTime' => $currentMatchTime ? [
-    //               'id' => $currentMatchTime->id,
-    //               'result_date' => $currentMatchTime->result_date,
-    //               'result_time' => $currentMatchTime->result_time,
-    //               'match_time' => $currentMatchTime->match_time,
-    //           ] : null
-    //       ];
-    //   }
-    // public static function getCurrentYearAndMatchTimes()
-    // {
-    //     $currentYear = Carbon::now()->year;
-    //     $currentDate = Carbon::now()->toDateString();
-    //     // logger()->info("Fetching match times for year: $currentYear and date: $currentDate");
-
-    //     // Get all match times for the current year
-    //     $yearMatchTimes = ThreedMatchTime::whereYear('result_date', $currentYear)->get();
-
-    //     // Get the match times for the current date
-    //     $currentMatchTimes = ThreedMatchTime::whereDate('result_date', $currentDate)->get();
-
-    //     // logger()->info('Current match times count: ' . $currentMatchTimes->count());
-
-    //     // If no match times for the current date, fetch the first match time of the next month
-    //     if ($currentMatchTimes->isEmpty()) {
-    //         $nextMonth = Carbon::now()->addMonth()->month;
-    //         $nextMonthMatchTime = ThreedMatchTime::whereYear('result_date', $currentYear)
-    //             ->whereMonth('result_date', $nextMonth)
-    //             ->orderBy('result_date', 'asc')
-    //             ->first();
-
-    //         if ($nextMonthMatchTime) {
-    //             $currentMatchTimes = collect([$nextMonthMatchTime]);
-    //         }
-    //     }
-
-    //     $currentMatchTime = $currentMatchTimes->first();
-
-    //     return [
-    //         'currentYear' => $currentYear,
-    //         'yearMatchTimes' => $yearMatchTimes,
-    //         'currentMatchTime' => $currentMatchTime ? $currentMatchTime->match_time : null
-    //     ];
-    // }
+--------------------------------
+for 3d group by running match 
+SELECT
+    running_match,
+    COUNT(*) as total_records,
+    SUM(sub_amount) as total_amount
+FROM
+    lottery_three_digit_pivots
+GROUP BY
+    running_match;
+--------------------------------
+SELECT
+    lottery_three_digit_pivots.running_match,
+    users.user_name,
+    users.phone,
+    lottery_three_digit_pivots.agent_id,
+    lottery_three_digit_pivots.bet_digit,
+    lottery_three_digit_pivots.sub_amount,
+    lottery_three_digit_pivots.res_date,
+    lottery_three_digit_pivots.res_time,
+    lottery_three_digit_pivots.play_date,
+    lottery_three_digit_pivots.play_time,
+    lottery_three_digit_pivots.match_start_date,
+    lottery_three_digit_pivots.match_status,
+    lottery_three_digit_pivots.win_lose,
+    lottery_three_digit_pivots.prize_sent,
+    COUNT(*) as total_records,
+    SUM(lottery_three_digit_pivots.sub_amount) as total_amount
+FROM
+    lottery_three_digit_pivots
+JOIN
+    users ON lottery_three_digit_pivots.user_id = users.id
+GROUP BY
+    lottery_three_digit_pivots.running_match,
+    users.user_name,
+    users.phone,
+    lottery_three_digit_pivots.agent_id,
+    lottery_three_digit_pivots.bet_digit,
+    lottery_three_digit_pivots.sub_amount,
+    lottery_three_digit_pivots.res_date,
+    lottery_three_digit_pivots.res_time,
+    lottery_three_digit_pivots.play_date,
+    lottery_three_digit_pivots.play_time,
+    lottery_three_digit_pivots.match_start_date,
+    lottery_three_digit_pivots.match_status,
+    lottery_three_digit_pivots.win_lose,
+    lottery_three_digit_pivots.prize_sent;
+-----------------------------------------------
+SELECT
+    lottery_three_digit_pivots.running_match,
+    users.user_name,
+    users.phone,
+    lottery_three_digit_pivots.agent_id,
+    lottery_three_digit_pivots.bet_digit,
+    lottery_three_digit_pivots.sub_amount,
+    lottery_three_digit_pivots.res_date,
+    lottery_three_digit_pivots.res_time,
+    lottery_three_digit_pivots.play_date,
+    lottery_three_digit_pivots.play_time,
+    lottery_three_digit_pivots.match_start_date,
+    lottery_three_digit_pivots.match_status,
+    lottery_three_digit_pivots.win_lose,
+    lottery_three_digit_pivots.prize_sent,
+    COUNT(*) as total_records,
+    SUM(lottery_three_digit_pivots.sub_amount) as total_amount
+FROM
+    lottery_three_digit_pivots
+JOIN
+    users ON lottery_three_digit_pivots.user_id = users.id
+GROUP BY
+    lottery_three_digit_pivots.running_match;
+----------------------------------------------------------

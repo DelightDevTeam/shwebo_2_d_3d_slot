@@ -2,19 +2,19 @@
 
 namespace App\Services;
 
-use Carbon\Carbon;
-use App\Models\TwoD\Lottery;
-use App\Models\TwoD\TwoDigit;
 use App\Helpers\SessionHelper;
+use App\Helpers\TwoDSessionHelper;
+use App\Models\SlipNumberCounter;
+use App\Models\TwoD\Lottery;
+use App\Models\TwoD\LotteryTwoDigitPivot;
+use App\Models\TwoD\TwoDigit;
 use App\Models\TwoD\TwoDLimit;
 use App\Models\TwoD\TwodSetting;
-use App\Models\SlipNumberCounter;
-use App\Helpers\TwoDSessionHelper;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Auth;
-use App\Models\TwoD\LotteryTwoDigitPivot;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class TwoDPlayService
 {
@@ -71,7 +71,7 @@ class TwoDPlayService
 
             $slipNo = $randomNumber.'-'.$customString.'-'.$currentDate.'-'.$currentTime; // Combine date, string, and random number
             $current_session = SessionHelper::getCurrentSession();
-            Log::info('today current session is : ' . $current_session);
+            Log::info('today current session is : '.$current_session);
 
             $lottery = Lottery::create([
                 'pay_amount' => $totalAmount,
