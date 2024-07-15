@@ -2,27 +2,27 @@
 
 namespace App\Http\Controllers\Admin\ThreeD;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
 
 class LottoWinnerHistoryController extends Controller
 {
     public function getGroupedByRunningMatch()
-{
-    $reports = DB::table('lottery_three_digit_pivots')
-        ->select('running_match', DB::raw('COUNT(*) as total_records'), DB::raw('SUM(sub_amount) as total_amount'))
-        ->where('prize_sent', true) // Filter where prize_sent is true
-        ->groupBy('running_match')
-        ->orderByDesc('running_match') // Optional: order by running_match descending
-        ->get();
+    {
+        $reports = DB::table('lottery_three_digit_pivots')
+            ->select('running_match', DB::raw('COUNT(*) as total_records'), DB::raw('SUM(sub_amount) as total_amount'))
+            ->where('prize_sent', true) // Filter where prize_sent is true
+            ->groupBy('running_match')
+            ->orderByDesc('running_match') // Optional: order by running_match descending
+            ->get();
 
-    return view('admin.three_d.report.first_winner.index', compact('reports'));
+        return view('admin.three_d.report.first_winner.index', compact('reports'));
 
-    //return response()->json($results);
-}
+        //return response()->json($results);
+    }
 
-public function getFirstPrizeDetailsByRunningMatch($running_match)
+    public function getFirstPrizeDetailsByRunningMatch($running_match)
     {
         $reports = DB::table('lottery_three_digit_pivots')
             ->join('users', 'lottery_three_digit_pivots.user_id', '=', 'users.id')
@@ -53,22 +53,21 @@ public function getFirstPrizeDetailsByRunningMatch($running_match)
         //return response()->json($details);
     }
 
-
     public function getSecondPrizeGroupedByRunningMatch()
-{
-    $reports = DB::table('lottery_three_digit_pivots')
-        ->select('running_match', DB::raw('COUNT(*) as total_records'), DB::raw('SUM(sub_amount) as total_amount'))
-        ->where('prize_sent', 2) // Filter where prize_sent is true
-        ->groupBy('running_match')
-        ->orderByDesc('running_match') // Optional: order by running_match descending
-        ->get();
+    {
+        $reports = DB::table('lottery_three_digit_pivots')
+            ->select('running_match', DB::raw('COUNT(*) as total_records'), DB::raw('SUM(sub_amount) as total_amount'))
+            ->where('prize_sent', 2) // Filter where prize_sent is true
+            ->groupBy('running_match')
+            ->orderByDesc('running_match') // Optional: order by running_match descending
+            ->get();
 
-    return view('admin.three_d.report.second_winner.index', compact('reports'));
+        return view('admin.three_d.report.second_winner.index', compact('reports'));
 
-    //return response()->json($results);
-}
+        //return response()->json($results);
+    }
 
-public function getSecondPrizeDetailsByRunningMatch($running_match)
+    public function getSecondPrizeDetailsByRunningMatch($running_match)
     {
         $reports = DB::table('lottery_three_digit_pivots')
             ->join('users', 'lottery_three_digit_pivots.user_id', '=', 'users.id')
@@ -100,20 +99,20 @@ public function getSecondPrizeDetailsByRunningMatch($running_match)
     }
 
     public function getThirdPrizeGroupedByRunningMatch()
-{
-    $reports = DB::table('lottery_three_digit_pivots')
-        ->select('running_match', DB::raw('COUNT(*) as total_records'), DB::raw('SUM(sub_amount) as total_amount'))
-        ->where('prize_sent', 3) // Filter where prize_sent is true
-        ->groupBy('running_match')
-        ->orderByDesc('running_match') // Optional: order by running_match descending
-        ->get();
+    {
+        $reports = DB::table('lottery_three_digit_pivots')
+            ->select('running_match', DB::raw('COUNT(*) as total_records'), DB::raw('SUM(sub_amount) as total_amount'))
+            ->where('prize_sent', 3) // Filter where prize_sent is true
+            ->groupBy('running_match')
+            ->orderByDesc('running_match') // Optional: order by running_match descending
+            ->get();
 
-    return view('admin.three_d.report.third_winner.index', compact('reports'));
+        return view('admin.three_d.report.third_winner.index', compact('reports'));
 
-    //return response()->json($results);
-}
+        //return response()->json($results);
+    }
 
-public function getThirdPrizeDetailsByRunningMatch($running_match)
+    public function getThirdPrizeDetailsByRunningMatch($running_match)
     {
         $reports = DB::table('lottery_three_digit_pivots')
             ->join('users', 'lottery_three_digit_pivots.user_id', '=', 'users.id')
@@ -143,8 +142,4 @@ public function getThirdPrizeDetailsByRunningMatch($running_match)
 
         //return response()->json($details);
     }
-
-
-
-
 }

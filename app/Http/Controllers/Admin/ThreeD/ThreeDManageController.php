@@ -160,5 +160,4 @@ class ThreeDManageController extends Controller
 
         return redirect()->route('admin.ReportIndex')->with('success', 'Default Break updated successfully.');
     }
-
 }

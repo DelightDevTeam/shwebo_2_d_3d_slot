@@ -58,7 +58,7 @@ class ThreedSettingTableSeeder extends Seeder
                         'result_time' => '15:30:00',
                         'match_start_date' => $matchStartDateApril17->format('Y-m-d'),
                         'status' => 'closed',
-                       // 'endpoint' => 'https://shwebo2d3dapi.online',
+                        // 'endpoint' => 'https://shwebo2d3dapi.online',
                     ]);
 
                     // Second game in May
@@ -84,7 +84,7 @@ class ThreedSettingTableSeeder extends Seeder
                         'result_time' => '15:30:00',
                         'match_start_date' => $matchStartDate17->format('Y-m-d'),
                         'status' => 'closed',
-                       // 'endpoint' => 'https://shwebo2d3dapi.online',
+                        // 'endpoint' => 'https://shwebo2d3dapi.online',
                     ]);
                 }
             }

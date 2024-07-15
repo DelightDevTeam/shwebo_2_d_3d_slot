@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin\ThreeD;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Models\ThreeD\ThreeDigit;
 use App\Models\ThreeD\ThreeDLimit;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
 
 class GetLottoDataByRunningMatchController extends Controller
 {
@@ -140,51 +140,50 @@ class GetLottoDataByRunningMatchController extends Controller
     }
 
     public function LottoLegar($running_match)
-{
+    {
         $defaultBreak = ThreeDLimit::lasted()->first();
-    
-    // Retrieve all three-digit numbers from the ThreeDigit model
-    $threeDigitNumbers = ThreeDigit::all()->pluck('three_digit');
 
-    $reports = DB::table('lottery_three_digit_pivots')
-        ->join('users', 'lottery_three_digit_pivots.user_id', '=', 'users.id')
-        ->join('lottos', 'lottery_three_digit_pivots.lotto_id', '=', 'lottos.id')
-        ->select(
-            'users.user_name',
-            'users.phone',
-            'lottery_three_digit_pivots.agent_id',
-            'lottery_three_digit_pivots.bet_digit',
-            'lottery_three_digit_pivots.sub_amount',
-            'lottery_three_digit_pivots.res_date',
-            'lottery_three_digit_pivots.res_time',
-            'lottery_three_digit_pivots.play_date',
-            'lottery_three_digit_pivots.play_time',
-            'lottery_three_digit_pivots.match_start_date',
-            'lottery_three_digit_pivots.match_status',
-            'lottery_three_digit_pivots.win_lose',
-            'lottery_three_digit_pivots.prize_sent',
-            'lottos.slip_no'
-        )
-        ->where('lottery_three_digit_pivots.running_match', $running_match)
-        ->orderByDesc('lottery_three_digit_pivots.created_at')
-        ->get();
+        // Retrieve all three-digit numbers from the ThreeDigit model
+        $threeDigitNumbers = ThreeDigit::all()->pluck('three_digit');
 
-    // Calculate the sub amounts for each digit
-    $subAmounts = DB::table('lottery_three_digit_pivots')
-        ->select(DB::raw('LEFT(bet_digit, 3) as three_digit'), DB::raw('SUM(sub_amount) as total_sub_amount'))
-        ->where('running_match', $running_match)
-        ->groupBy(DB::raw('LEFT(bet_digit, 3)'))
-        ->pluck('total_sub_amount', 'three_digit');
+        $reports = DB::table('lottery_three_digit_pivots')
+            ->join('users', 'lottery_three_digit_pivots.user_id', '=', 'users.id')
+            ->join('lottos', 'lottery_three_digit_pivots.lotto_id', '=', 'lottos.id')
+            ->select(
+                'users.user_name',
+                'users.phone',
+                'lottery_three_digit_pivots.agent_id',
+                'lottery_three_digit_pivots.bet_digit',
+                'lottery_three_digit_pivots.sub_amount',
+                'lottery_three_digit_pivots.res_date',
+                'lottery_three_digit_pivots.res_time',
+                'lottery_three_digit_pivots.play_date',
+                'lottery_three_digit_pivots.play_time',
+                'lottery_three_digit_pivots.match_start_date',
+                'lottery_three_digit_pivots.match_status',
+                'lottery_three_digit_pivots.win_lose',
+                'lottery_three_digit_pivots.prize_sent',
+                'lottos.slip_no'
+            )
+            ->where('lottery_three_digit_pivots.running_match', $running_match)
+            ->orderByDesc('lottery_three_digit_pivots.created_at')
+            ->get();
 
-    // Combine the threeDigitNumbers numbers with their sub-amounts
-    $twoDigitData = $threeDigitNumbers->map(function ($digit) use ($subAmounts) {
-        return [
-            'digit' => $digit,
-            'total_sub_amount' => $subAmounts->get(substr($digit, 0, 3), 0), 
-        ];
-    });
+        // Calculate the sub amounts for each digit
+        $subAmounts = DB::table('lottery_three_digit_pivots')
+            ->select(DB::raw('LEFT(bet_digit, 3) as three_digit'), DB::raw('SUM(sub_amount) as total_sub_amount'))
+            ->where('running_match', $running_match)
+            ->groupBy(DB::raw('LEFT(bet_digit, 3)'))
+            ->pluck('total_sub_amount', 'three_digit');
 
-    return view('admin.three_d.report.lager_show', compact('reports', 'twoDigitData', 'defaultBreak'));
-}
+        // Combine the threeDigitNumbers numbers with their sub-amounts
+        $twoDigitData = $threeDigitNumbers->map(function ($digit) use ($subAmounts) {
+            return [
+                'digit' => $digit,
+                'total_sub_amount' => $subAmounts->get(substr($digit, 0, 3), 0),
+            ];
+        });
 
+        return view('admin.three_d.report.lager_show', compact('reports', 'twoDigitData', 'defaultBreak'));
+    }
 }
