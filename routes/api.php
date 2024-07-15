@@ -139,6 +139,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         // second winner 
         Route::get('/second-prize-winner', [LottoPrizeWinnerHistoryController::class, 'SecondPrizeWinnerApi']);
         Route::get('/second-prize-show/{running_match}', [LottoPrizeWinnerHistoryController::class, 'getSecondPrizeShowByRunningMatch']);
+        // third prize winner 
+        Route::get('/third-prize-winner', [LottoPrizeWinnerHistoryController::class, 'ThirdPrizeWinnerApi']);
+        Route::get('/third-prize-show/{running_match}', [LottoPrizeWinnerHistoryController::class, 'getThirdPrizeShowByRunningMatch']);
+
 
 
     });
