@@ -49,7 +49,7 @@ class LottoPrizeWinnerHistoryController extends Controller
                 'lottos.slip_no'
             )
             ->where('lottery_three_digit_pivots.running_match', $running_match)
-            ->where('user_id', $user_id) // Filter where user id is auth id
+            ->where('lottery_three_digit_pivots.user_id', $user_id) // Filter where user id is auth id
             ->where('lottery_three_digit_pivots.prize_sent', true)
             ->orderByDesc('lottery_three_digit_pivots.created_at')
             ->get();
