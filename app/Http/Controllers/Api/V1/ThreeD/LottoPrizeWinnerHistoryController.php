@@ -38,6 +38,7 @@ class LottoPrizeWinnerHistoryController extends Controller
                 'lottery_three_digit_pivots.agent_id',
                 'lottery_three_digit_pivots.bet_digit',
                 'lottery_three_digit_pivots.sub_amount',
+                DB::raw('lottery_three_digit_pivots.sub_amount * 600 as total_prize'),
                 'lottery_three_digit_pivots.res_date',
                 'lottery_three_digit_pivots.res_time',
                 'lottery_three_digit_pivots.play_date',
