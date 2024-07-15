@@ -32,7 +32,7 @@ class ThreedSettingTableSeeder extends Seeder
                     'result_time' => '15:30:00',
                     'match_start_date' => $matchStartDateFirst->format('Y-m-d'),
                     'status' => 'closed',
-                    'endpoint' => 'https://shwebo2d3dapi.online',
+                    //'endpoint' => 'https://shwebo2d3dapi.online',
                 ]);
 
                 // Match start date and result date logic for the second game
@@ -44,7 +44,7 @@ class ThreedSettingTableSeeder extends Seeder
                     'result_time' => '15:30:00',
                     'match_start_date' => $matchStartDateSecond->format('Y-m-d'),
                     'status' => 'closed',
-                    'endpoint' => 'https://shwebo2d3dapi.online',
+                    //'endpoint' => 'https://shwebo2d3dapi.online',
                 ]);
 
                 // Special case for May
@@ -58,7 +58,7 @@ class ThreedSettingTableSeeder extends Seeder
                         'result_time' => '15:30:00',
                         'match_start_date' => $matchStartDateApril17->format('Y-m-d'),
                         'status' => 'closed',
-                        'endpoint' => 'https://shwebo2d3dapi.online',
+                       // 'endpoint' => 'https://shwebo2d3dapi.online',
                     ]);
 
                     // Second game in May
@@ -70,7 +70,7 @@ class ThreedSettingTableSeeder extends Seeder
                         'result_time' => '15:30:00',
                         'match_start_date' => $matchStartDateMay2->format('Y-m-d'),
                         'status' => 'closed',
-                        'endpoint' => 'https://shwebo2d3dapi.online',
+                        //'endpoint' => 'https://shwebo2d3dapi.online',
                     ]);
                 }
 
@@ -84,7 +84,7 @@ class ThreedSettingTableSeeder extends Seeder
                         'result_time' => '15:30:00',
                         'match_start_date' => $matchStartDate17->format('Y-m-d'),
                         'status' => 'closed',
-                        'endpoint' => 'https://shwebo2d3dapi.online',
+                       // 'endpoint' => 'https://shwebo2d3dapi.online',
                     ]);
                 }
             }

@@ -158,7 +158,7 @@ class ThreeDManageController extends Controller
         $defaultBreak = ThreeDLimit::latest()->first();
         $defaultBreak->update(['three_d_limit' => $request->three_d_limit]);
 
-        return redirect()->route('admin.ThreedDefaultBreakupdate')->with('success', 'Default Break updated successfully.');
+        return redirect()->route('admin.ReportIndex')->with('success', 'Default Break updated successfully.');
     }
 
 }

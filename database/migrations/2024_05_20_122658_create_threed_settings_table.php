@@ -18,9 +18,10 @@ return new class extends Migration
             $table->date('match_start_date')->nullable();
             $table->string('result_number')->nullable();
             $table->enum('status', ['open', 'closed', 'pending'])->default('pending'); // Status of the lottery
-            $table->enum('admin_log', ['open', 'closed'])->default('open'); // New status column
-            $table->enum('user_log', ['open', 'closed'])->default('open'); // New status column
-            $table->string('endpoint')->nullable(); // Endpoint URL for more information
+            //$table->enum('admin_log', ['open', 'closed'])->default('open'); // New status column
+            //$table->enum('user_log', ['open', 'closed'])->default('open'); // New status column
+            //$table->string('endpoint')->nullable(); // Endpoint URL for more information
+            $table->enum('prize_status', ['open', 'closed'])->default('closed'); // New status column
             $table->timestamps();
         });
     }
