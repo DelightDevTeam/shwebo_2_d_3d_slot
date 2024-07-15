@@ -290,6 +290,14 @@ Route::group([
     Route::get('/3d-first-prize', [LottoWinnerHistoryController::class, 'getGroupedByRunningMatch'])->name('WinnerFirstPrize');
     Route::get('report/first/{running_match}', [LottoWinnerHistoryController::class, 'getFirstPrizeDetailsByRunningMatch'])->name('3dReportFirstShow');
 
+    Route::get('/3d-second-prize', [LottoWinnerHistoryController::class, 'getSecondPrizeGroupedByRunningMatch'])->name('WinnerSecondPrize');
+    Route::get('report/second/{running_match}', [LottoWinnerHistoryController::class, 'getSecondPrizeDetailsByRunningMatch'])->name('3dReportSecondShow');
+
+    Route::get('/3d-third-prize', [LottoWinnerHistoryController::class, 'getThirdPrizeGroupedByRunningMatch'])->name('WinnerThirdPrize');
+    Route::get('report/third/{running_match}', [LottoWinnerHistoryController::class, 'getThirdPrizeDetailsByRunningMatch'])->name('3dReportThirdShow');
+
+    // 3d prize v2 end 
+    
     Route::get('/3d-second-winner', [WinnerController::class, 'ThreeDSecondWinner'])->name('WinnerSecond');
     Route::get('/3d-third-winner', [WinnerController::class, 'ThreeDThirdWinner'])->name('WinnerThird');
     Route::get('/3d-reports', [GetLottoDataByRunningMatchController::class, 'getGroupedByRunningMatch'])->name('ReportIndex');
