@@ -135,7 +135,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::get('/user/one-week-slip-no/{userId}/{slipNo}', [OneWeekRecWihtSlipController::class, 'show'])->name('SlipDetail');
         // first winner
         Route::get('/first-prize-winner', [LottoPrizeWinnerHistoryController::class, 'FirstPrizeWinnerApi']);
-        Route::get('/first-prize-show/{running_match}', [LottoPrizeWinnerHistoryController::class, 'getFirstPrizeDetailsByRunningMatch']);
+        Route::get('/first-prize-show/{running_match}', [LottoPrizeWinnerHistoryController::class, 'getFirstPrizeShowByRunningMatch']);
 
 
     });

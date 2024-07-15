@@ -26,7 +26,7 @@ class LottoPrizeWinnerHistoryController extends Controller
         ]);
     }
 
-    public function getFirstPrizeDetailsByRunningMatch($running_match)
+    public function getFirstPrizeShowByRunningMatch($running_match)
     {
         $user_id = Auth()->id();
         $reports = DB::table('lottery_three_digit_pivots')
