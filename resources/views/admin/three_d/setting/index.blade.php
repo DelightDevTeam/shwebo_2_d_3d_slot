@@ -52,6 +52,8 @@
        <th>CreatePrizeNumber</th>
        <th>Status</th>
        <th>3DMatch Open/Close</th>
+       <th>CloseTime</th>
+       <th>PrizeStatus</th>
       </tr>
      </thead>
      <tbody>
@@ -107,11 +109,42 @@
     <!-- Submit button -->
     <button type="submit" class="btn btn-primary mt-2">{{ $result->status == 'open' ? 'closed' : 'open' }}"
             {{ $result->status == 'open' ? 'checked' : '' }}</button>
-</form>
+        </form>
+        </td>
+        <td>
+        <form id="statusForm" action="{{ route('admin.ThreeDCloseTime', ['id' => $result->id]) }}" method="post">
+            @csrf
+            @method('PATCH')
+            <select name="closed_time" id="">
+                <option value="">{{ $result->closed_time ?? '' }}</option>
+                <option value="12:30">12:30</option>
+                <option value="14:00">2:00</option>
+            </select>
+            <button type="submit" class="btn btn-info btn-sm">MatchClose</button>
+        </form>
+        </td>
 
-</td>
+        <td>
+    <form action="{{ route('admin.PrizeStatusOpenClose', ['id' => $result->id]) }}" method="post">
+    @csrf
+    @method('PATCH')
+    
+    <!-- Switch for toggling status -->
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="statusSwitch-{{ $result->id }}"
+            name="prize_status" value="{{ $result->prize_status == 'open' ? 'closed' : 'open' }}"
+            {{ $result->prize_status == 'open' ? 'checked' : '' }}>
 
-
+        <label class="form-check-label" for="statusSwitch-{{ $result->id }}">
+            {{ $result->prize_status == 'open' ? 'Open' : 'Closed' }}
+        </label>
+    </div>
+    
+    <!-- Submit button -->
+    <button type="submit" class="btn btn-primary mt-2">{{ $result->prize_status == 'open' ? 'closed' : 'open' }}"
+            {{ $result->prize_status == 'open' ? 'checked' : '' }}</button>
+        </form>
+        </td>
       </tr>
       @endforeach
      </tbody>

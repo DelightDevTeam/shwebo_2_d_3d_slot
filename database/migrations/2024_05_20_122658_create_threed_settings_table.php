@@ -22,6 +22,7 @@ return new class extends Migration
             //$table->enum('user_log', ['open', 'closed'])->default('open'); // New status column
             //$table->string('endpoint')->nullable(); // Endpoint URL for more information
             $table->enum('prize_status', ['open', 'closed'])->default('closed'); // New status column
+            $table->time('closed_time')->nullable();
             $table->timestamps();
         });
     }

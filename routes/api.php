@@ -136,14 +136,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         // first winner
         Route::get('/first-prize-winner', [LottoPrizeWinnerHistoryController::class, 'FirstPrizeWinnerApi']);
         Route::get('/first-prize-show/{running_match}', [LottoPrizeWinnerHistoryController::class, 'getFirstPrizeShowByRunningMatch']);
-        // second winner 
+        // second winner
         Route::get('/second-prize-winner', [LottoPrizeWinnerHistoryController::class, 'SecondPrizeWinnerApi']);
         Route::get('/second-prize-show/{running_match}', [LottoPrizeWinnerHistoryController::class, 'getSecondPrizeShowByRunningMatch']);
-        // third prize winner 
+        // third prize winner
         Route::get('/third-prize-winner', [LottoPrizeWinnerHistoryController::class, 'ThirdPrizeWinnerApi']);
         Route::get('/third-prize-show/{running_match}', [LottoPrizeWinnerHistoryController::class, 'getThirdPrizeShowByRunningMatch']);
-
-
 
     });
     Route::group(['prefix' => 'live-chat'], function () {

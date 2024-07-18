@@ -117,7 +117,7 @@
         </form>
                 
             </td>
-            <td>
+    <td>
             
     <form id="statusForm" action="{{ route('admin.TwoDCloseTime', ['id' => $morningSession->id]) }}" method="post">
         @csrf

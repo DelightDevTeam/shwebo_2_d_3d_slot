@@ -23,7 +23,9 @@ class Kernel extends ConsoleKernel
         Commands\EveningPrizeStatusClose::class,
         Commands\CloseMorningSession::class,
         Commands\EveningSessionClose::class,
-        Commands\UpdateMatchStatus::class, // 3d
+        // Commands\UpdateMatchStatus::class, // 3d
+        Commands\ThreeDMatchStatusOpen::class, // 3d
+        Commands\ThreeDMatchStatusClose::class, // 3d
     ];
 
     /**
@@ -44,9 +46,14 @@ class Kernel extends ConsoleKernel
         $schedule->command('session:evening-status-open')->dailyAt('12:02')->timezone('Asia/Yangon'); // Assuming this is when you want it to run
         $schedule->command('session:evening-prize-status-open')->dailyAt('16:31')->timezone('Asia/Yangon'); // Set a specific time
         $schedule->command('session:evening-prize-status-close')->dailyAt('20:00')->timezone('Asia/Yangon'); // Set a specific time
-        $schedule->command('match:update-status')->dailyAt('14:00'); // 3d
         $schedule->command('session:close-morning')->dailyAt('11:45')->timezone('Asia/Yangon'); // Set a specific time
         $schedule->command('session:close-evening')->dailyAt('23:00')->timezone('Asia/Yangon'); // Set a specific time
+        //3d
+        //$schedule->command('match:update-status')->dailyAt('14:00'); // 3d
+        $schedule->command('app:three-d-match-status-open')
+            ->dailyAt('00:00')->timezone('Asia/Yangon'); //3d match status open
+        $schedule->command('app:three-d-match-status-close')
+            ->dailyAt('14:00')->timezone('Asia/Yangon'); //3d match status close
 
     }
 

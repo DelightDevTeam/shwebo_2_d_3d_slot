@@ -240,6 +240,8 @@ Route::group([
     Route::post('/3-d-reset', [ThreeDManageController::class, 'ThreeDReset'])->name('ThreeDReset');
 
     Route::get('3d-settings', [SettingsController::class, 'index']);
+    Route::patch('/3d-close/{id}/time', [SettingsController::class, 'UpdateCloseSessionTime'])->name('ThreeDCloseTime');
+
     Route::get('3d-more-setting', [SettingsController::class, 'getCurrentMonthResultsSetting']);
     Route::get('/3d-users-with-agents', [ThreeDManageController::class, 'Userindex'])->name('2dusers.with_agents');
 
@@ -252,6 +254,8 @@ Route::group([
     // result date update
     Route::patch('/3d-results/{id}/status', [SettingsController::class, 'updateStatus'])
         ->name('ThreedOpenClose');
+    Route::patch('/3d-prize/{id}/status', [SettingsController::class, 'updatePrizeStatus'])
+        ->name('PrizeStatusOpenClose');
     Route::patch('/three-d-results/{id}/status', [SettingsController::class, 'updateResultNumber'])
         ->name('UpdateResult_number');
 

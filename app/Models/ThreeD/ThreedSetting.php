@@ -11,7 +11,7 @@ class ThreedSetting extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['result_date', 'result_time', 'result_number', 'status', 'admin_log', 'user_log', 'match_start_date', 'endpoint'];
+    protected $fillable = ['result_date', 'result_time', 'result_number', 'status', 'match_start_date', 'prize_status', 'closed_time'];
 
     protected static function booted()
     {

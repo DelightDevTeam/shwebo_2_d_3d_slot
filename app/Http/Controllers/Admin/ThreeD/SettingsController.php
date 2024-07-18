@@ -87,6 +87,25 @@ class SettingsController extends Controller
         return redirect()->back()->with('success', "Status changed to '{$newStatus}' successfully.");
     }
 
+    public function updatePrizeStatus(Request $request, $id)
+    {
+        // Get the new status with a fallback default
+        $newStatus = $request->input('prize_status', 'closed'); // Default to 'closed' if not provided
+
+        // Find the existing record and update the status
+        $result = ThreedSetting::findOrFail($id);
+
+        // Ensure the status is not NULL before updating
+        if (is_null($newStatus)) {
+            return redirect()->back()->with('error', 'prize_status cannot be null');
+        }
+
+        $result->prize_status = $newStatus;
+        $result->save();
+
+        return redirect()->back()->with('success', "prize_status changed to '{$newStatus}' successfully.");
+    }
+
     public function updateResultNumber(Request $request, $id)
     {
         $result_number = $request->input('result_number'); // The new status
@@ -112,6 +131,58 @@ class SettingsController extends Controller
 
         // Return a response (like a JSON object)
         return redirect()->back()->with('success', 'Result number updated successfully.'); // Redirect back with success message
+    }
+
+    // public function UpdateCloseSessionTime(Request $request, $id)
+    // {
+    //     $closed_time = $request->input('closed_time'); // The new closed time
+
+    //     // Find the result by ID
+    //     $result = ThreedSetting::findOrFail($id);
+
+    //     // Update the closed time
+    //     $result->closed_time = $closed_time;
+    //     $result->save();
+
+    //     // Fetch today's date and current session
+    //     $today = Carbon::today('Asia/Yangon');
+
+    //     // Update closed time for all twod_data in the current session
+    //     $twod_data = ThreedSetting::where('result_date', $today)->get();
+    //     foreach ($twod_data as $twod) {
+    //         $twod->closed_time = $closed_time;
+    //         $twod->save();
+    //     }
+
+    //     // Return a response (like a JSON object)
+    //     return redirect()->back()->with('success', 'Closed time updated successfully.');
+    // }
+
+    public function UpdateCloseSessionTime(Request $request, $id)
+    {
+        $closed_time = $request->input('closed_time');
+
+        $this->updateThreedSetting($id, $closed_time);
+        $this->updateTwodDataClosedTime($closed_time);
+
+        return redirect()->back()->with('success', 'Closed time updated successfully.');
+    }
+
+    private function updateThreedSetting($id, $closed_time)
+    {
+        $result = ThreedSetting::findOrFail($id);
+        $result->closed_time = $closed_time;
+        $result->save();
+    }
+
+    private function updateTwodDataClosedTime($closed_time)
+    {
+        $data = ThreedSetting::whereIn('status', ['open', 'closed'])->get();
+
+        foreach ($data as $obj) {
+            $obj->closed_time = $closed_time;
+            $obj->save();
+        }
     }
 
     public function PermutationStore(Request $request)
