@@ -41,6 +41,13 @@ class GameTypeTableSeeder extends Seeder
                 'status' => 1,
                 'img' => 'fishing.png',
             ],
+            [
+                'name' => 'Testing 1',
+                'code' => '11',
+                'order' => '4',
+                'status' => 1,
+                'img' => 'fishing.png',
+            ],
         ];
 
         GameType::insert($data);
