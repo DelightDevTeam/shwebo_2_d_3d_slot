@@ -59,6 +59,10 @@ class HomeController extends Controller
         $appSetting = new AppSetting();
         $provider_balance = $appSetting->provider_initial_balance + SeamlessTransaction::sum("transaction_amount");
         Log::info('Provider Initial Balance: ' . $appSetting->provider_initial_balance);
+
+        Log::info('Seamless Transactions Sum: ' . SeamlessTransaction::sum("transaction_amount"));
+        Log::info('Calculated Provider Balance: ' . $provider_balance);
+
         
         $agent_count = $getUserCounts('Agent');
         $player_count = $getUserCounts('Player');
