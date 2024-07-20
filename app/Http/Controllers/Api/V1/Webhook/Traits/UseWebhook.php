@@ -49,7 +49,15 @@ trait UseWebhook
         if ($requestTransaction->TransactionAmount <= 0) {
             Log::warning('Skipping invalid transaction amount', [
                 'TransactionID' => $requestTransaction->TransactionID,
-                'TransactionAmount' => $requestTransaction->TransactionAmount
+                'TransactionAmount' => $requestTransaction->TransactionAmount,
+                'WagerID' => $requestTransaction->WagerID,
+                'GameType' => $requestTransaction->GameType,
+                'ProductID' => $requestTransaction->ProductID,
+                'BetAmount' => $requestTransaction->BetAmount,
+                'ValidBetAmount' => $requestTransaction->ValidBetAmount,
+                'Status' => $requestTransaction->Status,
+                //'CreatedOn' => $requestTransaction->CreatedOn,
+                //'ModifiedOn' => $requestTransaction->ModifiedOn
             ]);
             continue; // Skip invalid transactions
         }
@@ -100,6 +108,7 @@ trait UseWebhook
 
     return $seamless_transactions;
 }
+
 
     // public function createWagerTransactions(
     //     $requestTransactions,
