@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Api\V1\ThreeD;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\ThreeD\LotteryThreeDigitPivot;
-use Illuminate\Http\JsonResponse;
+use App\Http\Resources\LotteryThreeDigitPivotCollection;
 
 class LottoPrizeWinnerHistoryController extends Controller
 {
@@ -172,19 +173,32 @@ class LottoPrizeWinnerHistoryController extends Controller
         ]);
     }
 
-    // first winner history 
     public function ThreeDFirstWinnerHistory(): JsonResponse
-{
-    $results = LotteryThreeDigitPivot::where('prize_sent', 1)
-        ->select('*', DB::raw('sub_amount * 550 as prize_value'))
-        ->orderByDesc('prize_value')
-        ->get();
+    {
+        $results = LotteryThreeDigitPivot::where('prize_sent', 1)
+            ->select('lottery_three_digit_pivots.*', 'users.name as user_name', DB::raw('sub_amount * 550 as prize_value'))
+            ->join('users', 'lottery_three_digit_pivots.user_id', '=', 'users.id')
+            ->orderByDesc('prize_value')
+            ->get();
 
-    return response()->json([
-        'success' => true,
-        'message' => 'Data 3D First Winner History retrieved successfully',
-        'data' => $results
-    ]);
-}
+        return (new LotteryThreeDigitPivotCollection($results))
+            ->response()
+            ->setStatusCode(200);
+    }
+
+    // first winner history 
+//     public function ThreeDFirstWinnerHistory(): JsonResponse
+// {
+//     $results = LotteryThreeDigitPivot::where('prize_sent', 1)
+//         ->select('*', DB::raw('sub_amount * 550 as prize_value'))
+//         ->orderByDesc('prize_value')
+//         ->get();
+
+//     return response()->json([
+//         'success' => true,
+//         'message' => 'Data 3D First Winner History retrieved successfully',
+//         'data' => $results
+//     ]);
+// }
 
 }
