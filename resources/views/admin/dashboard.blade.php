@@ -9,7 +9,7 @@
                 </div>
                 <div class="text-end pt-1">
                     <p class="text-sm mb-0 text-capitalize">Balance</p>
-                    <p>{{ provider_balance }}</p>
+                    <p>{{ $provider_balance }}</p>
                     @if (auth()->user()->hasRole('Admin'))
 
                     <h4 class="mb-0">{{ number_format(auth()->user()->balanceFloat) }}</h4>
