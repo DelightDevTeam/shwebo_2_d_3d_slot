@@ -128,6 +128,9 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
+
+    'provider_initial_balance' => env('PROVIDER_INITIAL_BALANCE', 0),
+
     /*
     |--------------------------------------------------------------------------
     | Maintenance Mode Driver

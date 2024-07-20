@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\TransactionName;
-use App\Models\Admin\UserLog;
-use App\Models\SeamlessTransaction;
-use App\Models\User;
-use App\Services\WalletService;
-use App\Settings\AppSetting;
 use Exception;
+use App\Models\User;
+use App\Settings\AppSetting;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Admin\UserLog;
+use App\Enums\TransactionName;
+use App\Services\WalletService;
 use Illuminate\Support\Facades\DB;
+use App\Models\SeamlessTransaction;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
@@ -55,8 +56,10 @@ class HomeController extends Controller
             DB::raw('SUM(transactions.amount) as amount'),
         )->where('transactions.type', 'withdraw')->first();
 
-        $provider_balance = (new AppSetting())->provider_initial_balance + SeamlessTransaction::sum("transaction_amount");
-
+        $appSetting = new AppSetting();
+        $provider_balance = $appSetting->provider_initial_balance + SeamlessTransaction::sum("transaction_amount");
+        Log::info('Provider Initial Balance: ' . $appSetting->provider_initial_balance);
+        
         $agent_count = $getUserCounts('Agent');
         $player_count = $getUserCounts('Player');
 
