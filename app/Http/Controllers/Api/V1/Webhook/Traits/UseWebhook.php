@@ -45,23 +45,30 @@ trait UseWebhook
     $seamless_transactions = [];
 
     foreach ($requestTransactions as $requestTransaction) {
+        // Log incoming transaction details
+        Log::info('Incoming Transaction: ', [
+            'TransactionID' => $requestTransaction->TransactionID,
+            'TransactionAmount' => $requestTransaction->TransactionAmount,
+            'WagerID' => $requestTransaction->WagerID,
+            'GameType' => $requestTransaction->GameType,
+            'ProductID' => $requestTransaction->ProductID,
+            'BetAmount' => $requestTransaction->BetAmount,
+            'ValidBetAmount' => $requestTransaction->ValidBetAmount,
+            'Status' => $requestTransaction->Status,
+            //'CreatedOn' => $requestTransaction->CreatedOn,
+            //'ModifiedOn' => $requestTransaction->ModifiedOn
+        ]);
+
         // Validate transaction amount
         if ($requestTransaction->TransactionAmount <= 0) {
             Log::warning('Skipping invalid transaction amount', [
                 'TransactionID' => $requestTransaction->TransactionID,
-                'TransactionAmount' => $requestTransaction->TransactionAmount,
-                'WagerID' => $requestTransaction->WagerID,
-                'GameType' => $requestTransaction->GameType,
-                'ProductID' => $requestTransaction->ProductID,
-                'BetAmount' => $requestTransaction->BetAmount,
-                'ValidBetAmount' => $requestTransaction->ValidBetAmount,
-                'Status' => $requestTransaction->Status,
-                //'CreatedOn' => $requestTransaction->CreatedOn,
-                //'ModifiedOn' => $requestTransaction->ModifiedOn
+                'TransactionAmount' => $requestTransaction->TransactionAmount
             ]);
             continue; // Skip invalid transactions
         }
 
+        // Proceed with creating wager transactions
         $wager = Wager::firstOrCreate(
             ['seamless_wager_id' => $requestTransaction->WagerID],
             [
