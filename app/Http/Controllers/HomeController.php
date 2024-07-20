@@ -55,6 +55,8 @@ class HomeController extends Controller
             DB::raw('SUM(transactions.amount) as amount'),
         )->where('transactions.type', 'withdraw')->first();
 
+        $provider_balance = (new AppSetting())->provider_initial_balance + SeamlessTransaction::sum("transaction_amount");
+
         $agent_count = $getUserCounts('Agent');
         $player_count = $getUserCounts('Player');
 
@@ -63,7 +65,8 @@ class HomeController extends Controller
             'player_count',
             'user',
             'deposit',
-            'withdraw'
+            'withdraw',
+            'provider_balance'
         ));
     }
 
