@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Api\V1\ThreeD;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Models\ThreeD\LotteryThreeDigitPivot;
+use Illuminate\Http\JsonResponse;
 
 class LottoPrizeWinnerHistoryController extends Controller
 {
@@ -169,4 +171,20 @@ class LottoPrizeWinnerHistoryController extends Controller
             'data' => $reports,
         ]);
     }
+
+    // first winner history 
+    public function ThreeDFirstWinnerHistory(): JsonResponse
+{
+    $results = LotteryThreeDigitPivot::where('prize_sent', 1)
+        ->select('*', DB::raw('sub_amount * 550 as prize_value'))
+        ->orderByDesc('prize_value')
+        ->get();
+
+    return response()->json([
+        'success' => true,
+        'message' => 'Data 3D First Winner History retrieved successfully',
+        'data' => $results
+    ]);
+}
+
 }

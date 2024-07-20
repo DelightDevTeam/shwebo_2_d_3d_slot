@@ -142,6 +142,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         // third prize winner
         Route::get('/third-prize-winner', [LottoPrizeWinnerHistoryController::class, 'ThirdPrizeWinnerApi']);
         Route::get('/third-prize-show/{running_match}', [LottoPrizeWinnerHistoryController::class, 'getThirdPrizeShowByRunningMatch']);
+        Route::get('/first-winners-history', [LottoPrizeWinnerHistoryController::class, 'ThreeDFirstWinnerHistory']);
 
     });
     Route::group(['prefix' => 'live-chat'], function () {
