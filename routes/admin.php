@@ -133,6 +133,11 @@ Route::group([
 
     Route::post('deposit/{deposit}', [DepositRequestController::class, 'updateStatus'])->name('agent.updateStatus');
 
+    Route::post('deposit/{id}', [DepositRequestController::class, 'statusChangeIndex'])->name('agent.depositStatusUpdate');
+
+    Route::post('deposit/reject/{deposit}', [DepositRequestController::class, 'statusChangeReject'])->name('agent.depositStatusreject');
+
+    
     Route::get('transer-log', [TransferLogController::class, 'index'])->name('transferLog');
     Route::group(['prefix' => 'report'], function () {
         Route::get('index', [ReportController::class, 'index'])->name('report.index');

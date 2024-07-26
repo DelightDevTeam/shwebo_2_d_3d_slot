@@ -30,41 +30,93 @@
     <table class="table table-flush" id="users-search">
       <thead class="thead-light">
         <th>#</th>
-        <th>Name</th>
+        {{-- <th>id</th> --}}
+        <th>PlayerId</th>
         <th>Requested Amount</th>
         <th>Payment Method</th>
-        <th>Account Name</th>
-        <th>Account No</th>
-        <th>RefrenceNo</th>
+        <th>Bank Account Name</th>
+        <th>Bank Account Number</th>
         <th>Status</th>
         <th>Created_at</th>
         <th>Action</th>
       </thead>
       <tbody>
         @foreach ($deposits as $deposit)
-
         <tr>
           <td>{{ $loop->iteration }}</td>
+          {{-- <td>{{ $deposit->user->id }}</td> --}}
           <td>
             <span class="d-block">{{ $deposit->user->user_name }}</span>
           </td>
           <td>{{ number_format($deposit->amount) }}</td>
-          <td>{{ $deposit->userPayment->paymentType->name}}</td>
-          <td>{{ $deposit->userPayment->account_name }}</td>
+          <td>{{ $deposit->userPayment->paymentType->name }}</td>
+          <td>{{$deposit->userPayment->account_name}}</td>
           <td>{{$deposit->userPayment->account_no}}</td>
-          <td>{{$deposit->refrence_no}}</td>
-          <td>
-          <span class="badge text-bg-{{ $deposit->status == 0 ? 'danger' : ($deposit->status == 1 ? 'success' : 'warning') }} text-white mb-2">
-            {{ $deposit->status == 0 ? "pending" : ($deposit->status == 1 ? "approved" : "rejected") }}
-        </span>
-          </td>
+          {{-- <td>
+          <span class="badge text-bg-{{ $deposit->status == 0 ? 'danger' : 'success' }} text-white mb-2">{{ $deposit->status == 0 ? "pending" : "done" }}</span>
+          </td> --}}
 
-          <td>{{ $deposit->created_at}}</td>
           <td>
-            @if($deposit->status == 0 )
-            <a href="{{route('admin.agent.depositshow',$deposit->id)}}" class="btn btn-primary" disabled >Update</a>
+            @if ($deposit->status == 0)
+                <span class="badge text-bg-warning text-white mb-2">Pending</span>
+            @elseif ($deposit->status == 1)
+                <span class="badge text-bg-success text-white mb-2">Approved</span>
+            @elseif ($deposit->status == 2)
+                <span class="badge text-bg-danger text-white mb-2">Rejected</span>
             @endif
           </td>
+
+
+          <td>{{ $deposit->created_at->format('d-m-Y') }}</td>
+          <td>
+    <div class="d-flex align-items-center">
+        <form action="{{ route('admin.agent.depositStatusUpdate', $deposit->id) }}" method="post">
+            @csrf
+            <input type="hidden" name="amount" value="{{ $deposit->amount }}">
+            <input type="hidden" name="status" value="1">
+            <input type="hidden" name="player" value="{{ $deposit->user_id }}">
+            <button class="btn btn-success p-1 me-1" type="submit">
+                <i class="fas fa-check"></i>
+            </button>
+        </form>
+
+         <form action="{{ route('admin.agent.depositStatusreject', $deposit->id) }}" method="post">
+            @csrf
+            <input type="hidden" name="status" value="2">
+            <button class="btn btn-danger p-1 me-1" type="submit">
+                <i class="fas fa-xmark"></i>
+            </button>
+        </form>
+        <a href="{{ route('admin.agent.depositshow', $deposit->id) }}" class="btn btn-warning p-1 d-block">
+            <i class="fas fa-eye"></i>
+        </a>
+    </div>
+</td>
+
+          {{-- <td>
+            <div class="d-flex align-items-center">
+              <form action="{{ route('admin.agent.depositStatus',$deposit->id) }}" method="post">
+                @csrf
+                <input type="hidden" name="amount" value="{{ $deposit->amount }}">
+                <input type="hidden" name="status" value="1">
+                <button class="btn btn-success p-1 me-1" type="submit">
+                  <i class="fas fa-check"></i>
+                </button>
+              </form>
+              <form action="{{ route('admin.agent.depositStatus',$deposit->id) }}" method="post">
+                @csrf
+                <input type="hidden" name="amount" value="{{ $deposit->amount }}">
+                <input type="hidden" name="status" value="2">
+                <button class="btn btn-danger p-1 me-1" type="submit">
+                  <i class="fas fa-xmark"></i>
+                </button>
+              </form>
+              <a href="{{route('admin.agent.depositshow',$deposit->id)}}" class="btn btn-warning p-1 d-block">
+                <i class="fas fa-eye"></i>
+              </a>
+            </div>
+
+          </td> --}}
         </tr>
         @endforeach
       </tbody>
