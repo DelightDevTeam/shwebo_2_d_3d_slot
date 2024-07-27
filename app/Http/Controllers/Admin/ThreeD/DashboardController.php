@@ -27,7 +27,7 @@ class DashboardController extends Controller
             $yearlyTotal = Lotto::whereYear('created_at', '=', now()->year)->sum('total_amount');
 
             // Return data to admin dashboard
-            return view('admin.two_d.dashboard', [
+            return view('admin.three_d.dashboard', [
                 'dailyTotal' => $dailyTotal,
                 'weeklyTotal' => $weeklyTotal,
                 'monthlyTotal' => $monthlyTotal,

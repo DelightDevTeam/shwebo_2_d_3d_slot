@@ -12,7 +12,7 @@
                     <i class="fas fa-wallet text-white"></i>
                   </div>
                   <div class="text-end pt-1">
-                    <p class="text-sm mb-0 text-capitalize">2D Daily Income</p>
+                    <p class="text-sm mb-0 text-capitalize">3D Daily Income</p>
                     <h4 class="mb-0">{{ number_format($dailyTotal) }} <small>MMK</small></h4>
                   </div>
                 </div>
@@ -25,7 +25,7 @@
                     <i class="fas fa-wallet"></i>
                   </div>
                   <div class="text-end pt-1">
-                    <p class="text-sm mb-0 text-capitalize">2D Weekly Income</p>
+                    <p class="text-sm mb-0 text-capitalize">3D Weekly Income</p>
                     <h4 class="mb-0">{{ number_format($weeklyTotal) }} <small>MMK</small></h4>
                   </div>
                 </div>
@@ -38,7 +38,7 @@
                     <i class="fas fa-wallet"></i>
                   </div>
                   <div class="text-end pt-1">
-                    <p class="text-sm mb-0 text-capitalize ">2D Monthly Income</p>
+                    <p class="text-sm mb-0 text-capitalize ">3D Monthly Income</p>
                     <h4 class="mb-0 ">{{ number_format($monthlyTotal) }} <small>MMK</small></h4>
                   </div>
                 </div>
@@ -51,7 +51,7 @@
                     <i class="fas fa-wallet"></i>
                   </div>
                   <div class="text-end pt-1">
-                    <p class="text-sm mb-0 text-capitalize ">2D Yearly Income </p>
+                    <p class="text-sm mb-0 text-capitalize ">3D Yearly Income </p>
                     <h4 class="mb-0 ">{{ number_format($yearlyTotal) }} <small>MMK</small></h4>
                   </div>
                 </div>
