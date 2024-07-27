@@ -417,7 +417,7 @@
             <div class="collapse " id="three_d">
               <ul class="nav nav-sm flex-column">
                 <li class="nav-item">
-                  <a class="nav-link text-white " href="{{ url('admin/2-d-dashboard')}}">
+                  <a class="nav-link text-white " href="{{ url('admin/3-d-dashboard')}}">
                     <span class="sidenav-mini-icon"> 3D </span>
                     <span class="sidenav-normal  ms-2  ps-1"> Dashboard </span>
                   </a>
