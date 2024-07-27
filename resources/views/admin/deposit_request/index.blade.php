@@ -52,9 +52,6 @@
           <td>{{ $deposit->userPayment->paymentType->name }}</td>
           <td>{{$deposit->userPayment->account_name}}</td>
           <td>{{$deposit->userPayment->account_no}}</td>
-          {{-- <td>
-          <span class="badge text-bg-{{ $deposit->status == 0 ? 'danger' : 'success' }} text-white mb-2">{{ $deposit->status == 0 ? "pending" : "done" }}</span>
-          </td> --}}
 
           <td>
             @if ($deposit->status == 0)
@@ -69,23 +66,26 @@
 
           <td>{{ $deposit->created_at->format('d-m-Y') }}</td>
           <td>
-    <div class="d-flex align-items-center">
+    <div class="d-flex align-items-center ">
         <form action="{{ route('admin.agent.depositStatusUpdate', $deposit->id) }}" method="post">
             @csrf
             <input type="hidden" name="amount" value="{{ $deposit->amount }}">
             <input type="hidden" name="status" value="1">
             <input type="hidden" name="player" value="{{ $deposit->user_id }}">
-            <button class="btn btn-success p-1 me-1" type="submit">
-                <i class="fas fa-check"></i>
-            </button>
+            @if ($deposit->status ==  0)
+            <button class="btn btn-success p-1 me-1" type="submit"><i class="fas fa-check"></i></button>
+            @endif  
         </form>
 
          <form action="{{ route('admin.agent.depositStatusreject', $deposit->id) }}" method="post">
             @csrf
             <input type="hidden" name="status" value="2">
+            @if ($deposit->status ==  0)
+
             <button class="btn btn-danger p-1 me-1" type="submit">
                 <i class="fas fa-xmark"></i>
             </button>
+            @endif
         </form>
         <a href="{{ route('admin.agent.depositshow', $deposit->id) }}" class="btn btn-warning p-1 d-block">
             <i class="fas fa-eye"></i>

@@ -132,13 +132,7 @@
             </div>
 
           </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="input-group input-group-outline is-valid my-3">
-                <button type="submit" class="btn btn-primary">update</button>
-              </div>
-            </div>
-          </div>
+          
         </form>
       </div>
     </div>
