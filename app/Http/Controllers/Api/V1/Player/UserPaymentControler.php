@@ -15,7 +15,7 @@ class UserPaymentControler extends Controller
 
     public function index()
     {
-        $data = UserPayment::with('paymentType')->where('user_id', Auth::id())->latest()->first();
+        $data = UserPayment::with('paymentType')->where('user_id', Auth::id())->latest()->get();
 
         return $this->success($data, 'User Payment List');
     }
