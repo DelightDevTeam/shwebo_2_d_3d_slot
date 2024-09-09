@@ -23,6 +23,7 @@
   {{-- <link id="pagestyle" href="{{ asset('admin_app/assets/css/material-dashboard.css?v=3.0.6')}}" rel="stylesheet" /> --}}
   <link id="pagestyle" href="{{ asset('admin_app/assets/css/material-dashboard.css?v=3.0.6') }}" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+  <link  href="{{ asset('admin_app/assets/css/setting.css') }}" rel="stylesheet" />
 
   <!-- Nepcha Analytics (nepcha.com) -->
   <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->

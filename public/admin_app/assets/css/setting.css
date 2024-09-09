@@ -1,0 +1,10 @@
+.font:hover {
+     color: rgb(255, 179, 0) !important;
+}
+
+
+.card_design {
+    border-top-left-radius: 20px !important;
+    border-bottom-left-radius: 20px !important;
+    margin-top: 120px;
+}
