@@ -6,14 +6,14 @@
         <ul class="navbar-nav pt-5 mt-3 ps-lg-5 ps-md-4 ps-sm-2 ps-2  pb-5">
             {{-- kzt --}}
             @can('two_d_access')
-                @can('two_d_all_win')
+                {{-- @can('two_d_all_win')
                     <li class="nav-item active ">
                         <a class="nav-link text-white font " href="{{ url('admin/2-d-agent-all-winner') }}">
                             <span class="sidenav-mini-icon "> 2D </span>
                             <span class="sidenav-normal  ms-2  ps-1 ">ပေါက်သူများ </span>
                         </a>
                     </li>
-                @endcan
+                @endcan --}}
                 @can('admin_access')
                     <li class="nav-item">
                         <a class="nav-link text-white font" href="{{ url('admin/2d-default-limit') }}">
