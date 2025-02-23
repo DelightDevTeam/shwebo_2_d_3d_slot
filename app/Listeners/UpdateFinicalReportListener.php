@@ -20,6 +20,6 @@ class UpdateFinicalReportListener
      */
     public function handle(TransactionCreatedEvent $event): void
     {
-        UpdateFinicalReportJob::dispatch()->delay(30);
+        //UpdateFinicalReportJob::dispatch()->delay(30);
     }
 }
